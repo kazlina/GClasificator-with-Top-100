@@ -2,17 +2,21 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-
 import play.db.jpa.*;
+import java.io.Serializable;
+import play.data.validation.*;
 
 @Entity
-public class Profile extends Model {
+public class Profile extends GenericModel {
 
-    @ManyToOne
+	@Id
+	@JoinColumn(name="Id")
+	@ManyToOne
     public GPM Id;
     
-    //public int Id;
+    @Id
     public Date date;
+    
     public String Name;
     public String Photo_link;
     public Boolean Gender;

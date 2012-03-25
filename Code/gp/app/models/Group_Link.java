@@ -2,24 +2,30 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-
 import play.db.jpa.*;
+import java.io.Serializable;
+import play.data.validation.*;
 
 @Entity
-public class Group_Link extends Model {
+public class Group_Link extends GenericModel {
 
+    @Id
+	@JoinColumn(name="Id_Group")
     @ManyToOne
-    public Group Id_Group;
+    public Group_def Id_Group;
 
+    @Id
+	@JoinColumn(name="Id_Link")
     @ManyToOne
-    public Links_Def Id_Def;
+    public Links_Def Id_Link;
+	
+	@Required
+    public float Weight;
 
-    public double Weight;
 
-
-    public Group_Link(Group Id_Group, Links_Def Id_Def, double Weight) {
+    public Group_Link(Group_def Id_Group, Links_Def Id_Link, float Weight) {
         this.Id_Group = Id_Group;
-        this.Id_Def = Id_Def;
+        this.Id_Link = Id_Link;
         this.Weight = Weight;
         }
 

@@ -2,20 +2,21 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-
+import play.data.validation.*;
 import play.db.jpa.*;
 
 @Entity
 public class Links_Def extends Model {
 
-    public int Id;
-    public String Link;
+	public String Link;
     
-    @ManyToMany(mappedBy="followedLinks") 
-    public Set<Statistics> followsByStatistics = new HashSet<Statistics>(); 
-
-    public Links_Def( int Id, String Link){
-        this.Id = Id;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
+    public List<Group_Link> group_link;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
+    public List<Links> links;
+    
+    public Links_Def(String Link){
         this.Link = Link;
         }
 
