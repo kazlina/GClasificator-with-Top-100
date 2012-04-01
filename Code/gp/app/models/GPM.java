@@ -1,36 +1,32 @@
 package models;
- 
+
 import java.util.*;
 import javax.persistence.*;
- 
 import play.db.jpa.*;
- 
+import java.io.Serializable;
+import play.data.validation.*;
+
 @Entity
-public class GPM extends Model {
- 
-    public String id_gplus;
-    public String Name;
-    public String Tagline;
-    public String Photo_link;
-    public Date Last_update;
-    public int GR;
-    public int numberofposts;
-    public int sum_plus;
-    public int sum_comment;
-    public int sum_reshared;
- 
+public class GPM extends GenericModel {
+
+	@Id
+	@Match(value="^\\d{21}$", message="Incorrect identifer")
+    @Column(length=21)
+    public String Id;
+   
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id")
+    public List<Profile> profiles;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
+    public List<Statistics> statistics;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
+    public List<Pets> pets;
     
-    public GPM(String id_gplus, String Name, String Tagline, String Photo_link,int GR, int numberofposts,int sum_plus,int sum_comment, int sum_reshared) {
-        this.id_gplus = id_gplus;
-        this.Name = Name;
-        this.Tagline = Tagline;
-        this.Photo_link = Photo_link;
-        this.Last_update = new Date();
-        this.GR = GR;
-        this.numberofposts = numberofposts;
-        this.sum_plus = sum_plus;
-        this.sum_comment = sum_comment;
-        this.sum_reshared = sum_reshared;
+    public GPM(String Id) {
+
+        this.Id = Id;
+
     }
- 
+
 }
