@@ -1,0 +1,7 @@
+package controllers;
+ 
+import play.*;
+import play.mvc.*;
+ 
+public class Word_dictionarys extends CRUD {    
+}

@@ -13,7 +13,7 @@ public class Application extends Controller {
     public static void index() throws IOException{
            render();
     }
-    
+    /*
     public static void group() {
         List<GPM> olderGPM = GPM.find(
             "order by GR desc"
@@ -40,5 +40,5 @@ public class Application extends Controller {
             "order by sum_reshared desc"
         ).from(0).fetch(250);
         render(olderGPM);
-    }
+    }*/
 }

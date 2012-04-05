@@ -1,7 +1,6 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
 
 import org.jsoup.*;
@@ -9,9 +8,9 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 import java.io.*;
  
-public class Parser implements GetData {
+public class Parser {
 
-    public TempProfile GetProfile(String id) throws IOException {
+    public static TempProfile GetProfile(String id) throws IOException {
     	TempProfile profile = new TempProfile();
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         
@@ -54,7 +53,7 @@ public class Parser implements GetData {
         return profile;
 }
 
-    public Vector <Post> GetActivity(String id) throws IOException 
+    public static Vector <Post> GetPosts(String id) throws IOException 
     {
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         // íóæíà ïðîâåðêà ÷òî íå áûëî îøèáîê

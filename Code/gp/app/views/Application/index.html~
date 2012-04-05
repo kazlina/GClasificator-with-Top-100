@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-<h1>Client ${profile.displayName}</h1>
+
 <div id="shapka">
 <div id="menu"><a href="@{Application.index()}" id="a">Главная</a></div>
 <img src="@{'/public/images/line.png'}" style="float:left">
@@ -17,15 +17,15 @@
 <p id="block-p" align="center">Популярные</p>
 </div>
 <div id="block">
-<a href="@{Application.groupplus()}"><img src="@{'/public/images/main2.png'}"  /></a>
+<a href="@{Application.group()}"><img src="@{'/public/images/main2.png'}"  /></a>
 <p id="block-p" align="center">Плюсуемые</p>
 </div>
 <div id="block">
-<a href="@{Application.groupcomment()}"><img src="@{'/public/images/main3.png'}" /></a>
+<a href="@{Application.group()}"><img src="@{'/public/images/main3.png'}" /></a>
 <p id="block-p" align="center">Комментируемые</p>
 </div>
 <div id="block">
-<a href="@{Application.groupreshared()}"><img src="@{'/public/images/main4.png'}" /></a>
+<a href="@{Application.group()}"><img src="@{'/public/images/main4.png'}" /></a>
 <p id="block-p" align="center">Репостируемые</p>
 </div>
 <div id="block">

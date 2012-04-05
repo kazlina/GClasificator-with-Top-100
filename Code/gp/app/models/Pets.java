@@ -3,9 +3,9 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 import play.db.jpa.*;
-import java.io.Serializable;
 import play.data.validation.*;
 
+@Table(name="Pets")
 @Entity
 public class Pets extends GenericModel {
 	
@@ -17,19 +17,27 @@ public class Pets extends GenericModel {
 	@Id
 	@JoinColumn(name="Id_Group")
 	@ManyToOne
-    public Group_def Id_Group;
+    public Group_define Id_Group;
 
-	@Required
-    public int Position;
+	@Column(name="Position", nullable=false)
+	public int Position;
     
-    public Date Kill_Day;
+    @Column(name="Day_add", nullable=false)
+	public Date Day_add;
 
+	@Column(name="Day_del")
+	public Date Day_del;
+	
+	@Column(name="Comment")
+	public String Comment;
 
-    public Pets(GPM Id_GPM, Group_def Id_Group, int Position, Date Kill_Day) {
+    public Pets(GPM Id_GPM, Group_define Id_Group, int Position, Date Day_add, Date Day_del, String Comment) {
         this.Id_GPM = Id_GPM;
         this.Id_Group = Id_Group;
         this.Position = Position;
-        this.Kill_Day = Kill_Day;
+        this.Day_add = Day_add;
+        this.Day_del = Day_del;
+        this.Comment = Comment;
         }
 
 }
