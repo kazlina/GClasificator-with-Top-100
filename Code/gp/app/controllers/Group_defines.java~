@@ -1,7 +1,0 @@
-package controllers;
- 
-import play.*;
-import play.mvc.*;
- 
-public class Group_defines extends CRUD {    
-}
