@@ -29,11 +29,14 @@ public class Post_link extends GenericModel {
     public Posts post;
     
     @Id
+	@Required
 	@JoinColumn(name="Id_Link")
     @ManyToOne
     public Link_dictionary Id_Link;
     
-    @Column(name="Count", nullable=false)
+    @Required
+	@Min(1)
+	@Column(name="Count", nullable=false)
     public int Count;
     
     public Post_link(/*GPM Id, Posts post,*/ Link_dictionary Id_Link, int Count){

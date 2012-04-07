@@ -22,6 +22,8 @@ public class Posts extends GenericModel {
 	@EmbeddedId
 	public Key key;
 	
+	@Required
+	@MaxSize(value=10)
 	@Column(name="Type", length=10, nullable=false)
 	public String Type;
 	
@@ -34,7 +36,8 @@ public class Posts extends GenericModel {
     @Column(name="nReshare")
     public int nReshare;
     
-    @Column(name="isRepost", nullable=false)
+    @Required
+	@Column(name="isRepost", nullable=false)
     public boolean isRepost;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="post")
@@ -43,17 +46,15 @@ public class Posts extends GenericModel {
     	@JoinColumn(name="date", referencedColumnName="date")
     })*/
     public List<Post_link> followedLinks; 
-   /* 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumns({
+    
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="post")
+    /*@JoinColumns({
     	@JoinColumn(name="Id", referencedColumnName="Id_GPM"),
     	@JoinColumn(name="Date", referencedColumnName="Date")
-    })
+    })*/
     public List<Post_word> followedWords; 
-   */
+   
     public Posts(GPM Id_GPM, String Type, int nComments, int nPlus_one, int nReshare, boolean isRepost) {
-        //this.Id = Id_GPM;
-        //this.date = new Date();
         this.key.Id = Id_GPM;
         this.key.date = new Date();
         this.Type = Type;

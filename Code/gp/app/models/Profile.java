@@ -9,7 +9,7 @@ import play.data.validation.*;
 @Entity
 public class Profile extends GenericModel {
 
-	@Id
+	/*@Id
 	@JoinColumn(name="Id")
 	@ManyToOne
     public GPM Id;
@@ -17,12 +17,18 @@ public class Profile extends GenericModel {
     @Id
     @Column(name="Date")
     public Date date;
+    */
     
-    @Column(name="Name", length=50)
+    @EmbeddedId
+	public Key key;
+	
+    @MaxSize(value=100)
+    @Column(name="Name", length=100)
     public String Name;
     
     @Column(name="Image_URL")
-    public String Image_URL;
+    @URL
+	public String Image_URL;
     
     @Column(name="Gender")
     public Boolean Gender;
@@ -33,29 +39,30 @@ public class Profile extends GenericModel {
     @Column(name="Tagline")
     public String Tagline;
     
+    @MaxSize(value=20)
     @Column(name="Status", length=20)
     public String Status;
     
     @Column(name="Followers")
     public int Followers;    
 
-    /*@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumns({
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="profile")
+    /*@JoinColumns({
     	@JoinColumn(name="Id", referencedColumnName="Id_GPM"),
     	@JoinColumn(name="Date", referencedColumnName="Date")
-    }) 
+    })*/ 
     public List<Profile_link> followedLinks; 
     
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumns({
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="profile")
+    /*@JoinColumns({
     	@JoinColumn(name="Id", referencedColumnName="Id_GPM"),
     	@JoinColumn(name="Date", referencedColumnName="Date")
-    })
+    })*/
     public List<Profile_word> followedWords; 
-   */
-	public Profile(GPM Id, String Name, String Photo_link, Boolean Gender, String Aim, String Tagline, String Status, int followers) {
-        this.Id = Id;
-        this.date = new Date();
+   
+	public Profile(GPM Id_GPM, String Name, String Photo_link, Boolean Gender, String Aim, String Tagline, String Status, int followers) {
+        this.key.Id = Id_GPM;
+        this.key.date = new Date();
         this.Name = Name;
         this.Image_URL = Photo_link;
         this.Gender = Gender;

@@ -9,37 +9,35 @@ import play.data.validation.*;
 @Entity
 public class Group_define extends Model {
 	
-        @Required
+	@Required
+	@MaxSize(value=50)
 	@Column(name="Name", length=50, nullable=false, unique=true)
-        public String Name;
+	public String Name;
 	
+	@Required
+	@URL
 	@Column(name="Pictire_active", nullable=false)
 	public String Picture_active;
 
+	@Required
+	@URL
 	@Column(name="Pictire_passive", nullable=false)
 	public String Picture_passive;
 	
-	@Lob
-    	@MaxSize(1000)
 	@Column(name="Description")
 	public String Description;
 
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Group_Link> links;
-  
- @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Group_Word> words;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Pets> pets;
-
-   public String toString() {
-     return Name;
-}
-      
+    public List<Added_By_Admin> pets;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
+    public List<Group_Link> links;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
+    public List<Group_Word> words;
     
     public Group_define(String Name, String Pic_act, String Pic_pas, String Descr) {
-        this.links = new ArrayList<Group_Link>();
         this.Name = Name;
         this.Picture_active = Pic_act;
         this.Picture_passive = Pic_pas;

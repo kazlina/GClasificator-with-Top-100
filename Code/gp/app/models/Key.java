@@ -9,10 +9,12 @@ import play.data.validation.*;
 @Embeddable
 public class Key implements Serializable {
 
+	@Required
 	@JoinColumn(name="Id")
 	@ManyToOne
 	public GPM Id;
 	
+	@Required
 	@Column(name="Date")
     public Date date;
 }

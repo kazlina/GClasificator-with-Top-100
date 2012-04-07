@@ -9,7 +9,9 @@ import play.db.jpa.*;
 @Entity
 public class Link_dictionary extends Model {
 
-	@Column(name="Word", nullable=false, unique=true)
+	@Required
+	@URL
+	@Column(name="Link", nullable=false, unique=true)
 	public String Link;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
@@ -17,14 +19,10 @@ public class Link_dictionary extends Model {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
     public List<Post_link> post_links;
-    /*
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
     public List<Profile_link> profile_links;
-    */
     
-    public String toString() {
-    return Link;
-   }
     public Link_dictionary(String Link){
         this.Link = Link;
         }

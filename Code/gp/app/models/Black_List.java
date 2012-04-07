@@ -10,15 +10,16 @@ import play.data.validation.*;
 public class Black_List extends GenericModel {
  
 	@Id
+	@Required
 	@JoinColumn(name="Id")
 	@OneToOne
-        @Required
-        public GPM GPM;
+    public GPM GPM;
 	
+	@Required
+	@InFuture
 	@Column(name="Date", nullable=false)
 	public Date date;
-
-   
+	
     public Black_List(GPM GPM) {
         this.GPM = GPM;
         this.date = new Date();
