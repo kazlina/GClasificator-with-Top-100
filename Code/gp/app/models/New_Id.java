@@ -3,22 +3,27 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 import play.db.jpa.*;
-import java.io.Serializable;
 import play.data.validation.*;
 
+@Table(name="New_Id")
 @Entity
 public class New_Id extends GenericModel {
 
 	@Id
+	@Required
+	@MinSize(value=21)
+	@MaxSize(value=21)
 	@Match(value="^\\d{21}$", message="Incorrect identifer")
-    @Column(length=21)
+    @Column(name="Id", length=21)
     public String Id;
-    
-    public int Severity;
+
+	@Required
+	@Column(name="nMentiens", nullable=false)
+    public int nMentiens;
     
     public New_Id(String Id, int Severity) {
         this.Id = Id;
-        this.Severity = Severity;
+        this.nMentiens = Severity;
         }
 
 }

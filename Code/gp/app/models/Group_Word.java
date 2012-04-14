@@ -3,30 +3,39 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 import play.db.jpa.*;
-import java.io.Serializable;
 import play.data.validation.*;
 
+@Table(name="Group_Word")
 @Entity
 public class Group_Word extends GenericModel {
 
 	@Id
+	@Required
 	@JoinColumn(name="Id_Group")
     @ManyToOne
-    public Group_def Id_Group;
+    public Group_define Id_Group;
 
     @Id
+	@Required
 	@JoinColumn(name="Id_Word")
     @ManyToOne
-    public Keywords_Def Id_Word;
+    public Word_dictionary Id_Word;
 	
 	@Required
-    public float Weight;
+	@Range(min=0, max=1)
+	@Column(name="Post_weight", nullable=false)
+	public float Post_weight;
 
+	@Required
+	@Range(min=0, max=1)
+	@Column(name="Profile_weight", nullable=false)
+	public float Profile_weight;
 
-    public Group_Word(Group_def Id_Group, Keywords_Def Id_Word, float Weight) {
+    public Group_Word(Group_define Id_Group, Word_dictionary Id_word, float Post_weight, float Profile_weight) {
         this.Id_Group = Id_Group;
-        this.Id_Word = Id_Word;
-        this.Weight = Weight;
+        this.Id_Word = Id_word;
+        this.Post_weight = Post_weight;
+        this.Profile_weight = Profile_weight;
         }
 
 }
