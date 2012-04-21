@@ -13,16 +13,20 @@ public class Black_List extends GenericModel {
 	@Required
 	@JoinColumn(name="Id")
 	@OneToOne
-    public GPM GPM;
+	public GPM GPM;
 	
 	@Required
 	@InFuture
 	@Column(name="Date", nullable=false)
 	public Date date;
+
+	public String toString(){
+		return this.GPM.Id;
+	}
 	
-    public Black_List(GPM GPM) {
-        this.GPM = GPM;
-        this.date = new Date();
+	public Black_List(GPM GPM) {
+		this.GPM = GPM;
+        	this.date = new Date();
         }
 
 }

@@ -15,33 +15,35 @@ public class Group_define extends Model {
 	public String Name;
 	
 	@Required
-	@URL
 	@Column(name="Pictire_active", nullable=false)
 	public String Picture_active;
 
 	@Required
-	@URL
 	@Column(name="Pictire_passive", nullable=false)
 	public String Picture_passive;
 	
 	@Column(name="Description")
 	public String Description;
 
-
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Added_By_Admin> pets;
+	public List<Added_By_Admin> pets;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Group_Link> links;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
+	public List<Group_Link> links;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
-    public List<Group_Word> words;
-    
-    public Group_define(String Name, String Pic_act, String Pic_pas, String Descr) {
-        this.Name = Name;
-        this.Picture_active = Pic_act;
-        this.Picture_passive = Pic_pas;
-        this.Description = Descr;
-        }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Group")
+	public List<Group_Word> words;
 
+	public String toString(){
+		return this.Name;
+	}
+    
+	public Group_define(){};
+
+	public Group_define(String Name, String Pic_act, String Pic_pas, String Descr) {
+	this.Name = Name;
+	this.Picture_active = Pic_act;
+	this.Picture_passive = Pic_pas;
+	this.Description = Descr;
+	}
 }
