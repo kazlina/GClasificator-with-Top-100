@@ -1,13 +1,45 @@
 import org.junit.*;
 import java.util.*;
+
 import play.test.*;
 import models.*;
 
 public class BasicTest extends UnitTest {
 
     @Test
-    public void aVeryImportantThingToTest() {
-        assertEquals(2, 1 + 1);
+public void profileGpm() throws InterruptedException {
+    // Create a new GPM and save it
+    GPM gpm = new GPM("107332580040286178426").save();
+   // Create a new Profile
+    new Profile(gpm, "yulia", "yulia.jpg", true, "pop","pop","pop",900).save();
+    Thread.sleep(1000);
+    new Profile(gpm, "yulia", "yulia.jpg", true, "pop","cats","cats",1000).save();
+        
+    List <Profile> profiles = Profile.find("byId_GPM", "107332580040286178426").fetch();
+    
+    assertEquals(2, profiles.size());
+    Profile firstProfile = profiles.get(0);
+    assertNotNull(firstProfile);
+    assertEquals("yulia", firstProfile.Name);
+    assertEquals("yulia.jpg", firstProfile.Image_URL);
+    assertNotNull(firstProfile.date);    
+}
+    @Test
+    public void postGpm() throws InterruptedException {
+        // Create a new GPM and save it
+       // new GPM("107332580040286178426").save();
+       // Create a new Profile
+       /* new Posts("107332580040286178426", "yulia", "yulia.jpg", true, "pop","pop","pop",900).save();
+        Thread.sleep(1000);
+        new Posts("107332580040286178426", "yulia", "yulia.jpg", true, "cats","cats","cats",1000).save();
+            
+        List <Posts> posts = Posts.find("byId_GPM", "107332580040286178426").fetch();
+        
+        assertEquals(2, posts.size());
+        Profile firstPost = posts.get(0);
+        assertNotNull(firstPost);
+        assertEquals("yulia", firstPost.Name);
+        assertEquals("yulia.jpg", firstPost.Image_URL);
+        assertNotNull(firstPost.date);    */
     }
-
 }

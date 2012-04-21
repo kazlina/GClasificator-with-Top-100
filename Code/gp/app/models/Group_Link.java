@@ -7,17 +7,18 @@ import play.data.validation.*;
 
 @Table(name="Group_Link")
 @Entity
+@IdClass(KeyGroupLink.class)
 public class Group_Link extends GenericModel {
 
     @Id
-	@Required
-	@JoinColumn(name="Id_Group")
+    @Required
+    @JoinColumn(name="Id_Group")
     @ManyToOne
     public Group_define Id_Group;
 
     @Id
-	@Required
-	@JoinColumn(name="Id_Link")
+    @Required
+    @JoinColumn(name="Id_Link")
     @ManyToOne
     public Link_dictionary Id_Link;
 	
