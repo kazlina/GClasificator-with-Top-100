@@ -15,16 +15,23 @@ public class Word_dictionary extends Model {
 	public String Word;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
-    public List<Group_Word> group_word;
+	public List<Group_Word> group_word;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
-    public List<Post_word> post_word;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
+	public List<Post_word> post_word;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
-    public List<Profile_word> profile_word;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
+	public List<Profile_word> profile_word;
     
-    public Word_dictionary(String Word){
-        this.Word = Word;
-        }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Word")
+	public List<WordSynonyms> synonyms;	
+    
+	public String toString(){
+	return this.Word;
+	}
+    
+	public Word_dictionary(String Word){
+		this.Word = Word;
+	}
 
 }
