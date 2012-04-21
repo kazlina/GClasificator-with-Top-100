@@ -25,6 +25,22 @@ public class Group extends Model {
 	@Column(name="Description")
 	public String description;
 
+	@Range(min=0, max=100)
+	@Column(name="Percent_text")
+	public int textPercent;
+
+	@Range(min=0, max=100)
+	@Column(name="Percent_image")
+	public int imagePercent;
+
+	@Range(min=0, max=100)
+	@Column(name="Percent_link")
+	public int linkPercent;
+
+	@Range(min=0, max=100)
+	@Column(name="Percent_video")
+	public int videoPercent;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
 	public List<AddedByAdmin> addedByAdmin;
     
@@ -40,10 +56,14 @@ public class Group extends Model {
     
 	public Group(){};
 
-	public Group(String name, String activeImage, String passiveImage, String description) {
+	public Group(String name, String activeImage, String passiveImage, String description, int textPercent, int imagePercent, int 			linkPercent, int videoPercent) {
 	this.name = name;
 	this.activeImage = activeImage;
 	this.passiveImage = passiveImage;
 	this.description = description;
+	this.textPercent = textPercent;
+	this.imagePercent = imagePercent;
+	this.linkPercent = linkPercent;
+	this.videoPercent = videoPercent;
 	}
 }
