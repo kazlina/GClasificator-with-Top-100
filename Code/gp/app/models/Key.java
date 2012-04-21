@@ -10,11 +10,8 @@ import play.data.validation.*;
 public class Key implements Serializable {
 
 	@Required
-	@JoinColumn(name="Id")
-	@ManyToOne
-	public GPM Id;
+	public GPM Id_GPM;
 	
 	@Required
-	@Column(name="Date")
-    public Date date;
+        public Date date;
 }

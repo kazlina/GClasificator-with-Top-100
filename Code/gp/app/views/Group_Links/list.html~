@@ -10,7 +10,7 @@
     </div>
 
     <div id="crudListTable">
-        #{crud.table fields:['Name', 'Link','Weight for post', 'Weight for profile']/}
+        #{crud.table fields:['Group', 'Link','Post_weight', 'Profile_weight']/}
     </div>
 
     <div id="crudListPagination">

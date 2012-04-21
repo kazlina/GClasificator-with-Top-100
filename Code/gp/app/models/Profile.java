@@ -7,21 +7,19 @@ import play.data.validation.*;
 
 @Table(name="Profile")
 @Entity
+@IdClass(Key.class)
 public class Profile extends GenericModel {
-
-	/*@Id
-	@JoinColumn(name="Id")
-	@ManyToOne
-    public GPM Id;
+        
+    @Id
+    @Required
+    @JoinColumn(name="Id_GPM")
+    @ManyToOne
+    public GPM Id_GPM;
     
     @Id
     @Column(name="Date")
     public Date date;
-    */
-    
-    @EmbeddedId
-	public Key key;
-	
+
     @MaxSize(value=100)
     @Column(name="Name", length=100)
     public String Name;
@@ -59,10 +57,12 @@ public class Profile extends GenericModel {
     	@JoinColumn(name="Date", referencedColumnName="Date")
     })*/
     public List<Profile_word> followedWords; 
+    
+    public Profile(){};
    
 	public Profile(GPM Id_GPM, String Name, String Photo_link, Boolean Gender, String Aim, String Tagline, String Status, int followers) {
-        this.key.Id = Id_GPM;
-        this.key.date = new Date();
+        this.Id_GPM = Id_GPM;
+        this.date = Calendar.getInstance().getTime();
         this.Name = Name;
         this.Image_URL = Photo_link;
         this.Gender = Gender;

@@ -7,20 +7,19 @@ import play.data.validation.*;
 
 @Table(name="Posts")
 @Entity
+@IdClass(Key.class)
 public class Posts extends GenericModel {
 
-	/*//@Id
-	@JoinColumn(name="Id")
+    @Id
+    @Required
+    @JoinColumn(name="Id_GPM")
     @ManyToOne
-    public GPM Id;
+    public GPM Id_GPM;
     
-    //@Id
+    @Id
     @Column(name="date")
-	public Date date;
-	*/
+    public Date date;
 	
-	@EmbeddedId
-	public Key key;
 	
 	@Required
 	@MaxSize(value=10)
@@ -53,10 +52,12 @@ public class Posts extends GenericModel {
     	@JoinColumn(name="Date", referencedColumnName="Date")
     })*/
     public List<Post_word> followedWords; 
+    
+    public Posts(){};
    
     public Posts(GPM Id_GPM, String Type, int nComments, int nPlus_one, int nReshare, boolean isRepost) {
-        this.key.Id = Id_GPM;
-        this.key.date = new Date();
+        this.Id_GPM = Id_GPM;
+        this.date = Calendar.getInstance().getTime();
         this.Type = Type;
         this.nComment = nComments;
         this.nPlus_one = nPlus_one;

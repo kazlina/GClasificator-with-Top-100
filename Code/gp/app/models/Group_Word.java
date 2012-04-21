@@ -7,6 +7,7 @@ import play.data.validation.*;
 
 @Table(name="Group_Word")
 @Entity
+@IdClass(KeyGroupWord.class)
 public class Group_Word extends GenericModel {
 
 	@Id

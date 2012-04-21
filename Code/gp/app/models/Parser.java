@@ -40,7 +40,7 @@ public class Parser {
         
         Elements genders = doc.select("div.kM5Oeb-fYiPJe.KtnyId.IzbGp");//gender
         Elements gender = genders.select("div.aYm0te.c-wa-Da");//gender
-        profile.gender = gender.text();    
+        //profile.gender = gender.text();    
          
         Elements statuses = doc.select("div.kM5Oeb-jcNnAf.KtnyId.IzbGp");//relationshipStatus
         Elements status = statuses.select("div.aYm0te.c-wa-Da");//relationshipStatus
@@ -74,7 +74,7 @@ public class Parser {
           	//ïðîâåðêà ÷òî ïðàâèëüíî îáðàòèëèñü
         	
         	// çàïîìíèëè äàòó ïóáëèêàöèè ïîñòà
-        	elem.published_data = date_of_post;
+        	//elem.published_data = date_of_post;
 
         	// çàïîìíèì àâòîðà ïîñòà è òåêñò
         	Elements repost = post.getElementsByClass("Xt");
@@ -83,7 +83,7 @@ public class Parser {
         		//åñëè ýòî ïîñò
         		elem.kind_post = true;
         		elem.actor_id = "";
-        		elem.original_content = "";
+        		elem.annotation = "";
         		
         		Elements post_text = post.getElementsByClass("rXnUBd");
         		elem.content = post_text.text();
@@ -99,7 +99,7 @@ public class Parser {
         		Elements post_text = post.getElementsByClass("oX401d");
         		Elements repost_text = post.getElementsByClass("rXnUBd");
         		elem.content = post_text.text();
-        		elem.original_content = repost_text.text();
+        		elem.annotation = repost_text.text();
         	}
         	
         	// îïðåäåëèì òèï êîíòåíòà
@@ -209,7 +209,7 @@ public class Parser {
         	System.out.println(p.actor_id);
         	System.out.println(p.kind_content);
         	System.out.println(" --- *** original content *** ---");
-        	System.out.println(p.original_content);
+        	System.out.println(p.annotation);
         	System.out.println(" --- *** content *** ---");
         	System.out.println(p.content);
         	System.out.println(" --- *** statistic *** ---");

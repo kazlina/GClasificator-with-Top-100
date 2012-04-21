@@ -17,10 +17,10 @@ public class GPM extends GenericModel {
     @Column(name="Id", length=21)
     public String Id;
    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "key.Id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
     public List<Profile> profiles;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "key.Id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
     public List<Posts> posts;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")

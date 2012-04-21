@@ -9,10 +9,9 @@ import play.db.jpa.*;
 @Entity
 public class Link_dictionary extends Model {
 
-	@Required
-	@URL
-	@Column(name="Link", nullable=false, unique=true)
-	public String Link;
+   @Required
+   @Column(name="Link", nullable=false, unique=true)
+   public String Link;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_Link")
     public List<Group_Link> group_link;
