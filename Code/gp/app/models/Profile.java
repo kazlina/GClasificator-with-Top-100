@@ -5,7 +5,7 @@ import javax.persistence.*;
 import play.db.jpa.*;
 import play.data.validation.*;
 
-@Table(name="Profile")
+@Table(name="Profiles")
 @Entity
 @IdClass(Key.class)
 public class Profile extends GenericModel {
@@ -14,7 +14,7 @@ public class Profile extends GenericModel {
     @Required
     @JoinColumn(name="Id_GPM")
     @ManyToOne
-    public GPM Id_GPM;
+    public GPM gpm;
     
     @Id
     @Column(name="Date")
@@ -22,54 +22,51 @@ public class Profile extends GenericModel {
 
     @MaxSize(value=100)
     @Column(name="Name", length=100)
-    public String Name;
+    public String name;
     
     @Column(name="Image_URL")
     @URL
-	public String Image_URL;
+	public String image;
     
     @Column(name="Gender")
-    public Boolean Gender;
-    
-    @Column(name="Aim")
-    public String Aim;
-    
+    public String gender;
+     
     @Column(name="Tagline")
-    public String Tagline;
+    public String tagline;
     
     @MaxSize(value=20)
-    @Column(name="Status", length=20)
-    public String Status;
+    @Column(name="Relationship_Status", length=20)
+    public String relationshipStatus;
     
     @Column(name="Followers")
-    public int Followers;    
+    public int followers;    
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="profile")
     /*@JoinColumns({
     	@JoinColumn(name="Id", referencedColumnName="Id_GPM"),
     	@JoinColumn(name="Date", referencedColumnName="Date")
     })*/ 
-    public List<Profile_link> followedLinks; 
+    public List<ProfileLink> links; 
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="profile")
     /*@JoinColumns({
     	@JoinColumn(name="Id", referencedColumnName="Id_GPM"),
     	@JoinColumn(name="Date", referencedColumnName="Date")
     })*/
-    public List<Profile_word> followedWords; 
+    public List<ProfileWord> words; 
     
     public Profile(){};
    
-	public Profile(GPM Id_GPM, String Name, String Photo_link, Boolean Gender, String Aim, String Tagline, String Status, int followers) {
-        this.Id_GPM = Id_GPM;
+	public Profile(GPM gpm, String name, String image, String gender, String tagline, 
+					String relationshipStatus, int followers) {
+        this.gpm = gpm;
         this.date = Calendar.getInstance().getTime();
-        this.Name = Name;
-        this.Image_URL = Photo_link;
-        this.Gender = Gender;
-        this.Aim = Aim;
-        this.Tagline = Tagline;
-        this.Status = Status;
-        this.Followers = followers;
+        this.name = name;
+        this.image = image;
+        this.gender = gender;
+        this.tagline = tagline;
+        this.relationshipStatus = relationshipStatus;
+        this.followers = followers;
         }
 
 }

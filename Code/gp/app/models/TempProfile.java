@@ -7,17 +7,17 @@ public class TempProfile {
 	public String id;
 	public String displayName;
 	public String tagline;
-	public boolean gender;
+	public String gender; //female, male, other or null
 	public String relationshipStatus;
 	public String image;
 	public String aboutMe;
 	List <String> urls = new ArrayList<String>();
-	public boolean type;
+	public boolean type;//if person - true, if page - false
 	
 	public TempProfile() {
 	}	
 	
-    public TempProfile(String id, String displayName,String image, String aboutMe, boolean gender, String tagline,
+    public TempProfile(String id, String displayName,String image, String aboutMe, String gender, String tagline,
     		              List <String> urls, String relationshipStatus, boolean type){
     	this.id = id;
     	this.displayName = displayName;

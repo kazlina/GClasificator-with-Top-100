@@ -10,7 +10,7 @@ import play.data.validation.*;
 public class Key implements Serializable {
 
 	@Required
-	public GPM Id_GPM;
+	public GPM gpm;
 	
 	@Required
         public Date date;

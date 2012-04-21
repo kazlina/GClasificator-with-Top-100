@@ -33,8 +33,8 @@ public class GAPI {
     try {
       setupTransport();
 
-      //getProfile("107332580040286178426");
-      GetActivity("107332580040286178426", 30L);
+     // getProfile("100054563229729962810");
+     GetActivity("100054563229729962810", 30L);
     } catch (HttpResponseException e) {
      // log.severe(e.getResponse().parseAsString());
       throw e;
@@ -65,17 +65,6 @@ public class GAPI {
 		  return null;
   }
   
-  private static boolean getGender(String gender){
-	if(gender != null)
-	{
-		if (gender.equals("female"))
-	    	return true;
-	else
-    	return false;
-	}
-	return false;
-  }
-  
   private static boolean getType(String type){
 	if(type != null)
 	{
@@ -97,6 +86,8 @@ public class GAPI {
     		return "photo";
       	  if(a.getObjectType().equals("photo-album"))
     		return "photo";
+      	if(a.getObjectType().equals("audio"))
+    		return "audio";
       	  }
 	}
 	else
@@ -124,37 +115,40 @@ private static String getUrl(List<Attachments> list){
         }).build();      
     }
 
-  public static List <Post> GetActivity(String id, Long numberOf) throws IOException {
+  public static List <TempPost> GetActivity(String id, Long numberOf) throws IOException {
     Plus.Activities.List listActivities = plus.activities().list(id,"public");
     
     listActivities.setMaxResults(numberOf);
+    listActivities.setFields("items(actor/id,annotation,id,object(actor/id,attachments(content,displayName,objectType,url)," +
+    		"content,id,originalContent,plusoners/totalItems,replies/totalItems,resharers/totalItems)," +
+    		"published,updated,verb),nextLink,nextPageToken,selfLink");
 
     ActivityFeed feed;
     
-    List <Post> posts = new ArrayList();
+    List <TempPost> posts = new ArrayList();
     
     try {
       feed = listActivities.execute();
       for (Activity activity : feed.getItems()) {
-          Post post = new Post();
-          post.published_data = activity.getPublished();
+          TempPost post = new TempPost();
+          post.publishedData = new Date(activity.getPublished().getValue());
           post.content = stripTags(activity.getObject().getContent());
           post.annotation = stripTags(activity.getAnnotation());
-          post.kind_post = true;
+          post.isRepost = false;
           if(activity.getObject().getActor() != null)
           {
-          	post.actor_id = activity.getObject().getActor().getId();
-          	post.kind_post = false;
+          	post.actorId = activity.getObject().getActor().getId();
+          	post.isRepost = true;
           }
-          post.total_plusoners = activity.getObject().getPlusoners().getTotalItems();
-          post.total_replies = activity.getObject().getReplies().getTotalItems();
-          post.total_resharers = activity.getObject().getResharers().getTotalItems();
-          post.kind_content = getKindContent(activity.getObject().getAttachments());
-          if(post.kind_content.equals("article"))
+          post.nPlusOne = activity.getObject().getPlusoners().getTotalItems();
+          post.nComments = activity.getObject().getReplies().getTotalItems();
+          post.nResharers = activity.getObject().getResharers().getTotalItems();
+          post.kindContent = getKindContent(activity.getObject().getAttachments());
+          if(post.kindContent.equals("article"))
         	  post.url = getUrl(activity.getObject().getAttachments());       
           posts.add(post);
        }
-      for ( Post p: posts){
+      for ( TempPost p: posts){
       	p.print();
       }
   	return posts;     
@@ -172,12 +166,12 @@ private static String getUrl(List<Attachments> list){
       profile.displayName = person.getDisplayName();
       profile.image = person.getImage().getUrl();
       profile.aboutMe = stripTags(person.getAboutMe());
-      profile.gender = getGender(person.getGender());
+      profile.gender = person.getGender();
       profile.tagline = person.getTagline();
       profile.urls = getUrls(person.getUrls());
       profile.relationshipStatus = person.getRelationshipStatus();
       profile.type = getType(person.getObjectType());
-      //profile.print();
+      profile.print();
       return profile;
     } 
     catch (HttpResponseException e) {
@@ -192,16 +186,16 @@ private static String getUrl(List<Attachments> list){
     System.out.println("about me: " + person.getAboutMe());
     System.out.println("gender: " + person.getGender());
     System.out.println("tagline: " + person.getTagline());
-    System.out.println("Urls: " +  person.getUrls());
-    System.out.println("Status: " + person.getRelationshipStatus());
-    System.out.println("Type: " + person.getObjectType());
+    System.out.println("urls: " +  person.getUrls());
+    System.out.println("relationshipStatus: " + person.getRelationshipStatus());
+    System.out.println("type: " + person.getObjectType());
    }
 
   public static void print(ActivityFeed feed) {
 	 for (Activity activity : feed.getItems()) {
      System.out.println("content: " + activity.getObject().getContent());
      System.out.println("type: " + activity.getObject().getObjectType());
-     System.out.println("original content: " + activity.getObject().getOriginalContent());
+     System.out.println("annotation: " + activity.getAnnotation());
      if(activity.getObject().getActor() != null)
      {
     	 System.out.println("actor: " + activity.getObject().getActor().getId());
