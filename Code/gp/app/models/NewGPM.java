@@ -14,16 +14,16 @@ public class NewGPM extends GenericModel {
 	@MinSize(value=21)
 	@MaxSize(value=21)
 	@Match(value="^\\d{21}$", message="Incorrect identifer")
-    @Column(name="Id", length=21)
-    public String id;
+	@Column(name="Id", length=21)
+	public String id;
 
 	@Required
 	@Column(name="nMentiens", nullable=false)
-    public int nMentiens;
+	public int nMentiens;
     
 	public NewGPM(){};
 	
-    public NewGPM(String id, int severity) {
+	public NewGPM(String id, int severity) {
         this.id = id;
         this.nMentiens = severity;
         }

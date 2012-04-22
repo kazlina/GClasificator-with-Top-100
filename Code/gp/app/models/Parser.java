@@ -146,44 +146,44 @@ public class Parser {
         	// ïîëó÷àåì êîëè÷åñòâî +1
         	if (plus_one.isEmpty())
         	{
-        		elem.nPlusOne = 0L;
+        		elem.nPlusOne = 0;
         	}
         	else
         	{
         		plus_one = plus_one.replace("+", "");
         		try
         		{
-        			elem.nPlusOne = (long) Short.parseShort(plus_one);
+        			elem.nPlusOne = Short.parseShort(plus_one);
         		}
         		catch (NumberFormatException exeption)
         		{
         			//exeption.printStackTrace();
-        			elem.nPlusOne = 0L;
+        			elem.nPlusOne = 0;
         		}
         	}
         	
         	// ïîëó÷àåì êîëè÷åñòâî êîììåíòàðèåâ
         	if (comments.isEmpty())
         	{
-        		elem.nComments = 0L;
+        		elem.nComments = 0;
         	}
         	else
         	{
         		try
         		{
-        			elem.nComments = (long) Short.parseShort(comments);
+        			elem.nComments = Short.parseShort(comments);
         		}
         		catch (NumberFormatException exeption)
         		{
         			//exeption.printStackTrace();
-        			elem.nComments = 0L;
+        			elem.nComments = 0;
         		}
         	}
         		
         	//ïîëó÷àåì êîëè÷åñòâî ðåïîñòîâ
         	if (shared.isEmpty())
         	{
-        		elem.nResharers = 0L;
+        		elem.nResharers = 0;
         	}
         	else
         	{

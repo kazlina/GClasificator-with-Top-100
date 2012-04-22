@@ -32,7 +32,7 @@ public class GAPI {
       setupTransport();
 
      // getProfile("100054563229729962810");
-     GetActivity("100054563229729962810", 30L);
+     getActivity("100054563229729962810", 30);
     } catch (HttpResponseException e) {
      // log.severe(e.getResponse().parseAsString());
       throw e;
@@ -113,10 +113,10 @@ private static String getUrl(List<Attachments> list){
         }).build();      
     }
 
-  public static List <TempPost> getActivity(String id, Long numberOf) throws IOException {
+  public static List <TempPost> getActivity(String id, int numberOf) throws IOException {
     Plus.Activities.List listActivities = plus.activities().list(id,"public");
     
-    listActivities.setMaxResults(numberOf);
+    listActivities.setMaxResults((long)numberOf);
     listActivities.setFields("items(actor/id,annotation,id,object(actor/id,attachments(content,displayName,objectType,url)," +
     		"content,id,originalContent,plusoners/totalItems,replies/totalItems,resharers/totalItems)," +
     		"published,updated,verb),nextLink,nextPageToken,selfLink");
@@ -138,9 +138,9 @@ private static String getUrl(List<Attachments> list){
           	post.actorId = activity.getObject().getActor().getId();
           	post.isRepost = true;
           }
-          post.nPlusOne = activity.getObject().getPlusoners().getTotalItems();
-          post.nComments = activity.getObject().getReplies().getTotalItems();
-          post.nResharers = activity.getObject().getResharers().getTotalItems();
+          post.nPlusOne = activity.getObject().getPlusoners().getTotalItems().intValue();
+          post.nComments = activity.getObject().getReplies().getTotalItems().intValue();
+          post.nResharers = activity.getObject().getResharers().getTotalItems().intValue();
           post.kindContent = getKindContent(activity.getObject().getAttachments());
           if(post.kindContent.equals("article"))
         	  post.url = getUrl(activity.getObject().getAttachments());       

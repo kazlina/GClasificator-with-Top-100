@@ -5,14 +5,15 @@ import play.test.*;
 import models.*;
 
 public class BasicTest extends UnitTest {
-        @Before
+
+    @Before
     public void setup() {
         Fixtures.deleteAll();
     }
  
 
-    @Test
-public void profileGpm() throws InterruptedException {
+@Test
+public void addProfileToGpm() throws InterruptedException {
     // Create a new GPM and save it
     GPM gpm = new GPM("107332580040286178426").save();
    // Create a new Profile
@@ -30,7 +31,7 @@ public void profileGpm() throws InterruptedException {
     assertNotNull(firstProfile.date);    
 }
     @Test
-    public void postGpm() throws InterruptedException {
+    public void addPostToGpm(){
         // Create a new GPM and save it
         GPM gpm = GPM.findById("107332580040286178426");
        // Create a new Profile
@@ -47,4 +48,12 @@ public void profileGpm() throws InterruptedException {
         assertEquals("yulia.jpg", firstPost.Image_URL);
         assertNotNull(firstPost.date); */   
     }
+	@Test
+	public void addPlusOneToNewGpm(){
+	new NewGPM("107332580040286178426",1).save();
+	NewGPM newId = NewGPM.findById("107332580040286178426");
+	newId.nMentiens = newId.nMentiens+1;
+	newId.save();
+	assertEquals(2, newId.nMentiens);
+}
 }

@@ -11,17 +11,17 @@ public class TempPost {
 	public String annotation;
 	public Date publishedData;
 	public String url;
-	public boolean isRepost;//post or repost
-	public long nComments;
-	public long nPlusOne;
-	public long nResharers;
+	public boolean isRepost;//post-false or repost -true
+	public int nComments;
+	public int nPlusOne;
+	public int nResharers;
 	
 	public TempPost() {
 	}	
 	
     public TempPost(String actorId, String kindContent, String content, String annotation, 
-    		  		Date publishedData, String url, boolean isRepost, Long nComments,
-    		  		Long nPlusOne, Long nResharers){
+    		  		Date publishedData, String url, boolean isRepost, int nComments,
+    		  		int nPlusOne, int nResharers){
     	this.actorId = actorId;
     	this.kindContent = kindContent;
     	this.content = content;
