@@ -1,35 +1,25 @@
 package models;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.Locale;
 
 public class DataExtraction {
-	public static void main(String[] args) throws IOException {
-		newGPM("101035196437264488455");
-	}
 
-    public static int newGPM(String id) {
+    public int newGPM(String id) {
 	GPM gpm = new GPM(id).save();//сначала создаем GPM и потом передаем его, а не id, нормально? или надо в моделях изменить, чтобы 					строку передовать?
-	  updateActivity(gpm,100);
+	updateActivity(gpm,100);
         // i should add a validator!
-       updateProfile(gpm);
+        updateProfile(gpm);
         return 0;
     }
 
-    public static int updateProfile(GPM gpm){
+    public int updateProfile(GPM gpm){
         TempProfile profile = new TempProfile();
         Parser temp = new Parser();
 
         //get 'profile' from GooglePlus
-        try {
-			profile = temp.getProfile(gpm.id);
-			profile.print();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // i should add a validator!
+        profile = temp.getProfile(gpm.id); // i should add a validator!
 
         //add profile to DB
 	Profile man = new Profile(gpm,profile.displayName,profile.image,profile.gender,
@@ -45,7 +35,7 @@ public class DataExtraction {
         for (HistogramForWords pH: profileHistogram) {
                 //for pH.word search it (word) in WordDictionary
                 List <Word> word1 = Word.find("byWord",pH.word).fetch();
-                List <Synonym> word2 = Synonym.find("bySynonym",pH.word).fetch();
+                List <Synonym> word2 = Synonym.find("byWord",pH.word).fetch();
                 //there is the word (pH.word) in dictionary (Word or Synonym)
                 if (!(word1.isEmpty()) || !(word2.isEmpty())) {
                     //add word from profile to table 'ProfileWord'
@@ -79,23 +69,17 @@ public class DataExtraction {
         return 0;
     }
 
-    public static int updateActivity(GPM gpm, int countOfPosts) {
+    public int updateActivity(GPM gpm, int countOfPosts) {
 
         List <TempPost> activity = new ArrayList <TempPost>();
         GAPI temp = new GAPI();
 
         //get 'activity' from GooglePlus
-        try {
-			activity = temp.getActivity(gpm.id,countOfPosts);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // i should add a validator
+        activity = temp.getActivity(gpm.id,countOfPosts); // i should add a validator
 
         //for each 'post' from 'activity'
         for (TempPost post: activity) {
             //add posts to DB (class Post)
-        	post.print();
             Post postToDB = new Post (gpm,post.publishedData,post.kindContent,post.nComments,
 				post.nPlusOne, post.nResharers,post.isRepost).save();
             // i should add a validator!
@@ -108,7 +92,7 @@ public class DataExtraction {
             for (HistogramForWords pH: postHistogram) {
                 //for pH.word search it (word) in WordDictionary
                 List <Word> word1 = Word.find("byWord",pH.word).fetch();
-                List <Synonym> word2 = Synonym.find("bySynonym",pH.word).fetch();
+                List <Synonym> word2 = Synonym.find("byWord",pH.word).fetch();
                 //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
                 if (!(word1.isEmpty()) || !(word2.isEmpty())) {
                     //add word from post to table 'PostWord'
@@ -132,7 +116,7 @@ public class DataExtraction {
             //ids extraction
             if ((post.isRepost)) {
                 NewGPM newId = NewGPM.findById(post.actorId);
-                if (newId==null) {
+                if (newId.isEmpty()) {
                     new NewGPM(post.actorId,1).save();
                     // i should add a validator!
                 } else {
@@ -144,7 +128,8 @@ public class DataExtraction {
         }
         return 0;
     }
-    static ArrayList<HistogramForWords> wordPreprocessor(String a) {
+
+    ArrayList<HistogramForWords> wordPreprocessor(String a) {
         int i = 0, check = 0;
         String [] temp = null;
         ArrayList<String> mas = new ArrayList<String>();
@@ -178,7 +163,7 @@ public class DataExtraction {
         return hist;
     }
 
-    static String[] getWordsFromSentence(String a) {
+    String[] getWordsFromSentence(String a) {
         //conversion string to lowercase
         a = a.toLowerCase();
         String[] temp = null;

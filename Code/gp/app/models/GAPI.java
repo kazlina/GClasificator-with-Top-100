@@ -18,27 +18,10 @@ import com.google.api.services.plus.model.Activity.PlusObject.Attachments;
 import com.google.api.services.plus.model.Person.Urls;
 
 import java.io.IOException;
-//import java.util.logging.Logger;
-
 
 public class GAPI {
-  //private static final Logger log = Logger.getLogger(Sample.class.getName());
-
   private static Plus plus;
-
-  public static void main(String[] args) throws IOException {
-
-    try {
-      setupTransport();
-
-     // getProfile("100054563229729962810");
-     getActivity("100054563229729962810", 30);
-    } catch (HttpResponseException e) {
-     // log.severe(e.getResponse().parseAsString());
-      throw e;
-    }
-  }
-  
+ 
   private static String stripTags(String xmlStr){
 	    if (xmlStr != null){
 	    xmlStr = xmlStr.replaceAll("<(.)+?>", " "); 
@@ -113,20 +96,31 @@ private static String getUrl(List<Attachments> list){
         }).build();      
     }
 
-  public static List <TempPost> getActivity(String id, int numberOf) throws IOException {
-    Plus.Activities.List listActivities = plus.activities().list(id,"public");
-    
-    listActivities.setMaxResults((long)numberOf);
-    listActivities.setFields("items(actor/id,annotation,id,object(actor/id,attachments(content,displayName,objectType,url)," +
-    		"content,id,originalContent,plusoners/totalItems,replies/totalItems,resharers/totalItems)," +
-    		"published,updated,verb),nextLink,nextPageToken,selfLink");
-
+  public static List <TempPost> getActivity(String id, int numberOf) throws IOException {	  
+	setupTransport();    
+	Plus.Activities.List listActivities = plus.activities().list(id,"public");
     ActivityFeed feed;
     
     List <TempPost> posts = new ArrayList();
     
+    int remainder = numberOf;
+    while(remainder > 0){
+    	if(remainder > 100){
+			listActivities.setFields("items(actor/id,annotation,id,object(actor/id,attachments(content,displayName,objectType,url)," +
+    		"content,id,originalContent,plusoners/totalItems,replies/totalItems,resharers/totalItems)," +
+    		"published,updated,verb),nextPageToken"); 
+			listActivities.setMaxResults(100L);
+			remainder = remainder - 100;
+    	}
+    	else{
+    		listActivities.setFields("items(actor/id,annotation,id,object(actor/id,attachments(content,displayName,objectType,url)," +
+    	    		"content,id,originalContent,plusoners/totalItems,replies/totalItems,resharers/totalItems)," +
+    	    		"published,updated,verb)"); 
+    				listActivities.setMaxResults((long) remainder);
+    				remainder = 0;
+    	}
     try {
-      feed = listActivities.execute();
+      feed = listActivities.execute(); 
       for (Activity activity : feed.getItems()) {
           TempPost post = new TempPost();
           post.publishedData = new Date(activity.getPublished().getValue());
@@ -145,21 +139,34 @@ private static String getUrl(List<Attachments> list){
           if(post.kindContent.equals("article"))
         	  post.url = getUrl(activity.getObject().getAttachments());       
           posts.add(post);
+          if(remainder > 100){
+          	if (feed.getNextPageToken() == null) {
+          	    remainder = 0;
+          	}
+          	else{
+          		listActivities.setPageToken(feed.getNextPageToken());
+          	}
+          }
        }
-      for ( TempPost p: posts){
+  	}
+    catch (HttpResponseException e) {
+    	//System.out.println(e.getResponse().getStatusCode());
+    	return posts;
+    } 
+ }
+    int i = 0;
+    for ( TempPost p: posts){
+    	System.out.println("=====post № "+ i++ +"===============");
       	p.print();
       }
-  	return posts;     
-    } 
-    catch (HttpResponseException e) {
-      return null;
-    }    
-   }
+	return posts;  
+ }
   
   public static TempProfile getProfile(String id) throws IOException {
+	  setupTransport();
+	  TempProfile profile = new TempProfile();
     try {
-      Person person = plus.people().get(id).execute();
-      TempProfile profile = new TempProfile();
+      Person person = plus.people().get(id).execute();      
       profile.id = person.getId();
       profile.displayName = person.getDisplayName();
       profile.image = person.getImage().getUrl();
@@ -173,7 +180,7 @@ private static String getUrl(List<Attachments> list){
       return profile;
     } 
     catch (HttpResponseException e) {
-      return null;
+      return profile;
     }
   }
 
