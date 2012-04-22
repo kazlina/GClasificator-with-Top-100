@@ -40,7 +40,7 @@ public class Parser {
         
         Elements genders = doc.select("div.kM5Oeb-fYiPJe.KtnyId.IzbGp");//gender
         Elements gender = genders.select("div.aYm0te.c-wa-Da");//gender
-        //profile.gender = gender.text();    
+        profile.gender = gender.text();    
          
         Elements statuses = doc.select("div.kM5Oeb-jcNnAf.KtnyId.IzbGp");//relationshipStatus
         Elements status = statuses.select("div.aYm0te.c-wa-Da");//relationshipStatus
@@ -58,17 +58,17 @@ public class Parser {
         return profile;
 }
 
-    public static List <Post> GetActivity(String id) throws IOException 
+    public static List <TempPost> GetActivity(String id) throws IOException 
     {
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         // íóæíà ïðîâåðêà ÷òî íå áûëî îøèáîê
         
         Elements posts = doc.select("div.CPLjOe.Ye"); //ïîñòû ëåíòû
         // âñòàâèòü ïðîâåðêó íà êîëè÷åñòâî ïîñòîâ
-        List <Post> list_of_posts = new ArrayList <Post>();
+        List <TempPost> list_of_posts = new ArrayList <TempPost>();
         for(Element post : posts) 
         {
-        	Post elem = new Post();
+        	TempPost elem = new TempPost();
         	
         	String date_of_post = post.getElementsByClass("fD7nue").text().replace("Post date: ", "");
           	//ïðîâåðêà ÷òî ïðàâèëüíî îáðàòèëèñü
@@ -81,8 +81,8 @@ public class Parser {
         	if (repost.isEmpty())	 
         	{
         		//åñëè ýòî ïîñò
-        		elem.kind_post = true;
-        		elem.actor_id = "";
+        		elem.isRepost = false;
+        		elem.actorId = "";
         		elem.annotation = "";
         		
         		Elements post_text = post.getElementsByClass("rXnUBd");
@@ -90,11 +90,11 @@ public class Parser {
         	}
         	else	//åñëè ýòî ðåïîñò
         	{
-        		elem.kind_post = false;
+        		elem.isRepost = true;
         		String actor = post.getElementsByClass("Yt").html();
         		int start_cut = actor.indexOf("href=\"./") + 8;
         		actor = actor.substring(start_cut, start_cut + 21);
-        		elem.actor_id = actor;
+        		elem.actorId = actor;
         		
         		Elements post_text = post.getElementsByClass("oX401d");
         		Elements repost_text = post.getElementsByClass("rXnUBd");
@@ -115,26 +115,26 @@ public class Parser {
         		if (content_in_html.isEmpty())
         		{
         			// êîíòåíò - òåêñò
-        			elem.kind_content = "text";
+        			elem.kindContent = "text";
         		}
         		else if (!content_in_html.contains("data-content-type=\""))
         		{
-        			elem.kind_content = "link";
+        			elem.kindContent = "link";
         		}
         		else if(content_in_html.contains("data-content-type=\"image/jpeg"))
         		{
         			if (content_in_html.contains("data-content-url=\"https://plus.google.com/"))
         			{
-        				elem.kind_content = "image";
+        				elem.kindContent = "image";
         			}
         			else
         			{
-        				elem.kind_content = "link";
+        				elem.kindContent = "link";
         			}
         		}
         		else if(content_in_html.contains("data-content-type=\"application/x-shockwave-flash"))
         		{
-        			elem.kind_content = "video";
+        			elem.kindContent = "video";
         		}
          		
         	}
@@ -146,44 +146,44 @@ public class Parser {
         	// ïîëó÷àåì êîëè÷åñòâî +1
         	if (plus_one.isEmpty())
         	{
-        		elem.total_plusoners = 0L;
+        		elem.nPlusOne = 0L;
         	}
         	else
         	{
         		plus_one = plus_one.replace("+", "");
         		try
         		{
-        			elem.total_plusoners = (long) Short.parseShort(plus_one);
+        			elem.nPlusOne = (long) Short.parseShort(plus_one);
         		}
         		catch (NumberFormatException exeption)
         		{
         			//exeption.printStackTrace();
-        			elem.total_plusoners = 0L;
+        			elem.nPlusOne = 0L;
         		}
         	}
         	
         	// ïîëó÷àåì êîëè÷åñòâî êîììåíòàðèåâ
         	if (comments.isEmpty())
         	{
-        		elem.total_replies = 0L;
+        		elem.nComments = 0L;
         	}
         	else
         	{
         		try
         		{
-        			elem.total_replies = (long) Short.parseShort(comments);
+        			elem.nComments = (long) Short.parseShort(comments);
         		}
         		catch (NumberFormatException exeption)
         		{
         			//exeption.printStackTrace();
-        			elem.total_replies = 0L;
+        			elem.nComments = 0L;
         		}
         	}
         		
         	//ïîëó÷àåì êîëè÷åñòâî ðåïîñòîâ
         	if (shared.isEmpty())
         	{
-        		elem.total_resharers = 0L;
+        		elem.nResharers = 0L;
         	}
         	else
         	{
@@ -191,31 +191,31 @@ public class Parser {
         		shared = shared.substring(0, length_string_with_nemb);
         		try
         		{
-        			elem.total_resharers = Short.parseShort(shared);
+        			elem.nResharers = Short.parseShort(shared);
         		}
         		catch (NumberFormatException exeption)
         		{
         			//exeption.printStackTrace();
-        			elem.total_resharers = 0;
+        			elem.nResharers = 0;
         		}
         	}
         	list_of_posts.add(elem);
         }
         int i = 1;
-        for (Post p : list_of_posts)
+        for (TempPost p : list_of_posts)
         {
-        	System.out.println("    Post ¹" + i);
-        	System.out.println(p.published_data);
-        	System.out.println(p.actor_id);
-        	System.out.println(p.kind_content);
+        	System.out.println("    Post  " + i);
+        	System.out.println(p.publishedData);
+        	System.out.println(p.actorId);
+        	System.out.println(p.kindContent);
         	System.out.println(" --- *** original content *** ---");
         	System.out.println(p.annotation);
         	System.out.println(" --- *** content *** ---");
         	System.out.println(p.content);
         	System.out.println(" --- *** statistic *** ---");
-        	System.out.println("+1 = " + p.total_plusoners);
-        	System.out.println("comments " + p.total_replies);
-        	System.out.println("reshared " + p.total_resharers);
+        	System.out.println("+1 = " + p.nPlusOne);
+        	System.out.println("comments " + p.nComments);
+        	System.out.println("reshared " + p.nResharers);
         	i ++;
         }
         return list_of_posts;

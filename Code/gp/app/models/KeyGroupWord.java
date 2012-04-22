@@ -11,9 +11,9 @@ import play.data.validation.*;
 public class KeyGroupWord implements Serializable {
 
 	@Required
-	public Group_define Id_Group;
+	public Group group;
 	
 	@Required
-        public Word_dictionary Id_Word;
+    public Word word;
 
-	 }
+ }

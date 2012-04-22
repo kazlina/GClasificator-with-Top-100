@@ -14,8 +14,8 @@ import play.data.validation.*;
 public class KeyGroupLink implements Serializable {
 
 	@Required
-	public Group_define Id_Group;
+	public Group group;
 	
 	@Required
-        public Link_dictionary Id_Link;
-	 }
+    public Link link;
+}

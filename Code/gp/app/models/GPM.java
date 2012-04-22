@@ -5,7 +5,7 @@ import javax.persistence.*;
 import play.db.jpa.*;
 import play.data.validation.*;
 
-@Table(name="GPM")
+@Table(name="GPMs")
 @Entity
 public class GPM extends GenericModel {
 
@@ -15,22 +15,24 @@ public class GPM extends GenericModel {
 	@MaxSize(value=21)
 	@Match(value="^\\d{21}$", message="Incorrect identifer")
 	@Column(name="Id", length=21)
-	public String Id;
+	public String id;
   
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gpm")
 	public List<Profile> profiles;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
-	public List<Posts> posts;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gpm")
+	public List<Post> posts;
     
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Id_GPM")
-	public List<Added_By_Admin> pets;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gpm")
+	public List<AddedByAdmin> addedByAdmin;
     
 	public String toString(){
-		return this.Id;
+		return this.id;
 	}
+	
+	public GPM(){};
 	    
-	public GPM(String Id) {
-	 this.Id = Id;
+	public GPM(String id) {
+	 this.id = id;
 	}
 }
