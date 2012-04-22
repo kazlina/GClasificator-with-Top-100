@@ -113,7 +113,7 @@ private static String getUrl(List<Attachments> list){
         }).build();      
     }
 
-  public static List <TempPost> GetActivity(String id, Long numberOf) throws IOException {
+  public static List <TempPost> getActivity(String id, Long numberOf) throws IOException {
     Plus.Activities.List listActivities = plus.activities().list(id,"public");
     
     listActivities.setMaxResults(numberOf);

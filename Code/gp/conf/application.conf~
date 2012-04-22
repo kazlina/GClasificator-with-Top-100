@@ -85,7 +85,13 @@ date.format=yyyy-MM-dd
 db=mem
 #
 # To connect to a local MySQL5 database, use:
- db=mysql://root:1@localhost/test
+<<<<<<< HEAD
+ db=mysql://root:rjirfrjirf@localhost/test
+=======
+
+db=mysql://root:masloff@localhost/Site
+
+>>>>>>> 39ca193cd642e27f8f10dbc633312c1442c0295b
 #
 # To connect to a local PostgreSQL9 database, use:
 # db=postgres://user:pwd@host/database

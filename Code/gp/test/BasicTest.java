@@ -5,6 +5,11 @@ import play.test.*;
 import models.*;
 
 public class BasicTest extends UnitTest {
+        @Before
+    public void setup() {
+        Fixtures.deleteAll();
+    }
+ 
 
     @Test
 public void profileGpm() throws InterruptedException {

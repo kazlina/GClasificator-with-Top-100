@@ -1,7 +1,6 @@
 package models;
 
 import java.util.*;
-//import javax.persistence.*;
 import java.io.*;
 
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;

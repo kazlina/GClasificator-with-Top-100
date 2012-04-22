@@ -62,7 +62,7 @@ public class DataExtraction {
         GAPI temp = new GAPI();
 
         //get 'activity' from GooglePlus
-        activity = temp.GetActivity(id,countOfPosts); // i should add a validator
+        activity = temp.getActivity(id,countOfPosts); // i should add a validator
 
         //for each 'post' from 'activity'
         for (TempPost post: activity) {

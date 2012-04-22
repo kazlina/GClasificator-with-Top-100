@@ -9,7 +9,7 @@ import org.jsoup.select.*;
 import java.io.*;
  
 public class Parser {
-    public static TempProfile GetProfile(String id) throws IOException {
+    public static TempProfile getProfile(String id) throws IOException {
     	TempProfile profile = new TempProfile();
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         
@@ -58,7 +58,7 @@ public class Parser {
         return profile;
 }
 
-    public static List <TempPost> GetActivity(String id) throws IOException 
+    public static List <TempPost> getActivity(String id) throws IOException 
     {
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         // íóæíà ïðîâåðêà ÷òî íå áûëî îøèáîê
