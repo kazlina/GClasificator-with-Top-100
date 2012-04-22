@@ -6,19 +6,16 @@ import java.util.List;
 //import java.util.Locale;
 
 public class DataExtraction {
-	public static void main(String[] args) throws IOException {
-		newGPM("101035196437264488455");
-	}
 
-    public static int newGPM(String id) {
+    public int newGPM(String id) {
 	GPM gpm = new GPM(id).save();//сначала создаем GPM и потом передаем его, а не id, нормально? или надо в моделях изменить, чтобы 					строку передовать?
-	  updateActivity(gpm,100);
+	 // updateActivity(gpm,100);
         // i should add a validator!
        updateProfile(gpm);
         return 0;
     }
 
-    public static int updateProfile(GPM gpm){
+    public int updateProfile(GPM gpm){
         TempProfile profile = new TempProfile();
         Parser temp = new Parser();
 
@@ -79,7 +76,7 @@ public class DataExtraction {
         return 0;
     }
 
-    public static int updateActivity(GPM gpm, int countOfPosts) {
+    /*public int updateActivity(GPM gpm, int countOfPosts) {
 
         List <TempPost> activity = new ArrayList <TempPost>();
         GAPI temp = new GAPI();
@@ -143,7 +140,7 @@ public class DataExtraction {
             }
         }
         return 0;
-    }
+    }*/
     static ArrayList<HistogramForWords> wordPreprocessor(String a) {
         int i = 0, check = 0;
         String [] temp = null;

@@ -11,6 +11,8 @@ import models.*;
 public class Application extends Controller {
     
     public static void index() throws IOException{
+           //DataExtraction data = new DataExtraction(); <---------проверка DataExtraction
+           //data.newGPM("101035196437264488455");
            render();
     }
     
