@@ -18,7 +18,7 @@ public class DataExtraction {
         Parser temp = new Parser();
 
         //get 'profile' from GooglePlus
-        profile = temp.GetProgile(id); // i should add a validator!
+        profile = temp.getProfile(id); // i should add a validator!
 
         //add profile to DB
         Profile man = Profile(id,profile.displayName,profile.image,profile.gender,profile.tagline,profile.relationshipStatus,100).save();
