@@ -18,13 +18,11 @@ public class DataExtraction {
         Parser temp = new Parser();
 
         //get 'profile' from GooglePlus
-        profile = temp.getProgile(id); // i should add a validator!
+        profile = temp.GetProgile(id); // i should add a validator!
 
         //add profile to DB
-
-        Profile man = Profile(id,profile.displayName,profile.image,profile.gender,AIM???profile.tagline,profile.relationshipStatus,FOLLOWERS???).save();
+        Profile man = Profile(id,profile.displayName,profile.image,profile.gender,profile.tagline,profile.relationshipStatus,100).save();
         // i should add a validator!
-
 
         //words extraction
         ArrayList<HistogramForWords> profileHistogram = new ArrayList<HistogramForWords>();
@@ -34,15 +32,21 @@ public class DataExtraction {
         //for each word from profile
         for (HistogramForWords pH: profileHistogram) {
                 //for pH.word search it (word) in WordDictionary
-
-                List <WordDictionary> word1 = WordDictionary.find("byWord",pH.word).fetch();
-                List <WordSynonyms> word2 = WordSynonyms.find("byWord",pH.word).fetch();
-
-                //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
+                List <Word> word1 = Word.find("byWord",pH.word).fetch();
+                List <Synonyms> word2 = Synonyms.find("byWord",pH.word).fetch();
+                //there is the word (pH.word) in dictionary (Word or Synonyms)
                 if (!(word1.isEmpty()) || !(word2.isEmpty())) {
                     //add word from profile to table 'ProfileWord'
-                    new ProfileWord(man, Word_dictionary Id_Word????, pH.countWord).save();
-                    // i should add a validator!
+                    if (word1.isEmpty()) {
+                        Synonyms wordFromSynonyms = new Synonyms();
+                        wordFromSynonyms = word2.get(0);
+                        new ProfileWord(man, wordFromSynonyms, pH.countWord).save();
+                    } else {
+                        Word wordFromDictionary = new Word();
+                        wordFromDictionary = word1.get(0);
+                        new ProfileWord(man, wordFromDictionary, pH.countWord).save();
+                        // i should add a validator!
+                    }
                 }
 
             }
@@ -54,20 +58,17 @@ public class DataExtraction {
 
     public int updateActivity(String id, int countOfPosts) {
 
-        List <Post> activity = new ArrayList <Post>();
+        List <TempPost> activity = new ArrayList <TempPost>();
         GAPI temp = new GAPI();
 
         //get 'activity' from GooglePlus
-        activity = temp.getActivity(id,countOfPosts); // i should add a validator
+        activity = temp.GetActivity(id,countOfPosts); // i should add a validator
 
         //for each 'post' from 'activity'
-        for (Post post: activity) {
-            //add posts to DB (class Posts)
-
-            Posts postToDB = new Posts (id,"i do not know",post.total_replies,post.total_plusoners,post.total_resharers,post.kind_post).save();
-            // WHERE is there 'kind_content' in this table?
+        for (TempPost post: activity) {
+            //add posts to DB (class Post)
+            Post postToDB = new Post (id,post.publishedData,post.kindContent,post.nComments,post.nPlusOne,post.nResharers,post.isRepost).save();
             // i should add a validator!
-
 
             //words extraction
             //build word histogram
@@ -76,33 +77,35 @@ public class DataExtraction {
             //for each word from post
             for (HistogramForWords pH: postHistogram) {
                 //for pH.word search it (word) in WordDictionary
-
-                List <WordDictionary> word1 = WordDictionary.find("byWord",pH.word).fetch();
-                List <WordSynonyms> word2 = WordSynonyms.find("byWord",pH.word).fetch();
-
+                List <Word> word1 = Word.find("byWord",pH.word).fetch();
+                List <Synonyms> word2 = Synonyms.find("byWord",pH.word).fetch();
                 //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
                 if (!(word1.isEmpty()) || !(word2.isEmpty())) {
                     //add word from post to table 'PostWord'
-                    new PostWord(postToDB, Word_dictionary Id_Word, pH.countWord).save();
-                    // i should add a validator!
+                    if (word1.isEmpty()) {
+                        Synonyms wordFromSynonyms = new Synonyms();
+                        wordFromSynonyms = word2.get(0);
+                        new PostWord(postToDB, wordFromSynonyms, pH.countWord).save();
+                    } else {
+                        Word wordFromDictionary = new Word();
+                        wordFromDictionary = word1.get(0);
+                        new PostWord(postToDB, wordFromDictionary, pH.countWord).save();
+                        // i should add a validator!
+                    }
                 }
-
             }
 
             //links extraction (there is no, Artem has not written this feature yet)
 
             //ids extraction
             if (!(post.kindPost)) {
-
-                List <NewId> newId = NewId.find("byId").fetch();
+                List <NewGPM> newId = NewGPM.find("byId").fetch();
                 if (newId.isEmpty()) {
-                    new NewId(post.actorId,1).save();
+                    new NewGPM(post.actorId,1).save();
                     // i should add a validator!
-                }
-                else {
+                } else {
                     //add +1 to nMentiens for actorId ??? How?
                 }
-
             }
         }
         return 0;
