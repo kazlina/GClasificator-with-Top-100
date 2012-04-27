@@ -44,7 +44,7 @@ public class GroupLink extends Model {
         this.profileWeight = profileWeight;
         }
 */
-	public static Finder<Long, GroupLink> find = new Finder<Long, GroupLink>(Long.class, GroupLink.class);
+	public static Model.Finder<Long, GroupLink> find = new Model.Finder<Long, GroupLink>(Long.class, GroupLink.class);
 
 	public static List<GroupLink> all() {
 		return find.all();

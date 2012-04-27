@@ -19,7 +19,7 @@ public class Relationship extends Model {
     @Column(name = "status", length = 20, unique = true, nullable = false)
     public String status;
 
-    public static Finder<Long, Relationship> find = new Finder<Long, Relationship>(Long.class, Relationship.class);
+    public static Model.Finder<Long, Relationship> find = new Model.Finder<Long, Relationship>(Long.class, Relationship.class);
 
 	public static List<Relationship> all() {
 		return find.all();

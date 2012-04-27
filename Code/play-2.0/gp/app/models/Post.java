@@ -62,7 +62,7 @@ public class Post extends Model {
         this.isRepost = isRepost;
         }
  */
-	public static Finder<Long, Post> find = new Finder<Long, Post>(Long.class, Post.class);
+	public static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
 
 	public static List<Post> all() {
 		return find.all();

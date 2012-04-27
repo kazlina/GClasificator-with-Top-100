@@ -39,7 +39,7 @@ public class ProfileLink extends Model {
         this.amount = amount;
         }
 */
-	public static Finder<Long, ProfileLink> find = new Finder<Long, ProfileLink>(Long.class, ProfileLink.class);
+	public static Model.Finder<Long, ProfileLink> find = new Model.Finder<Long, ProfileLink>(Long.class, ProfileLink.class);
 
 	public static List<ProfileLink> all() {
 		return find.all();

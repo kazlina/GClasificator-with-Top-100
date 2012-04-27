@@ -22,7 +22,7 @@ public class Content extends Model {
     @OneToMany(mappedBy = "kindContent")
     public List<Post> posts;
 
-    public static Finder<Long, Content> find = new Finder<Long, Content>(Long.class, Content.class);
+    public static Model.Finder<Long, Content> find = new Model.Finder<Long, Content>(Long.class, Content.class);
 
 	public static List<Content> all() {
 		return find.all();

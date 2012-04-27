@@ -52,7 +52,7 @@ public class AddedByAdmin extends Model {
         this.comment = comment;
         }
 */
-	public static Finder<Long, AddedByAdmin> find = new Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
+	public static Model.Finder<Long, AddedByAdmin> find = new Model.Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
 
 	public static List<AddedByAdmin> all() {
 		return find.all();

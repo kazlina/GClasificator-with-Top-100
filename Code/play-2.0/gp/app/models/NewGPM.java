@@ -28,7 +28,7 @@ public class NewGPM extends Model {
         this.nMentiens = severity;
         }
 */
-	public static Finder<Long, NewGPM> find = new Finder<Long, NewGPM>(Long.class, NewGPM.class);
+	public static Model.Finder<Long, NewGPM> find = new Model.Finder<Long, NewGPM>(Long.class, NewGPM.class);
 
 	public static List<NewGPM> all() {
 		return find.all();

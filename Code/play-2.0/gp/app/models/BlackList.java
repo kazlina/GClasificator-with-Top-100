@@ -37,7 +37,7 @@ public class BlackList extends Model {
         this.dateOfAddition = Calendar.getInstance().getTime();;
     }
 */
-	public static Finder<Long, BlackList> find = new Finder<Long, BlackList>(Long.class, BlackList.class);
+	public static Model.Finder<Long, BlackList> find = new Model.Finder<Long, BlackList>(Long.class, BlackList.class);
 
 	public static List<BlackList> all() {
 		return find.all();

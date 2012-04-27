@@ -41,7 +41,7 @@ public class PostLink extends Model {
         this.amount = amount;
         }
 */
-	public static Finder<Long, PostLink> find = new Finder<Long, PostLink>(Long.class, PostLink.class);
+	public static Model.Finder<Long, PostLink> find = new Model.Finder<Long, PostLink>(Long.class, PostLink.class);
 
 	public static List<PostLink> all() {
 		return find.all();

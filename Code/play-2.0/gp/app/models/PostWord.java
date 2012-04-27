@@ -39,7 +39,7 @@ public class PostWord extends Model {
         this.amount = amount;
         }
 */
-	public static Finder<Long, PostWord> find = new Finder<Long, PostWord>(Long.class, PostWord.class);
+	public static Model.Finder<Long, PostWord> find = new Model.Finder<Long, PostWord>(Long.class, PostWord.class);
 
 	public static List<PostWord> all() {
 		return find.all();

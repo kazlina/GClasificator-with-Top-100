@@ -66,7 +66,7 @@ public class Profile extends Model {
         this.followers = followers;
         }
 */
-	public static Finder<Long, Profile> find = new Finder<Long, Profile>(Long.class, Profile.class);
+	public static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
 
 	public static List<Profile> all() {
 		return find.all();

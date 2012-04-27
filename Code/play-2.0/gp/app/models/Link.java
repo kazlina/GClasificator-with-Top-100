@@ -36,7 +36,7 @@ public class Link extends Model {
 		this.link = link;
 	}
 */
-	public static Finder<Long, Link> find = new Finder<Long, Link>(Long.class, Link.class);
+	public static Model.Finder<Long, Link> find = new Model.Finder<Long, Link>(Long.class, Link.class);
 
 	public static List<Link> all() {
 		return find.all();

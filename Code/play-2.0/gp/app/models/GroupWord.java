@@ -44,7 +44,7 @@ public class GroupWord extends Model {
 		this.profileWeight = profileWeight;
 	}
 */
-	public static Finder<Long, GroupWord> find = new Finder<Long, GroupWord>(Long.class, GroupWord.class);
+	public static Model.Finder<Long, GroupWord> find = new Model.Finder<Long, GroupWord>(Long.class, GroupWord.class);
 
 	public static List<GroupWord> all() {
 		return find.all();

@@ -19,7 +19,7 @@ public class Gender extends Model {
     @JoinColumn(name = "value", unique = true, nullable = false)
     public Integer value;
 
-    public static Finder<Long, Gender> find = new Finder<Long, Gender>(Long.class, Gender.class);
+    public static Model.Finder<Long, Gender> find = new Model.Finder<Long, Gender>(Long.class, Gender.class);
 
 	public static List<Gender> all() {
 		return find.all();

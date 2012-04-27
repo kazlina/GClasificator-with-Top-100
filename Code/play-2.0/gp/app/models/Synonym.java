@@ -1,5 +1,6 @@
 package models;
 
+import java.io.*;
 import java.util.*;
 
 import play.db.ebean.*;
@@ -20,7 +21,7 @@ public class Synonym extends Model {
     public Long id;
 	
     @ManyToOne
-	@Constraints.Required
+	//@Constraints.Required
 	@JoinColumn(name = "word", nullable = false)
 	public Word word;	
 	
@@ -44,7 +45,7 @@ public class Synonym extends Model {
     }
 
     public static void create(Long wordId, Synonym synonym) {
-        synonym.word = Word.find.ref(wordId);
+    	synonym.word = Word.wordById(wordId);
         synonym.save();
     }
 

@@ -28,7 +28,7 @@ public class GPM extends Model {
 	@OneToMany(mappedBy = "gpm")
 	public List<AddedByAdmin> addedByAdmin;
 
-	public static Finder<Long, GPM> find = new Finder<Long, GPM>(Long.class, GPM.class);
+	public static Model.Finder<Long, GPM> find = new Model.Finder<Long, GPM>(Long.class, GPM.class);
 /*
 	public String toString(){
 		return this.id_gpm;

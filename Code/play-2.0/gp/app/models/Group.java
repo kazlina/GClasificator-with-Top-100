@@ -66,7 +66,7 @@ public class Group extends Model {
 	this.videoPercent = videoPercent;
 	}
 */
-	public static Finder<Long, Group> find = new Finder<Long, Group>(Long.class, Group.class);
+	public static Model.Finder<Long, Group> find = new Model.Finder<Long, Group>(Long.class, Group.class);
 
 	public static List<Group> all() {
 		return find.all();
