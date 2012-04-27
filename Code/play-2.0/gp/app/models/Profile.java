@@ -34,14 +34,16 @@ public class Profile extends Model {
     @Column(name = "image")
 	public String image;
 
-    @Column(name = "gender")
-    public String gender;
+    @JoinColumn(name = "gender")
+    @ManyToOne
+    public Gender gender;
 
     @Column(name = "tagline")
     public String tagline;
 
-    @Column(name = "relationshipStatus", length = 20)
-    public String relationshipStatus;
+    @JoinColumn(name = "relationshipStatus")
+    @ManyToOne
+    public Relationship relationshipStatus;
 
     @Column(name = "Followers")
     public Integer followers;

@@ -29,26 +29,27 @@ public class Post extends Model {
     public Date date;
 
 	@Constraints.Required
-	@Column(name = "kindContent", length = 10, nullable = false)
-	public String kindContent;
+	@JoinColumn(name = "kindContent", nullable = false)
+	@ManyToOne
+	public Content kindContent;
 
-	@Column(name="nComment")
+	@Column(name = "nComment")
     public Integer nComment;
 
-    @Column(name="nPlusOne")
+    @Column(name = "nPlusOne")
     public Integer nPlusOne;
 
-    @Column(name="nResharers")
+    @Column(name = "nResharers")
     public Integer nResharers;
 
     @Constraints.Required
-	@Column(name="isRepost", nullable = false)
+	@Column(name = "isRepost", nullable = false)
     public boolean isRepost;
 
-    @OneToMany(mappedBy="post")
+    @OneToMany(mappedBy = "post")
     public List<PostLink> links;
 
-    @OneToMany(mappedBy="post")
+    @OneToMany(mappedBy = "post")
     public List<PostWord> words;
 /*
     public Post(GPM gpm, Date publishedData, String kindContent, int nComments, int nPlusOne, int nResharers, boolean isRepost) {

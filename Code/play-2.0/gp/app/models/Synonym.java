@@ -4,14 +4,15 @@ import java.util.*;
 
 import play.db.ebean.*;
 import play.data.validation.*;
-import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
-import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "Synonym", uniqueConstraints ={ @UniqueConstraint(columnNames = 
-                             {"word_id", "synonym" }) })
+@Table(name = "Synonym", uniqueConstraints ={
+		@UniqueConstraint(columnNames = {
+				"word", "synonym" 
+				}) 
+		})
 public class Synonym extends Model {
 
 	@Id
@@ -19,15 +20,13 @@ public class Synonym extends Model {
     public Long id;
 	
     @ManyToOne
-	//@Constraints.Required
-	//@JoinColumn(name = "word_id", nullable = false)
+	@Constraints.Required
+	@JoinColumn(name = "word", nullable = false)
 	public Word word;	
 	
 	@Column(name = "synonym", length = 30, nullable = false)
 	@Constraints.Required
 	public String synonym;
-
-
 	
 /*
 	public String toString(){
@@ -38,7 +37,7 @@ public class Synonym extends Model {
 		this.synonym = synonym;
 	}
 */
-	public static Finder<Long, Synonym> find = new Finder<Long, Synonym>(Long.class, Synonym.class);
+	public static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
 
     public static List<Synonym> all(Long wordId) {
         return Word.find.ref(wordId).synonyms;

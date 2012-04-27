@@ -4,9 +4,9 @@ import java.util.*;
 
 import play.db.ebean.*;
 import play.data.validation.*;
-import play.data.validation.Constraints.*;
+
 import javax.persistence.*;
-import javax.persistence.ManyToOne;
+
 
 @Entity
 @Table(name = "Word")
@@ -41,7 +41,7 @@ public class Word extends Model {
 		this.word = word;
 	}
 */
-	public static Finder<Long, Word> find = new Finder<Long, Word>(Long.class, Word.class);
+	public static Model.Finder<Long, Word> find = new Model.Finder<Long, Word>(Long.class, Word.class);
 
 	public static List<Word> all() {
 		return find.all();
