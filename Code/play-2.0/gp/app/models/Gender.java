@@ -16,8 +16,8 @@ public class Gender extends Model {
     public Long id;
 
     @Constraints.Required
-    @JoinColumn(name = "value", unique = true, nullable = false)
-    public Integer value;
+    @Column(name = "value", length = 10, unique = true, nullable = false)
+    public String value;
 
     public static Model.Finder<Long, Gender> find = new Model.Finder<Long, Gender>(Long.class, Gender.class);
 

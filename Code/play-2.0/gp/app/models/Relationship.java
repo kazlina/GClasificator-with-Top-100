@@ -16,7 +16,7 @@ public class Relationship extends Model {
     public Long id;
 
     @Constraints.Required
-    @Column(name = "status", length = 20, unique = true, nullable = false)
+    @Column(name = "status", length = 30, unique = true, nullable = false)
     public String status;
 
     public static Model.Finder<Long, Relationship> find = new Model.Finder<Long, Relationship>(Long.class, Relationship.class);

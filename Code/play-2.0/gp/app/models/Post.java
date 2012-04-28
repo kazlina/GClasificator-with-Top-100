@@ -8,17 +8,17 @@ import play.data.validation.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Post", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {
-		"gpm", "dateCreate"
-		})
-	})
+@Table(name = "Post")
 public class Post extends Model {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.Required
+    @Column(name = "postId", length = 30, nullable = false, unique = true)
+    public String postId;
+    
     @Constraints.Required
     @JoinColumn(name = "gpm", nullable = false)
     @ManyToOne
