@@ -14,7 +14,7 @@ public class DataExtraction {
 	GPM.create(gpm); 
 	updateActivity(gpm,100);
         // i should add a validator!
-    //updateProfile(gpm);
+    updateProfile(gpm);
     return 0;
     }
 
@@ -85,7 +85,6 @@ public class DataExtraction {
         //for each 'post' from 'activity'
         for (TempPost post: activity) {
             //add posts to DB (class Post)
-        	post.print();
         	Content kindContent =  Content.find.where().eq("kind", post.kindContent).findUnique();
             Post postToDB = new Post (gpm, post.postId, post.publishedData, kindContent, post.nComments,
 				post.nPlusOne, post.nResharers,post.isRepost);
