@@ -117,13 +117,12 @@ public class DataExtraction {
             }
 
             //links extraction (there is no, Artem has not written this feature yet)
-/*
+
             //ids extraction
             if ((post.isRepost)) {
                 NewGPM newId =  NewGPM.find.where().eq("id_gpm", post.actorId).findUnique();
                 if (newId==null) {
-                    @SuppressWarnings("null")
-					NewGPM newGpm= new NewGPM(newId.id_gpm,1);
+                    NewGPM newGpm= new NewGPM(post.actorId,1);
                     NewGPM.create(newGpm);
                     // i should add a validator!
                 } else {
@@ -131,7 +130,7 @@ public class DataExtraction {
 			 newId.nMentiens = newId.nMentiens+1;
 			 NewGPM.create(newId);//newId.save();
                 }
-            }*/
+            }
         }
         return 0;
     }
