@@ -118,7 +118,7 @@ public class DataExtraction {
 
             //ids extraction
             if ((post.isRepost)) {
-                NewGPM newId =  NewGPM.find.where().eq("id_gpm", post.actorId).findUnique();
+                NewGPM newId =  NewGPM.findByIdGPM(post.actorId);
                 if (newId==null) {
 		    NewGPM newGpm= new NewGPM(post.actorId,1);
                     NewGPM.create(newGpm);
