@@ -27,8 +27,8 @@ public class DataExtraction {
 		} // i should add a validator!
 
         //add profile to DB
-    Gender gender =  Gender.findByKind(profile.gender);
-    Relationship relationshipStatus = Relationship.findByKind(profile.relationshipStatus);
+    Gender gender =  Gender.findByValue(profile.gender);
+    Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
 	Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus,100);
 	Profile.create(man);

@@ -35,7 +35,7 @@ public class Gender extends Model {
 		return find.ref(Id);
 	}
 
-	public static Gender findByKind(String element) {
+	public static Gender findByValue(String element) {
 		return find.where().eq("value", element).findUnique();
 	}
 
