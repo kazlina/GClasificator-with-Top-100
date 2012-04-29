@@ -148,7 +148,7 @@ public class DataExtraction {
         }
         HistogramForWords elem = new HistogramForWords();
         elem.countWord++;
-        elem.word = mas.get(0);//здесь ломается проверить
+        elem.word = mas.get(0);//РЅР° СЌС‚РѕРј РјРµСЃС‚Рµ Р»РѕРјР°РµС‚СЃСЏ
         hist.add(elem);
         mas.remove(0);
         for (String m: mas){
