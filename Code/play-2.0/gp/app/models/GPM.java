@@ -31,11 +31,11 @@ public class GPM extends Model {
 	public String toString(){
 		return this.id_gpm;
 	}
-
+*/
 	public GPM(String id) {
 		this.id_gpm = id;
 	}
-*/
+
 	public static List<GPM> all() {
 		return find.all();
 	}
