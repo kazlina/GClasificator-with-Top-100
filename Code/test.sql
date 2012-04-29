@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 -- База данных: `test`
 --
 
+
+--
+-- Дамп данных таблицы `Relationship`
+--
+
+INSERT INTO `Relationship` (`id`, `status`) VALUES (1, 'single');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (2, 'in_a_relationship');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (3, 'engaged');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (4, 'married');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (5, 'its_complicated');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (6, 'open_relationship');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (7, 'widowed');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (8, 'in_domestic_partnership');
+INSERT INTO `Relationship` (`id`, `status`) VALUES (9, 'in_civil_union');
+
+--
+-- Дамп данных таблицы `Gender`
+--
+INSERT INTO `Gender` (`id`, `value`) VALUES (1, 'male');
+INSERT INTO `Gender` (`id`, `value`) VALUES (2, 'female');
+INSERT INTO `Gender` (`id`, `value`) VALUES (3, 'other');
+
+--
+-- Дамп данных таблицы `Content`
+--
+INSERT INTO `Content` (`id`,`kind`) VALUES (3,'audio');
+INSERT INTO `Content` (`id`,`kind`) VALUES (5,'link');
+INSERT INTO `Content` (`id`,`kind`) VALUES (2,'photo');
+INSERT INTO `Content` (`id`,`kind`) VALUES (1,'text');
+INSERT INTO `Content` (`id`,`kind`) VALUES (4,'video');
+
+
 --
 -- Дамп данных таблицы `Word`
 --
