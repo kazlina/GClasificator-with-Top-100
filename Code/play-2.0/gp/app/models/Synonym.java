@@ -30,11 +30,11 @@ public class Synonym extends Model {
 	public String toString(){
 		return this.synonym;
 	}
-
+*/
 	public Synonym(String synonym){
 		this.synonym = synonym;
 	}
-*/
+
 	public static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
 
     public static List<Synonym> all(Long wordId) {
