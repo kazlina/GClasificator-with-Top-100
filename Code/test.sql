@@ -21,10 +21,10 @@ SET time_zone = "+00:00";
 --
 
 --
--- Дамп данных таблицы `Word_dictionary`
+-- Дамп данных таблицы `Word`
 --
 
-INSERT INTO `Words_dictionary` (`id`, `Word`) VALUES
+INSERT INTO `Word` (`id`, `Word`) VALUES
 (31, 'abstract'),
 (24, 'acrylic'),
 (73, 'activities'),
@@ -321,10 +321,10 @@ INSERT INTO `Words_dictionary` (`id`, `Word`) VALUES
 (121, 'youtube');
 
 --
--- Дамп данных таблицы `Word_Synonyms`
+-- Дамп данных таблицы `Synonym`
 --
 
-INSERT INTO `Word_Synonyms` (`id`, `Synonym`, `Id_Word`) VALUES
+INSERT INTO `Synonym` (`id`, `synonym`, `word`) VALUES
 (1, 'абстрактный', 31),
 (2, 'акриловый', 24),
 (3, 'архитектор', 25),
@@ -433,10 +433,10 @@ INSERT INTO `Word_Synonyms` (`id`, `Synonym`, `Id_Word`) VALUES
 
 
 --
--- Дамп данных таблицы `Group_define`
+-- Дамп данных таблицы `GroupDescr`
 --
 
-INSERT INTO `Groups_description` (`id`, `Description`, `Name`, `Pictire_active`, `Pictire_passive`) VALUES
+INSERT INTO `GroupDescr` (`id`, `Description`, `name`, `activeImage`, `passiveImage`) VALUES
 (1, '', 'Художники', '', ''),
 (2, NULL, 'Спортсмены', '', ''),
 (3, NULL, 'Блоггеры', '', ''),
@@ -445,10 +445,10 @@ INSERT INTO `Groups_description` (`id`, `Description`, `Name`, `Pictire_active`,
 
 
 --
--- Дамп данных таблицы `Link_dictionary`
+-- Дамп данных таблицы `Link`
 --
 
-INSERT INTO `Links_dictionary` (`id`, `Link`) VALUES
+INSERT INTO `Link` (`id`, `link`) VALUES
 (1, '500px.com'),
 (7, 'blogger.com'),
 (3, 'blogspot.com'),
@@ -461,10 +461,10 @@ INSERT INTO `Links_dictionary` (`id`, `Link`) VALUES
 (5, 'youtube.com');
 
 --
--- Дамп данных таблицы `Group_Link`
+-- Дамп данных таблицы `GroupLink`
 --
 
-INSERT INTO `Group_Links` (`Post_weight`, `Profile_weight`, `Id_Link`, `Id_Group`) VALUES
+INSERT INTO `GroupLink` (`postWeight`, `profileWeight`, `link`, `groupDescr`) VALUES
 (0, 0, 3, 3),
 (0, 0, 4, 3),
 (0, 0, 5, 3),
@@ -477,10 +477,10 @@ INSERT INTO `Group_Links` (`Post_weight`, `Profile_weight`, `Id_Link`, `Id_Group
 (0, 0, 9, 5);
 
 --
--- Дамп данных таблицы `Group_Word`
+-- Дамп данных таблицы `GroupWord`
 --
 
-INSERT INTO `Group_Words` (`Post_weight`, `Profile_weight`, `Id_Word`, `Id_Group`) VALUES
+INSERT INTO `GroupWord` (`postWeight`, `profileWeight`, `word`, `groupDescr`) VALUES
 (0, 0, 1, 1),
 (0, 0, 2, 1),
 (0, 0, 3, 1),
