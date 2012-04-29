@@ -48,10 +48,9 @@ public class DataExtraction {
                 if ((wordFromDictionary != null) || !(word2.isEmpty())) {
                     //add word from profile to table 'ProfileWord'
                     if (wordFromDictionary == null) {
-					    Synonym wordFromSynonyms = new Synonym();
-                        wordFromSynonyms = word2.get(0);
+			Synonym wordFromSynonyms = word2.get(0);
                     	Word word = wordFromSynonyms.word;			
-			            ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
+			ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
                         ProfileWord.create(profileWord);
                     } else {
                     	ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
@@ -103,10 +102,9 @@ public class DataExtraction {
                 if ((wordFromDictionary!=null) || !(word2.isEmpty())) {
                     //add word from post to table 'PostWord'
                     if (wordFromDictionary==null) {
-		        Synonym wordFromSynonyms = new Synonym();
-                        wordFromSynonyms = word2.get(0);
+		        Synonym wordFromSynonyms = word2.get(0);
                        	Word word = wordFromSynonyms.word;			
-			            PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
+			PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
                         PostWord.create(postWord);
                     } else {
                         PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);	
