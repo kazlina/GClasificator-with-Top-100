@@ -33,9 +33,9 @@ public class NewGPM extends Model {
 	private static Model.Finder<Long, NewGPM> find = new Model.Finder<Long, NewGPM>(Long.class, NewGPM.class);
 
 	public static List<NewGPM> all() {
-		return find.all();
+		return find.where().orderBy("nMentiens desc").findList();
 	}
-
+	
 	public static NewGPM findById(Long Id) {
 		return find.ref(Id);
 	}
