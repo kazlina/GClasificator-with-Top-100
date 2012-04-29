@@ -35,7 +35,7 @@ public class DataExtraction {
     Relationship relationshipStatus = Relationship.find.where().eq("status", profile.relationshipStatus).findUnique();
 	Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus,100);
-	Ebean.save(man);
+	Profile.create(man);
         // i should add a validator!
 
         //words extraction
@@ -53,7 +53,7 @@ public class DataExtraction {
                     //add word from profile to table 'ProfileWord'
                     if (wordFromDictionary == null) {
                     	Word word = wordFromSynonyms.word;			
-			            ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
+			ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
                         ProfileWord.create(profileWord);
                     } else {
                     	ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
@@ -106,7 +106,7 @@ public class DataExtraction {
                     //add word from post to table 'PostWord'
                     if (wordFromDictionary==null) {
                     	Word word = wordFromSynonyms.word;			
-			            PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
+		        PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
                         PostWord.create(postWord);
                     } else {
                         PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);	
