@@ -14,7 +14,7 @@ public class DataExtraction {
 	GPM.create(gpm); 
 	updateActivity(gpm,100);
         // i should add a validator!
-    //updateProfile(gpm);
+    updateProfile(gpm);
     return 0;
     }
 
@@ -35,7 +35,7 @@ public class DataExtraction {
     Relationship relationshipStatus = Relationship.find.where().eq("status", profile.relationshipStatus).findUnique();
 	Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus,100);
-	Ebean.save(man);
+	Profile.create(man);
         // i should add a validator!
 
         //words extraction
@@ -53,7 +53,7 @@ public class DataExtraction {
                     //add word from profile to table 'ProfileWord'
                     if (wordFromDictionary == null) {
                     	Word word = wordFromSynonyms.word;			
-			            ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
+			ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
                         ProfileWord.create(profileWord);
                     } else {
                     	ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
@@ -85,7 +85,6 @@ public class DataExtraction {
         //for each 'post' from 'activity'
         for (TempPost post: activity) {
             //add posts to DB (class Post)
-        	post.print();
         	Content kindContent =  Content.find.where().eq("kind", post.kindContent).findUnique();
             Post postToDB = new Post (gpm, post.postId, post.publishedData, kindContent, post.nComments,
 				post.nPlusOne, post.nResharers,post.isRepost);
@@ -106,7 +105,7 @@ public class DataExtraction {
                     //add word from post to table 'PostWord'
                     if (wordFromDictionary==null) {
                     	Word word = wordFromSynonyms.word;			
-			            PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
+		        PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
                         PostWord.create(postWord);
                     } else {
                         PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);	
@@ -117,13 +116,12 @@ public class DataExtraction {
             }
 
             //links extraction (there is no, Artem has not written this feature yet)
-/*
+
             //ids extraction
             if ((post.isRepost)) {
                 NewGPM newId =  NewGPM.find.where().eq("id_gpm", post.actorId).findUnique();
                 if (newId==null) {
-                    @SuppressWarnings("null")
-					NewGPM newGpm= new NewGPM(newId.id_gpm,1);
+                    NewGPM newGpm= new NewGPM(post.actorId,1);
                     NewGPM.create(newGpm);
                     // i should add a validator!
                 } else {
@@ -131,7 +129,7 @@ public class DataExtraction {
 			 newId.nMentiens = newId.nMentiens+1;
 			 NewGPM.create(newId);//newId.save();
                 }
-            }*/
+            }
         }
         return 0;
     }
