@@ -18,7 +18,7 @@ public class Synonym extends Model {
     public Long id;
 	
     @ManyToOne
-	//@Constraints.Required
+	@Constraints.Required
 	@JoinColumn(name = "word", nullable = false)
 	public Word word;	
 	
@@ -26,23 +26,36 @@ public class Synonym extends Model {
 	@Constraints.Required
 	public String synonym;
 	
-/*
+
 	public String toString(){
 		return this.synonym;
 	}
-*/
+
 	public Synonym(String synonym){
 		this.synonym = synonym;
 	}
 
-	public static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
+	private static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
 
-    public static List<Synonym> all(Long wordId) {
-        return Word.findById(wordId).synonyms;
-    }
-
+    public static Synonym findById(Long Id) {
+		return find.ref(Id);
+	}
+    
+    public static List<Synonym> findBySynonim(String element) {
+    	return find.where().eq("synonym", element).findList();
+	}
+    
+    public static List<Synonym> findByWordId(Long wordId) {
+    	return Word.findById(wordId).synonyms;
+	}
+    
     public static void create(Long wordId, Synonym synonym) {
     	synonym.word = Word.findById(wordId);
+        synonym.save();
+    }
+    
+    public static void create(String word, Synonym synonym) {
+    	synonym.word = Word.findByWord(word);
         synonym.save();
     }
 

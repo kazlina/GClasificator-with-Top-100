@@ -58,8 +58,4 @@ public class Word extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
-	
-	public static void delete(Word element) {
-		find.ref(element.id).delete();
-    }
 }

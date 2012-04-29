@@ -32,8 +32,8 @@ public class WordTest {
         });
     }
 
-   @Test
-   public void FindNotExistedWord() {
+    @Test
+    public void FindNotExistedWord() {
         running(fakeApplication(), new Runnable() {
            public void run() {
                Word word = create("Marina");             
@@ -46,8 +46,8 @@ public class WordTest {
         });
     }
  
-   @Test
-   public void WordtoString() {
+    @Test
+    public void WordtoString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
               word = create(text = "Peter");
@@ -58,10 +58,10 @@ public class WordTest {
               Word.delete(word.id);
           }
        });
-   }
+    }
    
-   @Test
-   public void GetAllWords() {
+    @Test
+    public void GetAllWords() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
               create("Julia");
@@ -78,10 +78,10 @@ public class WordTest {
               assertThat(allWord.size() == 0);
           }
        });
-   }
+    }
    
-   @Test
-   public void FindAndDeleteByWord() {
+    @Test
+    public void FindByWord() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
               create(text = "Maximus");
@@ -89,12 +89,12 @@ public class WordTest {
               word = Word.findByWord(text);
               assertThat(word != null);
               
-              Word.delete(word);
+              Word.delete(word.id);
               
               word = Word.findByWord(text);
               assertThat(word == null);
           }
        });
-   }
+    }
 }
  

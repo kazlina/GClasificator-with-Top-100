@@ -48,13 +48,13 @@ public class Application extends Controller {
     }
 
     public static Result synonyms(Long wordId) {
-        return ok(views.html.synonym.render(Word.findById(wordId), Word.findById(wordId).word, Synonym.all(wordId), synonymForm));
+        return ok(views.html.synonym.render(Word.findById(wordId), Word.findById(wordId).word, Synonym.findByWordId(wordId), synonymForm));
     }
 
     public static Result addSynonym(Long wordId) {
         Form<Synonym> filledForm = synonymForm.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.synonym.render(Word.findById(wordId), Word.findById(wordId).word, Synonym.all(wordId), filledForm));
+            return badRequest(views.html.synonym.render(Word.findById(wordId), Word.findById(wordId).word, Synonym.findByWordId(wordId), filledForm));
         } else {
             Synonym.create(wordId, filledForm.get());
             return redirect(routes.Application.synonyms(wordId));  
