@@ -17,19 +17,28 @@ public class Content extends Model {
     @Column(name = "kind", length = 5, unique = true, nullable = false)
     public String kind;
 
-    @OneToMany(mappedBy = "kindContent")
-    public List<Post> posts;
+    public String toString(){
+		return this.kind;
+	}
 
-    public static Model.Finder<Long, Content> find = new Model.Finder<Long, Content>(Long.class, Content.class);
+	public Content(String type){
+		this.kind = type;
+	}
+    
+    private static Model.Finder<Long, Content> find = new Model.Finder<Long, Content>(Long.class, Content.class);
 
 	public static List<Content> all() {
 		return find.all();
 	}
 
-	public static Content contentById(Long Id) {
+	public static Content findById(Long Id) {
 		return find.ref(Id);
 	}
 
+	public static Content findByKind(String element) {
+		return find.where().eq("kind", element).findUnique();
+	}
+	
 	public static void create(Content element) {
 		element.save();
 	}
