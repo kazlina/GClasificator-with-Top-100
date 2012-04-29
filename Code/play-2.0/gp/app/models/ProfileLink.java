@@ -1,11 +1,9 @@
 package models;
 
 import java.util.*;
-
+import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "ProfileLink", uniqueConstraints = {

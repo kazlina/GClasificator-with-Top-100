@@ -1,12 +1,9 @@
 package models;
 
-import java.io.*;
 import java.util.*;
-
+import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "Synonym", uniqueConstraints ={
@@ -41,11 +38,11 @@ public class Synonym extends Model {
 	public static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
 
     public static List<Synonym> all(Long wordId) {
-        return Word.find.ref(wordId).synonyms;
+        return Word.findById(wordId).synonyms;
     }
 
     public static void create(Long wordId, Synonym synonym) {
-    	synonym.word = Word.wordById(wordId);
+    	synonym.word = Word.findById(wordId);
         synonym.save();
     }
 
