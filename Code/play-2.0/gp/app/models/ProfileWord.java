@@ -31,13 +31,13 @@ public class ProfileWord extends Model {
 	@Column(name = "amount", nullable = false)
     public Integer amount;
 
-/*
+
     public ProfileWord(Profile profile, Word word, int amount){
         this.profile = profile;
         this.word = word;
         this.amount = amount;
         }
-*/
+
 	public static Model.Finder<Long, ProfileWord> find = new Model.Finder<Long, ProfileWord>(Long.class, ProfileWord.class);
 
 	public static List<ProfileWord> all() {
