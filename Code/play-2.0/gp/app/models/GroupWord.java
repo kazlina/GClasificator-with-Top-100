@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -34,21 +35,25 @@ public class GroupWord extends Model {
 	@Constraints.Required
 	@Column(name = "profileWeight", nullable = false)
 	public float profileWeight;
-/*
+
 	public GroupWord(Group group, Word word, float postWeight, float profileWeight) {
 		this.group = group;
 		this.word = word;
 		this.postWeight = postWeight;
 		this.profileWeight = profileWeight;
 	}
-*/
-	public static Model.Finder<Long, GroupWord> find = new Model.Finder<Long, GroupWord>(Long.class, GroupWord.class);
 
-	public static List<GroupWord> all() {
-		return find.all();
+	private static Model.Finder<Long, GroupWord> find = new Model.Finder<Long, GroupWord>(Long.class, GroupWord.class);
+
+	public static List<GroupWord> findByGroup(Long id) {
+		return Group.findById(id).words;
+	}
+	
+	public static List<GroupWord> findByWord(Long id) {
+		return Word.findById(id).groupWords;
 	}
 
-	public static GroupWord groupWordById(Long Id) {
+	public static GroupWord findById(Long Id) {
 		return find.ref(Id);
 	}
 

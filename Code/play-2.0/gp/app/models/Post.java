@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -50,7 +51,8 @@ public class Post extends Model {
     @OneToMany(mappedBy = "post")
     public List<PostWord> words;
 
-    public Post(GPM gpm, String postId, Date publishedData, Content kindContent, int nComments, int nPlusOne, int nResharers, boolean isRepost) {
+    public Post(GPM gpm, String postId, Date publishedData, Content kindContent, int nComments, 
+    		int nPlusOne, int nResharers, boolean isRepost) {
         this.gpm = gpm;
         this.postId = postId;
         this.date = publishedData;
@@ -59,16 +61,16 @@ public class Post extends Model {
         this.nPlusOne = nPlusOne;
         this.nResharers = nResharers;
         this.isRepost = isRepost;
-        }
+    }
 
-	public static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
+    private static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
 
-	public static List<Post> all() {
-		return find.all();
-	}
-
-	public static Post postById(Long Id) {
+    public static Post findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<Post> findByGpmId(Long Id) {
+		return find.where().eq("gpm", GPM.findById(Id)).findList();
 	}
 
 	public static void create(Post element) {

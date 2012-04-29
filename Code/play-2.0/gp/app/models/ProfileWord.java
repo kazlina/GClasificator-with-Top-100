@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -37,14 +38,18 @@ public class ProfileWord extends Model {
         this.amount = amount;
         }
 
-	public static Model.Finder<Long, ProfileWord> find = new Model.Finder<Long, ProfileWord>(Long.class, ProfileWord.class);
+    private static Model.Finder<Long, ProfileWord> find = new Model.Finder<Long, ProfileWord>(Long.class, ProfileWord.class);
 
-	public static List<ProfileWord> all() {
-		return find.all();
-	}
-
-	public static ProfileWord profileWordById(Long Id) {
+    public static ProfileWord findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<ProfileWord> findByProfile(Long id) {
+		return Profile.findById(id).words;
+	}
+	
+	public static List<ProfileWord> findByWord(Long id) {
+		return Word.findById(id).profileWords;
 	}
 
 	public static void create(ProfileWord element) {

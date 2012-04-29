@@ -25,7 +25,7 @@ public class Link extends Model {
 
 	@OneToMany(mappedBy = "link")
 	public List<ProfileLink> profileLinks;
-/*
+
 	public String toString(){
 		return this.link;
 	}
@@ -33,15 +33,19 @@ public class Link extends Model {
 	public Link(String link){
 		this.link = link;
 	}
-*/
-	public static Model.Finder<Long, Link> find = new Model.Finder<Long, Link>(Long.class, Link.class);
+
+	private static Model.Finder<Long, Link> find = new Model.Finder<Long, Link>(Long.class, Link.class);
 
 	public static List<Link> all() {
 		return find.all();
 	}
 
-	public static Link linkById(Long Id) {
+	public static Link findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static Link findByLink(String link) {
+		return find.where().eq("link", link).findUnique();
 	}
 
 	public static void create(Link element) {

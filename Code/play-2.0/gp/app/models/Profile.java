@@ -43,8 +43,8 @@ public class Profile extends Model {
     @ManyToOne
     public Relationship relationshipStatus;
 
-    @Column(name = "Followers")
-    public Integer followers;
+    @Column(name = "nFollowers")
+    public Integer nfollowers;
 
     @OneToMany(mappedBy = "profile")
     public List<ProfileLink> links;
@@ -53,28 +53,32 @@ public class Profile extends Model {
     public List<ProfileWord> words;
 
     public Profile(GPM gpm, String name, String image, Gender gender, String tagline,
-					Relationship relationshipStatus, int followers) {
-        this.gpm = gpm;
-        this.date = Calendar.getInstance().getTime();
-        this.name = name;
+					Relationship relationshipStatus, int nFollowers) {
+    	this.gpm = gpm;  
+    	this.name = name;
         this.image = image;
         this.gender = gender;
         this.tagline = tagline;
         this.relationshipStatus = relationshipStatus;
-        this.followers = followers;
-        }
+        this.nfollowers = nFollowers;
+    }
 
-	public static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
+	private static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
 
-	public static List<Profile> all() {
-		return find.all();
-	}
-
-	public static Profile profileById(Long Id) {
+	public static Profile findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<Profile> findByGpmId(Long Id) {
+		return find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findList();
+	}
+	
+	public static Profile lastProfileByGpmId(Long Id) {
+		return find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findUnique();
 	}
 
 	public static void create(Profile element) {
+        element.date = Calendar.getInstance().getTime();		
 		element.save();
 	}
 

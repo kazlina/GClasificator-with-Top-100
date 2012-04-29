@@ -34,21 +34,25 @@ public class GroupLink extends Model {
 	@Constraints.Required
 	@Column(name = "profileWeight", nullable = false)
 	public float profileWeight;
-/*
+
 	public GroupLink(Group group, Link link, float postWeight, float profileWeight) {
         this.group = group;
         this.link = link;
         this.postWeight = postWeight;
         this.profileWeight = profileWeight;
         }
-*/
-	public static Model.Finder<Long, GroupLink> find = new Model.Finder<Long, GroupLink>(Long.class, GroupLink.class);
 
-	public static List<GroupLink> all() {
-		return find.all();
+	private static Model.Finder<Long, GroupLink> find = new Model.Finder<Long, GroupLink>(Long.class, GroupLink.class);
+
+	public static List<GroupLink> findByGroup(Long id) {
+		return Group.findById(id).links;
+	}
+	
+	public static List<GroupLink> findByLink(Long id) {
+		return Link.findById(id).groupLink;
 	}
 
-	public static GroupLink groupLinkById(Long Id) {
+	public static GroupLink findById(Long Id) {
 		return find.ref(Id);
 	}
 

@@ -20,7 +20,7 @@ public class DataExtraction {
 
         //get 'profile' from GooglePlus
         try {
-			profile = GAPI.getProfile(gpm.id_gpm);
+			profile = GAPI.getProfile(gpm.idGpm);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class DataExtraction {
         for (HistogramForWords pH: profileHistogram) {
                 //for pH.word search it (word) in WordDictionary
                 Word wordFromDictionary = Word.findByWord(pH.word);
-                List <Synonym> word2 = Synonym.findBySynonym(pH.word);
+                List <Synonym> word2 = Synonym.findBySynonim(pH.word);
                 //there is the word (pH.word) in dictionary (Word or Synonym)
                 if ((wordFromDictionary != null) || !(word2.isEmpty())) {
                     //add word from profile to table 'ProfileWord'
@@ -73,7 +73,7 @@ public class DataExtraction {
 
         //get 'activity' from GooglePlus
         try {
-			activity = temp.getActivity(gpm.id_gpm,countOfPosts);
+			activity = temp.getActivity(gpm.idGpm,countOfPosts);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +97,7 @@ public class DataExtraction {
             for (HistogramForWords pH: postHistogram) {
                 //for pH.word search it (word) in WordDictionary
             	Word wordFromDictionary = Word.findByWord(pH.word);
-                List <Synonym> word2 = Synonym.findBySynonym(pH.word);
+                List <Synonym> word2 = Synonym.findBySynonim(pH.word);
                 //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
                 if ((wordFromDictionary!=null) || !(word2.isEmpty())) {
                     //add word from post to table 'PostWord'

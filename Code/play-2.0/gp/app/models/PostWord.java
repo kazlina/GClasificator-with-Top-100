@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -37,14 +38,18 @@ public class PostWord extends Model {
         this.amount = amount;
         }
 
-	public static Model.Finder<Long, PostWord> find = new Model.Finder<Long, PostWord>(Long.class, PostWord.class);
+    private static Model.Finder<Long, PostWord> find = new Model.Finder<Long, PostWord>(Long.class, PostWord.class);
 
-	public static List<PostWord> all() {
-		return find.all();
-	}
-
-	public static PostWord postWordById(Long Id) {
+    public static PostWord findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<PostWord> findByPost(Long id) {
+		return Post.findById(id).words;
+	}
+	
+	public static List<PostWord> findByWord(Long id) {
+		return Word.findById(id).postWords;
 	}
 
 	public static void create(PostWord element) {

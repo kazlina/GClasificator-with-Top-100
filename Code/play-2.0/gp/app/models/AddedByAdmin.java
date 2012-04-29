@@ -40,28 +40,43 @@ public class AddedByAdmin extends Model {
 
 	@Column(name = "commentField")
 	public String comment;
-/*
-	public AddedByAdmin(GPM gpm, Group group, int position, Date dateOfAddition, Date dateOfRemoval, String comment) {
-        this.gpm = gpm;
-        this.group = group;
+
+	public AddedByAdmin(int position, Date dateOfAddition, Date dateOfRemoval, String comment) {
         this.position = position;
         this.dateOfAddition = dateOfAddition;
         this.dateOfRemoval = dateOfRemoval;
         this.comment = comment;
-        }
-*/
-	public static Model.Finder<Long, AddedByAdmin> find = new Model.Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
+    }
+
+	public String toString(){
+		return this.gpm.idGpm + " - " + group.name;
+		/*Profile profile = models.Profile.lastProfileByGpmId(this.gpm.id);
+		String name =  (profile != null && profile.name != null)? profile.name : this.gpm.idGpm;
+		return name + " - " + group.name;*/
+	}
+
+	private static Model.Finder<Long, AddedByAdmin> find = new Model.Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
 
 	public static List<AddedByAdmin> all() {
 		return find.all();
 	}
 
-	public static AddedByAdmin addedByAdminById(Long Id) {
+	public static AddedByAdmin findById(Long Id) {
 		return find.ref(Id);
 	}
+	
+	public static List<AddedByAdmin> findByGpm(Long Id) {
+		return GPM.findById(Id).addedByAdmin;
+	}
+	
+	public static List<AddedByAdmin> findByGroup(Long Id) {
+		return Group.findById(Id).addedByAdmin;
+	}
 
-	public static void create(AddedByAdmin man) {
-		man.save();
+	public static void create(GPM gpm, Group group, AddedByAdmin man) {
+		man.gpm = gpm;
+		man.group = group;
+        man.save();
 	}
 
 	public static void delete(Long id) {

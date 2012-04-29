@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -30,21 +31,25 @@ public class ProfileLink extends Model {
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public Integer amount;
-/*
+
 	public ProfileLink(Profile profile, Link link, int amount){
         this.profile = profile;
         this.link = link;
         this.amount = amount;
         }
-*/
-	public static Model.Finder<Long, ProfileLink> find = new Model.Finder<Long, ProfileLink>(Long.class, ProfileLink.class);
 
-	public static List<ProfileLink> all() {
-		return find.all();
-	}
+    private static Model.Finder<Long, ProfileLink> find = new Model.Finder<Long, ProfileLink>(Long.class, ProfileLink.class);
 
-	public static ProfileLink profileLinkById(Long Id) {
+    public static ProfileLink findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<ProfileLink> findByProfile(Long id) {
+		return Profile.findById(id).links;
+	}
+	
+	public static List<ProfileLink> findByLink(Long id) {
+		return Link.findById(id).profileLinks;
 	}
 
 	public static void create(ProfileLink element) {

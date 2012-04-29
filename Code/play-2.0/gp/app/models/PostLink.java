@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -30,23 +31,25 @@ public class PostLink extends Model {
     @Constraints.Required
 	@Column(name="amount", nullable = false)
     public int amount;
-/*
-   public PostLink(GPM Id, Posts post, Link link, int amount){
-        //this.Id_GPM = Id;
-        //this.date = new Date();
-        //this.post = post;
+
+   public PostLink(Post post, Link link, int amount){
+        this.post = post;
         this.link = link;
         this.amount = amount;
         }
-*/
-	public static Model.Finder<Long, PostLink> find = new Model.Finder<Long, PostLink>(Long.class, PostLink.class);
 
-	public static List<PostLink> all() {
-		return find.all();
-	}
+    private static Model.Finder<Long, PostLink> find = new Model.Finder<Long, PostLink>(Long.class, PostLink.class);
 
-	public static PostLink postLinkById(Long Id) {
+	public static PostLink findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static List<PostLink> findByPost(Long id) {
+		return Post.findById(id).links;
+	}
+	
+	public static List<PostLink> findByLink(Long id) {
+		return Link.findById(id).postLinks;
 	}
 
 	public static void create(PostLink element) {

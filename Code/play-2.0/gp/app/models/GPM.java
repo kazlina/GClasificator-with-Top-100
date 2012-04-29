@@ -13,9 +13,9 @@ public class GPM extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
-	@Column(name = "id_gpm", length = 21, unique = true, nullable = false)
+	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
 	@Constraints.Required
-	public String id_gpm;
+	public String idGpm;
 
 	@OneToMany(mappedBy = "gpm")
 	public List<Profile> profile;
@@ -26,24 +26,34 @@ public class GPM extends Model {
 	@OneToMany(mappedBy = "gpm")
 	public List<AddedByAdmin> addedByAdmin;
 
-	public static Model.Finder<Long, GPM> find = new Model.Finder<Long, GPM>(Long.class, GPM.class);
-/*
 	public String toString(){
-		return this.id_gpm;
-	}
-*/
-	public GPM(String id) {
-		this.id_gpm = id;
+		return this.idGpm;
+		/*Profile profile = Profile.lastProfileByGpmId(this.id);
+		return (profile != null && profile.name != null)? profile.name : this.idGpm;*/
 	}
 
+	public GPM(String id) {
+		this.idGpm = id;
+	}
+
+	private static Model.Finder<Long, GPM> find = new Model.Finder<Long, GPM>(Long.class, GPM.class);
+	
 	public static List<GPM> all() {
 		return find.all();
 	}
 
-	public static GPM gpmById(Long Id) {
+	public static GPM findById(Long Id) {
 		return find.ref(Id);
 	}
-
+	
+	public static GPM findByIdGpm(String idGpm) {
+		return find.where().eq("idGpm", idGpm).findUnique();
+	}
+	
+	public static int size() {
+		return find.findRowCount();
+	}
+	
 	public static void create(GPM man) {
 		man.save();
 	}

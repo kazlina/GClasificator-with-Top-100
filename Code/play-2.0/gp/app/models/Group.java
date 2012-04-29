@@ -39,6 +39,9 @@ public class Group extends Model {
 
 	@Column(name = "videoPercent")
 	public Integer videoPercent;
+	
+	@Column(name = "audioPercent")
+	public Integer audioPercent;
 
 	@OneToMany(mappedBy = "group")
 	public List<AddedByAdmin> addedByAdmin;
@@ -48,30 +51,36 @@ public class Group extends Model {
 
 	@OneToMany(mappedBy = "group")
 	public List<GroupWord> words;
-/*
+
 	public String toString(){
 		return this.name;
 	}
 
-	public Group(String name, String activeImage, String passiveImage, String description, int textPercent, int imagePercent, int 			linkPercent, int videoPercent) {
-	this.name = name;
-	this.activeImage = activeImage;
-	this.passiveImage = passiveImage;
-	this.description = description;
-	this.textPercent = textPercent;
-	this.imagePercent = imagePercent;
-	this.linkPercent = linkPercent;
-	this.videoPercent = videoPercent;
+	public Group(String name, String activeImage, String passiveImage, String description, 
+			int textPercent, int imagePercent, int linkPercent, int videoPercent, int audioPercent) {
+		this.name = name;
+		this.activeImage = activeImage;
+		this.passiveImage = passiveImage;
+		this.description = description;
+		this.textPercent = textPercent;
+		this.imagePercent = imagePercent;
+		this.linkPercent = linkPercent;
+		this.videoPercent = videoPercent;
+		this.audioPercent = audioPercent;
 	}
-*/
-	public static Model.Finder<Long, Group> find = new Model.Finder<Long, Group>(Long.class, Group.class);
+
+	private static Model.Finder<Long, Group> find = new Model.Finder<Long, Group>(Long.class, Group.class);
 
 	public static List<Group> all() {
 		return find.all();
 	}
 
-	public static Group groupById(Long Id) {
+	public static Group findById(Long Id) {
 		return find.ref(Id);
+	}
+	
+	public static Group findByName(String name) {
+		return find.where().eq("name", name).findUnique();
 	}
 
 	public static void create(Group group) {
