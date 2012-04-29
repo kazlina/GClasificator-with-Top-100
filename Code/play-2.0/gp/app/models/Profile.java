@@ -51,9 +51,9 @@ public class Profile extends Model {
 
     @OneToMany(mappedBy = "profile")
     public List<ProfileWord> words;
-/*
-    public Profile(GPM gpm, String name, String image, String gender, String tagline,
-					String relationshipStatus, int followers) {
+    
+    public Profile(GPM gpm, String name, String image, Gender gender, String tagline,
+					Relationship relationshipStatus, int followers) {
         this.gpm = gpm;
         this.date = Calendar.getInstance().getTime();
         this.name = name;
@@ -63,7 +63,7 @@ public class Profile extends Model {
         this.relationshipStatus = relationshipStatus;
         this.followers = followers;
         }
-*/
+        
 	public static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
 
 	public static List<Profile> all() {
