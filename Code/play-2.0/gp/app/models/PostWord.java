@@ -30,13 +30,13 @@ public class PostWord extends Model {
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public int amount;
-/*
-    public PostWord(Post posts, Word word, int amount){
-        this.post = posts;
+
+    public PostWord(Post post, Word word, int amount){
+        this.post = post;
         this.word = word;
         this.amount = amount;
         }
-*/
+
 	public static Model.Finder<Long, PostWord> find = new Model.Finder<Long, PostWord>(Long.class, PostWord.class);
 
 	public static List<PostWord> all() {

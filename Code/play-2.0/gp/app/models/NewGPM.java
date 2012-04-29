@@ -20,12 +20,12 @@ public class NewGPM extends Model {
 	@Constraints.Required
 	@Column(name = "nMentiens", nullable = false)
 	public int nMentiens;
-/*
-	public NewGPM(String id, int severity) {
-        this.id = id;
+
+	public NewGPM(String id_gpm, int severity) {
+        this.id_gpm = id_gpm;
         this.nMentiens = severity;
         }
-*/
+
 	public static Model.Finder<Long, NewGPM> find = new Model.Finder<Long, NewGPM>(Long.class, NewGPM.class);
 
 	public static List<NewGPM> all() {

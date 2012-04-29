@@ -31,7 +31,6 @@ public class ProfileWord extends Model {
 	@Column(name = "amount", nullable = false)
     public Integer amount;
 
-
     public ProfileWord(Profile profile, Word word, int amount){
         this.profile = profile;
         this.word = word;

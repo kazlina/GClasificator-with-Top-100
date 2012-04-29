@@ -12,7 +12,8 @@ import play.db.jpa.*;
 
 public class TempPost {
 	public String actorId;
-	public String kindContent;// article, video, photo, note, audio
+	public String postId;
+	public String kindContent;// link, video, photo, text, audio
 	public String content;
 	public String annotation;
 	public Date publishedData;
@@ -25,10 +26,11 @@ public class TempPost {
 	public TempPost() {
 	}	
 	
-    public TempPost(String actorId, String kindContent, String content, String annotation, 
+    public TempPost(String actorId, String postId,String kindContent, String content, String annotation, 
     		  		Date publishedData, String url, boolean isRepost, int nComments,
     		  		int nPlusOne, int nResharers){
     	this.actorId = actorId;
+    	this.postId = postId;
     	this.kindContent = kindContent;
     	this.content = content;
     	this.annotation = annotation;
@@ -42,6 +44,7 @@ public class TempPost {
     
     public void print(){
     	System.out.println("published data: " + this.publishedData);
+    	System.out.println("postId: " + this.postId);
     	System.out.println("kind post: " + this.isRepost);
     	System.out.println("actor_id: " + this.actorId);
     	System.out.println("kind content: " + this.kindContent);

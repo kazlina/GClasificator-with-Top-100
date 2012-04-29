@@ -14,7 +14,7 @@ public class Post extends Model {
     public Long id;
 
     @Constraints.Required
-    @Column(name = "postId", length = 30, nullable = false, unique = true)
+    @Column(name = "postId", length = 40, nullable = false, unique = true)
     public String postId;
     
     @Constraints.Required
@@ -49,9 +49,10 @@ public class Post extends Model {
 
     @OneToMany(mappedBy = "post")
     public List<PostWord> words;
-/*
-    public Post(GPM gpm, Date publishedData, String kindContent, int nComments, int nPlusOne, int nResharers, boolean isRepost) {
+
+    public Post(GPM gpm, String postId, Date publishedData, Content kindContent, int nComments, int nPlusOne, int nResharers, boolean isRepost) {
         this.gpm = gpm;
+        this.postId = postId;
         this.date = publishedData;
         this.kindContent = kindContent;
         this.nComment = nComments;
@@ -59,7 +60,7 @@ public class Post extends Model {
         this.nResharers = nResharers;
         this.isRepost = isRepost;
         }
- */
+
 	public static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
 
 	public static List<Post> all() {

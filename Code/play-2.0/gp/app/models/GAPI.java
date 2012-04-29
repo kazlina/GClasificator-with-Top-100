@@ -1,16 +1,6 @@
 package models;
 
 import java.util.*;
-import play.libs.*;
-import java.io.*;
-import java.util.*;
-import javax.persistence.*;
-
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import play.db.jpa.*;
 
 import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -69,7 +59,7 @@ public class GAPI {
 	if(list != null){
         for (PlusObject.Attachments a: list){
       	  if(a.getObjectType().equals("article"))
-    		return "article";
+    		return "link";
       	  if(a.getObjectType().equals("video"))
     		return "video";
       	  if(a.getObjectType().equals("photo"))
@@ -81,7 +71,7 @@ public class GAPI {
       	  }
 	}
 	else
-		return "note";
+		return "text";
 	return null;
 }
 private static String getUrl(List<Attachments> list){
@@ -107,7 +97,7 @@ private static String getUrl(List<Attachments> list){
         }).build();      
     }
 
-  public static List <TempPost> getActivity(String id, int numberOf) throws IOException {	  
+  public List <TempPost> getActivity(String id, int numberOf) throws IOException {	  
 	setupTransport();    
 	Plus.Activities.List listActivities = plus.activities().list(id,"public");
     ActivityFeed feed;
@@ -134,6 +124,7 @@ private static String getUrl(List<Attachments> list){
       feed = listActivities.execute(); 
       for (Activity activity : feed.getItems()) {
           TempPost post = new TempPost();
+          post.postId = activity.getId();
           post.publishedData = new Date(activity.getPublished().getValue());
           post.content = stripTags(activity.getObject().getContent());
           post.annotation = stripTags(activity.getAnnotation());
@@ -147,7 +138,7 @@ private static String getUrl(List<Attachments> list){
           post.nComments = activity.getObject().getReplies().getTotalItems().intValue();
           post.nResharers = activity.getObject().getResharers().getTotalItems().intValue();
           post.kindContent = getKindContent(activity.getObject().getAttachments());
-          if(post.kindContent.equals("article"))
+          if(post.kindContent.equals("link"))
         	  post.url = getUrl(activity.getObject().getAttachments());       
           posts.add(post);
           if(remainder > 100){
@@ -167,7 +158,7 @@ private static String getUrl(List<Attachments> list){
  }
     int i = 0;
     for ( TempPost p: posts){
-    	System.out.println("=====post № "+ i++ +"===============");
+    	System.out.println("=====post number  "+ i++ +"===============");
       	p.print();
       }
 	return posts;  
@@ -187,7 +178,7 @@ private static String getUrl(List<Attachments> list){
       profile.urls = getUrls(person.getUrls());
       profile.relationshipStatus = person.getRelationshipStatus();
       profile.type = getType(person.getObjectType());
-      profile.print();
+      //profile.print();
       return profile;
     } 
     catch (HttpResponseException e) {
@@ -209,6 +200,7 @@ private static String getUrl(List<Attachments> list){
 
   public static void print(ActivityFeed feed) {
 	 for (Activity activity : feed.getItems()) {
+	 System.out.println("postId: " + activity.getId());
      System.out.println("content: " + activity.getObject().getContent());
      System.out.println("type: " + activity.getObject().getObjectType());
      System.out.println("annotation: " + activity.getAnnotation());
