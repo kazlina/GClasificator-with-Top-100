@@ -21,7 +21,6 @@ public class DataExtraction {
         //get 'profile' from GooglePlus
         try {
 			profile = GAPI.getProfile(gpm.id_gpm);
-			profile.print();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,7 +122,7 @@ public class DataExtraction {
             if ((post.isRepost)) {
                 NewGPM newId =  NewGPM.find.where().eq("id_gpm", post.actorId).findUnique();
                 if (newId==null) {
-					NewGPM newGpm= new NewGPM(post.actorId,1);
+		    NewGPM newGpm= new NewGPM(post.actorId,1);
                     NewGPM.create(newGpm);
                     // i should add a validator!
                 } else {
