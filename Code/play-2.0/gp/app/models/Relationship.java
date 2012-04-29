@@ -35,7 +35,7 @@ public class Relationship extends Model {
 		return find.ref(Id);
 	}
 
-	public static Relationship findByKind(String element) {
+	public static Relationship findByStatus(String element) {
 		return find.where().eq("status", element).findUnique();
 	}
 	

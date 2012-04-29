@@ -56,7 +56,7 @@ public class Application extends Controller {
         if(filledForm.hasErrors()) {
             return badRequest(views.html.synonym.render(Word.findById(wordId), Word.findById(wordId).word, Synonym.findByWordId(wordId), filledForm));
         } else {
-            Synonym.create(wordId, filledForm.get());
+        	Synonym.create(wordId, filledForm.get());
             return redirect(routes.Application.synonyms(wordId));  
         }
     }
