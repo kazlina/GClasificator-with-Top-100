@@ -8,7 +8,7 @@ public class DataExtraction {
 
     public int newGPM(String id) {
 	GPM gpm = new GPM(id);
-	GPM.create(gpm); 
+	GPM.create(gpm);
 	//updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
@@ -27,11 +27,11 @@ public class DataExtraction {
 		} // i should add a validator!
 
         //add profile to DB
-    Gender gender =  Gender.findByValue(profile.gender);
-    Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
-	Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
+        Gender gender =  Gender.findByValue(profile.gender);
+        Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
+        Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus,100);
-	Profile.create(man);
+        Profile.create(man);
         // i should add a validator!
 
         //words extraction
@@ -39,8 +39,9 @@ public class DataExtraction {
         String text = null;
         text = profile.aboutMe + " " + profile.tagline;
         profileHistogram = wordPreprocessor(text);
-        //for each word from profile
-        for (HistogramForWords pH: profileHistogram) {
+        if (profileHistogram != null) {
+            //for each word from profile
+            for (HistogramForWords pH: profileHistogram) {
                 //for pH.word search it (word) in WordDictionary
                 Word wordFromDictionary = Word.findByWord(pH.word);
                 List <Synonym> word2 = Synonym.findBySynonim(pH.word);
@@ -48,18 +49,18 @@ public class DataExtraction {
                 if ((wordFromDictionary != null) || !(word2.isEmpty())) {
                     //add word from profile to table 'ProfileWord'
                     if (wordFromDictionary == null) {
-			Synonym wordFromSynonyms = word2.get(0);
-                    	Word word = wordFromSynonyms.word;			
-			ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);	
+                        Synonym wordFromSynonyms = word2.get(0);
+                        Word word = wordFromSynonyms.word;
+                        ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);
                         ProfileWord.create(profileWord);
                     } else {
-                    	ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
-                    	ProfileWord.create(profileWord);
+                        ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
+                        ProfileWord.create(profileWord);
                         // i should add a validator!
                     }
                 }
-
             }
+        }
 
         //links extraction (there is no, Artem has not written this feature yet)
 
@@ -92,24 +93,31 @@ public class DataExtraction {
             //words extraction
             //build word histogram
             ArrayList<HistogramForWords> postHistogram = new ArrayList<HistogramForWords>();
-            postHistogram = wordPreprocessor(post.content);
-            //for each word from post
-            for (HistogramForWords pH: postHistogram) {
-                //for pH.word search it (word) in WordDictionary
-            	Word wordFromDictionary = Word.findByWord(pH.word);
-                List <Synonym> word2 = Synonym.findBySynonim(pH.word);
-                //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
-                if ((wordFromDictionary!=null) || !(word2.isEmpty())) {
-                    //add word from post to table 'PostWord'
-                    if (wordFromDictionary==null) {
-		        Synonym wordFromSynonyms = word2.get(0);
-                       	Word word = wordFromSynonyms.word;			
-			PostWord postWord = new PostWord(postToDB, word, pH.countWord);	
-                        PostWord.create(postWord);
-                    } else {
-                        PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);	
-                        PostWord.create(postWord);
-                        // i should add a validator!
+            String text = null;
+            text = post.content;
+            if (post.isRepost && post.annotation != null) {
+                text = text + " " + post.annotation;
+            }
+            postHistogram = wordPreprocessor(text);
+            if (postHistogram != null){
+                //for each word from post
+                for (HistogramForWords pH: postHistogram) {
+                    //for pH.word search it (word) in WordDictionary
+                    Word wordFromDictionary = Word.findByWord(pH.word);
+                    List <Synonym> word2 = Synonym.findBySynonim(pH.word);
+                    //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
+                    if ((wordFromDictionary!=null) || !(word2.isEmpty())) {
+                        //add word from post to table 'PostWord'
+                        if (wordFromDictionary==null) {
+                    Synonym wordFromSynonyms = word2.get(0);
+                            Word word = wordFromSynonyms.word;
+                PostWord postWord = new PostWord(postToDB, word, pH.countWord);
+                            PostWord.create(postWord);
+                        } else {
+                            PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);
+                            PostWord.create(postWord);
+                            // i should add a validator!
+                        }
                     }
                 }
             }
@@ -144,24 +152,29 @@ public class DataExtraction {
             }
         }
         HistogramForWords elem = new HistogramForWords();
-        elem.countWord++;
-        elem.word = mas.get(0);
-        hist.add(elem);
-        mas.remove(0);
-        for (String m: mas){
-            for (HistogramForWords h: hist){
-                if (h.word == null ? m == null : h.word.equals(m)) {
-                    h.countWord++;
-                    check = 1;
+
+        if (!(mas.isEmpty())) {
+            elem.countWord++;
+            elem.word = mas.get(0);
+            hist.add(elem);
+            mas.remove(0);
+            for (String m: mas){
+                for (HistogramForWords h: hist){
+                    if (h.word == null ? m == null : h.word.equals(m)) {
+                        h.countWord++;
+                        check = 1;
+                    }
                 }
+                if (check == 0) {
+                    HistogramForWords elem1 = new HistogramForWords();
+                    elem1.countWord++;
+                    elem1.word = m;
+                    hist.add(elem1);
+                }
+                check = 0;
             }
-            if (check == 0) {
-                HistogramForWords elem1 = new HistogramForWords();
-                elem1.countWord++;
-                elem1.word = m;
-                hist.add(elem1);
-            }
-            check = 0;
+        } else {
+            hist = null;
         }
         return hist;
     }
