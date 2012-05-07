@@ -7,8 +7,8 @@ import java.util.List;
 public class DataExtraction {
 
     public int newGPM(String id) {
-	GPM gpm = new GPM(id);
-	GPM.create(gpm);
+	GPM gpm = null;
+	gpm.create(id);
 	//updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
@@ -126,16 +126,8 @@ public class DataExtraction {
 
             //ids extraction
             if ((post.isRepost)) {
-                NewGPM newId =  NewGPM.findByIdGPM(post.actorId);
-                if (newId==null) {
-		    NewGPM newGpm= new NewGPM(post.actorId,1);
-                    NewGPM.create(newGpm);
-                    // i should add a validator!
-                } else {
-                    //add +1 to nMentiens for actorId
-			 newId.nMentiens = newId.nMentiens+1;
-			 NewGPM.create(newId);//newId.save();
-                }
+                NewGPM newGPM = null;
+                newGPM.add(post.actorId);
             }
         }
         return 0;
