@@ -6,28 +6,18 @@ import models.*;
 
 public class NewGPMTest {
     
-	private NewGPM GPM;
-	private String idGpm;
-	
-    private NewGPM create(String id, int nMentiens) {
-        GPM = new NewGPM(id, nMentiens);
-        NewGPM.create(GPM);
-        return GPM;
-    }
-
-    @Test
+	@Test
     public void CreateAndDeleteNewGPM() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   GPM = create(idGpm = "100915540970866628562", 1);
-               assertThat(GPM.idGpm).isEqualTo(idGpm);
-               
-               NewGPM findGPM = NewGPM.findByIdGPM(idGpm);
+        	   String idGpm = "100915540970866628562";
+        	   NewGPM.add(idGpm);
+               NewGPM findGPM = NewGPM.findByIdGpm(idGpm);
                assertThat(findGPM.idGpm == idGpm);
 
                NewGPM.delete(findGPM.id);
                
-               NewGPM gpmDeleted = NewGPM.findByIdGPM(idGpm);
+               NewGPM gpmDeleted = NewGPM.findByIdGpm(idGpm);
                assertThat(findGPM == null);
            }
         });
@@ -37,8 +27,8 @@ public class NewGPMTest {
     public void FindNotExistedNewGPM() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-        	   GPM = NewGPM.findByIdGPM("100915540970866628562");
-               assertThat(GPM == null);
+        	   NewGPM gpm = NewGPM.findByIdGpm("100915540970866628562");
+               assertThat(gpm == null);
            }
         });
     }
@@ -47,12 +37,15 @@ public class NewGPMTest {
     public void NewGPMtoString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-        	  GPM = create(idGpm = "100915540970866628562", 1);
+        	  String idGpm = "100915540970866628562";
+        	  NewGPM.add(idGpm);
+              NewGPM findGPM = NewGPM.findByIdGpm(idGpm);
+              assertThat(findGPM.idGpm == idGpm);
               
-              String textGPM = GPM.toString();
+              String textGPM = findGPM.toString();
               assertThat(textGPM == idGpm);
 
-              NewGPM.delete(GPM.id);
+              NewGPM.delete(findGPM.id);
          }
 	   });
     }
@@ -61,9 +54,14 @@ public class NewGPMTest {
     public void GetAllNewGPM() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create("100915540970866628562", 1);
-              create("100915540970868628562", 3);
-              create("100915540970867628562", 2);
+              NewGPM.add("100915540970866628562");
+              
+              NewGPM.add("100915540970868628562");
+              NewGPM.add("100915540970868628562");
+              NewGPM.add("100915540970868628562");
+              
+              NewGPM.add("100915540970867628562");
+              NewGPM.add("100915540970867628562");
               
               List<NewGPM> allGPM = NewGPM.all();
               assertThat(allGPM.size() == 3);
@@ -84,9 +82,12 @@ public class NewGPMTest {
     public void FindNewGPMById() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   GPM = create(idGpm = "100915540970866628562", 1);
+        	   String idGpm = "100915540970866628562";
+        	   NewGPM.add(idGpm);
+               NewGPM gpm = NewGPM.findByIdGpm(idGpm);
+               assertThat(gpm != null);
                
-               NewGPM findGPM = NewGPM.findById(GPM.id);
+               NewGPM findGPM = NewGPM.findById(gpm.id);
                assertThat(findGPM != null);
 
                NewGPM.delete(findGPM.id);

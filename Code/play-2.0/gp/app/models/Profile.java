@@ -2,6 +2,9 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -53,14 +56,15 @@ public class Profile extends Model {
     public List<ProfileWord> words;
 
     public Profile(GPM gpm, String name, String image, Gender gender, String tagline,
-					Relationship relationshipStatus, int nFollowers) {
+			Relationship relationshipStatus, int nFollowers) {
     	this.gpm = gpm;  
     	this.name = name;
-        this.image = image;
-        this.gender = gender;
-        this.tagline = tagline;
-        this.relationshipStatus = relationshipStatus;
-        this.nfollowers = nFollowers;
+    	this.image = image;
+    	this.gender = gender;
+    	this.tagline = tagline;
+    	this.relationshipStatus = relationshipStatus;
+    	this.nfollowers = nFollowers;
+		
     }
 
 	private static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
@@ -76,9 +80,9 @@ public class Profile extends Model {
 	public static Profile lastProfileByGpmId(Long Id) {
 		return find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findUnique();
 	}
-
-	public static void create(Profile element) {
-        element.date = Calendar.getInstance().getTime();		
+	
+	public static void add(Profile element) {
+		element.date = Calendar.getInstance().getTime();		
 		element.save();
 	}
 

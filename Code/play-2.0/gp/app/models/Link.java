@@ -48,8 +48,10 @@ public class Link extends Model {
 		return find.where().eq("link", link).findUnique();
 	}
 
-	public static void create(Link element) {
-		element.save();
+	public static void add(Link element) {
+		Link findLink = Link.findByLink(element.link);
+		if (findLink == null)
+			element.save();
 	}
 
 	public static void delete(Long id) {

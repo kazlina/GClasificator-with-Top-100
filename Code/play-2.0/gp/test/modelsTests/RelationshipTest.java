@@ -6,24 +6,14 @@ import models.*;
 
 public class RelationshipTest {
     
-	private Relationship relation;
-	private String text;
-	
-    private Relationship create(String value) {
-    	relation = new Relationship(value);
-    	Relationship.create(relation);
-        return relation;
-    }
-
-    @Test
+	@Test
     public void CreateAndDeleteRelation() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   relation = create(text = "good relation");
-               assertThat(relation.status).isEqualTo(text);
-               
-               Relationship findRelation = Relationship.findByStatus(text);
-               assertThat(findRelation.status == text);
+        	   String text = "good relation";
+        	   Relationship.add(text);
+        	   Relationship findRelation = Relationship.findByStatus(text);
+               assertThat(findRelation != null);
 
                Relationship.delete(findRelation.id);
                Relationship relationDeleted = Relationship.findByStatus(text);
@@ -36,7 +26,7 @@ public class RelationshipTest {
     public void FindNotExistedRelation() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-        	   relation = Relationship.findByStatus("very beutiful status");
+        	   Relationship relation = Relationship.findByStatus("very beutiful status");
                assertThat(relation == null);
            }
         });
@@ -46,7 +36,10 @@ public class RelationshipTest {
     public void RelationToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-        	  relation = create(text = "good relation");
+        	  String text = "good relation";
+        	  Relationship.add(text);
+        	  Relationship relation = Relationship.findByStatus(text);
+              assertThat(relation != null);
               
               String relationText = relation.toString();
               assertThat(relationText == text);
@@ -60,9 +53,9 @@ public class RelationshipTest {
     public void GetAllRelations() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create("First relation");
-              create("Second relation");
-              create("Third relation");
+        	  Relationship.add("First relation");
+        	  Relationship.add("Second relation");
+        	  Relationship.add("Third relation");
               
               List<Relationship> allRelation = Relationship.all();
               assertThat(allRelation.size() == 3);
@@ -80,7 +73,10 @@ public class RelationshipTest {
     public void FindRelationById() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   relation = create("good relation");
+        	   String text = "good relation";
+        	   Relationship.add(text);
+        	   Relationship relation = Relationship.findByStatus(text);
+               assertThat(relation != null);
                
                Relationship findRelation = Relationship.findById(relation.id);
                assertThat(findRelation != null);

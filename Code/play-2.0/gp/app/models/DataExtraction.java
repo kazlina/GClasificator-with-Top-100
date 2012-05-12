@@ -8,7 +8,7 @@ public class DataExtraction {
 
     public int newGPM(String id) {
 	GPM gpm = null;
-	gpm.create(id);
+	gpm.add(id);
 	//updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
@@ -31,7 +31,7 @@ public class DataExtraction {
         Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
         Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus,100);
-        Profile.create(man);
+        Profile.add(man);
         // i should add a validator!
 
         //words extraction
@@ -51,11 +51,9 @@ public class DataExtraction {
                     if (wordFromDictionary == null) {
                         Synonym wordFromSynonyms = word2.get(0);
                         Word word = wordFromSynonyms.word;
-                        ProfileWord profileWord = new ProfileWord(man, word, pH.countWord);
-                        ProfileWord.create(profileWord);
+                        ProfileWord.add(man, pH.word, pH.countWord);
                     } else {
-                        ProfileWord profileWord = new ProfileWord(man, wordFromDictionary, pH.countWord);
-                        ProfileWord.create(profileWord);
+                    	ProfileWord.add(man, pH.word, pH.countWord);
                         // i should add a validator!
                     }
                 }
@@ -87,7 +85,7 @@ public class DataExtraction {
         	Content kindContent =  Content.findByKind(post.kindContent);
             Post postToDB = new Post (gpm, post.postId, post.publishedData, kindContent, post.nComments,
 				post.nPlusOne, post.nResharers,post.isRepost);
-            Post.create(postToDB);
+            Post.add(postToDB);
             // i should add a validator!
 
             //words extraction
@@ -111,11 +109,9 @@ public class DataExtraction {
                         if (wordFromDictionary==null) {
                     Synonym wordFromSynonyms = word2.get(0);
                             Word word = wordFromSynonyms.word;
-                PostWord postWord = new PostWord(postToDB, word, pH.countWord);
-                            PostWord.create(postWord);
+                            PostWord.add(postToDB, pH.word, pH.countWord);
                         } else {
-                            PostWord postWord = new PostWord(postToDB, wordFromDictionary, pH.countWord);
-                            PostWord.create(postWord);
+                        	PostWord.add(postToDB, pH.word, pH.countWord);
                             // i should add a validator!
                         }
                     }

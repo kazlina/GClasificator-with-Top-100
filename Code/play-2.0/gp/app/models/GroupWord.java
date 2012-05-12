@@ -57,8 +57,10 @@ public class GroupWord extends Model {
 		return find.ref(Id);
 	}
 
-	public static void create(GroupWord element) {
-		element.save();
+	public static void add(GroupWord element) {
+		GroupWord findGroupWord = find.where().eq("group", element.group).eq("word", element.word).findUnique();
+		if (findGroupWord == null)
+			element.save();
 	}
 
 	public static void delete(Long id) {

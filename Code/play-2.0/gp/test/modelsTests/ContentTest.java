@@ -6,27 +6,18 @@ import static org.fest.assertions.Assertions.*;
 import models.*;
 
 public class ContentTest {
-    
-	private Content content;
-	private String text;
-	
-    private Content create(String value) {
-    	content = new Content(value);
-    	Content.create(content);
-        return content;
-    }
 
-    @Test
+	@Test
     public void CreateAndDeleteContent() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   content = create(text = "link");
-               assertThat(content.kind).isEqualTo(text);
-               
-               Content findContent = Content.findByKind(text);
-               assertThat(findContent.kind == text);
+        	   String text = "link";
+        	   Content.add(text);
+               Content content = Content.findByKind(text);
+               assertThat(content != null);
 
-               Content.delete(findContent.id);
+               Content.delete(content.id);
+               
                Content contentDeleted = Content.findByKind(text);
                assertThat(contentDeleted == null);
            }
@@ -37,7 +28,7 @@ public class ContentTest {
     public void FindNotExistedContent() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-        	   content = Content.findByKind("video");
+        	   Content content = Content.findByKind("video");
                assertThat(content == null);
            }
         });
@@ -47,7 +38,10 @@ public class ContentTest {
     public void ContentToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-        	  content = create(text = "photo");
+        	  String text = "photo";
+        	  Content.add(text);
+              Content content = Content.findByKind(text);
+              assertThat(content != null);
               
               String contentText = content.toString();
               assertThat(contentText == text);
@@ -61,9 +55,9 @@ public class ContentTest {
     public void GetAllContents() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create("link");
-              create("text");
-              create("audio");
+        	  Content.add("link");
+        	  Content.add("text");
+        	  Content.add("audio");
               
               List<Content> allContent = Content.all();
               assertThat(allContent.size() == 3);
@@ -81,7 +75,10 @@ public class ContentTest {
     public void FindContentById() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   content = create("link");
+        	   String text = "photo";
+        	   Content.add(text);
+               Content content = Content.findByKind(text);
+               assertThat(content != null);
                
         	   Content findContent = Content.findById(content.id);
                assertThat(findContent != null);

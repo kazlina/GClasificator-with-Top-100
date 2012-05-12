@@ -21,7 +21,7 @@ public class Content extends Model {
 		return this.kind;
 	}
 
-	public Content(String type){
+	private Content(String type){
 		this.kind = type;
 	}
     
@@ -39,7 +39,8 @@ public class Content extends Model {
 		return find.where().eq("kind", element).findUnique();
 	}
 	
-	public static void create(Content element) {
+	public static void add(String type) {
+		Content element = new Content(type);
 		element.save();
 	}
 

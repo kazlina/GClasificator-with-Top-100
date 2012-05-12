@@ -1,8 +1,10 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -32,7 +34,7 @@ public class PostLink extends Model {
 	@Column(name="amount", nullable = false)
     public int amount;
 
-   public PostLink(Post post, Link link, int amount){
+   private PostLink(Post post, Link link, int amount){
         this.post = post;
         this.link = link;
         this.amount = amount;
@@ -52,8 +54,26 @@ public class PostLink extends Model {
 		return Link.findById(id).postLinks;
 	}
 
-	public static void create(PostLink element) {
+	public static void add(Post post, String link, int amount) {
+		Ebean.beginTransaction();
+		
+		Link findLink = Link.findByLink(link);
+		if (findLink == null) {
+			Ebean.endTransaction();
+			return;
+		}
+		
+		PostLink findPostLink = find.where().eq("post", post).eq("link", findLink).findUnique();
+		if (findPostLink != null) {
+			Ebean.endTransaction();
+			return;
+		}
+
+		
+		PostLink element = new PostLink(post, findLink, amount);
 		element.save();
+		
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

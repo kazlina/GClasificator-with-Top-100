@@ -2,6 +2,9 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -18,7 +21,7 @@ public class Synonym extends Model {
     public Long id;
 	
     @ManyToOne
-	@Constraints.Required
+	//@Constraints.Required
 	@JoinColumn(name = "word", nullable = false)
 	public Word word;	
 	
@@ -26,7 +29,6 @@ public class Synonym extends Model {
 	@Constraints.Required
 	public String synonym;
 	
-
 	public String toString(){
 		return this.synonym;
 	}
@@ -49,14 +51,26 @@ public class Synonym extends Model {
     	return Word.findById(wordId).synonyms;
 	}
     
-    public static void create(Long wordId, Synonym synonym) {
-    	synonym.word = Word.findById(wordId);
+    public static void add(Long wordId, Synonym synonym) {
+    	Ebean.beginTransaction();
+    	
+    	Word word = Word.findById(wordId);
+    	if (word == null) {
+    		Ebean.endTransaction();
+    		return;
+    	}
+    		
+    	
+    	Synonym findSynonym = find.where().eq("word", word).eq("synonym", synonym.synonym).findUnique();
+    	if (findSynonym != null) {
+    		Ebean.endTransaction();
+    		return;
+    	}
+    	
+    	synonym.word = word;
         synonym.save();
-    }
-    
-    public static void create(String word, Synonym synonym) {
-    	synonym.word = Word.findByWord(word);
-        synonym.save();
+        
+        Ebean.commitTransaction();
     }
 
 	public static void delete(Long id) {

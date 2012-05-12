@@ -7,24 +7,15 @@ import models.*;
 
 public class GenderTest {
     
-	private Gender gender;
-	private String text;
-	
-    private Gender create(String value) {
-    	gender = new Gender(value);
-    	Gender.create(gender);
-        return gender;
-    }
-
-    @Test
+	@Test
     public void CreateAndDeleteGender() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   gender = create(text = "man");
-               assertThat(gender.value).isEqualTo(text);
-               
-               Gender findGender = Gender.findByValue(text);
-               assertThat(findGender.value == text);
+        	   String text = "man";
+        	   Gender.add(text);
+        	   
+        	   Gender findGender = Gender.findByValue(text);
+               assertThat(findGender != null);
 
                Gender.delete(findGender.id);
                Gender genderDeleted = Gender.findByValue(text);
@@ -37,7 +28,7 @@ public class GenderTest {
     public void FindNotExistedGender() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-        	   gender = Gender.findByValue("woman");
+        	   Gender gender = Gender.findByValue("woman");
                assertThat(gender == null);
            }
         });
@@ -47,7 +38,11 @@ public class GenderTest {
     public void GenderToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-        	  gender = create(text = "man");
+        	  String text = "man";
+        	  Gender.add(text);
+       	   
+        	  Gender gender = Gender.findByValue(text);
+              assertThat(gender != null);
               
               String genderText = gender.toString();
               assertThat(genderText == text);
@@ -61,9 +56,9 @@ public class GenderTest {
     public void GetAllGenders() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create("man");
-              create("woman");
-              create("none");
+        	  Gender.add("man");
+        	  Gender.add("woman");
+        	  Gender.add("none");
               
               List<Gender> allGender = Gender.all();
               assertThat(allGender.size() == 3);
@@ -81,7 +76,11 @@ public class GenderTest {
     public void FindGenderById() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   gender = create("man");
+        	   String text = "man";
+        	   Gender.add(text);
+        	   
+        	   Gender gender = Gender.findByValue(text);
+               assertThat(gender != null);
                
         	   Gender findGender = Gender.findById(gender.id);
                assertThat(findGender != null);

@@ -51,13 +51,15 @@ public class GroupLink extends Model {
 	public static List<GroupLink> findByLink(Long id) {
 		return Link.findById(id).groupLink;
 	}
-
+	
 	public static GroupLink findById(Long Id) {
 		return find.ref(Id);
 	}
 
-	public static void create(GroupLink element) {
-		element.save();
+	public static void add(GroupLink element) {
+		GroupLink findGroupLink = find.where().eq("group", element.group).eq("link", element.link).findUnique();
+		if (findGroupLink == null)
+			element.save();
 	}
 
 	public static void delete(Long id) {

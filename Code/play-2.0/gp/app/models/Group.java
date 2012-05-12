@@ -83,8 +83,10 @@ public class Group extends Model {
 		return find.where().eq("name", name).findUnique();
 	}
 
-	public static void create(Group group) {
-		group.save();
+	public static void add(Group group) {
+		Group findGroup = Group.findByName(group.name);
+		if (findGroup == null)
+			group.save();
 	}
 
 	public static void delete(Long id) {

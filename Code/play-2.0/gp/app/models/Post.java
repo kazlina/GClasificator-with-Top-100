@@ -3,6 +3,9 @@ package models;
 import java.util.*;
 
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -53,14 +56,15 @@ public class Post extends Model {
 
     public Post(GPM gpm, String postId, Date publishedData, Content kindContent, int nComments, 
     		int nPlusOne, int nResharers, boolean isRepost) {
-        this.gpm = gpm;
-        this.postId = postId;
-        this.date = publishedData;
-        this.kindContent = kindContent;
-        this.nComment = nComments;
-        this.nPlusOne = nPlusOne;
-        this.nResharers = nResharers;
-        this.isRepost = isRepost;
+    	this.gpm = gpm;
+    	this.postId = postId;
+    	this.date = publishedData;
+    	this.kindContent = kindContent;
+    	this.nComment = nComments;
+    	this.nPlusOne = nPlusOne;
+    	this.nResharers = nResharers;
+    	this.isRepost = isRepost;
+		
     }
 
     private static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
@@ -68,13 +72,27 @@ public class Post extends Model {
     public static Post findById(Long Id) {
 		return find.ref(Id);
 	}
-	
-	public static List<Post> findByGpmId(Long Id) {
+    
+    public static Post findByPostId(String postId) {
+		return find.where().eq("postId", postId).findUnique();
+	}
+    
+    public static List<Post> findByGpmId(Long Id) {
 		return find.where().eq("gpm", GPM.findById(Id)).findList();
 	}
+    
+    public static Date getDateLastPostForGpm(GPM gpm) {
+    	return find.where().eq("gpm", gpm).orderBy("date desc").findUnique().date;
+	}
 
-	public static void create(Post element) {
-		element.save();
+	public static void add(Post element) {
+		Ebean.beginTransaction();
+		
+		Post findPost = Post.findByPostId(element.postId);
+		if (findPost == null)
+			element.save();
+		
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

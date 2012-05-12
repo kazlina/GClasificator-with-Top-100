@@ -1,7 +1,6 @@
 package models;
 
 import java.util.*;
-import java.lang.Override;
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
@@ -32,8 +31,6 @@ public class GPM extends Model {
 
 	public String toString(){
 		return this.idGpm;
-		/*Profile profile = Profile.lastProfileByGpmId(this.id);
-		return (profile != null && profile.name != null)? profile.name : this.idGpm;*/
 	}
 
 	private GPM(String id) {
@@ -58,7 +55,7 @@ public class GPM extends Model {
 		return find.findRowCount();
 	}
 	
-	public static void create(String idGpm) {
+	public static void add(String idGpm) {
 		Ebean.beginTransaction();
 		
 		GPM searchGpm = findByIdGpm(idGpm);
@@ -72,7 +69,7 @@ public class GPM extends Model {
 		GPM newGpm = new GPM(idGpm);
 		newGpm.save();
 		
-		Ebean.endTransaction();
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

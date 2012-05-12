@@ -21,7 +21,7 @@ public class Relationship extends Model {
 		return this.status;
 	}
 
-	public Relationship(String type){
+	private Relationship(String type){
 		this.status = type;
 	}
     
@@ -39,7 +39,8 @@ public class Relationship extends Model {
 		return find.where().eq("status", element).findUnique();
 	}
 	
-	public static void create(Relationship element) {
+	public static void add(String type) {
+		Relationship element = new Relationship(type);
 		element.save();
 	}
 

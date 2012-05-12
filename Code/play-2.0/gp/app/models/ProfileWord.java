@@ -3,6 +3,9 @@ package models;
 import java.util.*;
 
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -32,7 +35,7 @@ public class ProfileWord extends Model {
 	@Column(name = "amount", nullable = false)
     public Integer amount;
 
-    public ProfileWord(Profile profile, Word word, int amount){
+    private ProfileWord(Profile profile, Word word, int amount){
         this.profile = profile;
         this.word = word;
         this.amount = amount;
@@ -52,8 +55,29 @@ public class ProfileWord extends Model {
 		return Word.findById(id).profileWords;
 	}
 
-	public static void create(ProfileWord element) {
-		element.save();
+	public static void add(Profile profile, String word, int amount) {
+		Ebean.beginTransaction();
+		
+		Word findWord = Word.findByWord(word);
+		if (findWord != null) {
+			ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", findWord).findUnique();
+			if (findProfileWord == null) {
+				ProfileWord element = new ProfileWord(profile, findWord, amount);
+				element.save();
+			}
+		}
+		
+		List<Synonym> synonyms = Synonym.findBySynonim(word); 
+		for (int i = 0; i < synonyms.size(); i ++) {
+			Word synonymWord = synonyms.get(i).word;
+			ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", synonymWord).findUnique();
+			if (findProfileWord == null) {
+				ProfileWord element = new ProfileWord(profile, synonymWord, amount);
+				element.save();
+			}
+		}
+		
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

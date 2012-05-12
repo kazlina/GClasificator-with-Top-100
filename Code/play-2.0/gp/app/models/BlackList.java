@@ -27,11 +27,14 @@ public class BlackList extends Model {
 
 	public String toString(){
 		return this.gpm.idGpm;
-		/*Profile profile = Profile.lastProfileByGpmId(this.gpm.id);
-		return (profile != null && profile.name != null)? profile.name : this.gpm.idGpm;*/
 	}
 
-	public BlackList(String reasonOfAddition) {
+	public BlackList(Long gpmId, String reasonOfAddition) {
+		GPM gpm = GPM.findById(gpmId);
+		if (gpm == null)
+			return;
+		
+		this.gpm = gpm;
 		this.reasonOfAddition = reasonOfAddition;
     }
 
@@ -49,8 +52,7 @@ public class BlackList extends Model {
 		return find.where().eq("gpm", GPM.findById(Id)).findUnique();
 	}
 
-	public static void create(GPM gpm, BlackList element) {
-		element.gpm = gpm;
+	public static void add(BlackList element) {
 		element.dateOfAddition = Calendar.getInstance().getTime();
 		element.save();
 	}

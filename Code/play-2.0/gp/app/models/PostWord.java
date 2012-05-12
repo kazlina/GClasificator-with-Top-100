@@ -1,8 +1,10 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -32,7 +34,7 @@ public class PostWord extends Model {
 	@Column(name = "amount", nullable = false)
     public int amount;
 
-    public PostWord(Post post, Word word, int amount){
+    private PostWord(Post post, Word word, int amount){
         this.post = post;
         this.word = word;
         this.amount = amount;
@@ -52,8 +54,29 @@ public class PostWord extends Model {
 		return Word.findById(id).postWords;
 	}
 
-	public static void create(PostWord element) {
-		element.save();
+	public static void add(Post post, String word, int amount) {
+		Ebean.beginTransaction();
+		
+		Word findWord = Word.findByWord(word);
+		if (findWord != null) {
+			PostWord findPostWord = find.where().eq("post", post).eq("word", findWord).findUnique();
+			if (findPostWord == null) {
+				PostWord element = new PostWord(post, findWord, amount);
+				element.save();
+			}
+		}
+		
+		List<Synonym> synonyms = Synonym.findBySynonim(word); 
+		for (int i = 0; i < synonyms.size(); i ++) {
+			Word synonymWord = synonyms.get(i).word;
+			PostWord findPostWord = find.where().eq("post", post).eq("word", synonymWord).findUnique();
+			if (findPostWord == null) {
+				PostWord element = new PostWord(post, synonymWord, amount);
+				element.save();
+			}
+		}
+		
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

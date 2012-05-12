@@ -51,8 +51,10 @@ public class Word extends Model {
 		return find.where().eq("word", element).findUnique();
 	}
 
-	public static void create(Word element) {
-		element.save();
+	public static void add(Word element) {
+		Word findWord = Word.findByWord(element.word);
+		if (findWord == null)
+			element.save();
 	}
 
 	public static void delete(Long id) {

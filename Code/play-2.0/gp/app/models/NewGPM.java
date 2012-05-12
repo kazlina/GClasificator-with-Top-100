@@ -3,13 +3,13 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
-import com.avaje.ebean.Ebean;
+import com.avaje.ebean.*;
 
 import play.db.ebean.*;
 import play.data.validation.*;
 
 @Entity
-@Table(name="NewGPM")
+@Table(name = "NewGPM")
 public class NewGPM extends Model {
 
 	@Id
@@ -24,9 +24,8 @@ public class NewGPM extends Model {
 	@Column(name = "nMentiens", nullable = false)
 	public int nMentiens;
 
-	private NewGPM(String id_gpm, int severity) {
-        this.idGpm = id_gpm;
-        this.nMentiens = severity;
+	private NewGPM(String idGpm) {
+        this.idGpm = idGpm;
 	}
 	
 	private static Model.Finder<Long, NewGPM> find = new Model.Finder<Long, NewGPM>(Long.class, NewGPM.class);
@@ -53,16 +52,14 @@ public class NewGPM extends Model {
 		}
 		else {
 			GPM searchGpm = GPM.findByIdGpm(idGpm);
-			if (searchGpm != null) {
-				Ebean.endTransaction();
-				return;
+			if (searchGpm == null) {
+				NewGPM newGpm = new NewGPM(idGpm);
+				newGpm.nMentiens = 1;
+				newGpm.save();
 			}
-
-			NewGPM newGpm = new NewGPM(idGpm, 1);
-			newGpm.save();
 		}
 		
-		Ebean.endTransaction();
+		Ebean.commitTransaction();
 	}
 	
 	public static void delete(Long id) {

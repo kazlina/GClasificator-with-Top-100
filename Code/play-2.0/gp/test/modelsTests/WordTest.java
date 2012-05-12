@@ -8,30 +8,27 @@ import models.*;
 
 public class WordTest {
     
-	private Word word;
-	private String text;
-	
-    private Word create(String value) {
-        word = new Word(value);
-        Word.create(word);
+	private Word createWord(String value) {
+		Word word = new Word(value);
+        Word.add(word);
         return word;
     }
     
     private Synonym createSynonym(Long wordId, String value) {
     	Synonym synonym = new Synonym(value);
-    	Synonym.create(wordId, synonym);
+    	Synonym.add(wordId, synonym);
         return synonym;
     }
     
     private GroupWord createGroupWord(Group group, Word word) {
     	GroupWord groupWord = new GroupWord(group, word, 0, 0);
-		GroupWord.create(groupWord);
+		GroupWord.add(groupWord);
         return groupWord;
     }
 	
 	private Group createGroup(String value) {
 		Group group = new Group(value, "", "", "", 0, 0, 0, 0, 0);
-    	Group.create(group);
+    	Group.add(group);
         return group;
     }
 
@@ -39,9 +36,8 @@ public class WordTest {
     public void CreateAndDeleteWord() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-               word = create(text = "Peter");
-               assertThat(word.word).isEqualTo(text);
-               
+               String text = "Peter";
+               createWord(text);
                Word findWord = Word.findByWord(text);
                assertThat(findWord.word == text);
 
@@ -56,7 +52,7 @@ public class WordTest {
     public void FindNotExistedWord() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-               word = Word.findByWord("Yuri");
+        	   Word word = Word.findByWord("Yuri");
                assertThat(word == null);
            }
         });
@@ -66,7 +62,10 @@ public class WordTest {
     public void WordToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              word = create(text = "Peter");
+        	  String text = "Peter";
+              createWord(text);
+              Word word = Word.findByWord(text);
+              assertThat(word != null);
               
               String textWord = word.toString();
               assertThat(textWord == text);
@@ -80,9 +79,9 @@ public class WordTest {
     public void GetAllWords() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create("Julia");
-              create("Nasty");
-              create("Kate");
+        	  createWord("Julia");
+        	  createWord("Nasty");
+        	  createWord("Kate");
               
               List<Word> allWord = Word.all();
               assertThat(allWord.size() == 3);
@@ -100,9 +99,10 @@ public class WordTest {
     public void FindByWord() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create(text = "Maximus");
+        	  String text = "Maximus";
+        	  createWord(text);
               
-              word = Word.findByWord(text);
+        	  Word word = Word.findByWord(text);
               assertThat(word != null);
               
               Word.delete(word.id);
@@ -117,8 +117,9 @@ public class WordTest {
     public void GetSynonymsForWord() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-               create(text = "Mari");
-               word = Word.findByWord(text);
+        	   String text = "Mari";
+        	   createWord(text);
+        	   Word word = Word.findByWord(text);
                assertThat(word.word != null);
 
                createSynonym(word.id, "Marinad");
@@ -141,8 +142,9 @@ public class WordTest {
 	   public void GetGroupsForWord() {
 	   	running(fakeApplication(), new Runnable() {
 	          public void run() {
-	              create(text = "Mari");
-	              word = Word.findByWord(text);
+	        	  String text = "Mari";
+	        	  createWord(text);
+	              Word word = Word.findByWord(text);
 	              assertThat(word != null);
 
 	              //assertThat(word.groupWords.size() == 0);
@@ -173,10 +175,10 @@ public class WordTest {
     public void GetGroupsForSomeWord() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-               create("Mari");
-               create("Maximus");
+        	   createWord("Mari");
+        	   createWord("Maximus");
                
-               word = Word.findByWord("Mari");
+        	   Word word = Word.findByWord("Mari");
                assertThat(word != null);
                //assertThat(word.groupWords.size() == 0);
                

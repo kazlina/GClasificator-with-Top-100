@@ -8,12 +8,9 @@ import models.*;
 
 public class GroupTest {
     
-	private Group group;
-	private String name;
-	
-    private Group create(String value) {
-    	group = new Group(value, "", "", "", 0, 0, 0, 0, 0);
-    	Group.create(group);
+	private Group create(String value) {
+		Group group = new Group(value, "", "", "", 0, 0, 0, 0, 0);
+    	Group.add(group);
         return group;
     }
     
@@ -21,7 +18,8 @@ public class GroupTest {
     public void CreateAndDeleteGroup() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-        	   group = create(name = "mathematics");
+        	   String name = "mathematics";
+        	   Group group = create(name);
                assertThat(group.name).isEqualTo(name);
                
                Group findGroup = Group.findByName(name);
@@ -48,7 +46,9 @@ public class GroupTest {
     public void GroupToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              group = create(name = "photos");
+        	  String name = "mathematics";
+        	  Group group = create(name);
+              assertThat(group.name).isEqualTo(name);
               
               String textGroup = group.toString();
               assertThat(textGroup == name);
@@ -82,7 +82,9 @@ public class GroupTest {
     public void FindGroupById() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-              create(name = "lords");
+        	  String name = "mathematics";
+        	  Group group = create(name);
+              assertThat(group.name).isEqualTo(name);
               
               group = Group.findByName(name);
               assertThat(group != null);

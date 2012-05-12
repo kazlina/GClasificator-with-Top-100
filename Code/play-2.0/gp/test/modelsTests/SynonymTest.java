@@ -6,26 +6,15 @@ import models.*;
 
 public class SynonymTest {
     
-	private Word word;
-	private Synonym synonym;
-	private String textWord;
-	private String textSynonym;
-	
-    private Word createWord(String value) {
-        word = new Word(value);
-        Word.create(word);
+	private Word createWord(String value) {
+    	Word word = new Word(value);
+        Word.add(word);
         return word;
     }
     
-    private Synonym createSynonymByWord(String word, String value) {
-    	synonym = new Synonym(value);
-    	Synonym.create(word, synonym);
-        return synonym;
-    }
-    
     private Synonym createSynonymByIdWord(Long wordId, String value) {
-    	synonym = new Synonym(value);
-    	Synonym.create(wordId, synonym);
+    	Synonym synonym = new Synonym(value);
+    	Synonym.add(wordId, synonym);
         return synonym;
     }
 
@@ -33,11 +22,13 @@ public class SynonymTest {
     public void CreateAndDeleteSynonym() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-               createWord(textWord = "Maximus");
-               word = Word.findByWord(textWord);
-               assertThat(word.word != null);
+               String textWord = "Max";
+        	   createWord(textWord);
+               Word word = Word.findByWord(textWord);
+               assertThat(word != null);
 
-               synonym = createSynonymByWord(textWord, textSynonym = "Lord of world");
+               String textSynonym = "Maximus";
+               Synonym synonym = createSynonymByIdWord(word.id, textSynonym);
                assertThat(synonym.synonym).isEqualTo(textSynonym);
                
                Synonym findSynonym = Synonym.findById(synonym.id);
@@ -63,14 +54,16 @@ public class SynonymTest {
     }
  
    @Test
-   public void synonymToString() {
+   public void SynonymToString() {
 	   running(fakeApplication(), new Runnable() {
           public void run() {
-        	  createWord(textWord = "Maximus");
-              word = Word.findByWord(textWord);
+        	  String textWord = "Maximus";
+        	  createWord(textWord);
+              Word word = Word.findByWord(textWord);
               assertThat(word.word != null);
               
-              synonym = createSynonymByIdWord(word.id, textSynonym = "Lord of world");
+              String textSynonym = "Lord of the world";
+              Synonym synonym = createSynonymByIdWord(word.id, textSynonym);
               String text = synonym.toString();
               assertThat(text == textWord);
               
@@ -84,13 +77,14 @@ public class SynonymTest {
    public void GetAllSynonymsForWord() {
    	running(fakeApplication(), new Runnable() {
           public void run() {
-              createWord(textWord = "Mari");
-              word = Word.findByWord(textWord);
-              assertThat(word.word != null);
+        	  String textWord = "Mari";
+        	  createWord(textWord);
+        	  Word word = Word.findByWord(textWord);
+              assertThat(word != null);
 
-              createSynonymByWord(textWord, "Marinad");
-              createSynonymByWord(textWord, "Student");
-              createSynonymByWord(textWord, "Murder");
+              createSynonymByIdWord(word.id, "Marinad");
+              createSynonymByIdWord(word.id, "Student");
+              createSynonymByIdWord(word.id, "Murder");
               
               List<Synonym> synonyms = Synonym.findByWordId(word.id);
               assertThat(synonyms.size() == 3);
@@ -120,8 +114,8 @@ public class SynonymTest {
               Word secondWord = Word.findByWord(textSecondWord);
               assertThat(secondWord.word != null);
 
-              synonym = createSynonymByWord(textFirstWord, "Student");
-              createSynonymByWord(textFirstWord, "Murder");
+              Synonym synonym = createSynonymByIdWord(firstWord.id, "Student");
+              createSynonymByIdWord(firstWord.id, "Murder");
               
               createSynonymByIdWord(secondWord.id, "Assasin");
               createSynonymByIdWord(secondWord.id, "Slayer");

@@ -1,8 +1,10 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -32,7 +34,7 @@ public class ProfileLink extends Model {
 	@Column(name = "amount", nullable = false)
     public Integer amount;
 
-	public ProfileLink(Profile profile, Link link, int amount){
+    private ProfileLink(Profile profile, Link link, int amount){
         this.profile = profile;
         this.link = link;
         this.amount = amount;
@@ -52,8 +54,25 @@ public class ProfileLink extends Model {
 		return Link.findById(id).profileLinks;
 	}
 
-	public static void create(ProfileLink element) {
+	public static void add(Profile profile, String link, int amount) {
+		Ebean.beginTransaction();
+		
+		Link findLink = Link.findByLink(link);
+		if (findLink == null) {
+			Ebean.endTransaction();
+			return;
+		}
+		
+		ProfileLink findProfileLink = find.where().eq("profile", profile).eq("link", findLink).findUnique();
+		if (findProfileLink != null) {
+			Ebean.endTransaction();
+			return;
+		}
+		
+		ProfileLink element = new ProfileLink(profile, findLink, amount);
 		element.save();
+		
+		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

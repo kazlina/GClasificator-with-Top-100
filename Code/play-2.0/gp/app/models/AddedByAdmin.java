@@ -50,9 +50,6 @@ public class AddedByAdmin extends Model {
 
 	public String toString(){
 		return this.gpm.idGpm + " - " + group.name;
-		/*Profile profile = models.Profile.lastProfileByGpmId(this.gpm.id);
-		String name =  (profile != null && profile.name != null)? profile.name : this.gpm.idGpm;
-		return name + " - " + group.name;*/
 	}
 
 	private static Model.Finder<Long, AddedByAdmin> find = new Model.Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
@@ -73,7 +70,7 @@ public class AddedByAdmin extends Model {
 		return Group.findById(Id).addedByAdmin;
 	}
 
-	public static void create(GPM gpm, Group group, AddedByAdmin man) {
+	public static void add(GPM gpm, Group group, AddedByAdmin man) {
 		man.gpm = gpm;
 		man.group = group;
         man.save();

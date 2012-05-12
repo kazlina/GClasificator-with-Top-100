@@ -21,7 +21,7 @@ public class Gender extends Model {
 		return this.value;
 	}
 
-	public Gender(String value){
+	private Gender(String value){
 		this.value = value;
 	}
     
@@ -39,7 +39,8 @@ public class Gender extends Model {
 		return find.where().eq("value", element).findUnique();
 	}
 
-	public static void create(Gender element) {
+	public static void add(String value) {
+		Gender element = new Gender(value);
 		element.save();
 	}
 

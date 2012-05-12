@@ -6,27 +6,21 @@ import models.*;
 
 public class GroupWordTest {
     
-	private GroupWord groupWord;
-	private Word word;
-	private Group group;
-	private String textWord;
-	private String nameGroup;
-	
 	private GroupWord createGroupWord(Group group, Word word) {
-		groupWord = new GroupWord(group, word, 0, 0);
-		GroupWord.create(groupWord);
+		GroupWord groupWord = new GroupWord(group, word, 0, 0);
+		GroupWord.add(groupWord);
         return groupWord;
     }
 	
 	private Word createWord(String value) {
-        word = new Word(value);
-        Word.create(word);
+        Word word = new Word(value);
+        Word.add(word);
         return word;
     }
 	
 	private Group createGroup(String value) {
-    	group = new Group(value, "", "", "", 0, 0, 0, 0, 0);
-    	Group.create(group);
+    	Group group = new Group(value, "", "", "", 0, 0, 0, 0, 0);
+    	Group.add(group);
         return group;
     }
     
@@ -34,15 +28,17 @@ public class GroupWordTest {
     public void CreateAndDeleteGroupWord() {
     	running(fakeApplication(), new Runnable() {
            public void run() {
-               createWord(textWord = "Maximus");
-               word = Word.findByWord(textWord);
-               assertThat(word.word != null);
+               String textWord = "Maximus";
+        	   createWord(textWord);
+        	   Word word = Word.findByWord(textWord);
+               assertThat(word != null);
                
-               createGroup(nameGroup = "lords");
-               group = Group.findByName(nameGroup);
-               assertThat(group.name != null);
+               String nameGroup = "lords";
+               createGroup(nameGroup);
+               Group group = Group.findByName(nameGroup);
+               assertThat(group != null);
 
-               groupWord = createGroupWord(group, word);
+               GroupWord groupWord = createGroupWord(group, word);
                assertThat(groupWord.group).isEqualTo(group);
                
                GroupWord findGroupWord = GroupWord.findById(groupWord.id);
@@ -62,11 +58,12 @@ public class GroupWordTest {
    public void GetWordsForGroup() {
    	running(fakeApplication(), new Runnable() {
           public void run() {
-              createGroup(nameGroup = "flowers");
-              group = Group.findByName(nameGroup);
+              String nameGroup = "flowers";
+        	  createGroup(nameGroup);
+        	  Group group = Group.findByName(nameGroup);
               assertThat(group != null);
 
-              word = createWord("rose");
+              Word word = createWord("rose");
               createGroupWord(group, word);
               word = createWord("tulip");
               createGroupWord(group, word);
@@ -94,11 +91,12 @@ public class GroupWordTest {
    public void GetGroupsForWord() {
    	running(fakeApplication(), new Runnable() {
           public void run() {
-              createWord(textWord = "image");
-              word = Word.findByWord(textWord);
+              String textWord = "image";
+        	  createWord(textWord);
+              Word word = Word.findByWord(textWord);
               assertThat(word != null);
 
-              group = createGroup("photographers");
+              Group group = createGroup("photographers");
               createGroupWord(group, word);
               group = createGroup("artists");
               createGroupWord(group, word);
