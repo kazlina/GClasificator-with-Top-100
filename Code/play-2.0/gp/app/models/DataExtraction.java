@@ -43,20 +43,9 @@ public class DataExtraction {
             //for each word from profile
             for (HistogramForWords pH: profileHistogram) {
                 //for pH.word search it (word) in WordDictionary
-                Word wordFromDictionary = Word.findByWord(pH.word);
-                List <Synonym> word2 = Synonym.findBySynonim(pH.word);
-                //there is the word (pH.word) in dictionary (Word or Synonym)
-                if ((wordFromDictionary != null) || !(word2.isEmpty())) {
-                    //add word from profile to table 'ProfileWord'
-                    if (wordFromDictionary == null) {
-                        Synonym wordFromSynonyms = word2.get(0);
-                        Word word = wordFromSynonyms.word;
-                        ProfileWord.add(man, pH.word, pH.countWord);
-                    } else {
-                    	ProfileWord.add(man, pH.word, pH.countWord);
-                        // i should add a validator!
-                    }
-                }
+                //add word from profile to table 'ProfileWord'
+                ProfileWord.add(man, pH.word, pH.countWord);
+                // i should add a validator!
             }
         }
 
@@ -101,20 +90,9 @@ public class DataExtraction {
                 //for each word from post
                 for (HistogramForWords pH: postHistogram) {
                     //for pH.word search it (word) in WordDictionary
-                    Word wordFromDictionary = Word.findByWord(pH.word);
-                    List <Synonym> word2 = Synonym.findBySynonim(pH.word);
-                    //there is the word (pH.word) in dictionary (WordDictionary or WordSynonyms)
-                    if ((wordFromDictionary!=null) || !(word2.isEmpty())) {
-                        //add word from post to table 'PostWord'
-                        if (wordFromDictionary==null) {
-                    Synonym wordFromSynonyms = word2.get(0);
-                            Word word = wordFromSynonyms.word;
-                            PostWord.add(postToDB, pH.word, pH.countWord);
-                        } else {
-                        	PostWord.add(postToDB, pH.word, pH.countWord);
-                            // i should add a validator!
-                        }
-                    }
+                    //add word from post to table 'PostWord'
+                    PostWord.add(postToDB, pH.word, pH.countWord);
+                    // i should add a validator!
                 }
             }
 
