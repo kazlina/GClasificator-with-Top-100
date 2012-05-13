@@ -187,16 +187,15 @@ public class DataExtraction {
 		
 		//Dividing input string into words
 		slicedStringMass = separateTokens(inputString);
-		//порезали входную строку на отдельные группы символов, взяв за разделители пробелы
+
 		//////////////////////////////
 		//It's just copied Julia code from word extractor with some refactoring
-		//String urlRegexp = "(http|https|HTTP|HTTPS)://([\\w]+(:[\\w]+)?@)?([a-z]+\\.)?[a-z]+(\\.){1}[a-z]{2,3}+(:\\d+)?/?[/\\.a-zA-Z\\d\\?%=&_\\-#!;:@]*";
 		String urlRegexp = "(http|https|HTTP|HTTPS)://.*";
 		Pattern urlPattern = Pattern.compile(urlRegexp);
 		
-		//добавление в список ссылок
+		//adding links into list
 		ArrayList <URL> linksList = new ArrayList<URL>();
-		//загоняем в список слов только слова из порезанной строки, которые соответсвтуют html-шаблону
+		//add string from sliced mass into list only if they match html-tamplate
 		if (slicedStringMass != null) {
 			for(int i = 0; i < slicedStringMass.length; i++) {
 				if (urlPattern.matcher(slicedStringMass[i]).matches()) {
@@ -218,14 +217,14 @@ public class DataExtraction {
 
 		LinkComparator comparator = new LinkComparator("");
 		java.util.Collections.sort(linksList, comparator);
-		//создаём и инициализируем первый элемент выходного массива
+		//create and initialized first element histogram mass
 		ArrayList <HistogramForLinks> histogramList = new ArrayList<HistogramForLinks>();
 		try {
 			HistogramForLinks firstElem = new HistogramForLinks(linksList.get(0).toString());
 		
 			firstElem.count++;
 			histogramList.add(firstElem);
-			//удаляем первую ссылку, т.к. её уже рассмотрели
+			//deleting first link, because it was used
 			linksList.remove(0);
 			
 			boolean linkAdded = false;
@@ -285,11 +284,11 @@ public class DataExtraction {
 		}
 		
 		int distance = 0, linksDifferencesPosition = 0;
-		//поиск позиции строки, в которой строки начинают различаться
+		//search position in which strings are different
 		for (; bigLinkPath.charAt(linksDifferencesPosition) == smallLinkPath.charAt(linksDifferencesPosition) &&
 				linksDifferencesPosition < (smallLinkPath.length() - 1); linksDifferencesPosition++);
 		
-		//поиск расстояния между ссылками
+		//search of destination betwen strings
 		for (int curPosition = linksDifferencesPosition; curPosition < bigLinkPath.length(); curPosition++) {
 			if (bigLinkPath.charAt(curPosition) == '/' && ((bigLinkPath.length() - curPosition) != 1)){
 				distance++;
