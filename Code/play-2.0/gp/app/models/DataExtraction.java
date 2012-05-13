@@ -3,6 +3,8 @@ package models;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.net.URL;
 
 public class DataExtraction {
 
@@ -50,7 +52,21 @@ public class DataExtraction {
         }
 
         //links extraction (there is no, Artem has not written this feature yet)
-
+        String linksFromProfile = "";
+        //collect of links from profile "urls"
+        for (String str: profile.urls) {
+        	linksFromProfile += str + " ";
+        }
+        //combine of all links from profile
+        text = text + " " + linksFromProfile;
+        //begin of adding histogram info about profile links into table "ProfileLink"
+        ArrayList<HistogramForLinks> profileLinksHistogram = linkPreprocessor (text, 3);
+        if (profileLinksHistogram != null) {
+        	for (HistogramForLinks linksHistogram: profileLinksHistogram) {
+                //adding link from profile to table 'ProfileLink'
+    			ProfileLink.add(man, linksHistogram.link.toString(), linksHistogram.count);
+        	}
+        }
         return 0;
     }
 
@@ -96,7 +112,18 @@ public class DataExtraction {
                 }
             }
 
-            //links extraction (there is no, Artem has not written this feature yet)
+            
+            //links extraction
+            //combine of all links from post
+            text = text + " " + post.url;
+            //build links histogram
+            ArrayList<HistogramForLinks> profileLinksHistogram = linkPreprocessor (text, 3);
+            if (profileLinksHistogram != null) {
+            	for (HistogramForLinks linksHistogram: profileLinksHistogram) {
+                    //adding link from profile to table 'ProfileLink'
+        			PostLink.add(postToDB, linksHistogram.link.toString(), linksHistogram.count);
+            	}
+            }
 
             //ids extraction
             if ((post.isRepost)) {
@@ -155,4 +182,119 @@ public class DataExtraction {
         }
         return temp;
     }
+    private static ArrayList<HistogramForLinks> linkPreprocessor (String inputString, int maxLength) {
+    	String [] slicedStringMass = null;
+		
+		//Dividing input string into words
+		slicedStringMass = separateTokens(inputString);
+		//порезали входную строку на отдельные группы символов, взяв за разделители пробелы
+		//////////////////////////////
+		//It's just copied Julia code from word extractor with some refactoring
+		//String urlRegexp = "(http|https|HTTP|HTTPS)://([\\w]+(:[\\w]+)?@)?([a-z]+\\.)?[a-z]+(\\.){1}[a-z]{2,3}+(:\\d+)?/?[/\\.a-zA-Z\\d\\?%=&_\\-#!;:@]*";
+		String urlRegexp = "(http|https|HTTP|HTTPS)://.*";
+		Pattern urlPattern = Pattern.compile(urlRegexp);
+		
+		//добавление в список ссылок
+		ArrayList <URL> linksList = new ArrayList<URL>();
+		//загоняем в список слов только слова из порезанной строки, которые соответсвтуют html-шаблону
+		if (slicedStringMass != null) {
+			for(int i = 0; i < slicedStringMass.length; i++) {
+				if (urlPattern.matcher(slicedStringMass[i]).matches()) {
+					try {
+						URL addingLink = new URL(slicedStringMass [i]);
+						linksList.add(addingLink);
+					}
+					catch (Exception linkError) {
+						//it's mean, that regular expression in pattern is invalid
+					}
+				}
+			}
+		}
+		
+		if (linksList.size() == 0) {
+			ArrayList<HistogramForLinks> nullValue = null;
+			return nullValue;
+		}
+
+		LinkComparator comparator = new LinkComparator("");
+		java.util.Collections.sort(linksList, comparator);
+		//создаём и инициализируем первый элемент выходного массива
+		ArrayList <HistogramForLinks> histogramList = new ArrayList<HistogramForLinks>();
+		try {
+			HistogramForLinks firstElem = new HistogramForLinks(linksList.get(0).toString());
+		
+			firstElem.count++;
+			histogramList.add(firstElem);
+			//удаляем первую ссылку, т.к. её уже рассмотрели
+			linksList.remove(0);
+			
+			boolean linkAdded = false;
+			for (URL currentLink: linksList) {
+			    for (HistogramForLinks currentHistogram: histogramList) {
+			        if ((currentHistogram.link == null ? currentLink== null : 
+			        	(currentHistogram.link.getHost()).equals(currentLink.getHost())
+			        		&& linksDistance(currentLink, currentHistogram.link) <= maxLength)) {
+			        	currentHistogram.count++;
+			        	linkAdded = true;
+			        }
+			    }
+			    if (!linkAdded) {
+			    	HistogramForLinks newHistogramRecord = new HistogramForLinks(currentLink.toString());
+			    	newHistogramRecord.count++;
+			    	histogramList.add(newHistogramRecord);
+			    }
+			    linkAdded = false;
+			}
+		}
+		catch (Exception ex) {
+			//there is cannot be exception, because it should be early
+		}
+		//It's end of copied Julia code from word extractor
+		return histogramList;
+	}
+    
+	private static String [] separateTokens (String inputString) {
+		String [] outputString = null;
+		if (inputString != null && !inputString.equals("")){
+			outputString = inputString.split("\\s");
+		}
+		return outputString;
+	}
+
+	private  static int linksDistance (URL link1, URL link2) {
+		String bigLinkPath, smallLinkPath;
+		if (!link1.getHost().toString().equals(link2.getHost().toString())) {
+			return -1;
+		}
+		
+		if (link1.toString().length() >= link2.toString().length()) {
+			bigLinkPath = link1.getPath();
+			smallLinkPath = link2.getPath();
+		}
+		else {
+			bigLinkPath = link2.getPath();
+			smallLinkPath = link1.getPath();
+		}
+		//search of domain end in first and second link
+		
+		if (bigLinkPath.length() == 0) {
+			bigLinkPath = "/";
+		}
+		if (smallLinkPath.length() == 0) {
+			smallLinkPath = "/";
+		}
+		
+		int distance = 0, linksDifferencesPosition = 0;
+		//поиск позиции строки, в которой строки начинают различаться
+		for (; bigLinkPath.charAt(linksDifferencesPosition) == smallLinkPath.charAt(linksDifferencesPosition) &&
+				linksDifferencesPosition < (smallLinkPath.length() - 1); linksDifferencesPosition++);
+		
+		//поиск расстояния между ссылками
+		for (int curPosition = linksDifferencesPosition; curPosition < bigLinkPath.length(); curPosition++) {
+			if (bigLinkPath.charAt(curPosition) == '/' && ((bigLinkPath.length() - curPosition) != 1)){
+				distance++;
+			}
+		}
+		return distance;
+	}
 }
