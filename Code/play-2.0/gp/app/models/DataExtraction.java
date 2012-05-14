@@ -255,7 +255,7 @@ public class DataExtraction {
 	private static String [] separateTokens (String inputString) {
 		String [] outputString = null;
 		if (inputString != null && !inputString.equals("")){
-			outputString = inputString.split("\\s");
+			outputString = inputString.split("\\s=\\s|>|=\"|\\s=\"|=\\s\"|\\s=");
 		}
 		return outputString;
 	}
