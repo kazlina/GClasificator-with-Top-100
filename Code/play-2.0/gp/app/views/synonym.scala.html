@@ -9,7 +9,7 @@
         @for(synonym <- synonyms) {
             <li>
                 @synonym.synonym
-                @form(routes.Application.deleteSynonym(mainWord.id, synonym.id)) {
+                @form(routes.Words.deleteSynonym(mainWord.id, synonym.id)) {
                     <input type="submit" value="Delete">
                 }
             </li>
@@ -19,10 +19,10 @@
     
     <h2>Add a new synonym</h2>
     
-    @form(routes.Application.addSynonym(mainWord.id)) {
+    @form(routes.Words.addSynonym(mainWord.id)) {
         @inputText(synonymForm("synonym")) 
         <input type="submit" value="Create">
     }
     <hr/>
-    <a href=@routes.Application.words()>Back to words</a>
+    <a href=@routes.Words.words()>Back to words</a>
 }

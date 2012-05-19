@@ -5,14 +5,30 @@
 # Home page
 GET     /                       controllers.Application.index()
 GET     /ind                    controllers.Application.ind()
-GET     /admin/words            controllers.Application.words()
-POST    /admin/words            controllers.Application.newWord()
-POST    /admin/words/:id/delete controllers.Application.deleteWord(id: Long)
 
-GET     /admin/synonyms/:wid    controllers.Application.synonyms(wid: Long)
-POST    /admin/synonyms/:wid    controllers.Application.addSynonym(wid: Long)
-POST    /admin/synonyms/:wid/:sid/delete controllers.Application.deleteSynonym(wid: Long, sid: Long)
+
+# WORDS
+GET     /admin/words            controllers.Words.words()
+POST    /admin/words            controllers.Words.newWord()
+POST    /admin/words/:id/delete controllers.Words.deleteWord(id: Long)
+
+# SYNONYMS
+GET     /admin/synonyms/:wid    controllers.Words.synonyms(wid: Long)
+POST    /admin/synonyms/:wid    controllers.Words.addSynonym(wid: Long)
+POST    /admin/synonyms/:wid/:sid/delete controllers.Words.deleteSynonym(wid: Long, sid: Long)
+
+
+# BLACK LIST
+GET     /admin/blacklist        controllers.BlackListController.blackList()
+POST    /admin/blacklist        controllers.BlackListController.addBlackList()
+POST    /admin/blacklist/:id/delete controllers.BlackListController.deleteBlackList(id: Long)
                                 
+
+# GROUPS
+GET     /admin/groups            controllers.Groups.groups()
+POST    /admin/groups            controllers.Groups.addGroup()
+POST    /admin/groups/:id/delete controllers.Groups.deleteGroup(id: Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -11,9 +11,9 @@
             <li>
                 @word.word has
                 @word.synonyms.size() synonym(s)
-                <a href=@routes.Application.synonyms(word.id)>View/Edit synonyms</a>
+                <a href=@routes.Words.synonyms(word.id)>View/Edit synonyms</a>
 
-                @form(routes.Application.deleteWord(word.id)) {
+                @form(routes.Words.deleteWord(word.id)) {
                     <input type="submit" value="Delete">
                 }
             </li>
@@ -23,7 +23,7 @@
     <hr/>
     <h2>Add a new word</h2>
     
-    @form(routes.Application.newWord()) {
+    @form(routes.Words.newWord()) {
         @inputText(wordForm("word")) 
         <input type="submit" value="Create">
     }
