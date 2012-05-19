@@ -1,15 +1,15 @@
-@(groups: List[Group], groupForm: Form[Group])
+@(group: Group, nameGroup: String, groupWords: List[GroupWord], groupWordForm: Form[GroupWord])
 
 @import helper._
 
-@main("Groups list") {
-    <h1>@groups.size() group(s)</h1>
+@main("Group words list") {
+    <h1>Words for group @nameGroup</h1>
     
     <ul>
-        @for(group <- groups) {
+        @for(groupWord <- groupWords) {
             <li>
-                @group.name
-                @form(routes.Groups.deleteGroup(group.id)) {
+                @groupWord.word.word
+                @form(routes.Groups.deleteGroupWord(group.id,groupWord.id)) {
                     <input type="submit" value="Delete">
                 }
             </li>
@@ -17,19 +17,14 @@
     </ul>
     <hr/>
     
-    <h2>Add a new group to the list of groups</h2>
+    <h2>Add a new word to the list of words of group</h2>
     
-    @form(routes.Groups.addGroup()) {
-        @inputText(groupForm("name"))
-        @inputFile(groupForm("activeImage"))
-        @inputFile(groupForm("passiveImage"))
-        @textarea(groupForm("description"))
-        @inputText(groupForm("textPersent"))
-        @inputText(groupForm("imagePersent"))
-        @inputText(groupForm("linkPersent"))
-        @inputText(groupForm("videoPersent"))
-        @inputText(groupForm("audioPersent"))
+    @form(routes.Groups.addGroupWord(group.id)) {
+        @inputText(groupWordForm("word"))
+        @inputText(groupWordForm("postWeight"))
+        @inputText(groupWordForm("profileWeight"))
         <input type="submit" value="Create">
     }
     <hr/>
+    <a href=@routes.Groups.groups()>Back to groups</a>
 }
