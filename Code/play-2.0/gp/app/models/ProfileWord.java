@@ -44,7 +44,7 @@ public class ProfileWord extends Model {
     private static Model.Finder<Long, ProfileWord> find = new Model.Finder<Long, ProfileWord>(Long.class, ProfileWord.class);
 
     public static ProfileWord findById(Long Id) {
-		return find.ref(Id);
+    	return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<ProfileWord> findByProfile(Long id) {

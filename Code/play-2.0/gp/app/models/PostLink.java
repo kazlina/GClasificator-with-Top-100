@@ -43,7 +43,7 @@ public class PostLink extends Model {
     private static Model.Finder<Long, PostLink> find = new Model.Finder<Long, PostLink>(Long.class, PostLink.class);
 
 	public static PostLink findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<PostLink> findByPost(Long id) {

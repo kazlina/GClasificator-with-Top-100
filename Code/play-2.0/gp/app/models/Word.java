@@ -44,7 +44,7 @@ public class Word extends Model {
 	}
 
 	public static Word findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static Word findByWord(String element) {

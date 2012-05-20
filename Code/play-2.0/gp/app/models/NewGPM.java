@@ -3,6 +3,8 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
+import org.jsoup.select.Elements;
+
 import com.avaje.ebean.*;
 
 import play.db.ebean.*;
@@ -24,18 +26,26 @@ public class NewGPM extends Model {
 	@Column(name = "nMentiens", nullable = false)
 	public int nMentiens;
 
+	public String toString(){
+		return this.idGpm;
+	}
+	
 	private NewGPM(String idGpm) {
         this.idGpm = idGpm;
 	}
 	
 	private static Model.Finder<Long, NewGPM> find = new Model.Finder<Long, NewGPM>(Long.class, NewGPM.class);
 
-	public static List<NewGPM> all() {
-		return find.where().orderBy("nMentiens desc").findList();
+	public static List<NewGPM> get(int count) {
+		return find.where().orderBy("nMentiens desc").setMaxRows(count).findList();
+	}
+	
+	public static int size() {
+		return find.findRowCount();
 	}
 	
 	public static NewGPM findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static NewGPM findByIdGpm(String Id) {

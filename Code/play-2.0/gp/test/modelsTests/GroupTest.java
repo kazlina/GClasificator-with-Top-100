@@ -23,11 +23,11 @@ public class GroupTest {
                assertThat(group.name).isEqualTo(name);
                
                Group findGroup = Group.findByName(name);
-               assertThat(findGroup.name == name);
+               assertThat(findGroup.name).isEqualTo(name);
 
                Group.delete(findGroup.id);
                Group groupDeleted = Group.findByName(name);
-               assertThat(groupDeleted == null);
+               assertThat(groupDeleted).isNull();
            }
         });
     }
@@ -37,7 +37,7 @@ public class GroupTest {
         running(fakeApplication(), new Runnable() {
            public void run() {
         	   Group findGroup = Group.findByName("phisics");
-               assertThat(findGroup == null);
+               assertThat(findGroup).isNull();
            }
         });
     }
@@ -51,7 +51,7 @@ public class GroupTest {
               assertThat(group.name).isEqualTo(name);
               
               String textGroup = group.toString();
-              assertThat(textGroup == name);
+              assertThat(textGroup).isEqualTo(name);
               
               Group.delete(group.id);
           }
@@ -67,13 +67,13 @@ public class GroupTest {
               create("lords");
               
               List<Group> allGroup = Group.all();
-              assertThat(allGroup.size() == 3);
+              assertThat(allGroup.size()).isEqualTo(3);
               
               for (int i = 0; i < allGroup.size(); i ++)
             	  Group.delete(allGroup.get(i).id);
               
               allGroup = Group.all();
-              assertThat(allGroup.size() == 0);
+              assertThat(allGroup.size()).isEqualTo(0);
           }
        });
     }
@@ -87,12 +87,12 @@ public class GroupTest {
               assertThat(group.name).isEqualTo(name);
               
               group = Group.findByName(name);
-              assertThat(group != null);
+              assertThat(group).isNotNull();
               
               Group.delete(group.id);
               
               group = Group.findById(group.id);
-              assertThat(group == null);
+              assertThat(group).isNull();
           }
        });
     }

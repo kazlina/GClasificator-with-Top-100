@@ -13,11 +13,11 @@ public class RelationshipTest {
         	   String text = "good relation";
         	   Relationship.add(text);
         	   Relationship findRelation = Relationship.findByStatus(text);
-               assertThat(findRelation != null);
+               assertThat(findRelation).isNotNull();
 
                Relationship.delete(findRelation.id);
                Relationship relationDeleted = Relationship.findByStatus(text);
-               assertThat(relationDeleted == null);
+               assertThat(relationDeleted).isNull();
            }
         });
     }
@@ -27,7 +27,7 @@ public class RelationshipTest {
         running(fakeApplication(), new Runnable() {
            public void run() {
         	   Relationship relation = Relationship.findByStatus("very beutiful status");
-               assertThat(relation == null);
+               assertThat(relation).isNull();
            }
         });
     }
@@ -39,10 +39,10 @@ public class RelationshipTest {
         	  String text = "good relation";
         	  Relationship.add(text);
         	  Relationship relation = Relationship.findByStatus(text);
-              assertThat(relation != null);
+              assertThat(relation).isNotNull();
               
               String relationText = relation.toString();
-              assertThat(relationText == text);
+              assertThat(relationText).isEqualTo(text);
 
               Relationship.delete(relation.id);
           }
@@ -58,13 +58,13 @@ public class RelationshipTest {
         	  Relationship.add("Third relation");
               
               List<Relationship> allRelation = Relationship.all();
-              assertThat(allRelation.size() == 3);
+              assertThat(allRelation.size()).isEqualTo(3);
               
               for (int i = 0; i < allRelation.size(); i ++)
             	  Relationship.delete(allRelation.get(i).id);
               
               allRelation = Relationship.all();
-              assertThat(allRelation.size() == 0);
+              assertThat(allRelation.size()).isEqualTo(0);
           }
        });
     }
@@ -76,10 +76,10 @@ public class RelationshipTest {
         	   String text = "good relation";
         	   Relationship.add(text);
         	   Relationship relation = Relationship.findByStatus(text);
-               assertThat(relation != null);
+               assertThat(relation).isNotNull();
                
                Relationship findRelation = Relationship.findById(relation.id);
-               assertThat(findRelation != null);
+               assertThat(findRelation ).isNotNull();
 
                Relationship.delete(findRelation.id);
            }

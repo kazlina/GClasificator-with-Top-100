@@ -1,9 +1,11 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -70,7 +72,7 @@ public class Profile extends Model {
 	private static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);
 
 	public static Profile findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<Profile> findByGpmId(Long Id) {

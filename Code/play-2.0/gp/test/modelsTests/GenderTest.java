@@ -15,11 +15,11 @@ public class GenderTest {
         	   Gender.add(text);
         	   
         	   Gender findGender = Gender.findByValue(text);
-               assertThat(findGender != null);
+               assertThat(findGender).isNotNull();
 
                Gender.delete(findGender.id);
                Gender genderDeleted = Gender.findByValue(text);
-               assertThat(genderDeleted == null);
+               assertThat(genderDeleted).isNull();
            }
         });
     }
@@ -29,7 +29,7 @@ public class GenderTest {
         running(fakeApplication(), new Runnable() {
            public void run() {
         	   Gender gender = Gender.findByValue("woman");
-               assertThat(gender == null);
+               assertThat(gender).isNull();
            }
         });
     }
@@ -42,10 +42,10 @@ public class GenderTest {
         	  Gender.add(text);
        	   
         	  Gender gender = Gender.findByValue(text);
-              assertThat(gender != null);
+              assertThat(gender).isNotNull();
               
               String genderText = gender.toString();
-              assertThat(genderText == text);
+              assertThat(genderText).isEqualTo(text);
 
               Gender.delete(gender.id);
           }
@@ -61,13 +61,13 @@ public class GenderTest {
         	  Gender.add("none");
               
               List<Gender> allGender = Gender.all();
-              assertThat(allGender.size() == 3);
+              assertThat(allGender.size()).isEqualTo(3);
               
               for (int i = 0; i < allGender.size(); i ++)
             	  Gender.delete(allGender.get(i).id);
               
               allGender = Gender.all();
-              assertThat(allGender.size() == 0);
+              assertThat(allGender.size()).isEqualTo(0);
           }
        });
     }
@@ -80,10 +80,10 @@ public class GenderTest {
         	   Gender.add(text);
         	   
         	   Gender gender = Gender.findByValue(text);
-               assertThat(gender != null);
+               assertThat(gender).isNotNull();
                
         	   Gender findGender = Gender.findById(gender.id);
-               assertThat(findGender != null);
+               assertThat(findGender).isNotNull();
 
                Gender.delete(findGender.id);
            }

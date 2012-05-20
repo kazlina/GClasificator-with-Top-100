@@ -53,7 +53,7 @@ public class GroupLink extends Model {
 	}
 	
 	public static GroupLink findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 
 	public static void add(GroupLink element) {

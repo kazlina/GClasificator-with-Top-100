@@ -41,7 +41,7 @@ public class Link extends Model {
 	}
 
 	public static Link findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static Link findByLink(String link) {

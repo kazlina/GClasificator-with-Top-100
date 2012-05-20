@@ -14,12 +14,12 @@ public class ContentTest {
         	   String text = "link";
         	   Content.add(text);
                Content content = Content.findByKind(text);
-               assertThat(content != null);
+               assertThat(content).isNotNull();
 
                Content.delete(content.id);
                
                Content contentDeleted = Content.findByKind(text);
-               assertThat(contentDeleted == null);
+               assertThat(contentDeleted).isNull();
            }
         });
     }
@@ -29,7 +29,7 @@ public class ContentTest {
         running(fakeApplication(), new Runnable() {
            public void run() {
         	   Content content = Content.findByKind("video");
-               assertThat(content == null);
+               assertThat(content).isNull();
            }
         });
     }
@@ -41,10 +41,10 @@ public class ContentTest {
         	  String text = "photo";
         	  Content.add(text);
               Content content = Content.findByKind(text);
-              assertThat(content != null);
+              assertThat(content).isNotNull();
               
               String contentText = content.toString();
-              assertThat(contentText == text);
+              assertThat(contentText).isEqualTo(text);
 
               Content.delete(content.id);
           }
@@ -60,13 +60,13 @@ public class ContentTest {
         	  Content.add("audio");
               
               List<Content> allContent = Content.all();
-              assertThat(allContent.size() == 3);
+              assertThat(allContent.size()).isEqualTo(3);
               
               for (int i = 0; i < allContent.size(); i ++)
             	  Content.delete(allContent.get(i).id);
               
               allContent = Content.all();
-              assertThat(allContent.size() == 0);
+              assertThat(allContent.size()).isEqualTo(0);
           }
        });
     }
@@ -78,10 +78,10 @@ public class ContentTest {
         	   String text = "photo";
         	   Content.add(text);
                Content content = Content.findByKind(text);
-               assertThat(content != null);
+               assertThat(content).isNotNull();
                
         	   Content findContent = Content.findById(content.id);
-               assertThat(findContent != null);
+               assertThat(findContent).isNotNull();
 
                Content.delete(findContent.id);
            }

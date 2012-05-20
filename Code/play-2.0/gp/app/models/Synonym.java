@@ -40,7 +40,7 @@ public class Synonym extends Model {
 	private static Model.Finder<Long, Synonym> find = new Model.Finder<Long, Synonym>(Long.class, Synonym.class);
 
     public static Synonym findById(Long Id) {
-		return find.ref(Id);
+    	return find.where().eq("id", Id).findUnique();
 	}
     
     public static List<Synonym> findBySynonim(String element) {

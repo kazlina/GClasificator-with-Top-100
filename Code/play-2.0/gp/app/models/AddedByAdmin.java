@@ -59,7 +59,7 @@ public class AddedByAdmin extends Model {
 	}
 
 	public static AddedByAdmin findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<AddedByAdmin> findByGpm(Long Id) {

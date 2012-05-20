@@ -54,7 +54,7 @@ public class GroupWord extends Model {
 	}
 
 	public static GroupWord findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 
 	public static void add(GroupWord element) {

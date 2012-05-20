@@ -1,9 +1,11 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -44,7 +46,7 @@ public class GPM extends Model {
 	}
 
 	public static GPM findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static GPM findByIdGpm(String idGpm) {
@@ -75,4 +77,20 @@ public class GPM extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+	
+	public static List<SqlRow> getIdGpmByLastPosts(int count) {
+    	return Ebean.createSqlQuery("SELECT gpm"
+				+ " FROM Post"
+				+ " GROUP BY gpm"
+				+ " ORDER BY max(dateCreate)"
+				+ " LIMIT :count;").setParameter("count", count).findList();
+	}
+    
+	public static List<SqlRow> getIdGpmByLastProfile(int count) {
+		return Ebean.createSqlQuery("SELECT gpm"
+				+ " FROM Profile"
+				+ " GROUP BY gpm"
+				+ " ORDER BY max(dateUpdated)"
+				+ " LIMIT :count;").setParameter("count", count).findList();
+	}
 }

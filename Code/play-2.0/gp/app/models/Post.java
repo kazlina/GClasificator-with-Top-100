@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -70,7 +71,7 @@ public class Post extends Model {
     private static Model.Finder<Long, Post> find = new Model.Finder<Long, Post>(Long.class, Post.class);
 
     public static Post findById(Long Id) {
-		return find.ref(Id);
+    	return find.where().eq("id", Id).findUnique();
 	}
     
     public static Post findByPostId(String postId) {

@@ -76,7 +76,7 @@ public class Group extends Model {
 	}
 
 	public static Group findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static Group findByName(String name) {
