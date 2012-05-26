@@ -42,6 +42,16 @@ public class GroupWord extends Model {
 		this.postWeight = postWeight;
 		this.profileWeight = profileWeight;
 	}
+	
+	public GroupWord(Group group, String word, float postWeight, float profileWeight) {
+		Word findWord = Word.findByWord(word);
+		if (findWord != null) {
+			this.group = group;
+			this.word = findWord;
+			this.postWeight = postWeight;
+			this.profileWeight = profileWeight;
+		}
+	}
 
 	private static Model.Finder<Long, GroupWord> find = new Model.Finder<Long, GroupWord>(Long.class, GroupWord.class);
 

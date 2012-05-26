@@ -1,0 +1,29 @@
+@(links: List[Link], linkForm: Form[Link])
+
+@import helper._
+
+@main("Links list") {
+    
+    <h1>@links.size() link(s)</h1>
+    
+    <ul>
+        @for(link <- links) {
+            <li>
+                @link.link has
+                
+                @form(routes.Links.deleteLink(link.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <hr/>
+    <h2>Add a new link</h2>
+    
+    @form(routes.Links.newLink()) {
+        @inputText(linkForm("link")) 
+        <input type="submit" value="Create">
+    }
+    <hr/>
+}

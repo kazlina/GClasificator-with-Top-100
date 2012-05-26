@@ -1,6 +1,7 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
@@ -40,6 +41,16 @@ public class Link extends Model {
 		return find.all();
 	}
 
+	public static List<String> allInString() {
+		List <Link> links = all();
+		List <String> linksInString = new ArrayList<String>();
+		
+		for (Link link: links)
+			linksInString.add(link.link);
+		
+		return linksInString;
+	}
+	
 	public static Link findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}

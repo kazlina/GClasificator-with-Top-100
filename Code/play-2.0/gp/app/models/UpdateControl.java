@@ -16,14 +16,14 @@ public class UpdateControl {
 		int updateCountProfileGPM = (int) (GPM.size() / 100 * countProfileGPM);
 		
 		List<NewGPM> newGpmForGet = NewGPM.get(updateCountNewGPM);
-		for (int i = 0; i < newGpmForGet.size(); i ++) {
-			DataExtraction.newGPM(newGpmForGet.get(i).idGpm);
+		for (NewGPM element: newGpmForGet) {	
+			DataExtraction.newGPM(element.idGpm);
 			TimeUnit.SECONDS.sleep(1);
 		}
 		
 		List<SqlRow> gpmForUpdatePost = GPM.getIdGpmByLastPosts(updateCountPostGPM);
-		for (int i = 0; i < gpmForUpdatePost.size(); i ++) {
-			Long id = gpmForUpdatePost.get(i).getLong("gpm");
+		for (SqlRow element: gpmForUpdatePost) {
+			Long id = element.getLong("gpm");
 			GPM gpm = GPM.findById(id);
 			if (gpm != null) {
 				DataExtraction.updateActivity(gpm, updateCountNewGPM);
@@ -32,8 +32,8 @@ public class UpdateControl {
 		}
 		
 		List<SqlRow> gpmForUpdateProfile = GPM.getIdGpmByLastProfile(updateCountProfileGPM);
-		for (int i = 0; i < gpmForUpdateProfile.size(); i ++) {
-			Long id = gpmForUpdateProfile.get(i).getLong("gpm");
+		for (SqlRow element: gpmForUpdateProfile) {
+			Long id = element.getLong("gpm");
 			GPM gpm = GPM.findById(id);
 			if (gpm != null) {
 				DataExtraction.updateProfile(gpm);

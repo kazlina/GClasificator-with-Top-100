@@ -6,6 +6,10 @@
 GET     /                       controllers.Application.index()
 GET     /ind                    controllers.Application.ind()
 
+# LINKS
+GET     /admin/links            controllers.Links.links()
+POST    /admin/links            controllers.Links.newLink()
+POST    /admin/links/:id/delete controllers.Links.deleteLink(id: Long)
 
 # WORDS
 GET     /admin/words            controllers.Words.words()

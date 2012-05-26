@@ -40,7 +40,17 @@ public class GroupLink extends Model {
         this.link = link;
         this.postWeight = postWeight;
         this.profileWeight = profileWeight;
-        }
+    }
+	
+	public GroupLink(Group group, String link, float postWeight, float profileWeight) {
+		Link findLink = Link.findByLink(link);
+		if (findLink != null) {
+			this.group = group;
+			this.link = findLink;
+	        this.postWeight = postWeight;
+	        this.profileWeight = profileWeight;
+		}
+     }
 
 	private static Model.Finder<Long, GroupLink> find = new Model.Finder<Long, GroupLink>(Long.class, GroupLink.class);
 
