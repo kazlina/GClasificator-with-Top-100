@@ -57,9 +57,10 @@ public class GPM extends Model {
 		return find.findRowCount();
 	}
 	
-	public static void add(String idGpm) {
-		Ebean.beginTransaction();
+	public static GPM add(String idGpm) {
+		GPM newGpm = null;
 		
+		Ebean.beginTransaction();
 		try {
 			GPM searchGpm = findByIdGpm(idGpm);
 			if (searchGpm == null) {
@@ -67,7 +68,7 @@ public class GPM extends Model {
 				if (searchNewGpm != null)
 					NewGPM.delete(searchNewGpm.id);
 				
-				GPM newGpm = new GPM(idGpm);
+				newGpm = new GPM(idGpm);
 				newGpm.save();
 			}
 			Ebean.commitTransaction();	
@@ -75,7 +76,7 @@ public class GPM extends Model {
 		finally {
 			Ebean.endTransaction();
 		}
-		
+		return newGpm;
 	}
 
 	public static void delete(Long id) {
