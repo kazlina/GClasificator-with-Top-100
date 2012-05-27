@@ -1,7 +1,6 @@
 package models;
 
 import java.util.*;
-import javax.persistence.*;
 
 import org.jsoup.*;
 import org.jsoup.nodes.*;
@@ -10,22 +9,36 @@ import java.io.*;
  
 public class Parser {
     public static TempProfile getProfile(String id) throws IOException {
-    	TempProfile profile = new TempProfile();
+     TempProfile profile = new TempProfile();
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         
         profile.id = id;
         
+        //followers
+        Elements links = doc.select("script");
+        String template = ",[0,[]\\n]\\n,[";
+        for ( Element e : links) {         	  
+        	  if (e.toString().indexOf("key: '77'") != -1){
+              String textWithFollowers = e.toString();
+              int start = textWithFollowers.lastIndexOf(template)+template.length();
+              int end = textWithFollowers.indexOf(',', start);
+              profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
+              }  
+        }
+        
         String type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();
-        if (type == "+страница")
-        	profile.type = false;
+        if (type == "+Page")
+        	profile.isPerson = false;
         else
-        	profile.type = true;
+        	profile.isPerson = true;
         
         Elements name = doc.getElementsByClass("fn"); //displayName
         profile.displayName = name.text();
         
         Element tag = doc.select("div.aYm0te.c-wa-Da").first(); //tagline
+        if (tag !=null){
         profile.tagline = tag.text();
+        }
         
         Elements aboutMe = doc.select("div.kM5Oeb-uoq5sb.Sd8iK.KtnyId.IzbGp");//aboutMe
         Elements about = aboutMe.select("div.aYm0te.c-wa-Da.note");//aboutMe
@@ -61,26 +74,20 @@ public class Parser {
     public static List <TempPost> getActivity(String id) throws IOException 
     {
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
-        // íóæíà ïðîâåðêà ÷òî íå áûëî îøèáîê
+               
+        Elements posts = doc.select("div.CPLjOe.Ye");
         
-        Elements posts = doc.select("div.CPLjOe.Ye"); //ïîñòû ëåíòû
-        // âñòàâèòü ïðîâåðêó íà êîëè÷åñòâî ïîñòîâ
         List <TempPost> list_of_posts = new ArrayList <TempPost>();
         for(Element post : posts) 
         {
         	TempPost elem = new TempPost();
         	
         	String date_of_post = post.getElementsByClass("fD7nue").text().replace("Post date: ", "");
-          	//ïðîâåðêà ÷òî ïðàâèëüíî îáðàòèëèñü
-        	
-        	// çàïîìíèëè äàòó ïóáëèêàöèè ïîñòà
         	//elem.published_data = date_of_post;
 
-        	// çàïîìíèì àâòîðà ïîñòà è òåêñò
-        	Elements repost = post.getElementsByClass("Xt");
+          	Elements repost = post.getElementsByClass("Xt");
         	if (repost.isEmpty())	 
         	{
-        		//åñëè ýòî ïîñò
         		elem.isRepost = false;
         		elem.actorId = "";
         		elem.annotation = "";
@@ -88,7 +95,7 @@ public class Parser {
         		Elements post_text = post.getElementsByClass("rXnUBd");
         		elem.content = post_text.text();
         	}
-        	else	//åñëè ýòî ðåïîñò
+        	else	
         	{
         		elem.isRepost = true;
         		String actor = post.getElementsByClass("Yt").html();
@@ -102,9 +109,8 @@ public class Parser {
         		elem.annotation = repost_text.text();
         	}
         	
-        	// îïðåäåëèì òèï êîíòåíòà
         	Elements content = post.getElementsByClass("Zbbru");
-        	if (content.isEmpty())	//åñëè ýòî ñàéò/êðóã/èëè åùž ôèãíÿ êàêàÿ-òî
+        	if (content.isEmpty())	
         	{
         		//elem.kind_content = "circle/page";
         		continue;
@@ -114,7 +120,6 @@ public class Parser {
         		String content_in_html = content.html();
         		if (content_in_html.isEmpty())
         		{
-        			// êîíòåíò - òåêñò
         			elem.kindContent = "text";
         		}
         		else if (!content_in_html.contains("data-content-type=\""))
@@ -143,7 +148,6 @@ public class Parser {
         	String comments = post.getElementsByClass("aISsjb").text();
         	String shared = post.getElementsByClass("FdmHNd").text();
         	
-        	// ïîëó÷àåì êîëè÷åñòâî +1
         	if (plus_one.isEmpty())
         	{
         		elem.nPlusOne = 0;
@@ -162,7 +166,6 @@ public class Parser {
         		}
         	}
         	
-        	// ïîëó÷àåì êîëè÷åñòâî êîììåíòàðèåâ
         	if (comments.isEmpty())
         	{
         		elem.nComments = 0;
@@ -180,7 +183,6 @@ public class Parser {
         		}
         	}
         		
-        	//ïîëó÷àåì êîëè÷åñòâî ðåïîñòîâ
         	if (shared.isEmpty())
         	{
         		elem.nResharers = 0;
