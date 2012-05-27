@@ -89,11 +89,16 @@ public class Post extends Model {
 	public static void add(Post element) {
 		Ebean.beginTransaction();
 		
-		Post findPost = Post.findByPostId(element.postId);
-		if (findPost == null)
-			element.save();
-		
-		Ebean.commitTransaction();
+		try {
+			Post findPost = Post.findByPostId(element.postId);
+			if (findPost == null)
+				element.save();
+			
+			Ebean.commitTransaction();
+		}
+		finally {
+			Ebean.endTransaction();
+		}
 	}
 
 	public static void delete(Long id) {

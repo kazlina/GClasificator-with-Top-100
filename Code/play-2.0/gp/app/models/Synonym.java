@@ -54,23 +54,28 @@ public class Synonym extends Model {
     public static void add(Long wordId, Synonym synonym) {
     	Ebean.beginTransaction();
     	
-    	Word word = Word.findById(wordId);
-    	if (word == null) {
-    		Ebean.endTransaction();
-    		return;
+    	try {
+	    	Word word = Word.findById(wordId);
+	    	if (word == null) {
+	    		Ebean.endTransaction();
+	    		return;
+	    	}
+	    		
+	    	
+	    	Synonym findSynonym = find.where().eq("word", word).eq("synonym", synonym.synonym).findUnique();
+	    	if (findSynonym != null) {
+	    		Ebean.endTransaction();
+	    		return;
+	    	}
+	    	
+	    	synonym.word = word;
+	        synonym.save();
+	        
+	        Ebean.commitTransaction();
     	}
-    		
-    	
-    	Synonym findSynonym = find.where().eq("word", word).eq("synonym", synonym.synonym).findUnique();
-    	if (findSynonym != null) {
-    		Ebean.endTransaction();
-    		return;
-    	}
-    	
-    	synonym.word = word;
-        synonym.save();
-        
-        Ebean.commitTransaction();
+    	finally {
+			Ebean.endTransaction();
+		}
     }
 
 	public static void delete(Long id) {

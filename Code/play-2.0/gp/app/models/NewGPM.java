@@ -55,21 +55,25 @@ public class NewGPM extends Model {
 	public static void add(String idGpm) {
 		Ebean.beginTransaction();
 		
-		NewGPM searchNewGpm = findByIdGpm(idGpm);
-		if (searchNewGpm != null) {
-			searchNewGpm.nMentiens ++;
-			searchNewGpm.save();
-		}
-		else {
-			GPM searchGpm = GPM.findByIdGpm(idGpm);
-			if (searchGpm == null) {
-				NewGPM newGpm = new NewGPM(idGpm);
-				newGpm.nMentiens = 1;
-				newGpm.save();
+		try {
+			NewGPM searchNewGpm = findByIdGpm(idGpm);
+			if (searchNewGpm != null) {
+				searchNewGpm.nMentiens ++;
+				searchNewGpm.save();
 			}
+			else {
+				GPM searchGpm = GPM.findByIdGpm(idGpm);
+				if (searchGpm == null) {
+					NewGPM newGpm = new NewGPM(idGpm);
+					newGpm.nMentiens = 1;
+					newGpm.save();
+				}
+			}
+			Ebean.commitTransaction();
 		}
-		
-		Ebean.commitTransaction();
+		finally {
+			Ebean.endTransaction();
+		}
 	}
 	
 	public static void delete(Long id) {

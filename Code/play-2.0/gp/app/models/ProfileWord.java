@@ -58,26 +58,31 @@ public class ProfileWord extends Model {
 	public static void add(Profile profile, String word, int amount) {
 		Ebean.beginTransaction();
 		
-		Word findWord = Word.findByWord(word);
-		if (findWord != null) {
-			ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", findWord).findUnique();
-			if (findProfileWord == null) {
-				ProfileWord element = new ProfileWord(profile, findWord, amount);
-				element.save();
+		try {
+			Word findWord = Word.findByWord(word);
+			if (findWord != null) {
+				ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", findWord).findUnique();
+				if (findProfileWord == null) {
+					ProfileWord element = new ProfileWord(profile, findWord, amount);
+					element.save();
+				}
 			}
-		}
-		
-		List<Synonym> synonyms = Synonym.findBySynonim(word); 
-		for (int i = 0; i < synonyms.size(); i ++) {
-			Word synonymWord = synonyms.get(i).word;
-			ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", synonymWord).findUnique();
-			if (findProfileWord == null) {
-				ProfileWord element = new ProfileWord(profile, synonymWord, amount);
-				element.save();
+			
+			List<Synonym> synonyms = Synonym.findBySynonim(word); 
+			for (int i = 0; i < synonyms.size(); i ++) {
+				Word synonymWord = synonyms.get(i).word;
+				ProfileWord findProfileWord = find.where().eq("profile", profile).eq("word", synonymWord).findUnique();
+				if (findProfileWord == null) {
+					ProfileWord element = new ProfileWord(profile, synonymWord, amount);
+					element.save();
+				}
 			}
+			
+			Ebean.commitTransaction();
 		}
-		
-		Ebean.commitTransaction();
+		finally {
+			Ebean.endTransaction();
+		}
 	}
 
 	public static void delete(Long id) {

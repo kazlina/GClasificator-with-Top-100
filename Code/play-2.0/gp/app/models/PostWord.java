@@ -57,26 +57,31 @@ public class PostWord extends Model {
 	public static void add(Post post, String word, int amount) {
 		Ebean.beginTransaction();
 		
-		Word findWord = Word.findByWord(word);
-		if (findWord != null) {
-			PostWord findPostWord = find.where().eq("post", post).eq("word", findWord).findUnique();
-			if (findPostWord == null) {
-				PostWord element = new PostWord(post, findWord, amount);
-				element.save();
+		try {
+			Word findWord = Word.findByWord(word);
+			if (findWord != null) {
+				PostWord findPostWord = find.where().eq("post", post).eq("word", findWord).findUnique();
+				if (findPostWord == null) {
+					PostWord element = new PostWord(post, findWord, amount);
+					element.save();
+				}
 			}
-		}
-		
-		List<Synonym> synonyms = Synonym.findBySynonim(word); 
-		for (int i = 0; i < synonyms.size(); i ++) {
-			Word synonymWord = synonyms.get(i).word;
-			PostWord findPostWord = find.where().eq("post", post).eq("word", synonymWord).findUnique();
-			if (findPostWord == null) {
-				PostWord element = new PostWord(post, synonymWord, amount);
-				element.save();
+			
+			List<Synonym> synonyms = Synonym.findBySynonim(word); 
+			for (int i = 0; i < synonyms.size(); i ++) {
+				Word synonymWord = synonyms.get(i).word;
+				PostWord findPostWord = find.where().eq("post", post).eq("word", synonymWord).findUnique();
+				if (findPostWord == null) {
+					PostWord element = new PostWord(post, synonymWord, amount);
+					element.save();
+				}
 			}
+			
+			Ebean.commitTransaction();
 		}
-		
-		Ebean.commitTransaction();
+		finally {
+			Ebean.endTransaction();
+		}
 	}
 
 	public static void delete(Long id) {
