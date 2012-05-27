@@ -27,7 +27,6 @@ public class Parser {
               int start = textWithFollowers.lastIndexOf(template)+template.length();
               int end = textWithFollowers.indexOf(',', start);
               profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
-              //System.out.println("text: " + profile.nfollowers);
               }  
         }
         
@@ -74,7 +73,7 @@ public class Parser {
     	catch(HttpResponseException e){
     		
     	}
-        profile.print();
+        //profile.print();
         return profile;
 }
 
