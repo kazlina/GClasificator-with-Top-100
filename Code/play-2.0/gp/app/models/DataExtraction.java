@@ -7,8 +7,7 @@ import java.util.List;
 public class DataExtraction {
 
     public static int newGPM(String id) {
-	GPM gpm = null;
-	gpm.add(id);
+	GPM gpm = GPM.add(id);
 	updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
