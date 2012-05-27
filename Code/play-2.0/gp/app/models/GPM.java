@@ -57,21 +57,22 @@ public class GPM extends Model {
 		return find.findRowCount();
 	}
 	
-	public static void add(String idGpm) {
-		Ebean.beginTransaction();
+	public static GPM add(String idGpm) {
+		//Ebean.beginTransaction();
 		
 		GPM searchGpm = findByIdGpm(idGpm);
 		if (searchGpm != null)
-			return;
+			return searchGpm;
 
 		NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
 		if (searchNewGpm != null)
 			NewGPM.delete(searchNewGpm.id);
 		
 		GPM newGpm = new GPM(idGpm);
-		newGpm.save();
+       		newGpm.save();
+      		return newGpm;
 		
-		Ebean.commitTransaction();
+		//Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {
