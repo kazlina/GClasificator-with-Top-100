@@ -5,11 +5,15 @@ import java.util.*;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
+
+import com.google.api.client.http.HttpResponseException;
+
 import java.io.*;
  
 public class Parser {
     public static TempProfile getProfile(String id) throws IOException {
      TempProfile profile = new TempProfile();
+    	try{
         Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
         
         profile.id = id;
@@ -23,6 +27,7 @@ public class Parser {
               int start = textWithFollowers.lastIndexOf(template)+template.length();
               int end = textWithFollowers.indexOf(',', start);
               profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
+              //System.out.println("text: " + profile.nfollowers);
               }  
         }
         
@@ -35,14 +40,13 @@ public class Parser {
         Elements name = doc.getElementsByClass("fn"); //displayName
         profile.displayName = name.text();
         
-        Element tag = doc.select("div.aYm0te.c-wa-Da").first(); //tagline
-        if (tag !=null){
+        Elements tagline = doc.select("div.l-uq.ne.jc"); //tagline
+        Elements tag = tagline.select("div.Ga.a-f-e"); 
         profile.tagline = tag.text();
-        }
-        
-        Elements aboutMe = doc.select("div.kM5Oeb-uoq5sb.Sd8iK.KtnyId.IzbGp");//aboutMe
-        Elements about = aboutMe.select("div.aYm0te.c-wa-Da.note");//aboutMe
-        profile.aboutMe = about.text();
+ 
+        Elements about = doc.select("div.l-Jg.Wx.ne.jc");//aboutMe 
+        Elements aboutMe = about.select("div.Ga.a-f-e.note");
+        profile.aboutMe = aboutMe.text();
         
         Elements urls = doc.select("a.Qc0zVe.url");//url        
            
@@ -51,23 +55,26 @@ public class Parser {
          profile.urls.add(link);
         }
         
-        Elements genders = doc.select("div.kM5Oeb-fYiPJe.KtnyId.IzbGp");//gender
-        Elements gender = genders.select("div.aYm0te.c-wa-Da");//gender
+        Elements genders = doc.select("div.l-i9.ne.jc");//gender
+        Elements gender = genders.select("div.Ga.a-f-e");
         profile.gender = gender.text();    
          
-        Elements statuses = doc.select("div.kM5Oeb-jcNnAf.KtnyId.IzbGp");//relationshipStatus
-        Elements status = statuses.select("div.aYm0te.c-wa-Da");//relationshipStatus
+        Elements statuses = doc.select("div.l-Xea.ne.jc");//relationshipStatus
+        Elements status = statuses.select("div.Ga.a-f-e");
         profile.relationshipStatus = status.text();
          
-        Elements imag = doc.select("div.k-Qf-pc-N.CyVWVb");//image
-        Elements im = imag.select("div.k-Va-pc-N-A");
+        Elements im = doc.select("div.h-va-Za-W-P");//image
         Elements imga = im.select("[src]");
 
         for (Element src : imga) 
         if (src.tagName().equals("img")){
         profile.image = src.attr("abs:src");
-        }
-        //profile.print();
+        }       
+    	}
+    	catch(HttpResponseException e){
+    		
+    	}
+        profile.print();
         return profile;
 }
 
