@@ -1,65 +1,182 @@
-﻿select GPM.id_gpm, (
-veroyatnost_na_osnove_klyuchevyh_slov_iz_lenty + 
+﻿select GPM.id, (
+veroyatnost_na_osnove_klyuchevyh_slov_lenty + 
 veroyatnost_na_osnove_ssylok_iz_lenty +
 veroyatnost_na_osnove_klyuchevyh_slov_iz_profilya +
 veroyatnost_na_osnove_ssylok_iz_profilya +
 veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
-)/5 as RATING from 
+)/5 as RATING from
+GPM,
 (
-	select GPM.id_gpm, (sum(TotalWeightOfOneWord)) as veroyatnost_na_osnove_klyuchevyh_slov_lenti,
-			(sum(TotalWeightOfOneLinkFromFeed)) as veroyatnost_na_osnove_ssylok_iz_lenty,
-      (sum(TotalWeightOfOneLinkFromProfile)) as veroyatnost_na_osnove_ssylok_iz_profilya,
-			(sum(TotalWeightOfOneWordFromProfile)) as veroyatnost_na_osnove_klyuchevyh_slov_iz_profilya,
-			(100 - (abs(GroupContentRatio.group_text_ratio - rating_text_posts) + abs(GroupContentRatio.group_video_ratio - rating_video_posts) + abs(GroupContentRatio.group_pictures_ratio - rating_pictures_posts) + abs(GroupContentRatio.group_link_ratio - rating_link_posts))) as veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
-		from GroupContentRatio,
-			( -- counting of summ weight for one word from feed
-				select GPM.id, (GroupWord.postWeight * PostWord.amount) as TotalWeightOfOneWordFromFeed
-					from GPM, PostWord, GroupWord, Word, Post
-					where GPM.id = Post.gpm and
-                Post.id = PostWord.post and
-                PostWord.word = Word.id and
-                Word.id = GroupWord.word and
-                GroupWord.groupdescr = 5/*REQUIRED_GROUP_ID.id*/ and
-                GPM.id != BlackList.id
-			),
-			( -- counting of summ weight for one link from feed
-				select GPM.id,
-					(GroupLink.postWeight * PostLink.amount) as TotalWeightOfOneLinkFromFeed
-					from GPM, PostLink, GroupLink, Link, Post
-					where GPM.id = Post.gpm and
-                Post.id = PostLink.post and
-                PostLink.link = Link.id and
-                Link.id = GroupLink.link and
-                GroupLink.groupDescr = REQUIRED_GROUP_ID and
-                GPM.id != BlackList.id
-			),
-			( -- counting of summ weight for one link from profile
-				select GPM.id,
-					(GroupLink.profileWeight * ProfileLink.amount) as TotalWeightOfOneLinkFromProfile
-					from GPM, ProfileLink, GroupLink, Link, Profile
-					where GPM.id = Profile.gpm and
-						Profile.id = ProfileLink.profile and
-						ProfileLink.link = Link.id and
-            Link.id = GroupLink.link and
-            GroupLink.groupDescr = REQUIRED_GROUP_ID and
-						GPM.id != BlackList.id
-			),
-			( -- counting of summ weight for one word from profile
-				select GPM.id,
-					(GroupWord.profileWeight * ProfileWord.amount) as TotalWeightOfOneWordFromProfile
-					from GPM, ProfileWord, GroupWord, Word, Profile
-					where GPM.id = Profile.gpm and
-						Profile.id = ProfileWord.profile and
-						ProfileWord.word = Word.id and
-            Word.id = GroupWord.word and
-            GroupWord.groupDescr = REQUIRED_GROUP_ID and
-						GPM.id != BlackList.id
-			),
-			(
+	select GPM.id as gpm_id, (postWordWeight.wordPercent) as veroyatnost_na_osnove_klyuchevyh_slov_lenty,
+			(postLinkWeight.linkPercent) as veroyatnost_na_osnove_ssylok_iz_lenty,
+      (profileWordWeight.wordPercent) as veroyatnost_na_osnove_klyuchevyh_slov_iz_profilya,
+			(profileLinkWeight.linkPercent) as veroyatnost_na_osnove_ssylok_iz_profilya,
+			(100 - (abs(ifnull(GroupDescr.textPercent,0) - gpmContentRatio.rating_text_posts) +
+            abs(ifnull(GroupDescr.videoPercent,0) - rating_video_posts)
+            + abs(ifnull(GroupDescr.imagePercent,0) - rating_image_posts)
+            + abs(ifnull(GroupDescr.linkPercent,0) - rating_link_posts)
+            + abs(ifnull(GroupDescr.audioPercent,0) - rating_audio_posts))) as 
+            veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
+		from GroupDescr, GPM,
+      ( -- counting of post word percent for group
+        select gpm.id as gpm_id, ifnull (wordWeight,0) / ifnull(amount,1) *100 as wordPercent
+            from
+            gpm
+        left join
+        (
+            select 
+                sumEachWord.gpm_id as gpm_id,
+                    sumEachWord.wordWeight,
+                    amountAllWord.amount
+            from
+                (
+                    select 
+                    GPM.id as gpm_id,
+                        sum(GroupWord.postWeight * PostWord.amount) as wordWeight
+                        from
+                            GPM, Post, PostWord, Word, GroupWord, BlackList
+                        where
+                            GPM.id = Post.gpm and
+                            Post.id = PostWord.post and 
+                            PostWord.word = Word.id and 
+                            Word.id = GroupWord.word and 
+                            GroupWord.groupDescr = 5 and 
+                            GPM.id != BlackList.id
+                        group by GPM.id
+                ) sumEachWord, 
+                (   
+                    SELECT 
+                        gpm.id as gpm_id, sum(postword.amount) as amount
+                    FROM
+                        gpm, post, postword, word
+                    where
+                        gpm.id = post.gpm and post.id = postword.post and postword.word = word.id
+                    group by gpm.id
+                ) amountAllWord
+            where
+                sumEachWord.gpm_id = amountAllWord.gpm_id
+        ) WeightAndAmountWords 
+        ON gpm.id = WeightAndAmountWords.gpm_id
+      ) postWordWeight,
+      ( -- counting of post link percent for group
+        select gpm.id as gpm_id, ifnull (linkWeight,0)/ifnull(amount,1)*100 as linkPercent
+            from
+            gpm
+                left join
+            (
+                select 
+                sumEachLink.gpm_id as gpm_id,
+                    sumEachLink.linkWeight,
+                    amountAllLink.amount
+                from
+                (
+                    select GPM.id as gpm_id, sum(GroupLink.postWeight * PostLink.amount) as linkWeight
+                            from GPM, Post, PostLink, Link, GroupLink, BlackList
+                            where GPM.id = Post.gpm and
+                        Post.id = PostLink.post and
+                        PostLink.Link = Link.id and
+                        Link.id = GroupLink.link and
+                        GroupLink.groupDescr = 5 and
+                        GPM.id != BlackList.id
+                        group by GPM.id
+                ) sumEachLink,
+                (
+                    SELECT gpm.id as gpm_id, sum(postlink.amount) as amount
+                        FROM
+                        gpm, post, postlink, link
+                            where
+                                gpm.id = post.gpm and
+                                post.id = postlink.post and
+                                postlink.link = link.id
+                                group by gpm.id
+                ) amountAllLink
+            where 
+                sumEachLink.gpm_id = amountAllLink.gpm_id
+            ) WeightAndAmountLinks
+            on gpm.id = WeightAndAmountLinks.gpm_id
+      ) postLinkWeight,
+      ( -- counting of profile word percent for group
+        select gpm.id as gpm_id, ifnull(wordWeight,0)/ifnull(amount,1)*100 as wordPercent
+            from
+            gpm
+                left join
+            (
+                select 
+                sumEachWord.gpm_id as gpm_id,
+                    sumEachWord.wordWeight,
+                    amountAllWord.amount
+                from
+                    (
+                        select GPM.id as gpm_id, sum(GroupWord.profileWeight * ProfileWord.amount) as wordWeight
+                                from GPM, Profile, ProfileWord, Word, GroupWord, BlackList
+                                where GPM.id = Profile.gpm and
+                            Profile.id = ProfileWord.profile and
+                            ProfileWord.word = Word.id and
+                            Word.id = GroupWord.word and
+                            GroupWord.groupDescr = 5 and
+                            GPM.id != BlackList.id
+                            group by GPM.id
+                    ) sumEachWord,
+                    (
+                        SELECT gpm.id as gpm_id, sum(ProfileWord.amount) as amount
+                            FROM
+                            gpm, Profile, ProfileWord, word
+                                where
+                                    gpm.id = Profile.gpm and
+                                    Profile.id = ProfileWord.profile and
+                                    ProfileWord.word = word.id
+                                    group by gpm.id
+                    ) amountAllWord
+                where
+                    sumEachWord.gpm_id = amountAllWord.gpm_id
+            ) WeightAndAmountProfileWords
+            on gpm.id = WeightAndAmountProfileWords.gpm_id
+        ) profileWordWeight,
+        ( -- counting of profile link percent for group
+        
+        select gpm.id as gpm_id, ifnull(linkWeight,0)/ifnull(amount,1)*100 as linkPercent
+            from
+            gpm
+                left join
+            (
+                select
+                    sumEachLink.gpm_id as gpm_id,
+                    sumEachLink.linkWeight,
+                    amountAllLink.amount
+                from
+                    (
+                        select GPM.id as gpm_id, sum(GroupLink.ProfileWeight * ProfileLink.amount) as linkWeight
+                                from GPM, Profile, ProfileLink, Link, GroupLink, BlackList
+                                where GPM.id = Profile.gpm and
+                            Profile.id = ProfileLink.profile and
+                            ProfileLink.Link = Link.id and
+                            Link.id = GroupLink.link and
+                            GroupLink.groupDescr = 5 and
+                            GPM.id != BlackList.id
+                            group by GPM.id
+                    ) sumEachLink,
+                    (
+                        SELECT gpm.id as gpm_id, sum(ProfileLink.amount) as amount
+                            FROM
+                            gpm, Profile, ProfileLink, link
+                                where
+                                    GPM.id = Profile.gpm and
+                                    Profile.id = Profilelink.profile and
+                                    ProfileLink.Link = Link.id
+                                    group by gpm.id
+                    ) amountAllLink
+            where
+                sumEachLink.gpm_id = amountAllLink.gpm_id
+        ) WeightAndAmountProfileLinks
+        ON gpm.id = WeightAndAmountProfileLinks.gpm_id
+      ) profileLinkWeight,
+      -- ---------------------------------------------------------
+      
+			( -- counting content ratio
 				select GPM.id as idGPM,
 					(count_text_posts/ posts_count) as rating_text_posts,
 					(count_video_posts/ posts_count) as rating_video_posts,
-					(count_photo_posts/ posts_count) as rating_photo_posts,
+					(count_image_posts/ posts_count) as rating_image_posts,
 					(count_link_posts/ posts_count) as rating_link_posts,
           (count_audio_posts/ posts_count) as rating_audio_posts
 					from GPM,
@@ -98,7 +215,7 @@ veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
 							group by GPM.id
 					) as VideoPostsCount,
 					(
-						select GPM.id as id_gpm_photo_posts_count, ifnull(count(PostPhotoTable.gpm_id),0) as count_photo_posts
+						select GPM.id as id_gpm_image_posts_count, ifnull(count(PostImageTable.gpm_id),0) as count_image_posts
 							from GPM
                 left join
                 (
@@ -107,10 +224,10 @@ veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
                     where
                         Post.kindContent = Content.id and
                         Content.kind = 'photo'
-                ) PostPhotoTable
-                on GPM.id = PostPhotoTable.gpm_id
+                ) PostImageTable
+                on GPM.id = PostImageTable.gpm_id
 							group by GPM.id
-					) as PhotoPostsCount,
+					) as ImagePostsCount,
 					(
 						select GPM.id as id_gpm_link_posts_count, ifnull(count(PostLinkTable.gpm_id),0) as count_link_posts
 							from GPM
@@ -143,10 +260,17 @@ veroyatnost_na_osnove_procentnogo_sootnosheniya_tipov_kontenta
           	GPM.id = id_gpm_with_posts_count and
 						GPM.id = id_gpm_text_posts_count and
 						GPM.id = id_gpm_video_posts_count and
-						GPM.id = id_gpm_photo_posts_count and
+						GPM.id = id_gpm_image_posts_count and
 						GPM.id = id_gpm_link_posts_count and
-						GPM.id = id_gpm_audio_posts_count;
-			)
- )
+						GPM.id = id_gpm_audio_posts_count
+			) gpmContentRatio
+    where
+          	GPM.id = gpmContentRatio.idGPM and
+						GPM.id = postWordWeight.gpm_id and
+						GPM.id = postLinkWeight.gpm_id and
+						GPM.id = profileWordWeight.gpm_id and
+						GPM.id = profileLinkWeight.gpm_id
+ ) Veroyatnost
+ where gpm.id = Veroyatnost.gpm_id
 group by GPM.id desc
 order by RATING;
