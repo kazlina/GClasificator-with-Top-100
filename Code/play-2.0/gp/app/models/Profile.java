@@ -31,6 +31,7 @@ public class Profile extends Model {
     @Column(name = "dateUpdated", nullable = false)
     public Date date;
 
+    @Constraints.MaxLength(100)
     @Column(name = "name", length = 100)
     public String name;
 

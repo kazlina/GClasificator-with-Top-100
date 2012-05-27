@@ -27,6 +27,7 @@ public class AddedByAdmin extends Model {
 	@ManyToOne
     public Group group;
 
+	@Constraints.Min(1)
 	@Constraints.Required
 	@Column(name = "position", nullable = false)
 	public Integer position;

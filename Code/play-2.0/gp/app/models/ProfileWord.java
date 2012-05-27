@@ -31,6 +31,7 @@ public class ProfileWord extends Model {
     @ManyToOne
     public Word word;
 
+    @Constraints.Min(1)
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public Integer amount;

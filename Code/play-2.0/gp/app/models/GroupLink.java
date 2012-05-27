@@ -27,10 +27,14 @@ public class GroupLink extends Model {
     @ManyToOne
     public Link link;
 
-	@Constraints.Required
+    @Constraints.Min(0)
+    @Constraints.Max(1)
+    @Constraints.Required
 	@Column(name = "postWeight", nullable = false)
 	public float postWeight;
 
+    @Constraints.Min(0)
+    @Constraints.Max(1)
 	@Constraints.Required
 	@Column(name = "profileWeight", nullable = false)
 	public float profileWeight;

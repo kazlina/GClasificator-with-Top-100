@@ -20,13 +20,14 @@ public class Synonym extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 	
-    @ManyToOne
-	//@Constraints.Required
+    //@Constraints.Required
 	@JoinColumn(name = "word", nullable = false)
+	@ManyToOne
 	public Word word;	
 	
-	@Column(name = "synonym", length = 30, nullable = false)
+    @Constraints.MaxLength(30)
 	@Constraints.Required
+	@Column(name = "synonym", length = 30, nullable = false)
 	public String synonym;
 	
 	public String toString(){
@@ -56,21 +57,13 @@ public class Synonym extends Model {
     	
     	try {
 	    	Word word = Word.findById(wordId);
-	    	if (word == null) {
-	    		Ebean.endTransaction();
-	    		return;
+	    	if (word != null) {
+		    	Synonym findSynonym = find.where().eq("word", word).eq("synonym", synonym.synonym).findUnique();
+		    	if (findSynonym == null) {
+		    		synonym.word = word;
+		    		synonym.save();
+		    	}
 	    	}
-	    		
-	    	
-	    	Synonym findSynonym = find.where().eq("word", word).eq("synonym", synonym.synonym).findUnique();
-	    	if (findSynonym != null) {
-	    		Ebean.endTransaction();
-	    		return;
-	    	}
-	    	
-	    	synonym.word = word;
-	        synonym.save();
-	        
 	        Ebean.commitTransaction();
     	}
     	finally {

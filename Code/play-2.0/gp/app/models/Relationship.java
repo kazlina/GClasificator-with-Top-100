@@ -13,6 +13,7 @@ public class Relationship extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.MaxLength(30)
     @Constraints.Required
     @Column(name = "status", length = 30, unique = true, nullable = false)
     public String status;

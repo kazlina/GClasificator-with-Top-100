@@ -26,12 +26,13 @@ public class PostLink extends Model {
     public Post post;
 
     @Constraints.Required
-	@JoinColumn(name="link", nullable = false)
+	@JoinColumn(name = "link", nullable = false)
     @ManyToOne
     public Link link;
 
+    @Constraints.Min(1)
     @Constraints.Required
-	@Column(name="amount", nullable = false)
+	@Column(name = "amount", nullable = false)
     public int amount;
 
    private PostLink(Post post, Link link, int amount){

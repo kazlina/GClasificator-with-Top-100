@@ -18,10 +18,13 @@ public class NewGPM extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
+	@Constraints.MinLength(21)
+	@Constraints.MaxLength(21)
 	@Constraints.Required
 	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
 	public String idGpm;
 
+	@Constraints.Min(1)
 	@Constraints.Required
 	@Column(name = "nMentiens", nullable = false)
 	public int nMentiens;

@@ -18,6 +18,7 @@ public class Post extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.MaxLength(40)
     @Constraints.Required
     @Column(name = "postId", length = 40, nullable = false, unique = true)
     public String postId;

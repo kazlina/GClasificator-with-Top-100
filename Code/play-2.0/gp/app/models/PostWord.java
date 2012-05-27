@@ -30,6 +30,7 @@ public class PostWord extends Model {
     @ManyToOne
     public Word word;
 
+    @Constraints.Min(1)
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public int amount;

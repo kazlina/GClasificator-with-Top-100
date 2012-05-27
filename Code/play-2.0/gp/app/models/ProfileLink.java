@@ -30,6 +30,7 @@ public class ProfileLink extends Model {
     @ManyToOne
     public Link link;
 
+    @Constraints.Min(1)
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public Integer amount;

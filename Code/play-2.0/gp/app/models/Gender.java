@@ -13,6 +13,7 @@ public class Gender extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.MaxLength(10)
     @Constraints.Required
     @Column(name = "value", length = 10, unique = true, nullable = false)
     public String value;

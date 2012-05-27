@@ -17,9 +17,11 @@ public class GPM extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
-
-	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
+	
+	@Constraints.MinLength(21)
+	@Constraints.MaxLength(21)
 	@Constraints.Required
+	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
 	public String idGpm;
 
 	@OneToMany(mappedBy = "gpm")
