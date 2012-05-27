@@ -21,9 +21,8 @@ public class Application extends Controller {
 
     public static Result ind() throws IOException {
 	    TempProfile temp = GAPI.getProfile("100915540970866628562");
-	    DataExtraction data = new DataExtraction();
-	    data.newGPM("114536133164105123829");
-        return ok(temp.displayName);
+	    DataExtraction.newGPM("114536133164105123829");
+       	return ok(temp.displayName);
 		}
 
     public static Result index() {
