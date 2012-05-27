@@ -32,7 +32,7 @@ public class Content extends Model {
 	}
 
 	public static Content findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 
 	public static Content findByKind(String element) {

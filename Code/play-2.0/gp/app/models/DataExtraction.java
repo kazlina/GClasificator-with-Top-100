@@ -8,16 +8,15 @@ import java.net.URL;
 
 public class DataExtraction {
 
-    public int newGPM(String id) {
-	GPM gpm = null;
-	gpm.add(id);
-	//updateActivity(gpm,100);
+    public static int newGPM(String id) {
+	GPM gpm = GPM.add(id);
+	updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
     return 0;
     }
 
-    public int updateProfile(GPM gpm){
+    public static int updateProfile(GPM gpm){
         TempProfile profile = new TempProfile();
 
         //get 'profile' from GooglePlus
@@ -70,7 +69,7 @@ public class DataExtraction {
         return 0;
     }
 
-    public int updateActivity(GPM gpm, int countOfPosts) {
+    public static int updateActivity(GPM gpm, int countOfPosts) {
 
         List <TempPost> activity = new ArrayList <TempPost>();
         GAPI temp = new GAPI();

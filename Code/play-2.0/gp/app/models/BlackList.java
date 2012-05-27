@@ -31,11 +31,10 @@ public class BlackList extends Model {
 
 	public BlackList(Long gpmId, String reasonOfAddition) {
 		GPM gpm = GPM.findById(gpmId);
-		if (gpm == null)
-			return;
-		
-		this.gpm = gpm;
-		this.reasonOfAddition = reasonOfAddition;
+		if (gpm != null) {
+			this.gpm = gpm;
+			this.reasonOfAddition = reasonOfAddition;
+		}
     }
 
 	private static Model.Finder<Long, BlackList> find = new Model.Finder<Long, BlackList>(Long.class, BlackList.class);
@@ -45,7 +44,7 @@ public class BlackList extends Model {
 	}
 
 	public static BlackList findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static BlackList findByGpmId(Long Id) {

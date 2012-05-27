@@ -42,9 +42,19 @@ public class Word extends Model {
 	public static List<Word> all() {
 		return find.all();
 	}
+	
+	public static List<String> allInString() {
+		List <Word> words = all();
+		List <String> wordsInString = new ArrayList<String>();
+		
+		for (Word word: words)
+			wordsInString.add(word.word);
+		
+		return wordsInString;
+	}
 
 	public static Word findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static Word findByWord(String element) {

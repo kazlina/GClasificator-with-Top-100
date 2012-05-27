@@ -1,0 +1,30 @@
+@(group: Group, nameGroup: String, groupWords: List[GroupWord], groupWordForm: Form[GroupWord])
+
+@import helper._
+
+@main("Group words list") {
+    <h1>Words for group @nameGroup</h1>
+    
+    <ul>
+        @for(groupWord <- groupWords) {
+            <li>
+                @groupWord.word.word
+                @form(routes.Groups.deleteGroupWord(group.id,groupWord.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    <hr/>
+    
+    <h2>Add a new word to the list of words of group</h2>
+    
+    @form(routes.Groups.addGroupWord(group.id)) {
+        @inputText(groupWordForm("word"))
+        @inputText(groupWordForm("postWeight"))
+        @inputText(groupWordForm("profileWeight"))
+        <input type="submit" value="Create">
+    }
+    <hr/>
+    <a href=@routes.Groups.groups()>Back to groups</a>
+}

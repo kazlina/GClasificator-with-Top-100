@@ -31,22 +31,22 @@ public class GroupWordTest {
                String textWord = "Maximus";
         	   createWord(textWord);
         	   Word word = Word.findByWord(textWord);
-               assertThat(word != null);
+               assertThat(word).isNotNull();
                
                String nameGroup = "lords";
                createGroup(nameGroup);
                Group group = Group.findByName(nameGroup);
-               assertThat(group != null);
+               assertThat(group).isNotNull();
 
                GroupWord groupWord = createGroupWord(group, word);
                assertThat(groupWord.group).isEqualTo(group);
                
                GroupWord findGroupWord = GroupWord.findById(groupWord.id);
-               assertThat(findGroupWord.word == word);
+               assertThat(findGroupWord.word).isEqualTo(word);
                
                GroupWord.delete(groupWord.id);
                GroupWord groupWordDeleted = GroupWord.findById(groupWord.id);
-               assertThat(groupWordDeleted == null);
+               assertThat(groupWordDeleted).isNull();
                
                Word.delete(word.id);
                Group.delete(group.id);
@@ -61,7 +61,7 @@ public class GroupWordTest {
               String nameGroup = "flowers";
         	  createGroup(nameGroup);
         	  Group group = Group.findByName(nameGroup);
-              assertThat(group != null);
+              assertThat(group).isNotNull();
 
               Word word = createWord("rose");
               createGroupWord(group, word);
@@ -71,13 +71,13 @@ public class GroupWordTest {
               createGroupWord(group, word);
               
               List<GroupWord> groupWords = GroupWord.findByGroup(group.id);
-              assertThat(groupWords.size() == 3);
+              assertThat(groupWords.size()).isEqualTo(3);
               
               for (int i = 0; i < groupWords.size(); i ++)
             	  GroupWord.delete(groupWords.get(i).id);
               
               groupWords = GroupWord.findByGroup(group.id);
-              assertThat(groupWords.size() == 0);
+              assertThat(groupWords.size()).isEqualTo(0);
               
               Group.delete(group.id);
               Word.delete(Word.findByWord("rose").id);
@@ -94,7 +94,7 @@ public class GroupWordTest {
               String textWord = "image";
         	  createWord(textWord);
               Word word = Word.findByWord(textWord);
-              assertThat(word != null);
+              assertThat(word).isNotNull();
 
               Group group = createGroup("photographers");
               createGroupWord(group, word);
@@ -104,13 +104,13 @@ public class GroupWordTest {
               createGroupWord(group, word);
               
               List<GroupWord> groupWords = GroupWord.findByWord(word.id);
-              assertThat(groupWords.size() == 3);
+              assertThat(groupWords.size()).isEqualTo(3);
               
               for (int i = 0; i < groupWords.size(); i ++)
             	  GroupWord.delete(groupWords.get(i).id);
               
               groupWords = GroupWord.findByWord(word.id);
-              assertThat(groupWords.size() == 0);
+              assertThat(groupWords.size()).isEqualTo(0);
               
               Group.delete(Group.findByName("photographers").id);
               Group.delete(Group.findByName("artists").id);

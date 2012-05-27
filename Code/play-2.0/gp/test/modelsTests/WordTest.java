@@ -39,11 +39,11 @@ public class WordTest {
                String text = "Peter";
                createWord(text);
                Word findWord = Word.findByWord(text);
-               assertThat(findWord.word == text);
+               assertThat(findWord).isNotNull();
 
                Word.delete(findWord.id);
                Word wordDeleted = Word.findByWord(text);
-               assertThat(wordDeleted == null);
+               assertThat(wordDeleted).isNull();
            }
         });
     }
@@ -53,7 +53,7 @@ public class WordTest {
         running(fakeApplication(), new Runnable() {
            public void run() {
         	   Word word = Word.findByWord("Yuri");
-               assertThat(word == null);
+               assertThat(word).isNull();
            }
         });
     }
@@ -65,10 +65,10 @@ public class WordTest {
         	  String text = "Peter";
               createWord(text);
               Word word = Word.findByWord(text);
-              assertThat(word != null);
+              assertThat(word).isNotNull();
               
               String textWord = word.toString();
-              assertThat(textWord == text);
+              assertThat(textWord).isEqualTo(text);
               
               Word.delete(word.id);
           }
@@ -84,13 +84,13 @@ public class WordTest {
         	  createWord("Kate");
               
               List<Word> allWord = Word.all();
-              assertThat(allWord.size() == 3);
+              assertThat(allWord.size()).isEqualTo(3);
               
               for (int i = 0; i < allWord.size(); i ++)
             	  Word.delete(allWord.get(i).id);
               
               allWord = Word.all();
-              assertThat(allWord.size() == 0);
+              assertThat(allWord.size()).isEqualTo(0);
           }
        });
     }
@@ -103,12 +103,12 @@ public class WordTest {
         	  createWord(text);
               
         	  Word word = Word.findByWord(text);
-              assertThat(word != null);
+              assertThat(word).isNotNull();
               
               Word.delete(word.id);
               
               word = Word.findByWord(text);
-              assertThat(word == null);
+              assertThat(word).isNull();
           }
        });
     }
@@ -120,18 +120,19 @@ public class WordTest {
         	   String text = "Mari";
         	   createWord(text);
         	   Word word = Word.findByWord(text);
-               assertThat(word.word != null);
+               assertThat(word.word).isNotNull();
 
                createSynonym(word.id, "Marinad");
                createSynonym(word.id, "Student");
                createSynonym(word.id, "Murder");
                
-               assertThat(word.synonyms.size() == 3);
+               assertThat(word.synonyms.size()).isEqualTo(3);
                
                for (int i = 0; i < word.synonyms.size(); i ++)
              	  Synonym.delete(word.synonyms.get(i).id);
                
-               assertThat(word.synonyms.size() == 0);
+               word = Word.findByWord(text);
+               assertThat(word.synonyms.size()).isEqualTo(0);
                
                Word.delete(word.id);
            }
@@ -145,9 +146,8 @@ public class WordTest {
 	        	  String text = "Mari";
 	        	  createWord(text);
 	              Word word = Word.findByWord(text);
-	              assertThat(word != null);
-
-	              //assertThat(word.groupWords.size() == 0);
+	              assertThat(word).isNotNull();
+	              assertThat(word.groupWords.size() == 0);
 	              
 	              Group group = createGroup("Women");
 	              createGroupWord(group, word);
@@ -156,12 +156,14 @@ public class WordTest {
 	              group = createGroup("Murders");
 	              createGroupWord(group, word);
 	              
-	              assertThat(word.groupWords.size() == 3);
+	              word = Word.findByWord(text);
+	              assertThat(word.groupWords.size()).isEqualTo(3);
 	              
 	              for (int i = 0; i < word.groupWords.size(); i ++)
 	            	  GroupWord.delete(word.groupWords.get(i).id);
 	              
-	              assertThat(word.groupWords.size() == 0);
+	              word = Word.findByWord(text);
+	              assertThat(word.groupWords.size()).isEqualTo(0);
 	              
 	              Group.delete(Group.findByName("Women").id);
 	              Group.delete(Group.findByName("Students").id);
@@ -179,8 +181,8 @@ public class WordTest {
         	   createWord("Maximus");
                
         	   Word word = Word.findByWord("Mari");
-               assertThat(word != null);
-               //assertThat(word.groupWords.size() == 0);
+               assertThat(word).isNotNull();
+               assertThat(word.groupWords.size() == 0);
                
                Group group = createGroup("Women");
                createGroupWord(group, word);
@@ -189,27 +191,30 @@ public class WordTest {
                group = createGroup("Students");
                createGroupWord(group, word);
                
-               assertThat(word.groupWords.size() == 3);
-               assertThat(word.groupWords.get(0).group.name == "Students"
-            		   || word.groupWords.get(1).group.name == "Students"
-            		   || word.groupWords.get(2).group.name == "Students");
+        	   word = Word.findByWord("Mari");
+               assertThat(word.groupWords.size()).isEqualTo(3);
+               assertThat(word.groupWords.get(0).group.toString().contentEquals("Students")
+            		   || word.groupWords.get(1).group.toString().contentEquals("Students")
+            		   || word.groupWords.get(2).group.toString().contentEquals("Students")).isTrue();
                
                word = Word.findByWord("Maximus");
-               assertThat(word != null);
-               //assertThat(word.groupWords.size() == 0);
+               assertThat(word).isNotNull();
+               assertThat(word.groupWords.size()).isEqualTo(0);
                
                createGroupWord(group, word);
                group = createGroup("Lords");
                createGroupWord(group, word);
                
-               assertThat(word.groupWords.size() == 2);
-               assertThat(word.groupWords.get(0).group.name == "Students"
-            		   || word.groupWords.get(1).group.name == "Students");
+               word = Word.findByWord("Maximus");
+               assertThat(word.groupWords.size()).isEqualTo(2);
+               assertThat(word.groupWords.get(0).group.toString().contentEquals("Students")
+            		   || word.groupWords.get(1).group.toString().contentEquals("Students")).isTrue();
                
                for (int i = 0; i < word.groupWords.size(); i ++)
             	   GroupWord.delete(word.groupWords.get(i).id);
                
-               assertThat(word.groupWords.size() == 0);
+               word = Word.findByWord("Maximus");
+               assertThat(word.groupWords.size()).isEqualTo(0);
                
                Word.delete(word.id);
                
@@ -217,8 +222,11 @@ public class WordTest {
                for (int i = 0; i < word.groupWords.size(); i ++)
             	   GroupWord.delete(word.groupWords.get(i).id);
                
-               assertThat(word.groupWords.size() == 0);
+               word = Word.findByWord("Mari");
+               assertThat(word.groupWords.size()).isEqualTo(0);
+               
                Word.delete(word.id);
+               
                Group.delete(Group.findByName("Women").id);
                Group.delete(Group.findByName("Students").id);
                Group.delete(Group.findByName("Murders").id);

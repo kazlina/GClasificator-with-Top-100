@@ -43,7 +43,7 @@ public class ProfileLink extends Model {
     private static Model.Finder<Long, ProfileLink> find = new Model.Finder<Long, ProfileLink>(Long.class, ProfileLink.class);
 
     public static ProfileLink findById(Long Id) {
-		return find.ref(Id);
+    	return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<ProfileLink> findByProfile(Long id) {

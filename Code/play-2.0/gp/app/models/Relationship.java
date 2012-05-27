@@ -32,7 +32,7 @@ public class Relationship extends Model {
 	}
 
 	public static Relationship findById(Long Id) {
-		return find.ref(Id);
+		return find.where().eq("id", Id).findUnique();
 	}
 
 	public static Relationship findByStatus(String element) {

@@ -1,0 +1,28 @@
+@(blackList: List[BlackList], blackListForm: Form[BlackList])
+
+@import helper._
+
+@main("Black list") {
+    <h1>@blackList.size() people in the black list</h1>
+    
+    <ul>
+        @for(blackGPM <- blackList) {
+            <li>
+                @blackGPM.gpm.idGpm
+                @form(routes.BlackListController.deleteBlackList(blackGPM.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    <hr/>
+    
+    <h2>Add a new GPM to the black list</h2>
+    
+    @form(routes.BlackListController.addBlackList()) {
+        @inputText(blackListForm("gpm.idGpm")) 
+        @inputText(blackListForm("reasonOfAddition"))
+        <input type="submit" value="Create">
+    }
+    <hr/>
+}

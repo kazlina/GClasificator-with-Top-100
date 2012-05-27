@@ -43,7 +43,7 @@ public class PostWord extends Model {
     private static Model.Finder<Long, PostWord> find = new Model.Finder<Long, PostWord>(Long.class, PostWord.class);
 
     public static PostWord findById(Long Id) {
-		return find.ref(Id);
+    	return find.where().eq("id", Id).findUnique();
 	}
 	
 	public static List<PostWord> findByPost(Long id) {
