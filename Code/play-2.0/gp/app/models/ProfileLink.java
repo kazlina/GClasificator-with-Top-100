@@ -59,20 +59,13 @@ public class ProfileLink extends Model {
 		
 		try {
 			Link findLink = Link.findByLink(link);
-			if (findLink == null) {
-				Ebean.endTransaction();
-				return;
+			if (findLink != null) {
+				ProfileLink findProfileLink = find.where().eq("profile", profile).eq("link", findLink).findUnique();
+				if (findProfileLink == null) {
+					ProfileLink element = new ProfileLink(profile, findLink, amount);
+					element.save();
+				}
 			}
-			
-			ProfileLink findProfileLink = find.where().eq("profile", profile).eq("link", findLink).findUnique();
-			if (findProfileLink != null) {
-				Ebean.endTransaction();
-				return;
-			}
-			
-			ProfileLink element = new ProfileLink(profile, findLink, amount);
-			element.save();
-			
 			Ebean.commitTransaction();
 		}
 		finally {

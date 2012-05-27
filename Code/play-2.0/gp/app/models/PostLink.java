@@ -59,21 +59,13 @@ public class PostLink extends Model {
 		
 		try {
 			Link findLink = Link.findByLink(link);
-			if (findLink == null) {
-				Ebean.endTransaction();
-				return;
+			if (findLink != null) {
+				PostLink findPostLink = find.where().eq("post", post).eq("link", findLink).findUnique();
+				if (findPostLink == null) {
+					PostLink element = new PostLink(post, findLink, amount);
+					element.save();
+				}
 			}
-			
-			PostLink findPostLink = find.where().eq("post", post).eq("link", findLink).findUnique();
-			if (findPostLink != null) {
-				Ebean.endTransaction();
-				return;
-			}
-	
-			
-			PostLink element = new PostLink(post, findLink, amount);
-			element.save();
-			
 			Ebean.commitTransaction();
 		}
 		finally {

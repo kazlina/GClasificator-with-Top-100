@@ -62,16 +62,14 @@ public class GPM extends Model {
 		
 		try {
 			GPM searchGpm = findByIdGpm(idGpm);
-			if (searchGpm != null)
-				return;
-
-			NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
-			if (searchNewGpm != null)
-				NewGPM.delete(searchNewGpm.id);
-			
-			GPM newGpm = new GPM(idGpm);
-			newGpm.save();
-			
+			if (searchGpm == null) {
+				NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
+				if (searchNewGpm != null)
+					NewGPM.delete(searchNewGpm.id);
+				
+				GPM newGpm = new GPM(idGpm);
+				newGpm.save();
+			}
 			Ebean.commitTransaction();	
 		} 
 		finally {
