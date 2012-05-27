@@ -31,7 +31,7 @@ public class DataExtraction {
         Gender gender =  Gender.findByValue(profile.gender);
         Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
         Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
-					profile.tagline, relationshipStatus,100);
+					profile.tagline, relationshipStatus, profile.nfollowers);
         Profile.add(man);
         // i should add a validator!
 
