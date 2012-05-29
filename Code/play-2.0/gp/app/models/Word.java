@@ -13,8 +13,9 @@ public class Word extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-	@Column(name = "word", length = 30, nullable = false, unique = true)
+	@Constraints.MaxLength(30)
 	@Constraints.Required
+	@Column(name = "word", length = 30, nullable = false, unique = true)
 	public String word;
 
 	@OneToMany(mappedBy = "word")

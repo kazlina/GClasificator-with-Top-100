@@ -9,11 +9,12 @@ import java.net.URL;
 public class DataExtraction {
 
     public static int newGPM(String id) {
-	GPM gpm = null;
-	gpm.add(id);
-	updateActivity(gpm,100);
+	GPM gpm = GPM.add(id);
+	if(gpm != null){
+	//updateActivity(gpm,100);
         // i should add a validator!
     updateProfile(gpm);
+    }
     return 0;
     }
 
@@ -32,7 +33,7 @@ public class DataExtraction {
         Gender gender =  Gender.findByValue(profile.gender);
         Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
         Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
-					profile.tagline, relationshipStatus,100);
+					profile.tagline, relationshipStatus, profile.nfollowers);
         Profile.add(man);
         // i should add a validator!
 

@@ -26,12 +26,13 @@ public class PostLink extends Model {
     public Post post;
 
     @Constraints.Required
-	@JoinColumn(name="link", nullable = false)
+	@JoinColumn(name = "link", nullable = false)
     @ManyToOne
     public Link link;
 
+    @Constraints.Min(1)
     @Constraints.Required
-	@Column(name="amount", nullable = false)
+	@Column(name = "amount", nullable = false)
     public int amount;
 
    private PostLink(Post post, Link link, int amount){
@@ -57,23 +58,20 @@ public class PostLink extends Model {
 	public static void add(Post post, String link, int amount) {
 		Ebean.beginTransaction();
 		
-		Link findLink = Link.findByLink(link);
-		if (findLink == null) {
-			Ebean.endTransaction();
-			return;
+		try {
+			Link findLink = Link.findByLink(link);
+			if (findLink != null) {
+				PostLink findPostLink = find.where().eq("post", post).eq("link", findLink).findUnique();
+				if (findPostLink == null) {
+					PostLink element = new PostLink(post, findLink, amount);
+					element.save();
+				}
+			}
+			Ebean.commitTransaction();
 		}
-		
-		PostLink findPostLink = find.where().eq("post", post).eq("link", findLink).findUnique();
-		if (findPostLink != null) {
+		finally {
 			Ebean.endTransaction();
-			return;
 		}
-
-		
-		PostLink element = new PostLink(post, findLink, amount);
-		element.save();
-		
-		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

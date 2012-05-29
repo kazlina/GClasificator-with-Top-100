@@ -156,11 +156,11 @@ private static String getUrl(List<Attachments> list){
     	return posts;
     } 
  }
-    int i = 0;
-    for ( TempPost p: posts){
-    	System.out.println("=====post number  "+ i++ +"===============");
-      	p.print();
-      }
+   // int i = 0;
+    //for ( TempPost p: posts){
+    	//System.out.println("=====post number  "+ i++ +"===============");
+      	//p.print();
+      //}
 	return posts;  
  }
   
@@ -177,7 +177,7 @@ private static String getUrl(List<Attachments> list){
       profile.tagline = person.getTagline();
       profile.urls = getUrls(person.getUrls());
       profile.relationshipStatus = person.getRelationshipStatus();
-      profile.type = getType(person.getObjectType());
+      profile.isPerson = getType(person.getObjectType());
       //profile.print();
       return profile;
     } 
@@ -195,7 +195,7 @@ private static String getUrl(List<Attachments> list){
     System.out.println("tagline: " + person.getTagline());
     System.out.println("urls: " +  person.getUrls());
     System.out.println("relationshipStatus: " + person.getRelationshipStatus());
-    System.out.println("type: " + person.getObjectType());
+    System.out.println("isPerson: " + person.getObjectType());
    }
 
   public static void print(ActivityFeed feed) {

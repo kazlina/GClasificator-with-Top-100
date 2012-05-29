@@ -18,6 +18,7 @@ public class Post extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.MaxLength(40)
     @Constraints.Required
     @Column(name = "postId", length = 40, nullable = false, unique = true)
     public String postId;
@@ -89,11 +90,16 @@ public class Post extends Model {
 	public static void add(Post element) {
 		Ebean.beginTransaction();
 		
-		Post findPost = Post.findByPostId(element.postId);
-		if (findPost == null)
-			element.save();
-		
-		Ebean.commitTransaction();
+		try {
+			Post findPost = Post.findByPostId(element.postId);
+			if (findPost == null)
+				element.save();
+			
+			Ebean.commitTransaction();
+		}
+		finally {
+			Ebean.endTransaction();
+		}
 	}
 
 	public static void delete(Long id) {

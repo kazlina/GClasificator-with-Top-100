@@ -17,9 +17,11 @@ public class GPM extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
-
-	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
+	
+	@Constraints.MinLength(21)
+	@Constraints.MaxLength(21)
 	@Constraints.Required
+	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
 	public String idGpm;
 
 	@OneToMany(mappedBy = "gpm")
@@ -57,21 +59,26 @@ public class GPM extends Model {
 		return find.findRowCount();
 	}
 	
-	public static void add(String idGpm) {
+	public static GPM add(String idGpm) {
+		GPM newGpm = null;
+		
 		Ebean.beginTransaction();
-		
-		GPM searchGpm = findByIdGpm(idGpm);
-		if (searchGpm != null)
-			return;
-
-		NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
-		if (searchNewGpm != null)
-			NewGPM.delete(searchNewGpm.id);
-		
-		GPM newGpm = new GPM(idGpm);
-		newGpm.save();
-		
-		Ebean.commitTransaction();
+		try {
+			GPM searchGpm = findByIdGpm(idGpm);
+			if (searchGpm == null) {
+				NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
+				if (searchNewGpm != null)
+					NewGPM.delete(searchNewGpm.id);
+				
+				newGpm = new GPM(idGpm);
+				newGpm.save();
+			}
+			Ebean.commitTransaction();	
+		} 
+		finally {
+			Ebean.endTransaction();
+		}
+		return newGpm;
 	}
 
 	public static void delete(Long id) {

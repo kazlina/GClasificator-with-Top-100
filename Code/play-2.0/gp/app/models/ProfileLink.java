@@ -30,6 +30,7 @@ public class ProfileLink extends Model {
     @ManyToOne
     public Link link;
 
+    @Constraints.Min(1)
     @Constraints.Required
 	@Column(name = "amount", nullable = false)
     public Integer amount;
@@ -57,22 +58,20 @@ public class ProfileLink extends Model {
 	public static void add(Profile profile, String link, int amount) {
 		Ebean.beginTransaction();
 		
-		Link findLink = Link.findByLink(link);
-		if (findLink == null) {
-			Ebean.endTransaction();
-			return;
+		try {
+			Link findLink = Link.findByLink(link);
+			if (findLink != null) {
+				ProfileLink findProfileLink = find.where().eq("profile", profile).eq("link", findLink).findUnique();
+				if (findProfileLink == null) {
+					ProfileLink element = new ProfileLink(profile, findLink, amount);
+					element.save();
+				}
+			}
+			Ebean.commitTransaction();
 		}
-		
-		ProfileLink findProfileLink = find.where().eq("profile", profile).eq("link", findLink).findUnique();
-		if (findProfileLink != null) {
+		finally {
 			Ebean.endTransaction();
-			return;
 		}
-		
-		ProfileLink element = new ProfileLink(profile, findLink, amount);
-		element.save();
-		
-		Ebean.commitTransaction();
 	}
 
 	public static void delete(Long id) {

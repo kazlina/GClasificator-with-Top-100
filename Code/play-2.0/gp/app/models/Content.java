@@ -13,6 +13,7 @@ public class Content extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Constraints.MaxLength(5)
     @Constraints.Required
     @Column(name = "kind", length = 5, unique = true, nullable = false)
     public String kind;

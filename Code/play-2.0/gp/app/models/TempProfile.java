@@ -1,13 +1,5 @@
 package models;
-import play.libs.*;
 import java.util.*;
-import javax.persistence.*;
-
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
-
-import play.db.jpa.*;;
 
 public class TempProfile {
 	public String id;
@@ -18,13 +10,14 @@ public class TempProfile {
 	public String image;
 	public String aboutMe;
 	List <String> urls = new ArrayList<String>();
-	public boolean type;//if person - true, if page - false
+	public boolean isPerson;//if person - true, if page - false
+	public int nfollowers;
 	
 	public TempProfile() {
 	}	
 	
     public TempProfile(String id, String displayName,String image, String aboutMe, String gender, String tagline,
-    		              List <String> urls, String relationshipStatus, boolean type){
+    		              List <String> urls, String relationshipStatus, boolean isPerson, int nfollowers){
     	this.id = id;
     	this.displayName = displayName;
     	this.tagline = tagline;
@@ -32,8 +25,9 @@ public class TempProfile {
     	this.relationshipStatus = relationshipStatus;
     	this.image = image;
     	this.aboutMe = aboutMe;
-    	this.type = type;
+    	this.isPerson = isPerson;
     	this.urls = urls;
+    	this.nfollowers = nfollowers;
         }
 
     public void print(){
@@ -44,7 +38,8 @@ public class TempProfile {
     	System.out.println("relationshipStatus: " + this.relationshipStatus);
     	System.out.println("image: " + this.image);
     	System.out.println("aboutMe: " + this.aboutMe);
-    	System.out.println("type: " + this.type);
+    	System.out.println("isPerson: " + this.isPerson);
+    	System.out.println("followers: " + this.nfollowers);
     	for (String p : urls)
     	{
     		System.out.println("url " + p);    		

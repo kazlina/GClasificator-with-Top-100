@@ -13,6 +13,7 @@ public class Group extends Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+	@Constraints.MaxLength(50)
 	@Constraints.Required
 	@Column(name = "name", length = 50, nullable = false, unique = true)
 	public String name;
@@ -28,18 +29,23 @@ public class Group extends Model {
 	@Column(name = "description")
 	public String description;
 
+	@Constraints.Min(0)
 	@Column(name = "textPercent")
 	public Integer textPercent;
 
+	@Constraints.Min(0)
 	@Column(name = "imagePercent")
 	public Integer imagePercent;
 
+	@Constraints.Min(0)
 	@Column(name = "linkPercent")
 	public Integer linkPercent;
 
+	@Constraints.Min(0)
 	@Column(name = "videoPercent")
 	public Integer videoPercent;
 	
+	@Constraints.Min(0)
 	@Column(name = "audioPercent")
 	public Integer audioPercent;
 
