@@ -1,27 +1,10 @@
-@(groups: List[Group], groupForm: Form[Group])
+@(group: Group, groupForm: Form[Group])
 
 @import helper._
 
-@main("Groups list") {
-    <h1>@groups.size() group(s)</h1>
-    
-    <ul>
-        @for(group <- groups) {
-            <li>
-                @group.name
-                <a href=@routes.Groups.groupWords(group.id)>View/Edit words of group</a>
-                @form(routes.Groups.deleteGroup(group.id)) {
-                    <input type="submit" value="Delete">
-                }
-            </li>
-        }
-    </ul>
-    <hr/>
-    
-    <h2>Add a new group to the list of groups</h2>
-    
-    @form(routes.Groups.addGroup()) {
-        @inputText(groupForm("name"))
+@main("Group") {
+@form(routes.Groups.addGroup()) {
+        @inputText(groupForm("name"), 'value -> "name")
         @inputFile(groupForm("activeImage"))
         @inputFile(groupForm("passiveImage"))
         @textarea(groupForm("description"))
@@ -32,5 +15,5 @@
         @inputText(groupForm("audioPersent"))
         <input type="submit" value="Create">
     }
-    <hr/>
+    <a href=@routes.Groups.groups()>Back to groups</a>
 }
