@@ -94,7 +94,25 @@ public class Group extends Model {
 		if (findGroup == null)
 			group.save();
 	}
-
+	
+	public static void updateGroup(Long idGroup, Group group) {
+		Group findGroup = Group.findById(idGroup);
+		if (findGroup == null)
+			return;
+		
+		findGroup.name = group.name;
+		findGroup.activeImage = group.activeImage;
+		findGroup.passiveImage = group.passiveImage;
+		findGroup.description = group.description;
+		findGroup.textPercent = group.textPercent;
+		findGroup.imagePercent = group.imagePercent;
+		findGroup.linkPercent = group.linkPercent;
+		findGroup.videoPercent = group.videoPercent;
+		findGroup.audioPercent = group.audioPercent;
+		
+		findGroup.update();
+	}
+	
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }

@@ -3,10 +3,10 @@
 @import helper._
 
 @main("Group") {
-@form(routes.Groups.addGroup()) {
-        @inputText(groupForm("name"), 'value -> "name")
-        @inputFile(groupForm("activeImage"))
-        @inputFile(groupForm("passiveImage"))
+@form(routes.Groups.changeGroup(group.id)) {
+        @inputText(groupForm("name"), '_label -> "name group") 
+        @inputFile(groupForm("activeImage"), 'accept -> "image/jpeg,image/png,image/gif")
+        @inputFile(groupForm("passiveImage"), 'accept -> "image/jpeg,image/png,image/gif")
         @textarea(groupForm("description"))
         @inputText(groupForm("textPersent"))
         @inputText(groupForm("imagePersent"))

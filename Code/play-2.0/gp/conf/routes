@@ -35,6 +35,7 @@ POST    /admin/groups/:id/delete controllers.Groups.deleteGroup(id: Long)
 
 # ABOUT GROUP
 GET     /admin/groups/:gid       controllers.Groups.viewGroup(gid: Long)
+POST    /admin/groups/:gid       controllers.Groups.changeGroup(gid: Long)
 
 # GROUP WORDS
 GET     /admin/groupwords/:gid            controllers.Groups.groupWords(gid: Long)

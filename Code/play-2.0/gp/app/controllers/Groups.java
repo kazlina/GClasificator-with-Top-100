@@ -39,6 +39,17 @@ public class Groups extends Controller {
         }
     }
 
+    //you can change group
+    public static Result changeGroup(Long id) {
+        Form<Group> filledForm = groupForm.bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.groups.render(Group.all(), filledForm));
+        } else {
+            Group.updateGroup(id, filledForm.get());
+            return redirect(routes.Groups.groups());
+        }
+    }
+    
     //you can delete group
     public static Result deleteGroup(Long id) {
         Group.delete(id);
@@ -47,7 +58,7 @@ public class Groups extends Controller {
 
     //you can view information about group
     public static Result viewGroup(Long groupId) {
-        Form<Group> filledForm = groupForm.bindFromRequest();
+        Form<Group> filledForm = form(Group.class).fill(Group.findById(groupId));//groupForm.bindFromRequest();
         return ok(views.html.group.render(Group.findById(groupId),filledForm));
     }
 
