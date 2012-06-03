@@ -193,14 +193,15 @@ public class DataExtraction {
 		Pattern urlPattern = Pattern.compile(urlRegexp);
 		
 		//adding links into list
-		ArrayList <URL> linksList = new ArrayList<URL>();
+		ArrayList <URL> sourcelinksList = new ArrayList<URL>();
 		//add string from sliced mass into list only if they match html-tamplate
+		
 		if (slicedStringMass != null) {
 			for(int i = 0; i < slicedStringMass.length; i++) {
 				if (urlPattern.matcher(slicedStringMass[i]).matches()) {
 					try {
 						URL addingLink = new URL(slicedStringMass [i]);
-						linksList.add(addingLink);
+						sourcelinksList.add(addingLink);
 					}
 					catch (Exception linkError) {
 						//it's mean, that regular expression in pattern is invalid
@@ -209,31 +210,41 @@ public class DataExtraction {
 			}
 		}
 		
-		if (linksList.size() == 0) {
+		if (sourcelinksList.size() == 0) {
 			ArrayList<HistogramForLinks> nullValue = null;
 			return nullValue;
 		}
 
 		LinkComparator comparator = new LinkComparator("");
-		java.util.Collections.sort(linksList, comparator);
+		java.util.Collections.sort(sourcelinksList, comparator);
+		
+		List <Link> dictionaryLinks = Link.all();
+		
 		//create and initialized first element histogram mass
 		ArrayList <HistogramForLinks> histogramList = new ArrayList<HistogramForLinks>();
 		try {
-			HistogramForLinks firstElem = new HistogramForLinks(linksList.get(0).toString());
+			HistogramForLinks firstElem = new HistogramForLinks(sourcelinksList.get(0).toString());
 		
 			firstElem.count++;
 			histogramList.add(firstElem);
 			//deleting first link, because it was used
-			linksList.remove(0);
+			sourcelinksList.remove(0);
 			
 			boolean linkAdded = false;
-			for (URL currentLink: linksList) {
-			    for (HistogramForLinks currentHistogram: histogramList) {
-			        if ((currentHistogram.link == null ? currentLink== null : 
-			        	(currentHistogram.link.getHost()).equals(currentLink.getHost())
-			        		&& linksDistance(currentLink, currentHistogram.link) <= maxLength)) {
-			        	currentHistogram.count++;
-			        	linkAdded = true;
+			for (URL currentLink: sourcelinksList) {
+			    for (Link linkFromDictionary: dictionaryLinks) {
+				    //for (HistogramForLinks currentHistogram: histogramList) {
+
+			    	if (dimainCollation(
+			        		linkFromDictionary.link.toString().substring(
+		        					getSecondSlashPosition(linkFromDictionary.link.toString()), getThirdSlashPosition(linkFromDictionary.link.toString())
+		        					)
+		        			,currentLink.getHost())
+			        		&& linksDistance(currentLink, new URL (linkFromDictionary.link)) <= maxLength) {
+			        	for (HistogramForLinks currentHistogram: histogramList) {
+			        		currentHistogram.count++;
+				        	linkAdded = true;			        		
+			        	}
 			        }
 			    }
 			    if (!linkAdded) {
@@ -294,5 +305,59 @@ public class DataExtraction {
 			}
 		}
 		return distance;
+	}
+	//collate string and find occurrence "?" only in domain
+	private  static boolean dimainCollation (String dictionaryLinkDomain, String newLinkDomain) {
+		int indexOfQuestionMark = dictionaryLinkDomain.indexOf('?');
+		//if (dictionaryLinkDomain.charAt(dictionaryLinkDomain.length()) != '?')
+		if (indexOfQuestionMark < newLinkDomain.length()) {
+			String leftPart = null, rightPart = null;
+			if (indexOfQuestionMark != 0 && 
+					indexOfQuestionMark != (dictionaryLinkDomain.length() - 1)) { // ru.?.com
+				leftPart = dictionaryLinkDomain.substring(0, indexOfQuestionMark);
+				rightPart = dictionaryLinkDomain.substring(indexOfQuestionMark + 1, dictionaryLinkDomain.length());
+				if (newLinkDomain.startsWith (leftPart) && 
+						newLinkDomain.endsWith (rightPart)) {
+					return true;
+				}
+			}
+			else { // ?.google.com
+				if (indexOfQuestionMark == 0 &&
+						newLinkDomain.endsWith (dictionaryLinkDomain.substring (2, dictionaryLinkDomain.length() ) )) {
+					return true;
+				}
+				 // ru.google.?
+				if (indexOfQuestionMark == (dictionaryLinkDomain.length() - 1) &&
+						newLinkDomain.startsWith (dictionaryLinkDomain.substring (0, indexOfQuestionMark) )) {
+					return true;
+				}
+			}
+				
+			if (//checking before Question Mark
+					dictionaryLinkDomain.substring(0, indexOfQuestionMark).equals(newLinkDomain.substring(0, indexOfQuestionMark)) &&
+					dictionaryLinkDomain.substring(indexOfQuestionMark, dictionaryLinkDomain.length()).
+						equals(newLinkDomain.substring(indexOfQuestionMark, newLinkDomain.length()))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static int getSecondSlashPosition (String link) {
+		int currentPosition, count = 0; 
+		for (currentPosition = 0; count != 2; currentPosition++) {
+			if (link.charAt(currentPosition) == '/') {
+				count++;
+			}
+		}
+		return currentPosition - 1;
+	}
+	public static int getThirdSlashPosition (String link) {
+		int currentPosition, count = 0; 
+		for (currentPosition = 0; count != 3 && currentPosition != link.length(); currentPosition++) {
+			if (link.charAt(currentPosition) == '/') {
+				count++;
+			}
+		}
+		return currentPosition;
 	}
 }
