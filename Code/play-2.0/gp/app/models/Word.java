@@ -15,7 +15,7 @@ public class Word extends Model {
 
 	@Constraints.MaxLength(30)
 	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Z]+")
+	@Constraints.Pattern("[a-zA-Zа-яА-Я]+")
 	@Column(name = "word", length = 30, nullable = false, unique = true)
 	public String word;
 
@@ -44,21 +44,21 @@ public class Word extends Model {
 	public static List<Word> all() {
 		return find.all();
 	}
-	
+
 	public static List<String> allInString() {
 		List <Word> words = all();
 		List <String> wordsInString = new ArrayList<String>();
-		
+
 		for (Word word: words)
 			wordsInString.add(word.word);
-		
+
 		return wordsInString;
 	}
 
 	public static Word findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}
-	
+
 	public static Word findByWord(String element) {
 		return find.where().eq("word", element).findUnique();
 	}

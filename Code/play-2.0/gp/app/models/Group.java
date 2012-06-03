@@ -15,7 +15,7 @@ public class Group extends Model {
 
 	@Constraints.MaxLength(50)
 	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Z0-9\\s]+")
+	@Constraints.Pattern("[a-zA-Zа-яА-Я0-9\\s]+")
 	@Column(name = "name", length = 50, nullable = false, unique = true)
 	public String name;
 
@@ -45,7 +45,7 @@ public class Group extends Model {
 	@Constraints.Min(0)
 	@Column(name = "videoPercent")
 	public Integer videoPercent;
-	
+
 	@Constraints.Min(0)
 	@Column(name = "audioPercent")
 	public Integer audioPercent;
@@ -63,7 +63,7 @@ public class Group extends Model {
 		return this.name;
 	}
 
-	public Group(String name, String activeImage, String passiveImage, String description, 
+	public Group(String name, String activeImage, String passiveImage, String description,
 			int textPercent, int imagePercent, int linkPercent, int videoPercent, int audioPercent) {
 		this.name = name;
 		this.activeImage = activeImage;
@@ -85,7 +85,7 @@ public class Group extends Model {
 	public static Group findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}
-	
+
 	public static Group findByName(String name) {
 		return find.where().eq("name", name).findUnique();
 	}
@@ -95,12 +95,12 @@ public class Group extends Model {
 		if (findGroup == null)
 			group.save();
 	}
-	
+
 	public static void updateGroup(Long idGroup, Group group) {
 		Group findGroup = Group.findById(idGroup);
 		if (findGroup == null)
 			return;
-		
+
 		findGroup.name = group.name;
 		findGroup.activeImage = group.activeImage;
 		findGroup.passiveImage = group.passiveImage;
@@ -110,10 +110,10 @@ public class Group extends Model {
 		findGroup.linkPercent = group.linkPercent;
 		findGroup.videoPercent = group.videoPercent;
 		findGroup.audioPercent = group.audioPercent;
-		
+
 		findGroup.update();
 	}
-	
+
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }

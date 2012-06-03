@@ -2,35 +2,33 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 
 @Entity
 @Table(name = "Synonym", uniqueConstraints ={
 		@UniqueConstraint(columnNames = {
-				"word", "synonym" 
-				}) 
+				"word", "synonym"
+				})
 		})
 public class Synonym extends Model {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-	
+
     //@Constraints.Required
 	@JoinColumn(name = "word", nullable = false)
 	@ManyToOne
-	public Word word;	
-	
+	public Word word;
+
     @Constraints.MaxLength(30)
 	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Z]+")
+	@Constraints.Pattern("[a-zA-Zа-яА-Я]+")
 	@Column(name = "synonym", length = 30, nullable = false)
 	public String synonym;
-	
+
 	public String toString(){
 		return this.synonym;
 	}
@@ -44,18 +42,18 @@ public class Synonym extends Model {
     public static Synonym findById(Long Id) {
     	return find.where().eq("id", Id).findUnique();
 	}
-    
+
     public static List<Synonym> findBySynonim(String element) {
     	return find.where().eq("synonym", element).findList();
 	}
-    
+
     public static List<Synonym> findByWordId(Long wordId) {
     	return Word.findById(wordId).synonyms;
 	}
-    
+
     public static void add(Long wordId, Synonym synonym) {
     	Ebean.beginTransaction();
-    	
+
     	try {
 	    	Word word = Word.findById(wordId);
 	    	if (word != null) {
