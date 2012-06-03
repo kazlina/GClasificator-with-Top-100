@@ -15,6 +15,7 @@ public class Gender extends Model {
 
     @Constraints.MaxLength(10)
     @Constraints.Required
+    @Constraints.Pattern("[a-z]+")
     @Column(name = "value", length = 10, unique = true, nullable = false)
     public String value;
 

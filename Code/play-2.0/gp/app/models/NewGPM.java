@@ -21,6 +21,7 @@ public class NewGPM extends Model {
 	@Constraints.MinLength(21)
 	@Constraints.MaxLength(21)
 	@Constraints.Required
+	@Constraints.Pattern("[0-9]+")
 	@Column(name = "idGpm", length = 21, unique = true, nullable = false)
 	public String idGpm;
 

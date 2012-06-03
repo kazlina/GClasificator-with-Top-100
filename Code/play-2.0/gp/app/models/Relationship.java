@@ -15,6 +15,7 @@ public class Relationship extends Model {
 
     @Constraints.MaxLength(30)
     @Constraints.Required
+    @Constraints.Pattern("[a-zA-Z\\s]+")
     @Column(name = "status", length = 30, unique = true, nullable = false)
     public String status;
 

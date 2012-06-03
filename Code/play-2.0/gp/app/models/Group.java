@@ -15,6 +15,7 @@ public class Group extends Model {
 
 	@Constraints.MaxLength(50)
 	@Constraints.Required
+	@Constraints.Pattern("[a-zA-Z0-9\\s]+")
 	@Column(name = "name", length = 50, nullable = false, unique = true)
 	public String name;
 

@@ -27,6 +27,7 @@ public class Synonym extends Model {
 	
     @Constraints.MaxLength(30)
 	@Constraints.Required
+	@Constraints.Pattern("[a-zA-Z]+")
 	@Column(name = "synonym", length = 30, nullable = false)
 	public String synonym;
 	
