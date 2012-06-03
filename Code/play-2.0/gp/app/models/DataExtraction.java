@@ -181,14 +181,12 @@ public class DataExtraction {
         }
         return temp;
     }
-    private static ArrayList<HistogramForLinks> linkPreprocessor (String inputString, int maxLength) {
+    public static ArrayList<HistogramForLinks> linkPreprocessor (String inputString, int maxLength) {
     	String [] slicedStringMass = null;
 		
 		//Dividing input string into words
 		slicedStringMass = separateTokens(inputString);
 
-		//////////////////////////////
-		//It's just copied Julia code from word extractor with some refactoring
 		String urlRegexp = "(http|https|HTTP|HTTPS)://.*";
 		Pattern urlPattern = Pattern.compile(urlRegexp);
 		
@@ -223,42 +221,36 @@ public class DataExtraction {
 		//create and initialized first element histogram mass
 		ArrayList <HistogramForLinks> histogramList = new ArrayList<HistogramForLinks>();
 		try {
-			HistogramForLinks firstElem = new HistogramForLinks(sourcelinksList.get(0).toString());
-		
-			firstElem.count++;
-			histogramList.add(firstElem);
-			//deleting first link, because it was used
-			sourcelinksList.remove(0);
-			
-			boolean linkAdded = false;
 			for (URL currentLink: sourcelinksList) {
 			    for (Link linkFromDictionary: dictionaryLinks) {
-				    //for (HistogramForLinks currentHistogram: histogramList) {
 
 			    	if (dimainCollation(
-			        		linkFromDictionary.link.toString().substring(
-		        					getSecondSlashPosition(linkFromDictionary.link.toString()), getThirdSlashPosition(linkFromDictionary.link.toString())
+			        		linkFromDictionary.link.substring(
+		        					getSecondSlashPosition(linkFromDictionary.link), getThirdSlashPosition(linkFromDictionary.link)
 		        					)
-		        			,currentLink.getHost())
-			        		&& linksDistance(currentLink, new URL (linkFromDictionary.link)) <= maxLength) {
-			        	for (HistogramForLinks currentHistogram: histogramList) {
-			        		currentHistogram.count++;
-				        	linkAdded = true;			        		
-			        	}
-			        }
+		        			,currentLink.getHost())	&& 
+		        			linksDistance(currentLink, new URL (linkFromDictionary.link)) <= maxLength) {
+			    		//search in histogram such link
+			    		int indexOfLink;
+			    		boolean linkInHistogram = false;
+			    		for (indexOfLink = 0; 
+			    				indexOfLink < histogramList.size() && !linkInHistogram; 
+			    				indexOfLink++) {
+			    			linkInHistogram = histogramList.get(indexOfLink).link.equals(currentLink.toString());
+			    		}
+	        			if (linkInHistogram) {
+	        				histogramList.get(indexOfLink - 1).count++;
+	        			}
+		        		else {
+		        			histogramList.add(new HistogramForLinks(linkFromDictionary.link));
+		        		}
+			    	}
 			    }
-			    if (!linkAdded) {
-			    	HistogramForLinks newHistogramRecord = new HistogramForLinks(currentLink.toString());
-			    	newHistogramRecord.count++;
-			    	histogramList.add(newHistogramRecord);
-			    }
-			    linkAdded = false;
 			}
 		}
 		catch (Exception ex) {
 			//there is cannot be exception, because it should be early
 		}
-		//It's end of copied Julia code from word extractor
 		return histogramList;
 	}
     
