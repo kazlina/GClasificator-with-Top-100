@@ -15,6 +15,7 @@ public class Content extends Model {
 
     @Constraints.MaxLength(5)
     @Constraints.Required
+    @Constraints.Pattern("[a-z]+")
     @Column(name = "kind", length = 5, unique = true, nullable = false)
     public String kind;
 

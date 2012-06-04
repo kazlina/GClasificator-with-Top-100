@@ -22,11 +22,25 @@ create table BlackList (
   constraint pk_BlackList primary key (id))
 ;
 
+create table Content (
+  id                        bigint auto_increment not null,
+  kind                      varchar(5) not null,
+  constraint uq_Content_kind unique (kind),
+  constraint pk_Content primary key (id))
+;
+
 create table GPM (
   id                        bigint auto_increment not null,
-  id_gpm                    varchar(21) not null,
-  constraint uq_GPM_id_gpm unique (id_gpm),
+  idGpm                     varchar(21) not null,
+  constraint uq_GPM_idGpm unique (idGpm),
   constraint pk_GPM primary key (id))
+;
+
+create table Gender (
+  id                        bigint auto_increment not null,
+  value                     varchar(10) not null,
+  constraint uq_Gender_value unique (value),
+  constraint pk_Gender primary key (id))
 ;
 
 create table GroupDescr (
@@ -39,6 +53,7 @@ create table GroupDescr (
   imagePercent              integer,
   linkPercent               integer,
   videoPercent              integer,
+  audioPercent              integer,
   constraint uq_GroupDescr_name unique (name),
   constraint pk_GroupDescr primary key (id))
 ;
@@ -72,22 +87,23 @@ create table Link (
 
 create table NewGPM (
   id                        bigint auto_increment not null,
-  id_gpm                    varchar(21) not null,
+  idGpm                     varchar(21) not null,
   nMentiens                 integer not null,
-  constraint uq_NewGPM_id_gpm unique (id_gpm),
+  constraint uq_NewGPM_idGpm unique (idGpm),
   constraint pk_NewGPM primary key (id))
 ;
 
 create table Post (
   id                        bigint auto_increment not null,
+  postId                    varchar(40) not null,
   gpm                       bigint,
   dateCreate                datetime not null,
-  kindContent               varchar(10) not null,
+  kindContent               bigint,
   nComment                  integer,
   nPlusOne                  integer,
   nResharers                integer,
   isRepost                  tinyint(1) default 0 not null,
-  constraint uq_Post_1 unique (gpm,dateCreate),
+  constraint uq_Post_postId unique (postId),
   constraint pk_Post primary key (id))
 ;
 
@@ -115,10 +131,10 @@ create table Profile (
   dateUpdated               datetime not null,
   name                      varchar(100),
   image                     varchar(255),
-  gender                    varchar(255),
+  gender                    bigint,
   tagline                   varchar(255),
-  relationshipStatus        varchar(20),
-  Followers                 integer,
+  relationshipStatus        bigint,
+  nFollowers                integer,
   constraint uq_Profile_1 unique (gpm,dateUpdated),
   constraint pk_Profile primary key (id))
 ;
@@ -141,11 +157,18 @@ create table ProfileWord (
   constraint pk_ProfileWord primary key (id))
 ;
 
+create table Relationship (
+  id                        bigint auto_increment not null,
+  status                    varchar(30) not null,
+  constraint uq_Relationship_status unique (status),
+  constraint pk_Relationship primary key (id))
+;
+
 create table Synonym (
   id                        bigint auto_increment not null,
-  word_id                   bigint,
+  word                      bigint,
   synonym                   varchar(30) not null,
-  constraint uq_Synonym_1 unique (word_id,synonym),
+  constraint uq_Synonym_1 unique (word,synonym),
   constraint pk_Synonym primary key (id))
 ;
 
@@ -172,26 +195,32 @@ alter table GroupWord add constraint fk_GroupWord_word_7 foreign key (word) refe
 create index ix_GroupWord_word_7 on GroupWord (word);
 alter table Post add constraint fk_Post_gpm_8 foreign key (gpm) references GPM (id) on delete restrict on update restrict;
 create index ix_Post_gpm_8 on Post (gpm);
-alter table PostLink add constraint fk_PostLink_post_9 foreign key (post) references Post (id) on delete restrict on update restrict;
-create index ix_PostLink_post_9 on PostLink (post);
-alter table PostLink add constraint fk_PostLink_link_10 foreign key (link) references Link (id) on delete restrict on update restrict;
-create index ix_PostLink_link_10 on PostLink (link);
-alter table PostWord add constraint fk_PostWord_post_11 foreign key (post) references Post (id) on delete restrict on update restrict;
-create index ix_PostWord_post_11 on PostWord (post);
-alter table PostWord add constraint fk_PostWord_word_12 foreign key (word) references Word (id) on delete restrict on update restrict;
-create index ix_PostWord_word_12 on PostWord (word);
-alter table Profile add constraint fk_Profile_gpm_13 foreign key (gpm) references GPM (id) on delete restrict on update restrict;
-create index ix_Profile_gpm_13 on Profile (gpm);
-alter table ProfileLink add constraint fk_ProfileLink_profile_14 foreign key (profile) references Profile (id) on delete restrict on update restrict;
-create index ix_ProfileLink_profile_14 on ProfileLink (profile);
-alter table ProfileLink add constraint fk_ProfileLink_link_15 foreign key (link) references Link (id) on delete restrict on update restrict;
-create index ix_ProfileLink_link_15 on ProfileLink (link);
-alter table ProfileWord add constraint fk_ProfileWord_profile_16 foreign key (profile) references Profile (id) on delete restrict on update restrict;
-create index ix_ProfileWord_profile_16 on ProfileWord (profile);
-alter table ProfileWord add constraint fk_ProfileWord_word_17 foreign key (word) references Word (id) on delete restrict on update restrict;
-create index ix_ProfileWord_word_17 on ProfileWord (word);
-alter table Synonym add constraint fk_Synonym_word_18 foreign key (word_id) references Word (id) on delete restrict on update restrict;
-create index ix_Synonym_word_18 on Synonym (word_id);
+alter table Post add constraint fk_Post_kindContent_9 foreign key (kindContent) references Content (id) on delete restrict on update restrict;
+create index ix_Post_kindContent_9 on Post (kindContent);
+alter table PostLink add constraint fk_PostLink_post_10 foreign key (post) references Post (id) on delete restrict on update restrict;
+create index ix_PostLink_post_10 on PostLink (post);
+alter table PostLink add constraint fk_PostLink_link_11 foreign key (link) references Link (id) on delete restrict on update restrict;
+create index ix_PostLink_link_11 on PostLink (link);
+alter table PostWord add constraint fk_PostWord_post_12 foreign key (post) references Post (id) on delete restrict on update restrict;
+create index ix_PostWord_post_12 on PostWord (post);
+alter table PostWord add constraint fk_PostWord_word_13 foreign key (word) references Word (id) on delete restrict on update restrict;
+create index ix_PostWord_word_13 on PostWord (word);
+alter table Profile add constraint fk_Profile_gpm_14 foreign key (gpm) references GPM (id) on delete restrict on update restrict;
+create index ix_Profile_gpm_14 on Profile (gpm);
+alter table Profile add constraint fk_Profile_gender_15 foreign key (gender) references Gender (id) on delete restrict on update restrict;
+create index ix_Profile_gender_15 on Profile (gender);
+alter table Profile add constraint fk_Profile_relationshipStatus_16 foreign key (relationshipStatus) references Relationship (id) on delete restrict on update restrict;
+create index ix_Profile_relationshipStatus_16 on Profile (relationshipStatus);
+alter table ProfileLink add constraint fk_ProfileLink_profile_17 foreign key (profile) references Profile (id) on delete restrict on update restrict;
+create index ix_ProfileLink_profile_17 on ProfileLink (profile);
+alter table ProfileLink add constraint fk_ProfileLink_link_18 foreign key (link) references Link (id) on delete restrict on update restrict;
+create index ix_ProfileLink_link_18 on ProfileLink (link);
+alter table ProfileWord add constraint fk_ProfileWord_profile_19 foreign key (profile) references Profile (id) on delete restrict on update restrict;
+create index ix_ProfileWord_profile_19 on ProfileWord (profile);
+alter table ProfileWord add constraint fk_ProfileWord_word_20 foreign key (word) references Word (id) on delete restrict on update restrict;
+create index ix_ProfileWord_word_20 on ProfileWord (word);
+alter table Synonym add constraint fk_Synonym_word_21 foreign key (word) references Word (id) on delete restrict on update restrict;
+create index ix_Synonym_word_21 on Synonym (word);
 
 
 
@@ -203,7 +232,11 @@ drop table AddedByAdmin;
 
 drop table BlackList;
 
+drop table Content;
+
 drop table GPM;
+
+drop table Gender;
 
 drop table GroupDescr;
 
@@ -226,6 +259,8 @@ drop table Profile;
 drop table ProfileLink;
 
 drop table ProfileWord;
+
+drop table Relationship;
 
 drop table Synonym;
 
