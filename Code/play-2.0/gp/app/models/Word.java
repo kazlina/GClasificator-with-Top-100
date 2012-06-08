@@ -46,15 +46,12 @@ public class Word extends Model {
 	}
 
 	public static List<String> allInString() {
-		List <Word> words = all();
 		List <String> wordsInString = new ArrayList<String>();
-
-		for (Word word: words)
+		for (Word word: all())
 			wordsInString.add(word.word);
-
 		return wordsInString;
 	}
-
+	
 	public static Word findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}
