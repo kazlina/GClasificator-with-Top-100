@@ -49,6 +49,10 @@ public class Link extends Model {
 		return linksInString;
 	}
 	
+	public static Integer size() {
+		return find.findRowCount();
+	}
+	
 	public static Link findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}

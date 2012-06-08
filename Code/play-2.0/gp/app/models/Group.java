@@ -89,6 +89,10 @@ public class Group extends Model {
 	public static Group findByName(String name) {
 		return find.where().eq("name", name).findUnique();
 	}
+	
+	public static Integer size() {
+		return find.findRowCount();
+	}
 
 	public static void add(Group group) {
 		Group findGroup = Group.findByName(group.name);

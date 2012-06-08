@@ -6,6 +6,9 @@
 GET     /                       controllers.Application.index()
 GET     /ind                    controllers.Application.ind()
 
+# ADMIN PAGE
+GET     /admin            		controllers.Admin.main()
+
 # LINKS
 GET     /admin/links            controllers.Links.links()
 POST    /admin/links            controllers.Links.newLink()

@@ -52,6 +52,10 @@ public class Word extends Model {
 		return wordsInString;
 	}
 	
+	public static Integer size() {
+		return find.findRowCount();
+	}
+	
 	public static Word findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}
