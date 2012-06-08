@@ -43,12 +43,9 @@ public class Link extends Model {
 	}
 
 	public static List<String> allInString() {
-		List <Link> links = all();
 		List <String> linksInString = new ArrayList<String>();
-		
-		for (Link link: links)
+		for (Link link: all())
 			linksInString.add(link.link);
-		
 		return linksInString;
 	}
 	

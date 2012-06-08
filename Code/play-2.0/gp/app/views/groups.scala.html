@@ -9,8 +9,9 @@
         @for(group <- groups) {
             <li>
                 @group.name
-                <a href=@routes.Groups.groupWords(group.id)>Edit words of group</a><br>
-                <a href=@routes.Groups.viewGroup(group.id)>View</a>
+                <br><a href=@routes.Groups.groupWords(group.id)>Edit words of group</a>
+                <br><a href=@routes.Groups.groupLinks(group.id)>Edit links of group</a>
+                <br><a href=@routes.Groups.viewGroup(group.id)>View</a>
                 @form(routes.Groups.deleteGroup(group.id)) {
                     <input type="submit" value="Delete">
                 }

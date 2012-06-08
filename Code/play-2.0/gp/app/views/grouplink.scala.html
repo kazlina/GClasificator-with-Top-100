@@ -1,0 +1,30 @@
+@(group: Group, nameGroup: String, groupLinks: List[GroupLink], groupLinkForm: Form[GroupLink])
+
+@import helper._
+
+@main("Group links list") {
+    <h1>Links for group @nameGroup</h1>
+    
+    <ul>
+        @for(groupLink <- groupLinks) {
+            <li>
+                @groupLink.link
+                @form(routes.Groups.deleteGroupLink(group.id,groupLink.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    <hr/>
+    
+    <h2>Add a new link to the list of links of group</h2>
+    
+    @form(routes.Groups.addGroupLink(group.id)) {
+        @select(groupLinkForm("link"), options(Link.allInString), '_label -> "links")
+        @inputText(groupLinkForm("postWeight"))
+        @inputText(groupLinkForm("profileWeight"))
+        <input type="submit" value="Create">
+    }
+    <hr/>
+    <a href=@routes.Groups.groups()>Back to groups</a>
+}

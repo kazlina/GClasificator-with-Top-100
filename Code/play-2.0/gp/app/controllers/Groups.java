@@ -82,4 +82,29 @@ public class Groups extends Controller {
         GroupWord.delete(groupWordId);
         return redirect(routes.Groups.groupWords(groupId));
     }
+    
+    // GROUP LINKS
+    //you can see all group's words
+    public static Result groupLinks(Long groupId) {
+        Group gr = Group.findById(groupId);
+    	return ok(views.html.grouplink.render(gr, gr.name, GroupLink.findByGroup(groupId), form(GroupLink.class)));
+    }
+
+    //you can add group's word
+    public static Result addGroupLink(Long groupId) {
+    	Group gr = Group.findById(groupId);
+    	Form<GroupLink> filledForm = form(GroupLink.class).bindFromRequest();
+        if(filledForm.hasErrors()) 
+        	return badRequest(views.html.grouplink.render(gr, gr.name, GroupLink.findByGroup(groupId), filledForm));
+         
+        GroupLink gl = filledForm.get();
+        GroupLink.add(new GroupLink(groupId, gl.link.link, gl.postWeight, gl.profileWeight));
+        return redirect(routes.Groups.groupLinks(groupId));
+    }
+
+    //you can delete group's word
+    public static Result deleteGroupLink(Long groupId,Long groupWordId) {
+        GroupWord.delete(groupWordId);
+        return redirect(routes.Groups.groupWords(groupId));
+    }
 }
