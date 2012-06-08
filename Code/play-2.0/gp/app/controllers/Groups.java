@@ -69,12 +69,9 @@ public class Groups extends Controller {
     //you can add group's word
     public static Result addGroupWord(Long groupId) {
     	Form<GroupWord> filledForm = form(GroupWord.class).bindFromRequest();
-        if(filledForm.hasErrors()) {
-        	System.out.println("-----------------------------");
-        	System.out.println(filledForm.errors());
-        	System.out.println("-----------------------------");
+        if(filledForm.hasErrors()) 
         	return badRequest(views.html.groupword.render(Group.findById(groupId), Group.findById(groupId).name, GroupWord.findByGroup(groupId), filledForm));
-        } 
+         
         GroupWord gw = filledForm.get();
         GroupWord.add(new GroupWord(groupId, gw.word.word, gw.postWeight, gw.profileWeight));
         return redirect(routes.Groups.groupWords(groupId));
