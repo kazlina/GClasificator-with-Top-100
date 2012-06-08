@@ -13,9 +13,9 @@ public class Group extends Model {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-	@Constraints.MaxLength(50)
-	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Zа-яА-Я0-9\\s]+")
+	@Constraints.MaxLength(value = 50, message = "max length = 50")
+	@Constraints.Required(message = "name is required")
+	@Constraints.Pattern(value = "[a-zA-Zа-яА-Я0-9\\s]+", message = "Incorrect name of group")
 	@Column(name = "name", length = 50, nullable = false, unique = true)
 	public String name;
 

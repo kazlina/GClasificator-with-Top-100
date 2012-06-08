@@ -15,7 +15,7 @@ public class Word extends Model {
 
 	@Constraints.MaxLength(30)
 	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Zа-яА-Я]+")
+	@Constraints.Pattern(value = "[a-zA-Zа-яА-Я]+", message = "Incorrect word")
 	@Column(name = "word", length = 30, nullable = false, unique = true)
 	public String word;
 
