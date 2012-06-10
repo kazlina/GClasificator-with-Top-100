@@ -1,1747 +1,618 @@
--- phpMyAdmin SQL Dump
--- version 3.4.5deb1
--- http://www.phpmyadmin.net
+CREATE DATABASE  IF NOT EXISTS `test` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `test`;
+-- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)
 --
--- Хост: localhost
--- Время создания: Апр 21 2012 г., 20:23
--- Версия сервера: 5.1.62
--- Версия PHP: 5.3.6-13ubuntu3.6
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: test
+-- ------------------------------------------------------
+-- Server version	5.1.53-community
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- База данных: `test`
+-- Table structure for table `play_evolutions`
 --
 
---
--- Дамп данных таблицы `NewGPM`
---
-
-INSERT INTO `NewGPM` (`id_gpm`, `nMentiens`) VALUES
-('105727444555813489376', 2),
-('106081895808858114685', 2),
-('108497854512071229497', 1),
-('109881842842005617350', 1),
-('109297897538038103233', 1),
-('104146453223630643589', 1),
-('116889817243857236759', 1),
-('116478408432375245793', 1),
-('111414365412067268018', 1),
-('114389732693324084004', 1),
-('111218576343303467396', 1),
-('101082968627292826572', 1),
-('107540629485283649979', 1),
-('115126783957192949128', 1),
-('112000655852778703531', 1),
-('102027639157949156986', 1),
-('107601406689066602184', 1),
-('108487293502568686632', 1),
-('110758668954214890916', 1),
-('116155683760690202517', 1),
-('101328151020046391596', 1),
-('103070466664167067139', 1),
-('107324786350943348934', 1),
-('115439787677651869141', 1),
-('112536248901730665074', 1),
-('102518249556756332560', 1),
-('104741165054201306683', 1),
-('102703800095809622855', 1),
-('110844767706810088397', 1),
-('113378850557808427343', 1),
-('113455568550681617115', 1),
-('104912917356741246670', 1),
-('114130497407307723807', 1),
-('106610782806678263222', 1),
-('108117854221718814462', 1),
-('115960317996844691235', 1),
-('105867571821556184468', 1),
-('109485687357389929885', 1),
-('112864828015335332199', 1),
-('107061969520656964054', 1),
-('111827971023014472404', 1),
-('107164074163119705733', 1),
-('113796848790713882648', 1),
-('116907396629005511240', 1),
-('115578475618676021782', 1),
-('116222792096549133909', 1),
-('102148968102552916213', 1),
-('102356402603993684869', 1),
-('107163539223211669406', 1),
-('105660299511631173020', 1),
-('101499765944129661495', 1),
-('116409994270736740147', 1),
-('116655779661817376126', 1),
-('109848546048504966459', 1),
-('106951547181083343357', 1),
-('114549399670348425173', 1),
-('108523300063684902117', 1),
-('105112576061224982618', 1),
-('104166963913180669757', 1),
-('101764897419972320467', 1),
-('109477654250057350287', 1),
-('115917885396499085812', 1),
-('117724206934284535078', 1),
-('113046410027988176936', 1),
-('103492736471916442017', 1),
-('110003977323521433076', 1),
-('108926624173894619660', 1),
-('100718438236613896588', 1),
-('113696405311752226753', 1),
-('109917975531265202564', 1),
-('114621385895763735070', 1),
-('107685628073198022677', 1),
-('116167371920966635865', 1),
-('113563197235112166080', 1),
-('104214171578749661248', 1),
-('109513947582592182637', 1),
-('115559311346180804839', 1),
-('117621833384436120621', 1),
-('104290170485188514094', 1),
-('105792786274478842234', 1),
-('115182577996148656791', 1),
-('109109540439739103360', 1),
-('109141192126338179138', 1),
-('115623702808833558579', 1),
-('100752408567904662989', 1),
-('115600002723737184297', 1),
-('109991935331534808914', 1),
-('112243708749314909341', 1),
-('113424405670100069223', 1),
-('116684218922961448134', 1),
-('111221260489730780723', 1),
-('113675392485884459200', 1),
-('100347258368557502240', 1),
-('100135795418953301535', 1),
-('101075069482078155889', 1),
-('114462607483992586940', 1),
-('102070757518827075005', 1),
-('105487703012039957818', 1),
-('107866692061033886550', 1),
-('102867297157850987181', 1),
-('109281994634845538462', 1),
-('112296736758395613032', 1),
-('100537644899195194897', 1),
-('103558822527435570944', 1),
-('105805953202813756631', 1),
-('107574506845018937097', 1),
-('114200159301997059067', 1),
-('100702045876666903960', 1),
-('103823651636164768505', 1),
-('108855660368769362180', 1),
-('114755240492684394380', 1),
-('100491168277202401951', 1),
-('114833056821144106055', 1),
-('117194483866411181633', 1),
-('111609610754130053369', 1),
-('109707838530687847453', 1),
-('111342058032975227702', 1),
-('116926412851461620376', 1),
-('117538399501523144894', 1),
-('103467386265662564691', 1),
-('111363888584226099376', 1),
-('112646316806065340881', 1),
-('117467870890649074124', 1),
-('100372499750213429035', 1),
-('104685139841684618715', 1),
-('113129566443005386436', 1),
-('106430897959412956937', 1),
-('102320153591660781514', 1),
-('109053873582042161204', 1),
-('105147271918240387853', 1),
-('106459587246946642986', 1),
-('118089998056466658888', 1),
-('113154016319829303368', 1),
-('104707722691001913497', 1),
-('111351992473257691403', 1),
-('103547953111411764396', 1),
-('117567970846938402069', 1),
-('117441342438922393140', 1),
-('106964361259992368482', 1),
-('114033023534739473398', 1),
-('109864924511609341233', 1),
-('107241708592733555482', 1),
-('110288681882310008864', 1),
-('105741130802710137031', 1),
-('117390771594701179922', 1),
-('116893960595816892260', 1),
-('108815458602651747249', 1),
-('106403022809621967046', 1),
-('107741152832245188942', 1),
-('116898274668790674664', 1),
-('113554757943345023986', 1),
-('100736747588561508538', 1),
-('116659731612606540330', 1),
-('112625130777409888914', 1),
-('101908391863742993018', 1),
-('117427965408516165606', 1),
-('107966445473072595112', 1),
-('108944772511777890335', 1),
-('117842780953247652925', 1),
-('102566994413152502478', 1),
-('107731632269683572003', 1),
-('101342256865214074383', 1),
-('110727555995273535464', 1),
-('113521113094746407741', 1),
-('115788806758991712248', 1),
-('114686091695228729256', 1),
-('107878861705416620562', 1),
-('111469227243795252706', 1),
-('104677812953833386554', 1),
-('113926289500476760879', 1),
-('118202792925679737828', 1),
-('106222965570898155371', 1),
-('116889123782033227907', 1),
-('115098225746367263023', 1),
-('113276861370213912415', 1),
-('110439401865641226991', 1),
-('107947745249372458692', 1),
-('106977486730357049095', 1),
-('115845878002180683760', 1),
-('108764217215644747348', 1),
-('105065100709231875267', 1),
-('108930904812390819519', 1),
-('114497289253126530472', 1),
-('103634396390456644248', 1),
-('100320675800516951460', 1),
-('110670988463298255888', 1),
-('110047017260368408383', 1),
-('115772705939323632870', 1),
-('105999472614064220701', 1),
-('117232754327695118207', 1),
-('113375141255760433461', 1),
-('101563133917495152745', 1),
-('106576014130608390077', 1),
-('113537246107008318726', 1),
-('103405347001806295230', 1),
-('102111225690683538037', 1),
-('117802859619847554171', 1),
-('100586061801858575149', 1),
-('116569924076395286043', 1),
-('112189121637434791825', 1),
-('106048826852755799228', 1),
-('102430262175562376616', 1),
-('117127106340710780315', 1),
-('109511980545405584330', 1),
-('107972960011131134927', 1),
-('112424869495383218984', 1),
-('106650556121080621799', 1),
-('111252451305314712315', 1),
-('112086562578687549746', 1),
-('109633507430487661017', 1),
-('105874716432514375144', 1),
-('107680480596904391940', 1),
-('103829281202402155975', 1),
-('100538296843243761741', 1),
-('101985569437571906463', 1),
-('112165061688946926011', 1),
-('103685370624600585350', 1),
-('100213100174232499931', 1),
-('118338122807204617709', 1),
-('104751441551165877262', 1),
-('110450743774270176758', 1),
-('102852554203969333154', 1),
-('109086485902314041381', 1),
-('108810152752960817249', 1),
-('116897920940109090121', 1),
-('113325056289989785412', 1),
-('117201208024264158264', 1),
-('105032343574729198615', 1),
-('111434081641654028537', 1),
-('111547813343683356709', 1),
-('107462853236093664627', 1),
-('100943816011247703972', 1),
-('112384396012685100301', 1),
-('112275856390520557607', 1),
-('109136630267873698352', 1),
-('117421123686295963767', 1),
-('106058191573227772287', 1),
-('104116783688196701140', 1),
-('110925169272074144560', 1),
-('111904771838673960423', 1),
-('117766299313421064218', 1),
-('118264682014694899398', 1),
-('105015855023589422618', 1),
-('108113328568346463673', 1),
-('111197644910310088877', 1),
-('106138177035293880199', 1),
-('104721448843223899740', 1),
-('111441278602865212925', 1),
-('105276502254027740724', 1),
-('117282508127784901767', 1),
-('104152600378375983552', 1),
-('114048275133157482409', 1),
-('106699272501076142278', 1),
-('100223390369318616889', 1),
-('109636984586624810111', 1),
-('106377453958809776928', 1),
-('105046907714015556743', 1),
-('108552861808800504662', 1),
-('103534615873032920951', 1),
-('111144825372910043343', 1),
-('111682381206859822244', 1),
-('102046557558192368281', 1),
-('110703691461436810484', 1),
-('108639202178465068721', 1),
-('117560743785798308154', 1),
-('104347354268904343201', 1),
-('102043605096647731212', 1),
-('113302671083219323027', 1),
-('115304200687794350630', 1),
-('105946933738933611322', 1),
-('109530965043923225739', 1),
-('107666757153354509343', 1),
-('108617092770977658374', 1),
-('115554116701697093221', 1),
-('101133210103430144800', 1),
-('102771048419431790185', 1),
-('112191495220481353399', 1),
-('112100152724685677190', 1),
-('113924725262132857615', 1),
-('111358240714026955387', 1),
-('107202614850913025937', 1),
-('108614926117501246457', 1),
-('116443598357470098641', 1),
-('110476119537799041586', 1),
-('100107260898095371759', 1),
-('101961690411361725114', 1),
-('109356527308265286844', 1),
-('108752630163899638798', 1),
-('106340506143611494141', 1),
-('101723022107285833148', 1),
-('109967480336207654200', 1),
-('110863639057606201122', 1),
-('111801028926635136863', 1),
-('116990273601802102374', 1),
-('108116381524723779709', 1),
-('104293413184036494645', 1),
-('114807014800070389464', 1),
-('114798656894956316427', 1),
-('111835748558332545676', 1),
-('110967702097386375468', 1);
-
+DROP TABLE IF EXISTS `play_evolutions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `play_evolutions` (
+  `id` int(11) NOT NULL,
+  `hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `applied_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `apply_script` text COLLATE utf8_unicode_ci,
+  `revert_script` text COLLATE utf8_unicode_ci,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_problem` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп данных таблицы `GPM`
+-- Dumping data for table `play_evolutions`
 --
 
-INSERT INTO `GPM` (`id`,`id_gpm`) VALUES
-(1, '100237630574484089823'),
-(2, '102871830398264157687'),
-(3, '113359777710817483258'),
-(4, '103172158448932010502'),
-(5, '114862790439773763162'),
-(6, '108437871879281403721'),
-(7, '105226553876340461108'),
-(8, '110950950882502330382'),
-(9, '115880304856486149254'),
-(10, '102851767877912089372'),
-(11, '110710051462926796984'),
-(12, '102062962160740605096'),
-(13, '115126181109689868156'),
-(14, '105148782014971508620'),
-(15, '101297223506570420213'),
-(16, '109070219292455564541'),
-(17, '108545813606466940684'),
-(18, '107997921224609250721'),
-(19, '103322054410787170741'),
-(20, '111755731633845208016'),
-(21, '111962077049890418486'),
-(22, '109513465916727821308'),
-(23, '116854937671270701931'),
-(24, '101884531993220192600'),
-(25, '106472137404451336877'),
-(26, '113941021920276385753'),
-(27, '117443949326971307946'),
-(28, '108930152274984501310'),
-(29, '118418954133777758418'),
-(30, '110310877919739927400'),
-(31, '113266766793656424935'),
-(32, '103614022894261388839'),
-(33, '112597862728294451971'),
-(34, '109426322105564144975'),
-(35, '106469974714953558245'),
-(36, '114651930974609406394'),
-(37, '118218435018193081342'),
-(38, '110107339878968721607'),
-(39, '113911146997010572793'),
-(40, '115611447280612302542'),
-(41, '111750020482442086859'),
-(42, '111367435513003508332'),
-(43, '101113754039426612780'),
-(44, '110219388018658796740'),
-(45, '109262369432886122025'),
-(46, '108317314746377111824'),
-(47, '113438256900303213931'),
-(48, '117264386846913687230'),
-(49, '114339510646405657410'),
-(50, '101848926014582449074'),
-(51, '111014844970722661388'),
-(52, '108819592697488458076'),
-(53, '116444957556175943850'),
-(54, '111931627441418090108'),
-(55, '114137303766439306556'),
-(56, '103114665076340695946'),
-(57, '108030124760702808713'),
-(58, '104578309919492528255'),
-(59, '108737182344572663055'),
-(60, '101830909916620833538'),
-(61, '106474026900111874801'),
-(62, '111797999376336266287'),
-(63, '102798028319178785921'),
-(64, '103685740157136493702'),
-(65, '110376448387770502311'),
-(66, '107105348072959327741'),
-(67, '117100521176975612690'),
-(68, '117484822908955118072'),
-(69, '101373961279443806744'),
-(70, '108900123222187129096'),
-(71, '104042965789095032304'),
-(72, '102865263115020893218'),
-(73, '113625462103500841369'),
-(74, '108177381721794114207'),
-(75, '111112809838472063992'),
-(76, '105362990780240393762'),
-(77, '104584322313471697637'),
-(78, '115961021629090154025'),
-(79, '110924681541917174512'),
-(80, '104359092098400076998'),
-(81, '111124838372075709293'),
-(82, '117697399358826098478'),
-(83, '107489144252174167638'),
-(84, '104987932455782713675'),
-(85, '101607164549546362845'),
-(86, '101358132915387811680'),
-(87, '110378953230340021029'),
-(88, '112160401912410742862'),
-(89, '117186458716523937136'),
-(90, '107808257391213832544'),
-(91, '117523780312701271966'),
-(92, '102946542014341156581'),
-(93, '107047796519061210494'),
-(94, '102991700177087923792'),
-(95, '113072711822326175383'),
-(96, '101086723341988609817'),
-(97, '102397052073935758476'),
-(98, '103438332263642514693'),
-(99, '107590607834908463472'),
-(100, '112642573356460292505'),
-(101, '104450760987525660219'),
-(102, '114489276586542400632'),
-(103, '117377434815709898403'),
-(104, '115695578304416858659'),
-(105, '106526452034734966566'),
-(106, '104605946488794124557'),
-(107, '112652642866960214917'),
-(108, '111014820258310090462'),
-(109, '113702637309752822154'),
-(110, '104582505916119011826'),
-(111, '115086020530995525916'),
-(112, '106078817258497259289'),
-(113, '109774951215877430341'),
-(114, '108584805279585306962'),
-(115, '108851026326071355993'),
-(116, '117757565120070816446'),
-(117, '108443027359212340995'),
-(118, '115389783780767903194'),
-(119, '107682127259406303623'),
-(120, '113933900781596561921'),
-(121, '106078945425159812521'),
-(122, '107117483540235115863'),
-(123, '113455290791279442483'),
-(124, '100187476770699262263'),
-(125, '106189723444098348646'),
-(126, '111000835266298743697'),
-(127, '105374053126573134396'),
-(128, '111663200449496600556'),
-(129, '103533326117556337218'),
-(130, '106612212961522683427'),
-(131, '116226932711437764309'),
-(132, '116300127798936608980'),
-(133, '107234826207633309420'),
-(134, '112418301618963883780'),
-(135, '102842474642952848368'),
-(136, '113567079117038816080'),
-(137, '108998981953582461859'),
-(138, '112333944070832643201'),
-(139, '107965908980122847486'),
-(140, '102078626327216121008'),
-(141, '101885378781377158143'),
-(142, '110103641077948436261'),
-(143, '114256368867306598055'),
-(144, '104080364565463357906'),
-(145, '109445052568756454814'),
-(146, '107978533419612049399'),
-(147, '115106448444522478339'),
-(148, '112932784151698305129'),
-(149, '108384201920217141722'),
-(150, '114514155722976658302'),
-(151, '109630659107188171995'),
-(152, '114153859732710523651'),
-(153, '117149748409261143562'),
-(154, '111873853137122484021'),
-(155, '115360471097759949621'),
-(156, '107771181372242547518'),
-(157, '110899709105002539146'),
-(158, '101062235821996561929'),
-(159, '117200237104468182805'),
-(160, '114536133164105123829'),
-(161, '114927294217645926989'),
-(162, '100487969343352743165'),
-(163, '106133480923323663427'),
-(164, '101568956202899798139'),
-(165, '104625680955461792087'),
-(166, '110601489851669034905'),
-(167, '107607569797601764658'),
-(168, '116023012118919307324'),
-(169, '111699855306814304937'),
-(170, '108470782772821648496'),
-(171, '114338270254521043906'),
-(172, '115924865466302265389'),
-(173, '107902791674095682080'),
-(174, '107119940474246316259'),
-(175, '117865657916498538688'),
-(176, '102409541521880756024'),
-(177, '110945896776944314708'),
-(178, '116247667398036716276'),
-(179, '100121771572038665942'),
-(180, '105547060999578080024'),
-(181, '105228323457033543279'),
-(182, '107507539268974734333'),
-(183, '101263615503715477581'),
-(184, '113020499347875878373'),
-(185, '109876318275533969777'),
-(186, '108115916250756840114'),
-(187, '108032623298499022371'),
-(188, '111095045247360522931'),
-(189, '100605864222557374608'),
-(190, '106176762220398854458'),
-(191, '116217341136297387119'),
-(192, '117310042965407401917'),
-(193, '107383157816966336384'),
-(194, '107410390066929416191'),
-(195, '117012073762049397704'),
-(196, '104492758108542814469'),
-(197, '109395595318124294995'),
-(198, '109813896768294978296'),
-(199, '107682748671253717847'),
-(200, '113217924531763968801'),
-(201, '117574275845876523777'),
-(202,'116797080272126609169'),
-(203, '107753428759636856492'),
-(204, '110351160992477343545'),
-(205,'114618043230336563405'),
-(206,'115476760898236047310'),
-(207,'103399926392582289066'),
-(208,'113882113745075873153'),
-(209,'109895887909967698705'),
-(210,'117851035855826465807'),
-(211, '113104553286769158393'),
-(212,'100982542565040210759'),
-(213,'104527336160199666877'),
-(214,'114429268108164958658'),
-(215,'108064987002967815406'),
-(216,'108442283195035542863'),
-(217,'114692043974858733404'),
-(218,'117576570968762597633'),
-(219,'103431929066971009187'),
-(220,'109956665432008548196'),
-(221,'101697775213251991950'),
-(222,'102766862318438263839'),
-(223,'115892016102825426276'),
-(224,'106393478695568433143'),
-(225,'103667678270324179713'),
-(226,'101401758788146857707'),
-(227,'116649538143102503746'),
-(228,'111485501208531423117'),
-(229,'110749379267845817082'),
-(230,'109397461154116413309'),
-(231,'110260043240685719403'),
-(232,'110301351129803392889'),
-(233,'102808055366513259643'),
-(234,'112433233162542061134'),
-(235,'105072305864951447999'),
-(236,'107459220492917008623'),
-(237,'106041044070973034789'),
-(238,'101635646826159269569'),
-(239,'105263179223599481812'),
-(240,'117946280977397583653'),
-(241,'100878750601794258007'),
-(242,'105829127126456546310'),
-(243,'101963562526317648015'),
-(244,'117596712775912423303'),
-(245,'101032695844597631152'),
-(246,'101055508006784976207'),
-(247,'104512463398531242371'),
-(248,'114182956162660391899'),
-(249,'114407290472947588380'),
-(250, '106651724747459783271'),
-(251,'102219475968800204884'),
-(252,'109708803236569894683'),
-(253,'108998673146368660257'),
-(254,'113391764481641719364'),
-(255,'103961830934909664721'),
-(256,'111869347391871267742'),
-(257,'118278103414973538940'),
-(258,'101849747879612982297'),
-(259,'100985592227856419908'),
-(260,'110318982509514011806'),
-(261,'113127438179392830442'),
-(262,'101261243957067319422'),
-(263,'112918443114281605164'),
-(264,'113116318008017777871'),
-(265,'110352049954858592591'),
-(266,'112838502596906088209'),
-(267,'105708414064799835376'),
-(268,'118075919496626375791'),
-(269,'114424163811716070551'),
-(270,'117358845486245155054'),
-(271,'104553134624556200907'),
-(272,'107968525907303243288'),
-(273,'106166623138751182431'),
-(274,'105304378023511234716'),
-(275,'103170905344370158971'),
-(276,'108721466183079531495'),
-(277,'102650149727724374614'),
-(278,'115370362521098055110'),
-(279,'111262146038004038186'),
-(280,'107362628080904735459'),
-(281,'115088379301960147122'),
-(282,'111024867716009599127'),
-(283,'101773665563877788994'),
-(284,'100125012078853567494'),
-(285,'100714924968242569275'),
-(286,'105176186612843033039'),
-(287,'107237971410782934577'),
-(288,'114298469939126595172'),
-(289,'105019697110407738154'),
-(290,'116217543656262200291'),
-(291,'112925421996968278033'),
-(292,'108986482395975467331'),
-(293,'115179679900545378026'),
-(294,'116482086628123122453'),
-(295,'114075031055755136093'),
-(296,'115287228091669334278'),
-(297,'107640279749845902491'),
-(298,'116933946231042531581'),
-(299, '116894851940832610980'),
-(300, '105871790537930741438');
+LOCK TABLES `play_evolutions` WRITE;
+/*!40000 ALTER TABLE `play_evolutions` DISABLE KEYS */;
+INSERT INTO `play_evolutions` VALUES (1,'750c21cfb3e56f8515a095ba19d60b61bfdf287b','2012-04-29 12:14:41','create table AddedByAdmin (\nid                        bigint auto_increment not null,\ngpm                       bigint,\ngroupDescr                bigint,\nposition                  integer not null,\ndateOfAddition            datetime not null,\ndateOfRemoval             datetime,\ncommentField              varchar(255),\nconstraint uq_AddedByAdmin_1 unique (gpm,groupDescr),\nconstraint pk_AddedByAdmin primary key (id))\n;\n\ncreate table BlackList (\nid                        bigint auto_increment not null,\ndateOfAddition            datetime not null,\nreasonOfAddition          varchar(255),\nconstraint pk_BlackList primary key (id))\n;\n\ncreate table Content (\nid                        bigint auto_increment not null,\nkind                      varchar(5) not null,\nconstraint uq_Content_kind unique (kind),\nconstraint pk_Content primary key (id))\n;\n\ncreate table GPM (\nid                        bigint auto_increment not null,\nidGpm                     varchar(21) not null,\nconstraint uq_GPM_idGpm unique (idGpm),\nconstraint pk_GPM primary key (id))\n;\n\ncreate table Gender (\nid                        bigint auto_increment not null,\nvalue                     varchar(10) not null,\nconstraint uq_Gender_value unique (value),\nconstraint pk_Gender primary key (id))\n;\n\ncreate table GroupDescr (\nid                        bigint auto_increment not null,\nname                      varchar(50) not null,\nactiveImage               varchar(255) not null,\npassiveImage              varchar(255) not null,\ndescription               varchar(255),\ntextPercent               integer,\nimagePercent              integer,\nlinkPercent               integer,\nvideoPercent              integer,\naudioPercent              integer,\nconstraint uq_GroupDescr_name unique (name),\nconstraint pk_GroupDescr primary key (id))\n;\n\ncreate table GroupLink (\nid                        bigint auto_increment not null,\ngroupDescr                bigint,\nlink                      bigint,\npostWeight                float not null,\nprofileWeight             float not null,\nconstraint uq_GroupLink_1 unique (groupDescr,link),\nconstraint pk_GroupLink primary key (id))\n;\n\ncreate table GroupWord (\nid                        bigint auto_increment not null,\ngroupDescr                bigint,\nword                      bigint,\npostWeight                float not null,\nprofileWeight             float not null,\nconstraint uq_GroupWord_1 unique (groupDescr,word),\nconstraint pk_GroupWord primary key (id))\n;\n\ncreate table Link (\nid                        bigint auto_increment not null,\nlink                      varchar(255) not null,\nconstraint uq_Link_link unique (link),\nconstraint pk_Link primary key (id))\n;\n\ncreate table NewGPM (\nid                        bigint auto_increment not null,\nidGpm                     varchar(21) not null,\nnMentiens                 integer not null,\nconstraint uq_NewGPM_idGpm unique (idGpm),\nconstraint pk_NewGPM primary key (id))\n;\n\ncreate table Post (\nid                        bigint auto_increment not null,\npostId                    varchar(40) not null,\ngpm                       bigint,\ndateCreate                datetime not null,\nkindContent               bigint,\nnComment                  integer,\nnPlusOne                  integer,\nnResharers                integer,\nisRepost                  tinyint(1) default 0 not null,\nconstraint uq_Post_postId unique (postId),\nconstraint pk_Post primary key (id))\n;\n\ncreate table PostLink (\nid                        bigint auto_increment not null,\npost                      bigint,\nlink                      bigint,\namount                    integer not null,\nconstraint uq_PostLink_1 unique (post,link),\nconstraint pk_PostLink primary key (id))\n;\n\ncreate table PostWord (\nid                        bigint auto_increment not null,\npost                      bigint,\nword                      bigint,\namount                    integer not null,\nconstraint uq_PostWord_1 unique (post,word),\nconstraint pk_PostWord primary key (id))\n;\n\ncreate table Profile (\nid                        bigint auto_increment not null,\ngpm                       bigint,\ndateUpdated               datetime not null,\nname                      varchar(100),\nimage                     varchar(255),\ngender                    bigint,\ntagline                   varchar(255),\nrelationshipStatus        bigint,\nnFollowers                integer,\nconstraint uq_Profile_1 unique (gpm,dateUpdated),\nconstraint pk_Profile primary key (id))\n;\n\ncreate table ProfileLink (\nid                        bigint auto_increment not null,\nprofile                   bigint,\nlink                      bigint,\namount                    integer not null,\nconstraint uq_ProfileLink_1 unique (profile,link),\nconstraint pk_ProfileLink primary key (id))\n;\n\ncreate table ProfileWord (\nid                        bigint auto_increment not null,\nprofile                   bigint,\nword                      bigint,\namount                    integer not null,\nconstraint uq_ProfileWord_1 unique (profile,word),\nconstraint pk_ProfileWord primary key (id))\n;\n\ncreate table Relationship (\nid                        bigint auto_increment not null,\nstatus                    varchar(30) not null,\nconstraint uq_Relationship_status unique (status),\nconstraint pk_Relationship primary key (id))\n;\n\ncreate table Synonym (\nid                        bigint auto_increment not null,\nword                      bigint,\nsynonym                   varchar(30) not null,\nconstraint uq_Synonym_1 unique (word,synonym),\nconstraint pk_Synonym primary key (id))\n;\n\ncreate table Word (\nid                        bigint auto_increment not null,\nword                      varchar(30) not null,\nconstraint uq_Word_word unique (word),\nconstraint pk_Word primary key (id))\n;\n\nalter table AddedByAdmin add constraint fk_AddedByAdmin_gpm_1 foreign key (gpm) references GPM (id) on delete restrict on update restrict;\ncreate index ix_AddedByAdmin_gpm_1 on AddedByAdmin (gpm);\nalter table AddedByAdmin add constraint fk_AddedByAdmin_group_2 foreign key (groupDescr) references GroupDescr (id) on delete restrict on update restrict;\ncreate index ix_AddedByAdmin_group_2 on AddedByAdmin (groupDescr);\nalter table BlackList add constraint fk_BlackList_gpm_3 foreign key (Id) references GPM (id) on delete restrict on update restrict;\ncreate index ix_BlackList_gpm_3 on BlackList (Id);\nalter table GroupLink add constraint fk_GroupLink_group_4 foreign key (groupDescr) references GroupDescr (id) on delete restrict on update restrict;\ncreate index ix_GroupLink_group_4 on GroupLink (groupDescr);\nalter table GroupLink add constraint fk_GroupLink_link_5 foreign key (link) references Link (id) on delete restrict on update restrict;\ncreate index ix_GroupLink_link_5 on GroupLink (link);\nalter table GroupWord add constraint fk_GroupWord_group_6 foreign key (groupDescr) references GroupDescr (id) on delete restrict on update restrict;\ncreate index ix_GroupWord_group_6 on GroupWord (groupDescr);\nalter table GroupWord add constraint fk_GroupWord_word_7 foreign key (word) references Word (id) on delete restrict on update restrict;\ncreate index ix_GroupWord_word_7 on GroupWord (word);\nalter table Post add constraint fk_Post_gpm_8 foreign key (gpm) references GPM (id) on delete restrict on update restrict;\ncreate index ix_Post_gpm_8 on Post (gpm);\nalter table Post add constraint fk_Post_kindContent_9 foreign key (kindContent) references Content (id) on delete restrict on update restrict;\ncreate index ix_Post_kindContent_9 on Post (kindContent);\nalter table PostLink add constraint fk_PostLink_post_10 foreign key (post) references Post (id) on delete restrict on update restrict;\ncreate index ix_PostLink_post_10 on PostLink (post);\nalter table PostLink add constraint fk_PostLink_link_11 foreign key (link) references Link (id) on delete restrict on update restrict;\ncreate index ix_PostLink_link_11 on PostLink (link);\nalter table PostWord add constraint fk_PostWord_post_12 foreign key (post) references Post (id) on delete restrict on update restrict;\ncreate index ix_PostWord_post_12 on PostWord (post);\nalter table PostWord add constraint fk_PostWord_word_13 foreign key (word) references Word (id) on delete restrict on update restrict;\ncreate index ix_PostWord_word_13 on PostWord (word);\nalter table Profile add constraint fk_Profile_gpm_14 foreign key (gpm) references GPM (id) on delete restrict on update restrict;\ncreate index ix_Profile_gpm_14 on Profile (gpm);\nalter table Profile add constraint fk_Profile_gender_15 foreign key (gender) references Gender (id) on delete restrict on update restrict;\ncreate index ix_Profile_gender_15 on Profile (gender);\nalter table Profile add constraint fk_Profile_relationshipStatus_16 foreign key (relationshipStatus) references Relationship (id) on delete restrict on update restrict;\ncreate index ix_Profile_relationshipStatus_16 on Profile (relationshipStatus);\nalter table ProfileLink add constraint fk_ProfileLink_profile_17 foreign key (profile) references Profile (id) on delete restrict on update restrict;\ncreate index ix_ProfileLink_profile_17 on ProfileLink (profile);\nalter table ProfileLink add constraint fk_ProfileLink_link_18 foreign key (link) references Link (id) on delete restrict on update restrict;\ncreate index ix_ProfileLink_link_18 on ProfileLink (link);\nalter table ProfileWord add constraint fk_ProfileWord_profile_19 foreign key (profile) references Profile (id) on delete restrict on update restrict;\ncreate index ix_ProfileWord_profile_19 on ProfileWord (profile);\nalter table ProfileWord add constraint fk_ProfileWord_word_20 foreign key (word) references Word (id) on delete restrict on update restrict;\ncreate index ix_ProfileWord_word_20 on ProfileWord (word);\nalter table Synonym add constraint fk_Synonym_word_21 foreign key (word) references Word (id) on delete restrict on update restrict;\ncreate index ix_Synonym_word_21 on Synonym (word);','SET FOREIGN_KEY_CHECKS=0;\n\ndrop table AddedByAdmin;\n\ndrop table BlackList;\n\ndrop table Content;\n\ndrop table GPM;\n\ndrop table Gender;\n\ndrop table GroupDescr;\n\ndrop table GroupLink;\n\ndrop table GroupWord;\n\ndrop table Link;\n\ndrop table NewGPM;\n\ndrop table Post;\n\ndrop table PostLink;\n\ndrop table PostWord;\n\ndrop table Profile;\n\ndrop table ProfileLink;\n\ndrop table ProfileWord;\n\ndrop table Relationship;\n\ndrop table Synonym;\n\ndrop table Word;\n\nSET FOREIGN_KEY_CHECKS=1;','applied','');
+/*!40000 ALTER TABLE `play_evolutions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Дамп данных таблицы `Relationship`
+-- Table structure for table `profile`
 --
 
-INSERT INTO `Relationship` (`id`, `status`) VALUES (1, 'single');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (2, 'in_a_relationship');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (3, 'engaged');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (4, 'married');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (5, 'its_complicated');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (6, 'open_relationship');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (7, 'widowed');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (8, 'in_domestic_partnership');
-INSERT INTO `Relationship` (`id`, `status`) VALUES (9, 'in_civil_union');
+DROP TABLE IF EXISTS `profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profile` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `gpm` bigint(20) DEFAULT NULL,
+  `dateUpdated` datetime NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gender` bigint(20) DEFAULT NULL,
+  `tagline` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `relationshipStatus` bigint(20) DEFAULT NULL,
+  `nFollowers` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Profile_1` (`gpm`,`dateUpdated`),
+  KEY `ix_Profile_gpm_14` (`gpm`),
+  KEY `ix_Profile_gender_15` (`gender`),
+  KEY `ix_Profile_relationshipStatus_16` (`relationshipStatus`),
+  CONSTRAINT `fk_Profile_gender_15` FOREIGN KEY (`gender`) REFERENCES `gender` (`id`),
+  CONSTRAINT `fk_Profile_gpm_14` FOREIGN KEY (`gpm`) REFERENCES `gpm` (`id`),
+  CONSTRAINT `fk_Profile_relationshipStatus_16` FOREIGN KEY (`relationshipStatus`) REFERENCES `relationship` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп данных таблицы `Gender`
---
-INSERT INTO `Gender` (`id`, `value`) VALUES (1, 'male');
-INSERT INTO `Gender` (`id`, `value`) VALUES (2, 'female');
-INSERT INTO `Gender` (`id`, `value`) VALUES (3, 'other');
-
---
--- Дамп данных таблицы `Content`
---
-INSERT INTO `Content` (`id`,`kind`) VALUES (3,'audio');
-INSERT INTO `Content` (`id`,`kind`) VALUES (5,'link');
-INSERT INTO `Content` (`id`,`kind`) VALUES (2,'photo');
-INSERT INTO `Content` (`id`,`kind`) VALUES (1,'text');
-INSERT INTO `Content` (`id`,`kind`) VALUES (4,'video');
-
---
--- Дамп данных таблицы `profile`
+-- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`gpm`, `dateUpdated`, `name`, `image`, `gender`, `tagline`, `relationshipStatus`, `Followers`) VALUES
-(1, '2011-11-14 12:52:12', 'Nikolay Samokhin', 'https://lh6.googleusercontent.com/-ksYjWkS4pms/AAAAAAAAAAI/AAAAAAAAAAA/o2eF8wmgtTo/photo.jpg?sz=50', '1', '', '', NULL),
-(2, '2012-04-22 01:09:12', 'Artemy Lebedev', 'https://lh6.googleusercontent.com/-4vQOG6qUMMU/AAAAAAAAAAI/AAAAAAAAAAA/qJBI24rbaG4/photo.jpg?sz=50', '1', 'Родился в Москве. Проживаю в интернете.', '', NULL),
-(3, '2012-01-31 06:26:00', 'Ilya Varlamov', 'https://lh6.googleusercontent.com/-LJyJIU5SJQc/AAAAAAAAAAI/AAAAAAAAAAA/ZCVuXn3S7h4/photo.jpg?sz=50', '1', '', '', NULL),
-(4, '2012-01-31 06:26:04', 'Pavel Durov', 'https://lh4.googleusercontent.com/-YCNKQHKzeO4/AAAAAAAAAAI/AAAAAAAAAAA/pq-DE6u7xPI/photo.jpg?sz=50', '1', 'VK', '', NULL),
-(5, '2012-04-22 01:10:05', 'Ольга Акукина', 'https://lh5.googleusercontent.com/-z-vQRJkE1Qw/AAAAAAAAAAI/AAAAAAAAAAA/oVrS07lJDps/photo.jpg?sz=50', '2', '', '4', NULL),
-(6, '2011-11-14 13:20:36', 'Lana Walker', 'https://lh4.googleusercontent.com/-eE-1Tq6iAV4/AAAAAAAAAAI/AAAAAAAAAAA/bHRO9mylS_g/photo.jpg?sz=50', '2', 'Nature, Photography, Positivity.', '', NULL),
-(7, '2012-04-22 04:15:13', 'Lasse Wassermann', 'https://lh4.googleusercontent.com/-sk1l-3Vtfjw/AAAAAAAAAAI/AAAAAAAAAAA/u2SWXmR6ubA/photo.jpg?sz=50', '1', 'Insomniac Googler with a taste for non-pop music -  I carry my heart inside out.', '', NULL),
-(8, '2012-04-22 01:11:19', 'Yuri Savelich', 'https://lh3.googleusercontent.com/-K2nJaZ7PHmg/AAAAAAAAAAI/AAAAAAAAAAA/45XLF1HyHgU/photo.jpg?sz=50', '1', 'fuck facebook!', '', NULL),
-(9, '2012-04-22 01:11:57', 'Ник Паутиныч', 'https://lh4.googleusercontent.com/-O1jhS38QUnE/AAAAAAAAAAI/AAAAAAAAAAA/LrdmUTHdg40/photo.jpg?sz=50', '1', 'content manager @ Yota Play', '4', NULL),
-(10, '2012-04-22 01:12:32', 'Станислав Петров', 'https://lh5.googleusercontent.com/-s14PJsS3S7Q/AAAAAAAAAAI/AAAAAAAAAAA/l3rnyIBkpus/photo.jpg?sz=50', '1', '', '', NULL),
-(11, '2012-04-22 01:13:55', 'Игорь Пыльнов', 'https://lh4.googleusercontent.com/-7FtZzYGuoEc/AAAAAAAAAAI/AAAAAAAAAAA/vhPn38YDuis/photo.jpg?sz=50', '1', 'Web, Programming, SEO, Design, Android || Не занимаюсь перепостом одних и тех же сообщений и контента || Открыт интересным идеям и людям', '', NULL),
-(12, '2011-11-14 13:23:38', 'Andrey Sebrant', 'https://lh5.googleusercontent.com/-87r3ByWv1u8/AAAAAAAAAAI/AAAAAAAAAAA/kkX2dGrjf0E/photo.jpg?sz=50', '1', 'Yandex & all the world', '', NULL),
-(13, '2012-04-22 01:13:56', 'Dmitry Shatohin', 'https://lh5.googleusercontent.com/-R6_t4y9iOQ0/AAAAAAAAAAI/AAAAAAAAAAA/k4eDozG4vdw/photo.jpg?sz=50', '1', 'Выгода.ру (Vigoda.ru)', '', NULL),
-(14, '2012-04-22 01:13:53', 'Dmitriy Fedyaev', 'https://lh6.googleusercontent.com/--ytG5DAkFOU/AAAAAAAAAAI/AAAAAAAAAAA/XK7nFvQG4JI/photo.jpg?sz=50', '1', 'Федяев Дмитрий - фотограф, ретушёр, менеджер, рекламист, скачать, недорого, без регистрации', '', NULL),
-(15, '2012-04-22 01:30:21', 'Oleg Anisimov', 'https://lh5.googleusercontent.com/-0yKHPnz43FM/AAAAAAAAAAI/AAAAAAAAAAA/9PpaBiUQHfc/photo.jpg?sz=50', '1', 'Since 1974', '', NULL),
-(16, '2012-04-22 01:32:09', 'Александр Каримов', 'https://lh3.googleusercontent.com/-Rusptne1H8E/AAAAAAAAAAI/AAAAAAAAAAA/HHkXo-RhAeA/photo.jpg?sz=50', '1', '', '', NULL),
-(17, '2012-04-22 02:18:02', 'Руслан Усачев', 'https://lh6.googleusercontent.com/-xCgYsqA_ZVM/AAAAAAAAAAI/AAAAAAAAAAA/v2pbMHuULfo/photo.jpg?sz=50', '1', '+Руслан', '', NULL),
-(18, '2011-11-14 13:24:10', 'Slava Kuteev', 'https://lh4.googleusercontent.com/-JS0NpjGjcTY/AAAAAAAAAAI/AAAAAAAAAAA/Kmly1svYE20/photo.jpg?sz=50', '1', '', '4', NULL),
-(19, '2012-04-22 01:39:09', 'Людмила Отто', 'https://lh5.googleusercontent.com/-2ul8B38Lwo8/AAAAAAAAAAI/AAAAAAAAAAA/cobvvsltTLs/photo.jpg?sz=50', '2', 'домоНЕхозяйка', '', NULL),
-(20, '2012-04-22 01:43:58', 'Илья Корбут', 'https://lh6.googleusercontent.com/-jaXs8gz0XhM/AAAAAAAAAAI/AAAAAAAAAAA/dTL5OFEmzeY/photo.jpg?sz=50', '1', '', '', NULL),
-(21, '2012-02-01 04:41:27', 'Romain Guy', 'https://lh3.googleusercontent.com/-jrQ2B4tid9Q/AAAAAAAAAAI/AAAAAAAAAAA/hfLx6NPVnBU/photo.jpg?sz=50', '1', 'Photographer, human droid, avid reader, native French man and sleep deprived', '', NULL),
-(22, '2012-04-22 01:51:03', 'Tina Satro', 'https://lh5.googleusercontent.com/-nBfu-Z14yHU/AAAAAAAAAAI/AAAAAAAAAAA/P2w2fF4uplw/photo.jpg?sz=50', '2', 'Круглимся', '', NULL),
-(23, '2012-04-22 01:55:05', 'Квирикашвили Вячеслав', 'https://lh4.googleusercontent.com/-PdC_-0lSO5Q/AAAAAAAAAAI/AAAAAAAAAAA/LW7Okh0Sl4w/photo.jpg?sz=50', '1', '', '', NULL),
-(24, '2012-04-22 02:20:23', 'Владимир Козлов', 'https://lh6.googleusercontent.com/-YLUGs77DJ4A/AAAAAAAAAAI/AAAAAAAAAAA/Dl2HgZBYZw8/photo.jpg?sz=50', '1', '', '4', NULL),
-(25, '2012-04-22 02:43:26', 'Diana Poga', 'https://lh4.googleusercontent.com/-8-wj63PpLvI/AAAAAAAAAAI/AAAAAAAAAAA/_qtkpBjAW6A/photo.jpg?sz=50', '2', 'Делай добро, и бросай его в воду.', '4', NULL),
-(26, '2012-04-22 02:44:53', 'Абиляка Гатауллина', 'https://lh4.googleusercontent.com/-X4pG6uzLUOM/AAAAAAAAAAI/AAAAAAAAAAA/bJYtC812A10/photo.jpg?sz=50', '2', 'Шумная невысокая брюнетка с чайно-карими глазами (чай явно был зеленый)', '', NULL),
-(27, '2012-04-22 01:49:28', 'Alexey Nagichev', 'https://lh6.googleusercontent.com/-NyOXIfliOfI/AAAAAAAAAAI/AAAAAAAAAAA/wx7Iffn1Omc/photo.jpg?sz=50', '1', 'The Wrong Questions With The Wrong Replies', '', NULL),
-(28, '2012-04-22 02:45:49', 'Andrey Winston', 'https://lh6.googleusercontent.com/-12XFMQaz38c/AAAAAAAAAAI/AAAAAAAAAAA/G85U6iCVflo/photo.jpg?sz=50', '', 'Сиськи с пивом правят миром!', '', NULL),
-(29, '2011-11-14 13:33:05', 'Anton Filatov', 'https://lh4.googleusercontent.com/-Hz5Ej-8MSlg/AAAAAAAAAAI/AAAAAAAAAAA/UtqbaLcAwoE/photo.jpg?sz=50', '1', '', '', NULL),
-(30, '2011-11-14 13:33:09', 'Maxim Kononenko', 'https://lh4.googleusercontent.com/-fjcBsrKBJpE/AAAAAAAAAAI/AAAAAAAAAAA/e91GI1GC5yU/photo.jpg?sz=50', '1', '', '', NULL),
-(31, '2011-11-14 13:33:23', 'Roman Ivanov', 'https://lh6.googleusercontent.com/-vsXcPQgQWZ8/AAAAAAAAAAI/AAAAAAAAAAA/d-fzAmrcqGg/photo.jpg?sz=50', '1', '', '', NULL),
-(32, '2012-04-22 01:56:40', 'Дмитрий Иванов', 'https://lh6.googleusercontent.com/-8MwwZoVJ4TU/AAAAAAAAAAI/AAAAAAAAAAA/xY1EtAPNHVs/photo.jpg?sz=50', '1', 'Юрист, видеоблогер, продюсер', '2', NULL),
-(33, '2012-04-22 01:50:13', 'Людмила Кудрявцева', 'https://lh5.googleusercontent.com/-fLIyEMdGKr4/AAAAAAAAAAI/AAAAAAAAAAA/yoyqC82_NRE/photo.jpg?sz=50', '2', '', '', NULL),
-(34, '2012-04-22 01:52:52', 'Mekhron Nerd', 'https://lh4.googleusercontent.com/-iHgM_hP2zHc/AAAAAAAAAAI/AAAAAAAAAAA/Jiatia2m9s0/photo.jpg?sz=50', '1', 'vamerike.com', '', NULL),
-(35, '2012-04-22 01:42:33', 'Андрей Колесников', 'https://lh6.googleusercontent.com/-GPZcM4Ta5zY/AAAAAAAAAAI/AAAAAAAAAAA/9TKDRDThh9A/photo.jpg?sz=50', '1', '', '', NULL),
-(36, '2012-04-22 01:54:15', 'Иван Воищев', 'https://lh5.googleusercontent.com/-zqH0WX2RCp4/AAAAAAAAAAI/AAAAAAAAAAA/VLoy9eMS7OQ/photo.jpg?sz=50', '1', 'IT. Верстальщик html. Музыкант. Подкастер', '', NULL),
-(37, '2012-04-22 01:34:14', 'Alexandr Popov', 'https://lh5.googleusercontent.com/-oZMqM0byFIM/AAAAAAAAAAI/AAAAAAAAAAA/trfCOo0cjIo/photo.jpg?sz=50', '1', 'Photographer, Blogger, Diver, IT, фотограф, блоггер, дайвер, айтишник.', '', NULL),
-(38, '2012-04-22 01:59:17', 'Den Kustov', 'https://lh4.googleusercontent.com/-l7XVGWCUWps/AAAAAAAAAAI/AAAAAAAAAAA/f49jDS6PyXI/photo.jpg?sz=50', '1', 'Школьник', '1', NULL),
-(39, '2012-04-22 02:47:02', 'Ксюша Скоробогатая', 'https://lh4.googleusercontent.com/-QeNVy8qmav0/AAAAAAAAAAI/AAAAAAAAAAA/9cEsuRsetP4/photo.jpg?sz=50', '', 'Меня трудно найти...Легко потерять...Невозможно забыть... goo.gl/ps2xO', '', NULL),
-(40, '2012-04-22 01:33:41', 'Kriss Selitser', 'https://lh6.googleusercontent.com/-gYjJtxbYrus/AAAAAAAAAAI/AAAAAAAAAAA/rXNhEyh1fgs/photo.jpg?sz=50', '1', 'Verified Account ✔', '4', NULL),
-(41, '2012-04-22 01:32:56', 'Кристи Чеширский Кот', 'https://lh3.googleusercontent.com/-swSAUdOpxMI/AAAAAAAAAAI/AAAAAAAAAAA/pGa_HQJ3k5w/photo.jpg?sz=50', '2', 'Предел для меня  — только небо.', '', NULL),
-(42, '2012-04-22 01:45:16', 'Alexey Shelest', 'https://lh3.googleusercontent.com/-MkK-WBW3N_c/AAAAAAAAAAI/AAAAAAAAAAA/bdXp21t_lzY/photo.jpg?sz=50', '1', '', '', NULL),
-(43, '2012-04-22 01:47:36', 'Артём Зубков', 'https://lh6.googleusercontent.com/-usOSDGMvgVY/AAAAAAAAAAI/AAAAAAAAAAA/wFpsjnPRSFE/photo.jpg?sz=50', '1', 'Programmer, Developer, Bicyclist, Only positive thinking', '4', NULL),
-(44, '2011-11-14 13:38:20', 'Victoria Yakovleva', 'https://lh5.googleusercontent.com/-V2dQKs50uMQ/AAAAAAAAAAI/AAAAAAAAAAA/lnUuzAUuD9Q/photo.jpg?sz=50', '2', '', '', NULL),
-(45, '2012-04-22 02:47:55', 'Yury Zvyagintsev', 'https://lh3.googleusercontent.com/-LU2zdZf_4lo/AAAAAAAAAAI/AAAAAAAAAAA/Hm5Ca8sFJX8/photo.jpg?sz=50', '1', 'Это заговор!', '', NULL),
-(46, '2011-11-14 13:38:37', 'Alexey Simonenko', 'https://lh4.googleusercontent.com/-dZV-I2LbHF4/AAAAAAAAAAI/AAAAAAAAAAA/J5ktqy6BuWo/photo.jpg?sz=50', '1', 'CTO and Co-Founder of Serenity', '2', NULL),
-(47, '2012-02-11 04:09:30', 'David Herreman', 'https://lh5.googleusercontent.com/-rDUkzqXqyP8/AAAAAAAAAAI/AAAAAAAAAAA/rlHsoNPswo0/photo.jpg?sz=50', '1', 'www.dherreman.com', '', NULL),
-(48, '2012-04-22 01:51:40', 'Анастасия Аджийская', 'https://lh6.googleusercontent.com/-53AAeWkGSu4/AAAAAAAAAAI/AAAAAAAAAAA/9mZzfe6QBFw/photo.jpg?sz=50', '2', 'Настоящая аристократка должна была уметь и шелка носить, и глину месить-словом,не чураться черной работы. Потому и уважали сибирские старожилы жен декабристов', '', NULL),
-(49, '2012-04-22 01:54:24', 'Dmitry Karpov', 'https://lh4.googleusercontent.com/-68y-xAVJwck/AAAAAAAAAAI/AAAAAAAAAAA/EDkG5mCgG7M/photo.jpg?sz=50', '1', 'O_o', '', NULL),
-(50, '2012-04-22 02:00:45', 'Виктория Маросеева', 'https://lh4.googleusercontent.com/-R5aZTF5Tg9c/AAAAAAAAAAI/AAAAAAAAAAA/VcPXCCpfF-g/photo.jpg?sz=50', '2', '', '', NULL),
-(51, '2011-11-14 13:41:49', 'Evgeniy Kozlov', 'https://lh4.googleusercontent.com/-RtLbbRtyzxI/AAAAAAAAAAI/AAAAAAAAAAA/BAF2rAHLzVc/photo.jpg?sz=50', '1', '', '', NULL),
-(52, '2012-04-22 02:02:26', 'Andrey Bocharov', 'https://lh5.googleusercontent.com/-wbTrLUCKSow/AAAAAAAAAAI/AAAAAAAAAAA/4tpdszEhoIg/photo.jpg?sz=50', '1', '', '', NULL),
-(53, '2011-11-14 13:42:08', 'Artur Kor', 'https://lh4.googleusercontent.com/-reO-v84eIzM/AAAAAAAAAAI/AAAAAAAAAAA/LeQ6X3V6zl4/photo.jpg?sz=50', '1', 'Lead front-end developer / ui designer', '', NULL),
-(54, '2012-04-22 02:04:12', 'Alexey Navalny', 'https://lh3.googleusercontent.com/-f349c91TK24/AAAAAAAAAAI/AAAAAAAAAAA/7H3Z3_WP6vs/photo.jpg?sz=50', '1', 'Алексей Навальный', '', NULL),
-(55, '2012-02-01 08:30:15', 'Eldar Murtazin', 'https://lh3.googleusercontent.com/-rHNPonBxuHw/AAAAAAAAAAI/AAAAAAAAAAA/fLaKxoZU85c/photo.jpg?sz=50', '1', 'Telecom - most people know me as journalist, a few one as analyst', '', NULL),
-(56, '2012-04-22 02:48:40', 'Oleg Tinkov', 'https://lh6.googleusercontent.com/-ORnR08kaV8Y/AAAAAAAAAAI/AAAAAAAAAAA/ETzsIZ7BlNo/photo.jpg?sz=50', '1', 'Я такой как все', '', NULL),
-(57, '2012-04-22 02:21:04', 'Стас Давыдов', 'https://lh6.googleusercontent.com/-H3cBfXFV9jI/AAAAAAAAAAI/AAAAAAAAAAA/vGZyTpDZjgM/photo.jpg?sz=50', '3', 'Наверное, самый качественный русскоязычный влог, посвящённый обзорам вирусных видео.)', '', NULL),
-(58, '2012-04-22 01:50:01', 'Umputun U', 'https://lh3.googleusercontent.com/-QpS2smvcugU/AAAAAAAAAAI/AAAAAAAAAAA/fdG6wN6roUs/photo.jpg?sz=50', '1', 'Известный, в узких кругах', '', NULL),
-(59, '2012-04-22 01:53:02', 'Stanislavs Davidovs', 'https://lh6.googleusercontent.com/-uBRmyEpG4YQ/AAAAAAAAAAI/AAAAAAAAAAA/rpAl5FpukSY/photo.jpg?sz=50', '1', '', '', NULL),
-(60, '2012-04-22 02:25:03', 'Марина Воронцова', 'https://lh3.googleusercontent.com/-qsLBwzJVL7w/AAAAAAAAAAI/AAAAAAAAAAA/66K433IGYyo/photo.jpg?sz=50', '2', 'Жизнь - большое путешествие', '', NULL),
-(61, '2012-04-22 01:46:38', 'Ellena Voin', 'https://lh5.googleusercontent.com/-LOFts1xY_RU/AAAAAAAAAAI/AAAAAAAAAAA/7kD3oHml6T4/photo.jpg?sz=50', '2', '', '', NULL),
-(62, '2012-04-22 02:50:57', 'Интересно Всем', 'https://lh3.googleusercontent.com/-LrLW2-2YrbM/AAAAAAAAAAI/AAAAAAAAAAA/rYPEK5pJBrQ/photo.jpg?sz=50', '1', '', '', NULL),
-(63, '2012-04-22 02:23:03', 'Сергей Морозов', 'https://lh6.googleusercontent.com/-gTacT3PHHM8/AAAAAAAAAAI/AAAAAAAAAAA/Mvv5Om1gOJY/photo.jpg?sz=50', '1', '', '', NULL),
-(64, '2012-02-11 15:51:52', 'viktor skurko', 'https://lh4.googleusercontent.com/-2PFpOKfWBqI/AAAAAAAAAAI/AAAAAAAAAAA/1W_0oigp6ew/photo.jpg?sz=50', '1', 'Carrots Killer. Russian Federation', '', NULL),
-(65, '2012-04-22 02:51:49', 'Тоша Лемур Варич', 'https://lh3.googleusercontent.com/-KAFBtBtAak4/AAAAAAAAAAI/AAAAAAAAAAA/7NQPDc3V2vc/photo.jpg?sz=50', '1', 'Discoursemonger', '', NULL),
-(66, '2011-11-15 04:23:51', 'Tomasz Huczek', 'https://lh3.googleusercontent.com/-ljNc3QN9UWE/AAAAAAAAAAI/AAAAAAAAAAA/uOVteEez_po/photo.jpg?sz=50', '1', 'Amateur musician, hobbyist photographer, working as software developer.', '', NULL),
-(67, '2012-04-22 02:27:10', 'Сергей Белый', 'https://lh5.googleusercontent.com/-HKtN7mjV9Uo/AAAAAAAAAAI/AAAAAAAAAAA/FpP9yju9BzQ/photo.jpg?sz=50', '1', 'Graphic Design', '', NULL),
-(68, '2012-04-22 02:49:38', 'Александра Павлинова', 'https://lh5.googleusercontent.com/-i6Vy_L4YEWo/AAAAAAAAAAI/AAAAAAAAAAA/etV3pNO3xew/photo.jpg?sz=50', '2', 'Перманентное состояние счастья свидетельствует о психическом заболевании. Осторожнее.', '', NULL),
-(69, '2012-02-01 07:46:09', 'Johan Peijnenburg', 'https://lh6.googleusercontent.com/-iBFt5QfnLP0/AAAAAAAAAAI/AAAAAAAAAAA/xb1fuZocFP8/photo.jpg?sz=50', '1', 'Alpine Nature & Landscape Images - NiO Photography - Switzerland', '2', NULL),
-(70, '2011-11-14 13:44:20', 'Sophie Serger', 'https://lh6.googleusercontent.com/-KUaA2WAlNSE/AAAAAAAAAAI/AAAAAAAAAAA/lUd_sKcJmUc/photo.jpg?sz=50', '2', 'Random and fun posts mostly about animals', '', NULL),
-(71, '2011-11-14 13:44:29', 'Adam Kumiszcza', 'https://lh5.googleusercontent.com/-20-vmu7B4i4/AAAAAAAAAAI/AAAAAAAAAAA/s6434PRZnYc/photo.jpg?sz=50', '1', 'Computer geek, bird watcher and photographer', '', NULL),
-(72, '2012-02-03 08:17:48', 'Alex Koloskov', 'https://lh4.googleusercontent.com/-sgm1j6WibCA/AAAAAAAAAAI/AAAAAAAAAAA/wAq0Th5lr_E/photo.jpg?sz=50', '1', 'The Lighting Magician', '', NULL),
-(73, '2012-02-06 01:51:35', 'Lili Ana', 'https://lh4.googleusercontent.com/--Li53GELR4g/AAAAAAAAAAI/AAAAAAAAAAA/5Qqx7BJcXfk/photo.jpg?sz=50', '2', '', '', NULL),
-(74, '2011-11-14 13:44:51', 'Eric Rousset', 'https://lh6.googleusercontent.com/-OisMGBoP9N4/AAAAAAAAAAI/AAAAAAAAAAA/V1vSclAEdgM/photo.jpg?sz=50', '1', 'French Photographer', '2', NULL),
-(75, '2011-11-14 13:44:56', 'Gene Bowker', 'https://lh4.googleusercontent.com/-nkV72U8CoQ4/AAAAAAAAAAI/AAAAAAAAAAA/A1Uf_xtGLPQ/photo.jpg?sz=50', '1', 'In search of Americana, Trains, and quickly fading past.', '', NULL),
-(76, '2011-11-14 13:45:01', 'Daniel Sjostrom', 'https://lh3.googleusercontent.com/-q7HadAs57cQ/AAAAAAAAAAI/AAAAAAAAAAA/uTFbf14We9M/photo.jpg?sz=50', '1', 'Geek, amateur photographer and father.', '', NULL),
-(77, '2011-11-14 13:45:08', 'Steven Kennard', 'https://lh4.googleusercontent.com/-xY1Sel6S-nw/AAAAAAAAAAI/AAAAAAAAAAA/ipMY2ikRWo8/photo.jpg?sz=50', '1', 'Woodturning and photography - partner at Innovative Imaging Studio', '', NULL),
-(78, '2011-11-14 13:45:14', 'Jeff Smith', 'https://lh4.googleusercontent.com/-wwHSpBafT6k/AAAAAAAAAAI/AAAAAAAAAAA/ne657r9JtAg/photo.jpg?sz=50', '1', '', '', NULL),
-(79, '2011-11-14 13:45:20', 'Laurent CoppÃ©e', 'https://lh3.googleusercontent.com/-fq7CH0DQtcA/AAAAAAAAAAI/AAAAAAAAAAA/MqQVv8_PLew/photo.jpg?sz=50', '1', 'What I saw ...', '', NULL),
-(80, '2011-11-14 13:48:39', 'Francis West', 'https://lh4.googleusercontent.com/-0fukVDr1nUI/AAAAAAAAAAI/AAAAAAAAAAA/xN7054lGV70/photo.jpg?sz=50', '1', '', '', NULL),
-(81, '2011-11-14 13:48:44', 'kimberly pemberton', 'https://lh3.googleusercontent.com/-DW9X849cIww/AAAAAAAAAAI/AAAAAAAAAAA/yULcHpGoGuw/photo.jpg?sz=50', '2', 'amateur photographer / professional procrastinator', '4', NULL),
-(82, '2012-02-11 14:54:58', 'Karin Nelson', 'https://lh4.googleusercontent.com/-S0F61ISF1aI/AAAAAAAAAAI/AAAAAAAAAAA/CorWiAmrFtg/photo.jpg?sz=50', '2', 'Graphic Designer (paid), Photographer (unpaid).', '4', NULL),
-(83, '2011-11-14 13:48:54', 'Steve Johnson', 'https://lh4.googleusercontent.com/-v_6eikuTe5M/AAAAAAAAAAI/AAAAAAAAAAA/xDHauO3fLWs/photo.jpg?sz=50', '1', 'MinimalistPhotography101.com and Stuff', '', NULL),
-(84, '2012-01-31 03:56:01', 'Thomas Hawk', 'https://lh6.googleusercontent.com/-4DZlw4krzUs/AAAAAAAAAAI/AAAAAAAAAAA/8GYcnPZdrfc/photo.jpg?sz=50', '1', 'Making Your G+ Experience More Beautiful One Photograph at a Time', '4', NULL),
-(85, '2012-02-03 06:29:03', 'Stefan Keuchel', 'https://lh3.googleusercontent.com/-9MW3A4g7z8A/AAAAAAAAAAI/AAAAAAAAAAA/PhDsMJa_NdA/photo.jpg?sz=50', '1', 'happy father & husband, Vespa Lover, Diver, Twitter Addict, PR Manager Google Germany', '', NULL),
-(86, '2011-11-16 07:46:54', 'Alexander Chen', 'https://lh3.googleusercontent.com/-dJ2qwA5eQis/AAAAAAAAAAI/AAAAAAAAAAA/ibA7GhwE0Ns/photo.jpg?sz=50', '1', 'Google Creative Lab. I make musical, interactive work.', '', NULL),
-(87, '2012-02-11 04:12:32', 'Lisa Ding', 'https://lh6.googleusercontent.com/-AYDNvJcPk4E/AAAAAAAAAAI/AAAAAAAAAAA/hLmjJX-ngbw/photo.jpg?sz=50', '2', 'Community Manager at Google, Connoisseur of Fine Blogs', '', NULL),
-(88, '2011-11-14 13:49:27', 'Kay Oberbeck', 'https://lh4.googleusercontent.com/-rELaDNTCfk4/AAAAAAAAAAI/AAAAAAAAAAA/WvuSjmRHHLg/photo.jpg?sz=50', '1', 'Director, Communication & Public Affairs, Google DACH', '', NULL),
-(89, '2011-11-14 13:49:33', 'Kevin Staff', 'https://lh6.googleusercontent.com/-jJ1AldQiS5I/AAAAAAAAAAI/AAAAAAAAAAA/ddDysJDMxQ8/photo.jpg?sz=50', '1', 'Graphic Media Designer, Writer & Blogger. My Passion Is The Conversation Of Graphic Expression.', '', NULL),
-(90, '2011-11-14 13:49:38', 'Gerard Sanz', 'https://lh3.googleusercontent.com/-19BSXVuGGoQ/AAAAAAAAAAI/AAAAAAAAAAA/ItN4LVhJCqo/photo.jpg?sz=50', '1', 'Upgrade to Awesome!', '', NULL),
-(91, '2012-02-09 08:48:36', 'Tilek Mamutov', 'https://lh4.googleusercontent.com/-wbn8kTb6RqY/AAAAAAAAAAI/AAAAAAAAAAA/eO5x6h-PHWY/photo.jpg?sz=50', '1', 'New Business Development Manager - Central and Central South Asia, Google', '4', NULL),
-(92, '2011-11-14 13:49:58', 'Reinoud Vaandrager', 'https://lh4.googleusercontent.com/-xt4Y819mN_o/AAAAAAAAAAI/AAAAAAAAAAA/WBaG8R_fVhA/photo.jpg?sz=50', '1', 'never odd or even', '', NULL),
-(93, '2012-02-06 01:53:34', 'Sarah Price', 'https://lh4.googleusercontent.com/-kXQzpulngro/AAAAAAAAAAI/AAAAAAAAAAA/Ol6CwD56EQc/photo.jpg?sz=50', '2', 'Gmail Community Manager', '', NULL),
-(94, '2012-02-11 15:53:00', 'Vanessa Schneider', 'https://lh4.googleusercontent.com/-4t5gfeipeFk/AAAAAAAAAAI/AAAAAAAAAAA/GWIdbUZNIdA/photo.jpg?sz=50', '2', 'Community manager for Google by day, superhero by night.', '', NULL),
-(95, '2011-11-14 13:50:12', 'Alexander Dommes', 'https://lh6.googleusercontent.com/-z1CkEi7JVSs/AAAAAAAAAAI/AAAAAAAAAAA/bF3gYXNE3iI/photo.jpg?sz=50', '1', '1984, linux, android, security, hacking, kochen und so..', '2', NULL),
-(96, '2011-11-14 13:50:18', 'Raul Krauthausen', 'https://lh3.googleusercontent.com/-3juwF7JqP4s/AAAAAAAAAAI/AAAAAAAAAAA/0wYY54QdDdM/photo.jpg?sz=50', '1', '', '', NULL),
-(97, '2011-11-14 13:50:21', 'Kelly Fee', 'https://lh4.googleusercontent.com/-A7Z7gZ5Bt0A/AAAAAAAAAAI/AAAAAAAAAAA/ByKpu5hI3S0/photo.jpg?sz=50', '', 'Google Community Manager', '', NULL),
-(98, '2011-11-14 13:50:31', 'Michael Hermeston', 'https://lh4.googleusercontent.com/-sRa7GimzcRc/AAAAAAAAAAI/AAAAAAAAAAA/jPRwp1gD3pA/photo.jpg?sz=50', '1', 'Father, Husband, Googler, Google+er, Scotch snob, Metal enthusiast', '4', NULL),
-(99, '2012-02-01 04:22:51', 'Adam Lasnik', 'https://lh3.googleusercontent.com/-pG5rkD-wJFs/AAAAAAAAAAI/AAAAAAAAAAA/pCjhg0lD1dU/photo.jpg?sz=50', '1', 'A reasonably social lindy-hopping geek in the SF Bay Area', '', NULL),
-(100, '2011-11-14 13:50:45', 'Sky Bintliff', 'https://lh4.googleusercontent.com/-Oas00hTjWTo/AAAAAAAAAAI/AAAAAAAAAAA/HWkDBk3Qhc4/photo.jpg?sz=50', '1', 'Google+ Photos Community Manager', '', NULL),
-(101, '2012-02-06 01:54:06', 'Scott Beale', 'https://lh3.googleusercontent.com/-Z50XnW7KP9E/AAAAAAAAAAI/AAAAAAAAAAA/5nDI_Rvj3Ck/photo.jpg?sz=50', '1', 'primary tentacle of Laughing Squid', '', NULL),
-(102, '2011-11-14 13:50:54', 'Jacky Hayward', 'https://lh3.googleusercontent.com/-F-a2CSgOrVU/AAAAAAAAAAI/AAAAAAAAAAA/cmknC8trYv8/photo.jpg?sz=50', '2', 'Google Chrome Community Manager and Jilli Ice Cream Co Founder.', '', NULL),
-(103, '2012-02-03 06:29:08', 'DeWitt Clinton', 'https://lh3.googleusercontent.com/-ubAPqKWm7QU/AAAAAAAAAAI/AAAAAAAAAAA/srP8ZII1rSc/photo.jpg?sz=50', '1', 'Googler, mostly.', '4', NULL),
-(104, '2012-02-11 15:54:19', 'Melissa Daniels', 'https://lh5.googleusercontent.com/-SwzRxH2A4g4/AAAAAAAAAAI/AAAAAAAAAAA/a8Wc7aVjFKQ/photo.jpg?sz=50', '2', 'Googler. Crazy cat lady. Shopaholic. Chromebook lover :)', '', NULL),
-(105, '2012-02-01 07:46:40', 'Marvin Ryan Vista', 'https://lh3.googleusercontent.com/--YNO0K6xFqo/AAAAAAAAAAI/AAAAAAAAAAA/B2X1sb_-2Bo/photo.jpg?sz=50', '1', 'Learning, thinking, doing since 1992.', '1', NULL),
-(106, '2011-11-15 05:55:37', 'Chandrashekar Raghavan', 'https://lh5.googleusercontent.com/-oSq56CEszfI/AAAAAAAAAAI/AAAAAAAAAAA/V51n34ivbSQ/photo.jpg?sz=50', '1', 'Googler, Product Manager, Yinduren, Traveler, Audiophile', '', NULL),
-(107, '2011-11-16 07:47:45', 'Andreas KnÃ¼ttel', 'https://lh3.googleusercontent.com/-wUFfsZViiNU/AAAAAAAAAAI/AAAAAAAAAAA/2ZYwRPNHkXY/photo.jpg?sz=50', '1', 'A photographer and wood worker showing off what he loves most in life, feel free to share my love :D', '', NULL),
-(108, '2012-04-22 02:53:54', 'Владислав Смагин', 'https://lh3.googleusercontent.com/-yS1mxn2oN9c/AAAAAAAAAAI/AAAAAAAAAAA/faGk_dRzQlw/photo.jpg?sz=50', '1', '', '', NULL),
-(109, '2012-02-03 06:29:11', 'Keyan Mobli', 'https://lh3.googleusercontent.com/-5o-ZVak2rws/AAAAAAAAAAI/AAAAAAAAAAA/5nUF4tdkyds/photo.jpg?sz=50', '1', 'Cyanogenmod, Premed, and Life.', '', NULL),
-(110, '2011-11-14 13:52:00', 'Damir Nasipov', 'https://lh5.googleusercontent.com/-jjhA0zIpjwM/AAAAAAAAAAI/AAAAAAAAAAA/pyHxcIasj1I/photo.jpg?sz=50', '1', '', '', NULL),
-(111, '2011-11-14 13:54:22', 'Anthony Gelot', 'https://lh5.googleusercontent.com/-X4uctd5SSlU/AAAAAAAAAAI/AAAAAAAAAAA/PxqC6FTNnHY/photo.jpg?sz=50', '1', 'AG photographe', '2', NULL),
-(112, '2011-11-14 13:54:35', 'Roni Delmonico', 'https://lh6.googleusercontent.com/-0T9D9EvqbWA/AAAAAAAAAAI/AAAAAAAAAAA/Jqu82QQ6-3g/photo.jpg?sz=50', '2', 'Living, loving, laughing, creating....joyously every day.', '4', NULL),
-(113, '2012-04-22 04:15:13', 'Eric James Leffler', 'https://lh5.googleusercontent.com/-trD19DYNugI/AAAAAAAAAAI/AAAAAAAAAAA/Vf3ihGE8oWw/photo.jpg?sz=50', '1', 'Owner/Photographer of Eric James Photography', '', NULL),
-(114, '2012-02-11 15:55:13', 'Anna Rumiantseva', 'https://lh6.googleusercontent.com/-6jFHBxbnpeU/AAAAAAAAAAI/AAAAAAAAAAA/jBuesIWxesw/photo.jpg?sz=50', '2', '', '', NULL),
-(115, '2011-11-14 13:54:58', 'Nori Sakamoto', 'https://lh5.googleusercontent.com/-d0XONdrpNgw/AAAAAAAAAAI/AAAAAAAAAAA/Y7wqrH0ttmc/photo.jpg?sz=50', '1', 'Aurora Photographer', '', NULL),
-(116, '2012-02-11 04:13:51', 'Catherine Hall', 'https://lh3.googleusercontent.com/-v5TkEUkeu1w/AAAAAAAAAAI/AAAAAAAAAAA/oSvwieCjGiw/photo.jpg?sz=50', '2', 'TWiT Photo host. Pro Photographer. Lover of Life + all things creative', '', NULL),
-(117, '2011-11-14 13:55:17', 'Simon Laustsen', 'https://lh4.googleusercontent.com/-eDAo-Rh7mW8/AAAAAAAAAAI/AAAAAAAAAAA/gi1qI19A8x8/photo.jpg?sz=50', '1', '', '', NULL),
-(118, '2012-04-22 02:43:47', 'Mark Mayer', 'https://lh6.googleusercontent.com/-7HcTc8sU6t8/AAAAAAAAAAI/AAAAAAAAAAA/cjgoOvCrQdQ/photo.jpg?sz=50', '1', 'Свободный человек.', '', NULL),
-(119, '2011-11-14 13:55:32', 'Ilya Kruglov', 'https://lh4.googleusercontent.com/-HvbNI6vukIs/AAAAAAAAAAI/AAAAAAAAAAA/wtyKi4gM0Ls/photo.jpg?sz=50', '1', 'geegs', '', NULL),
-(120, '2012-02-06 01:55:49', 'oommen k', 'https://lh6.googleusercontent.com/-u5dZL5jUL8E/AAAAAAAAAAI/AAAAAAAAAAA/jul2Wkcp8VI/photo.jpg?sz=50', '1', 'At kerela', '', NULL),
-(121, '2011-11-14 13:56:05', 'Andrew McLaughlin', 'https://lh4.googleusercontent.com/-vIPIRwwacRU/AAAAAAAAAAI/AAAAAAAAAAA/cCjjQlvPqx4/photo.jpg?sz=50', '1', 'Nerd.', '', NULL),
-(122, '2012-01-31 03:00:09', 'Vic Gundotra', 'https://lh5.googleusercontent.com/-DVHdLH31tDY/AAAAAAAAAAI/AAAAAAAAAAA/Y71fEMMDZmk/photo.jpg?sz=50', '1', 'Google+', '4', NULL),
-(123, '2012-01-31 23:40:13', 'Colby Brown', 'https://lh5.googleusercontent.com/-GEp_jXS9xXg/AAAAAAAAAAI/AAAAAAAAAAA/V2tk0_5VqNQ/photo.jpg?sz=50', '1', 'Professional Fine Art Landscape, Travel and Humanitarian Photographer, Educator and Author', '4', NULL),
-(124, '2011-11-14 13:56:32', 'Sergey Kuznetsov', 'https://lh3.googleusercontent.com/-c65ZZ5lgN5w/AAAAAAAAAAI/AAAAAAAAAAA/bsn-G7DWqj0/photo.jpg?sz=50', '1', '', '', NULL),
-(125, '2012-01-31 02:42:48', 'Larry Page', 'https://lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAAAAAA/xOvnPfMX1XU/photo.jpg?sz=50', '1', '', '4', NULL),
-(126, '2011-11-14 13:56:53', 'Anton Nossik', 'https://lh5.googleusercontent.com/-yuly2IWaF00/AAAAAAAAAAI/AAAAAAAAAAA/5B17CK9nPOM/photo.jpg?sz=50', '1', 'Just another refugee from LiveJournal. For Russian please check gplus.to/dolboed', '4', NULL),
-(127, '2012-04-22 02:23:33', 'Сергей Мухамедов', 'https://lh4.googleusercontent.com/-A25cp9N9Lr0/AAAAAAAAAAI/AAAAAAAAAAA/qQA3EBCUGCA/photo.jpg?sz=50', '1', 'НедоСМИ', '', NULL),
-(128, '2012-04-22 01:33:36', 'Виталий Соловьев', 'https://lh6.googleusercontent.com/-FSOSn4USXZQ/AAAAAAAAAAI/AAAAAAAAAAA/8aaGo1eiMsY/photo.jpg?sz=50', '1', 'WTF ???????', '4', NULL),
-(129, '2012-04-22 04:15:13', 'Michael Mozart', 'https://lh6.googleusercontent.com/-qdIUbJjx9oE/AAAAAAAAAAI/AAAAAAAAAAA/wXUSnU-ZO8c/photo.jpg?sz=50', '1', 'JeepersMedia on YouTube 400,000 Subscribers to FAIL TOY Reviews!', '', NULL),
-(130, '2011-11-14 13:57:25', 'Andrey SPmaster', 'https://lh6.googleusercontent.com/-kZID6gBMw-I/AAAAAAAAAAI/AAAAAAAAAAA/LkPZJwnsy5c/photo.jpg?sz=50', '1', 'Ð£Ñ€Ð°! ÐÐ°Ñ Ð¿Ñ€ÐµÐ´Ð°Ð»Ð¸!', '9', NULL),
-(131, '2011-11-14 13:57:30', 'Tony Ruscoe', 'https://lh6.googleusercontent.com/-mFb33fjnZvI/AAAAAAAAAAI/AAAAAAAAAAA/GtiIsG4aFbU/photo.jpg?sz=50', '1', 'Web Architect at Google interested in genealogy, allotments, whisky, beer, food, and Back to the Future', '4', NULL),
-(132, '2011-11-14 13:57:41', 'Vlad Glogus', 'https://lh6.googleusercontent.com/-FgDOfX_rreM/AAAAAAAAAAI/AAAAAAAAAAA/jRSjoS9YJck/photo.jpg?sz=50', '1', '', '', NULL),
-(133, '2012-02-01 07:47:46', 'Chris Pirillo', 'https://lh3.googleusercontent.com/-9pGU32rrX5E/AAAAAAAAAAI/AAAAAAAAAAA/d2tMlMXnm44/photo.jpg?sz=50', '1', 'Content Geek for Hire', '2', NULL),
-(134, '2012-01-31 02:52:40', 'Leon HÃ¥land', 'https://lh4.googleusercontent.com/-Kt-plSGMSgA/AAAAAAAAAAI/AAAAAAAAAAA/kfNVrwupjT0/photo.jpg?sz=50', '1', 'technowizard', '', NULL),
-(135, '2012-04-22 02:55:27', '晃光', 'https://lh5.googleusercontent.com/-2XqC8jPCB1c/AAAAAAAAAAI/AAAAAAAAAAA/2KF0hPGTghY/photo.jpg?sz=50', '1', '生命不止，着藤不息', '', NULL),
-(136, '2011-11-14 13:58:24', 'Andy Arnt', 'https://lh5.googleusercontent.com/-bp4IsaolPHw/AAAAAAAAAAI/AAAAAAAAAAA/StwlcEMF8H4/photo.jpg?sz=50', '1', 'The 10 words that describe me best.', '4', NULL),
-(137, '2012-01-31 03:52:10', 'Nohail Sarwar Baloch', 'https://lh5.googleusercontent.com/-4IgZ-KCxLsY/AAAAAAAAAAI/AAAAAAAAAAA/qJub4tBzRAk/photo.jpg?sz=50', '1', '', '1', NULL),
-(138, '2011-11-14 13:59:00', 'Guru NeiL', 'https://lh6.googleusercontent.com/-JOd3lFQ-_RA/AAAAAAAAAAI/AAAAAAAAAAA/Rg9UkDqO9Xc/photo.jpg?sz=50', '1', 'Only To Make You SmiLeÂ®               Â»Â»Â»Â» Verified By Googleâ„¢', '4', NULL),
-(139, '2011-11-14 13:59:07', 'Jeny Elkind', 'https://lh3.googleusercontent.com/-2daejwxV69w/AAAAAAAAAAI/AAAAAAAAAAA/Z8kIhM0hPWM/photo.jpg?sz=50', '2', 'Web developer, Designer, Wife, Daughter, Friend...', '4', NULL),
-(140, '2012-04-22 02:56:30', 'Саша Бло', 'https://lh6.googleusercontent.com/-HsazhYUmzso/AAAAAAAAAAI/AAAAAAAAAAA/_P8Xo9pQ2pw/photo.jpg?sz=50', '2', 'Исследователь социальных сетей', '', NULL),
-(141, '2011-11-14 13:59:21', 'Mj Shadmehr', 'https://lh3.googleusercontent.com/-uji_yZOVwTc/AAAAAAAAAAI/AAAAAAAAAAA/hzOEnE3VQj4/photo.jpg?sz=50', '1', 'Ø´Ø§Ø¯Ù…Ù‡Ø±', '4', NULL),
-(142, '2011-11-14 13:59:26', 'Ihar Mahaniok', 'https://lh5.googleusercontent.com/-IPplOgZ_190/AAAAAAAAAAI/AAAAAAAAAAA/dVOdW6-YhtM/photo.jpg?sz=50', '1', 'Software Engineer at Google, and photographer in free time. Enjoying creating and using new stuff', '', NULL),
-(143, '2012-04-22 01:47:38', 'Anton Shvets', 'https://lh6.googleusercontent.com/-ZWk1NAR0BFw/AAAAAAAAAAI/AAAAAAAAAAA/nDLa8v_-Ovk/photo.jpg?sz=50', '1', 'Advertising is the rattling of a stick inside a swill bucket. George Orwell', '', NULL),
-(144, '2012-04-22 02:58:50', 'Вадим Клименко', 'https://lh6.googleusercontent.com/-w2Uvwe09_D8/AAAAAAAAAAI/AAAAAAAAAAA/PvzsXThe0e8/photo.jpg?sz=50', '1', 'Веб-разработчик', '6', NULL),
-(145, '2012-04-22 01:45:20', 'Sergey Saliy', 'https://lh4.googleusercontent.com/-vPhArQ5dq5o/AAAAAAAAAAI/AAAAAAAAAAA/QckDG3XP7oE/photo.jpg?sz=50', '1', 'Hello world', '', NULL),
-(146, '2011-11-14 14:00:23', 'Max Ischenko', 'https://lh3.googleusercontent.com/-czkZvZlcSik/AAAAAAAAAAI/AAAAAAAAAAA/TYrEIW-L4qs/photo.jpg?sz=50', '3', 'I love to create something of value. Programmer. Entrepreneur.', '', NULL),
-(147, '2011-11-14 14:00:33', 'AJ Kohn', 'https://lh4.googleusercontent.com/-zyHf1OvONG8/AAAAAAAAAAI/AAAAAAAAAAA/J53SL98eBJU/photo.jpg?sz=50', '1', 'SEO, Marketing, Product Strategist', '', NULL),
-(148, '2012-04-22 01:49:00', 'Kirill Karyakin', 'https://lh4.googleusercontent.com/-f8F9Vqny_oc/AAAAAAAAAAI/AAAAAAAAAAA/SGxcmJWug9o/photo.jpg?sz=50', '1', '', '', NULL),
-(149, '2012-02-01 08:32:54', 'Denis Labelle', 'https://lh4.googleusercontent.com/-2Nt1eh8mOkw/AAAAAAAAAAI/AAAAAAAAAAA/c74k552rIVI/photo.jpg?sz=50', '1', 'Google+ Your Business, Brand, Organization', '', NULL),
-(150, '2012-01-31 03:23:49', 'Konstantin Makov', 'https://lh5.googleusercontent.com/-NX7tXJ_fOe8/AAAAAAAAAAI/AAAAAAAAAAA/UW7otva3W0U/photo.jpg?sz=50', '1', 'UKRAINE . COGITO ERGO SUM', '', NULL),
-(151, '2011-11-14 14:01:45', 'Nick Smith', 'https://lh6.googleusercontent.com/--ATFzxCfmtU/AAAAAAAAAAI/AAAAAAAAAAA/bmUUWX8AkJg/photo.jpg?sz=50', '1', '', '', NULL),
-(152, '2012-02-03 05:49:49', 'Leodor Selenier', 'https://lh6.googleusercontent.com/-Nh-0RmXHy5k/AAAAAAAAAAI/AAAAAAAAAAA/o0en0GQEJpU/photo.jpg?sz=50', '2', 'Bon Expose', '', NULL),
-(153, '2011-11-14 14:02:11', 'Alex Shwartz', 'https://lh3.googleusercontent.com/-cV8myXiGuOc/AAAAAAAAAAI/AAAAAAAAAAA/cm8PDZ3MvPs/photo.jpg?sz=50', '1', '', '', NULL),
-(154, '2012-02-01 05:26:34', 'Jarek Klimek', 'https://lh5.googleusercontent.com/-qS9pXHsYS1c/AAAAAAAAAAI/AAAAAAAAAAA/yXNnfiaF_74/photo.jpg?sz=50', '1', 'Editor in Chief and Co-founder of PhotoExtract: 1150 Pixel Photography Magazine', '', NULL),
-(155, '2012-02-01 07:48:30', 'Klaus Herrmann', 'https://lh4.googleusercontent.com/-ZAy-p7OWf8I/AAAAAAAAAAI/AAAAAAAAAAA/qwlg_1UVvNQ/photo.jpg?sz=50', '1', 'HDR Photography @ farbspiel-photo.com - View. Learn. Connect.', '', NULL),
-(156, '2012-02-11 15:55:36', 'Paul Roustan', 'https://lh6.googleusercontent.com/-Wov5dTjoVno/AAAAAAAAAAI/AAAAAAAAAAA/8zCPGox9EM8/photo.jpg?sz=50', '1', 'Airbrush Body Painter & Photographer', '4', NULL),
-(157, '2012-02-11 15:56:50', 'Robert Anderson', 'https://lh5.googleusercontent.com/-2ZdQWahpS2k/AAAAAAAAAAI/AAAAAAAAAAA/YnQnRz83_aM/photo.jpg?sz=50', '1', 'CEO, WindTalk', '4', NULL),
-(158, '2011-11-14 14:03:08', 'Monty Montz', 'https://lh6.googleusercontent.com/-u8fN71J2z-s/AAAAAAAAAAI/AAAAAAAAAAA/fWHBdyfQeZs/photo.jpg?sz=50', '1', 'Writer, photographer, transcriptionist, entrepreneur, health nut, tech junkie', '', NULL),
-(159, '2012-02-03 08:20:48', 'Drew Hart', 'https://lh5.googleusercontent.com/-DyGX-5pcc6I/AAAAAAAAAAI/AAAAAAAAAAA/AzEQNOQ_Sdk/photo.jpg?sz=50', '1', 'â™¥ SharePoint | IT Geek | Temporary holder of the Holy Rings of Betazed while Lwaxana is on Holiday', '', NULL),
-(160, '2012-01-31 03:03:59', 'Elena Kalis', 'https://lh6.googleusercontent.com/-Y2u3IB8bbek/AAAAAAAAAAI/AAAAAAAAAAA/ZTT2FNu3Cvk/photo.jpg?sz=50', '2', 'Conceptual underwater photographer', '', NULL),
-(161, '2011-11-14 14:03:32', 'Mike Dean', 'https://lh4.googleusercontent.com/-WvyJK21AgsY/AAAAAAAAAAI/AAAAAAAAAAA/g_pslAeue6w/photo.jpg?sz=50', '1', 'photographer, writer, thinker, conversationalist, teacher and learner', '', NULL),
-(162, '2011-11-14 14:03:38', 'Ben Malbon', 'https://lh3.googleusercontent.com/-6tkBH15teG4/AAAAAAAAAAI/AAAAAAAAAAA/pAO-WGzXDz0/photo.jpg?sz=50', '1', 'No plan survives the battle field (Helmuth von Moltke the Elder)', '', NULL),
-(163, '2011-11-14 14:03:55', 'Daniel A. Norman', 'https://lh4.googleusercontent.com/-hE6ByPjvsP8/AAAAAAAAAAI/AAAAAAAAAAA/3kDMrTj73Po/photo.jpg?sz=50', '1', 'Artist / Photographer', '', NULL),
-(164, '2011-11-15 04:19:50', 'Yevgen Timashov', 'https://lh5.googleusercontent.com/-NuFoYpUCEnk/AAAAAAAAAAI/AAAAAAAAAAA/_iQ9Eix96Dk/photo.jpg?sz=50', '1', 'Fine Art Landscape and Nature Photographer', '', NULL),
-(165, '2012-04-22 02:25:27', 'Дмитрий Вдовин', 'https://lh3.googleusercontent.com/-71IJTrIXJpQ/AAAAAAAAAAI/AAAAAAAAAAA/IfSxZCg9IMo/photo.jpg?sz=50', '1', 'жизнь продолжается....', '', NULL),
-(166, '2012-04-22 01:50:11', 'Alexander Chipliev', 'https://lh6.googleusercontent.com/-x1P0EtBK9h4/AAAAAAAAAAI/AAAAAAAAAAA/Sv7evJU6rxk/photo.jpg?sz=50', '1', 'Ruby on Rails | HTML5 | Javascript | Linux', '', NULL),
-(167, '2012-04-22 01:43:57', 'Alexander Pilishvili', 'https://lh3.googleusercontent.com/-BhORp5l9Cfs/AAAAAAAAAAI/AAAAAAAAAAA/ToZki9Cd5Bw/photo.jpg?sz=50', '1', '', '', NULL),
-(168, '2012-04-22 01:40:49', 'Виталий Рабош', 'https://lh3.googleusercontent.com/-y3qzdN7wjHI/AAAAAAAAAAI/AAAAAAAAAAA/ulFrDLylj1E/photo.jpg?sz=50', '1', 'piwar.ru - это mmorpg создана мной.', '3', NULL),
-(169, '2012-02-11 04:15:12', 'Helminadia Ranford', 'https://lh5.googleusercontent.com/-BsFvaGs0JIw/AAAAAAAAAAI/AAAAAAAAAAA/UWjB4kakMcA/photo.jpg?sz=50', '2', 'Outdoor photographer,Traveler', '', NULL),
-(170, '2012-02-03 05:50:40', 'helen sotiriadis', 'https://lh6.googleusercontent.com/-RULJnRqpXGk/AAAAAAAAAAI/AAAAAAAAAAA/QGioUTnGY_c/photo.jpg?sz=50', '2', 'architect, photographer, teacher and author', '2', NULL),
-(171, '2012-02-03 05:51:38', 'Aaron Reed', 'https://lh5.googleusercontent.com/-GaHOH7T_WwI/AAAAAAAAAAI/AAAAAAAAAAA/O3MQmzMMd3s/photo.jpg?sz=50', '1', 'Aaron Reed Photography', '2', NULL),
-(172, '2011-11-14 21:56:08', 'Ray Bilcliff', 'https://lh4.googleusercontent.com/-1O96-LBZEOQ/AAAAAAAAAAI/AAAAAAAAAAA/NNxaBCVGvTw/photo.jpg?sz=50', '1', 'Photos from the Florida Everglades and Beyond.', '1', NULL),
-(173, '2011-11-14 21:56:13', 'Lars Clausen', 'https://lh3.googleusercontent.com/-YQJiqVglKQI/AAAAAAAAAAI/AAAAAAAAAAA/VoLpNF3eElg/photo.jpg?sz=50', '1', 'I am a graphic designer & photographer from Denmark, most of all I am an old guy who never grew up.', '', NULL),
-(174, '2012-02-11 15:58:06', 'Carl Stovell', 'https://lh6.googleusercontent.com/-x-bvYV9f-Xw/AAAAAAAAAAI/AAAAAAAAAAA/Hv1u5lCPfGA/photo.jpg?sz=50', '1', 'Geordie Photographer.. but not just black and white!', '', NULL),
-(175, '2011-11-14 21:56:21', 'Daniel Plumer', 'https://lh3.googleusercontent.com/--iJ58kdZJ1Y/AAAAAAAAAAI/AAAAAAAAAAA/tDnx4BwTWKs/photo.jpg?sz=50', '1', 'Landscape and wildlife photographer', '', NULL),
-(176, '2012-02-03 06:29:16', 'Michiel de Lange', 'https://lh3.googleusercontent.com/-zWBJNkiXz8U/AAAAAAAAAAI/AAAAAAAAAAA/97Ux8mhMhQM/photo.jpg?sz=50', '1', '| PHOTOGRAPHY | Street Life | Travel | Documentary | Street Portraiture |', '', NULL),
-(177, '2011-11-14 21:56:38', 'Frank Yuwono', 'https://lh5.googleusercontent.com/-HcOyo3XxsHE/AAAAAAAAAAI/AAAAAAAAAAA/VsbWm0WAks8/photo.jpg?sz=50', '1', 'Frank Yuwono Photography, Melbourne, Australia', '', NULL),
-(178, '2011-11-14 21:56:45', 'Dave Beckerman', 'https://lh6.googleusercontent.com/-oXR8ytmgf4o/AAAAAAAAAAI/AAAAAAAAAAA/muTDLF7FGcU/photo.jpg?sz=50', '1', 'New York Photography: For Sale at www.BeckermanPhoto.com', '', NULL),
-(179, '2011-11-14 21:56:55', 'Martin Rak', 'https://lh6.googleusercontent.com/-KxAcn2W52c0/AAAAAAAAAAI/AAAAAAAAAAA/zv1cyuTMNlU/photo.jpg?sz=50', '1', 'Landscape Photographer', '', NULL),
-(180, '2012-02-01 05:27:18', 'Teresa Stover', 'https://lh3.googleusercontent.com/-5EFML5kiLUE/AAAAAAAAAAI/AAAAAAAAAAA/i2zx8HDHWx0/photo.jpg?sz=50', '2', 'Visual artist in love with the natural world', '4', NULL),
-(181, '2012-02-01 07:49:56', 'Hengki Koentjoro', 'https://lh4.googleusercontent.com/-CMrZBpO8KGY/AAAAAAAAAAI/AAAAAAAAAAA/xO6OTsU0hgM/photo.jpg?sz=50', '1', 'Counting the ways ...', '4', NULL),
-(182, '2012-02-01 07:50:18', 'rarindra prakarsa', 'https://lh3.googleusercontent.com/-zdeoFVg7Q0g/AAAAAAAAAAI/AAAAAAAAAAA/3S5D3Uh-br0/photo.jpg?sz=50', '1', 'www.rarindra-prakarsa.com', '', NULL),
-(183, '2011-11-14 21:57:25', 'Pradeep Sanyal', 'https://lh3.googleusercontent.com/-BjLhN369SxA/AAAAAAAAAAI/AAAAAAAAAAA/rvpA17FT478/photo.jpg?sz=50', '1', 'âœ” Photographer and Traveler | â™” www.pradeepsanyal.com', '', NULL),
-(184, '2012-01-31 03:47:15', 'Mitch Dobrowner', 'https://lh6.googleusercontent.com/-Sz8wLWavLj0/AAAAAAAAAAI/AAAAAAAAAAA/z27hP6ppN-U/photo.jpg?sz=50', '1', 'This is the Google+ page of Mitch Dobrowner Fine Art Photography', '', NULL),
-(185, '2011-11-14 21:57:32', 'Lisa RedWillow', 'https://lh5.googleusercontent.com/-k-CWeuDuDZI/AAAAAAAAAAI/AAAAAAAAAAA/N_B__l2KO_8/photo.jpg?sz=50', '2', 'Is home from Hawaii and will sleep for days', '', NULL),
-(186, '2011-11-14 21:57:36', 'Albert Albs', 'https://lh5.googleusercontent.com/-qE_TLHTydJs/AAAAAAAAAAI/AAAAAAAAAAA/3sgBkJGTfM4/photo.jpg?sz=50', '1', 'Loves Google, Photography, Blogging, Social Networking, SEO and WordPress', '1', NULL),
-(187, '2012-04-22 04:15:13', 'Nathan Wirth', 'https://lh5.googleusercontent.com/-SCN50fubxKs/AAAAAAAAAAI/AAAAAAAAAAA/fQbmYIyaZhQ/photo.jpg?sz=50', '1', 'College English Teacher, Photography Enthusiast, Husband, Father, Writer', '4', NULL),
-(188, '2012-02-09 08:52:02', 'Alexander Safonov', 'https://lh6.googleusercontent.com/-L-_v-wCRYtw/AAAAAAAAAAI/AAAAAAAAAAA/BEoQuxfszkU/photo.jpg?sz=50', '1', 'underwater photography | software engineering | quant trading | gaming', '', NULL),
-(189, '2012-02-01 07:50:32', 'Marcelo Almeida', 'https://lh3.googleusercontent.com/-KB0bCEAHekA/AAAAAAAAAAI/AAAAAAAAAAA/e-7Ch35aq6s/photo.jpg?sz=50', '1', 'art lover...not an artist', '', NULL),
-(190, '2012-02-03 08:22:26', 'Joseph Lee', 'https://lh4.googleusercontent.com/--buFV2hxaEM/AAAAAAAAAAI/AAAAAAAAAAA/LCAc6xEw4Uw/photo.jpg?sz=50', '1', 'A scientist who happens to dabble in technology, or is it the other way around?', '', NULL),
-(191, '2011-11-14 21:58:12', 'tráº§n thanh thiá»‡n', 'https://lh6.googleusercontent.com/-VU-D1uEfVG0/AAAAAAAAAAI/AAAAAAAAAAA/YhE6j0kLhYo/photo.jpg?sz=50', '1', 'A E S T H E T I C S (Art, Architecture, Design & Decor)', '', NULL),
-(192, '2012-02-01 05:28:24', 'Jaime GarcÃ­a', 'https://lh5.googleusercontent.com/-z6SBVZlfxOs/AAAAAAAAAAI/AAAAAAAAAAA/UcQPW_tOR_8/photo.jpg?sz=50', '1', 'A Musician/Composer who loves Astronomy, Science, Arts, Photography, Videogames, Chocolate, Puzzles and rainy days.', '', NULL),
-(193, '2012-02-01 00:01:10', 'Alireza Yavari', 'https://lh4.googleusercontent.com/-Dm0e7zBoN74/AAAAAAAAAAI/AAAAAAAAAAA/yoK8zy3_3HQ/photo.jpg?sz=50', '1', 'I make people do stuff online without them knowing about it, in a positive way!', '', NULL),
-(194, '2011-11-14 21:58:30', 'mahyar musavi', 'https://lh4.googleusercontent.com/-PEnpTvrGLbg/AAAAAAAAAAI/AAAAAAAAAAA/MQNwqScR_Ic/photo.jpg?sz=50', '1', 'Just sharing my favorite photos which belong to other photographers. None of them belongs to me. With love and peace', '4', NULL),
-(195, '2012-04-22 02:58:51', 'Герман Клименко', 'https://lh4.googleusercontent.com/-j7ONQwe3bXQ/AAAAAAAAAAI/AAAAAAAAAAA/0mw98VYok0M/photo.jpg?sz=50', '1', 'Жадность порождает бедность', '', NULL),
-(196, '2011-11-14 22:01:29', 'ÐÐ¸ÐºÐ¾Ð»Ð°Ð¹ Ð¡Ð¸Ð´Ð¾Ñ€ÐºÐ¸Ð½', 'https://lh3.googleusercontent.com/-DpNsq0FpFpI/AAAAAAAAAAI/AAAAAAAAAAA/Nc0TjLFp5nQ/photo.jpg?sz=50', '1', '', '', NULL),
-(197, '2012-04-22 01:52:59', 'Арсений Вейцкин', 'https://lh3.googleusercontent.com/-KOrPpo6BW8w/AAAAAAAAAAI/AAAAAAAAAAA/Ne-iQgmOHgk/photo.jpg?sz=50', '1', '', '', NULL),
-(198, '2012-01-31 02:46:03', 'Sergey Brin', 'https://lh5.googleusercontent.com/-e_uN3LbK-HI/AAAAAAAAAAI/AAAAAAAAAAA/4TpCwzpRsVU/photo.jpg?sz=50', '1', '', '', NULL),
-(199, '2012-02-06 01:56:41', 'Erfun Kheirandish', 'https://lh6.googleusercontent.com/-0g5kpD6tyg4/AAAAAAAAAAI/AAAAAAAAAAA/V16F91HIlbo/photo.jpg?sz=50', '', 'Scroll down to see more; share and recommend to make a bigger community', '', NULL),
-(200, '2012-02-01 08:34:10', 'Danny Sullivan', 'https://lh3.googleusercontent.com/-olvH6SbAItQ/AAAAAAAAAAI/AAAAAAAAAAA/zyJixw59WVA/photo.jpg?sz=50', '1', 'Editor, SearchEngineLand.com, covering Google, SEO, PPC, search engines and search marketing.', '', NULL),
-(201, '2011-11-14 22:05:23', 'Mikhail Kuchenko', 'https://lh4.googleusercontent.com/-S5Y0e7iucHw/AAAAAAAAAAI/AAAAAAAAAAA/FG5yOaylRRM/photo.jpg?sz=50', '1', 'ÐŸÐ¾Ð´Ð¿Ð¸ÑÑ‹Ð²Ð°Ð¹Ñ‚ÐµÑÑŒ ;0', '6', NULL),
-(202, '2012-02-01 07:51:09', 'J. Adam Moore', 'https://lh5.googleusercontent.com/-LQnKEkHsPAc/AAAAAAAAAAI/AAAAAAAAAAA/TivVN4wubog/photo.jpg?sz=50', '2', 'âœ“ Verified - Software developer, humorist, comedic ghostwriter.', '', NULL),
-(203, '2012-02-03 06:29:24', 'MG Siegler', 'https://lh5.googleusercontent.com/-YrWJYldErmI/AAAAAAAAAAI/AAAAAAAAAAA/Ai73ZCF0Ftg/photo.jpg?sz=50', '1', 'I roam the badlands. An outlaw hunting outlaws. A renegade.', '', NULL),
-(204, '2012-02-01 08:34:45', 'Sascha Pallenberg', 'https://lh6.googleusercontent.com/-U88MJWQ54AY/AAAAAAAAAAI/AAAAAAAAAAA/DCUMPOmYwzE/photo.jpg?sz=50', '1', 'Techtainer, Netbooknews Founder, Worldtraveller and Legal Alien in Taiwan', '1', NULL),
-(205, '2012-01-31 03:57:33', 'Michelle Marie', 'https://lh6.googleusercontent.com/-p9biYZIobow/AAAAAAAAAAI/AAAAAAAAAAA/Tp87dDVAgS8/photo.jpg?sz=50', '2', 'Professional supervillain, master of disguise. Mwahahaha!', '1', NULL),
-(206, '2012-01-31 03:19:11', 'Lutz Beyer', 'https://lh6.googleusercontent.com/-XnTWJzkI6V0/AAAAAAAAAAI/AAAAAAAAAAA/TTE9pPBAJKU/photo.jpg?sz=50', '1', '', '', NULL),
-(207, '2012-02-03 06:29:40', 'Craig Kanalley', 'https://lh5.googleusercontent.com/-AU_jrYVhJdE/AAAAAAAAAAI/AAAAAAAAAAA/yWyQcMM9jGc/photo.jpg?sz=50', '1', 'Social Media Editor at NBC News, formerly Senior Editor at Huffington Post, into Tech/Hockey', '1', NULL),
-(208, '2012-02-03 06:29:44', 'Dave Besbris', 'https://lh3.googleusercontent.com/-OSwXSIg1wls/AAAAAAAAAAI/AAAAAAAAAAA/lI_EnosgaFE/photo.jpg?sz=50', '1', '', '', NULL),
-(209, '2012-01-31 03:57:48', 'Natalie Villalobos', 'https://lh3.googleusercontent.com/-7Xrmcf1dy6Q/AAAAAAAAAAI/AAAAAAAAAAA/HJDTlYiOoto/photo.jpg?sz=50', '2', 'Community Manager for Google+. Started +Handmade.', '2', NULL),
-(210, '2011-11-14 22:06:43', 'David Yonge-Mallo', 'https://lh5.googleusercontent.com/-3PlgMJ2nL78/AAAAAAAAAAI/AAAAAAAAAAA/lMkr98DC2HU/photo.jpg?sz=50', '', 'Official Google+ Profile of the I18n Man of Mystery', '4', NULL),
-(211, '2011-11-14 22:06:48', 'Pedro Dias', 'https://lh3.googleusercontent.com/-Px5VNouhlZE/AAAAAAAAAAI/AAAAAAAAAAA/6UVLxsjVROs/photo.jpg?sz=50', '1', 'Ex-Googler and Web addict in between. I like SEO, Usability and Design... Still hate spam!', '', NULL),
-(212, '2011-11-14 22:07:03', 'Natalia Storozhenko', 'https://lh6.googleusercontent.com/-YBCDDloQ1lw/AAAAAAAAAAI/AAAAAAAAAAA/_l9GEVNiWtk/photo.jpg?sz=50', '2', '', '', NULL),
-(213, '2012-04-22 02:08:34', 'Aleksander Sergeevich', 'https://lh3.googleusercontent.com/-9W8sGunWEmY/AAAAAAAAAAI/AAAAAAAAAAA/bQxmX5rTReo/photo.jpg?sz=50', '1', 'Stay Hungry. Stay Foolish.', '', NULL),
-(214, '2012-04-22 01:32:33', 'Андрей Ушаков', 'https://lh4.googleusercontent.com/-o3I5EsZsEmM/AAAAAAAAAAI/AAAAAAAAAAA/1efdjxShF24/photo.jpg?sz=50', '1', 'Это Соркуша же. Помесь Каркуши и Сырны. (с)', '1', NULL),
-(215, '2011-11-14 22:07:37', 'Yaroslav Chygliaev', 'https://lh4.googleusercontent.com/-csSCP2dl2JE/AAAAAAAAAAI/AAAAAAAAAAA/YVfnVMwby3c/photo.jpg?sz=50', '1', '', '', NULL),
-(216, '2012-04-22 01:42:18', 'Rina S.', 'https://lh5.googleusercontent.com/-Jd5zomnDssE/AAAAAAAAAAI/AAAAAAAAAAA/zt5SAZqH-w8/photo.jpg?sz=50', '2', 'А будете меня обижать - я вам приснюсь!', '', NULL),
-(217, '2011-11-14 22:07:47', 'Dina Guseynova', 'https://lh4.googleusercontent.com/-D6j_KmKrStg/AAAAAAAAAAI/AAAAAAAAAAA/EUmlkUYGc34/photo.jpg?sz=50', '2', 'Nothing else matters', '', NULL),
-(218, '2012-01-31 03:26:00', 'MicaÃ«l Reynaud', 'https://lh4.googleusercontent.com/-fVXk6u6L5dk/AAAAAAAAAAI/AAAAAAAAAAA/NVKlE4_vajA/photo.jpg?sz=50', '', '', '', NULL),
-(219, '2012-04-22 02:04:19', 'Алексей Скорняков', 'https://lh5.googleusercontent.com/-qg3s_w1KGM4/AAAAAAAAAAI/AAAAAAAAAAA/_uQvRYij8EE/photo.jpg?sz=50', '1', 'Дорогу осилит идущий.', '', NULL),
-(220, '2011-11-14 22:08:18', 'Sergey Koksharov', 'https://lh4.googleusercontent.com/-Og02rCORp7Y/AAAAAAAAAAI/AAAAAAAAAAA/OoIRwFf35gE/photo.jpg?sz=50', '1', 'Web developer and Life Optimizator', '4', NULL),
-(221, '2011-11-14 22:08:45', 'Aygul Zagidullina', 'https://lh3.googleusercontent.com/-wmWxIHbCRGI/AAAAAAAAAAI/AAAAAAAAAAA/wle1EgxDiNc/photo.jpg?sz=50', '2', 'Impossible is nothing. Making things happen since 1982.', '', NULL),
-(222, '2011-11-15 04:19:40', 'Venn Stone', 'https://lh4.googleusercontent.com/-a9SerfGR1Xw/AAAAAAAAAAI/AAAAAAAAAAA/2BvAlglI-kM/photo.jpg?sz=50', '1', 'Founder / Host of LinuxGameCast (L.G.C.)  Linux game capture, news, reviews and whatever else we come up with.', '', NULL),
-(223, '2012-01-31 03:40:03', 'Gregory Colbert', 'https://lh6.googleusercontent.com/-oy0iN4EOHP4/AAAAAAAAAAI/AAAAAAAAAAA/NHn3_9U-Tqs/photo.jpg?sz=50', '1', 'Photographer/filmmaker and creator of Ashes and Snow', '', NULL),
-(224, '2012-01-31 06:28:14', 'Gabriel Vasile', 'https://lh6.googleusercontent.com/-Be7pafNVDUY/AAAAAAAAAAI/AAAAAAAAAAA/TPu095R8UYk/photo.jpg?sz=50', '1', 'I find or create cool and useful things. Read the intro section to see my most successful posts.', '', NULL),
-(225, '2012-02-01 08:36:45', 'Alexandre Deschaumes', 'https://lh5.googleusercontent.com/-0yLRe5Y9euM/AAAAAAAAAAI/AAAAAAAAAAA/eVHSWRjylbM/photo.jpg?sz=50', '1', '', '', NULL),
-(226, '2012-04-22 03:00:08', 'Андрій Кондратьєв', 'https://lh3.googleusercontent.com/-GXly4GII6AM/AAAAAAAAAAI/AAAAAAAAAAA/BZ3PycKNnCo/photo.jpg?sz=50', '1', '', '', NULL),
-(227, '2011-11-14 22:11:02', 'Damien Grillat', 'https://lh4.googleusercontent.com/-Q9trvYSMcZw/AAAAAAAAAAI/AAAAAAAAAAA/VLoq6jAtiwI/photo.jpg?sz=50', '', 'Photographe professionnel dans le sud de la France - www.damiengrillat.fr', '3', NULL),
-(228, '2011-11-14 22:11:06', 'Robin Black', 'https://lh5.googleusercontent.com/-Y2Zq4rGLTqA/AAAAAAAAAAI/AAAAAAAAAAA/YwItaZRB92c/photo.jpg?sz=50', '2', 'Los Angeles-based landscape photographer', '', NULL),
-(229, '2012-02-09 08:53:05', 'Victoria Nigar', 'https://lh6.googleusercontent.com/-KSMx-Gzo6Jg/AAAAAAAAAAI/AAAAAAAAAAA/VHS4sofZmPc/photo.jpg?sz=50', '2', 'Google,Android,Movies,Fashion', '6', NULL),
-(230, '2012-02-09 08:54:36', 'Darrell Hudson', 'https://lh6.googleusercontent.com/-KAYbzj97Za8/AAAAAAAAAAI/AAAAAAAAAAA/A9sCuyGZdO8/photo.jpg?sz=50', '1', 'The Tech Effect', '', NULL),
-(231, '2011-11-14 22:11:42', 'Matt Steiner', 'https://lh6.googleusercontent.com/-Z-rqolK8tsA/AAAAAAAAAAI/AAAAAAAAAAA/g2Mc2vja-Sw/photo.jpg?sz=50', '1', '', '', NULL),
-(232, '2012-04-22 02:03:11', 'Timur Gaskarov', 'https://lh4.googleusercontent.com/-9HZkhW7YlwA/AAAAAAAAAAI/AAAAAAAAAAA/DL5nMk9Xusk/photo.jpg?sz=50', '1', 'Project management, ERP engineering, Google Chrome fan ;)', '', NULL),
-(233, '2012-04-22 01:59:25', 'Иван Сергеев', 'https://lh6.googleusercontent.com/-UB44601znTw/AAAAAAAAAAI/AAAAAAAAAAA/UM4WkOe3oOc/photo.jpg?sz=50', '1', 'Хостинг-провайдер Евробайт', '', NULL),
-(234, '2012-02-01 08:37:35', 'Arvid Bux', 'https://lh3.googleusercontent.com/-TouICNeczXY/AAAAAAAAAAI/AAAAAAAAAAA/9_hqMjHyoDs/photo.jpg?sz=50', '1', 'Blogger, fAndroid, Gadget freak, Google enthusiast, Space Nerd, Early Adaptor, Trendwatcher', '', NULL),
-(235, '2012-02-01 05:30:06', 'Zsolt Zsigmond', 'https://lh3.googleusercontent.com/-bQFXwh3cU9c/AAAAAAAAAAI/AAAAAAAAAAA/GQ3nZ1HgNdg/photo.jpg?sz=50', '1', 'realityDream - prints for sale @ http://realitydream.hu', '', NULL),
-(236, '2011-11-14 22:12:16', 'Jeffrey Sullivan', 'https://lh4.googleusercontent.com/-1tzPHcxDVOg/AAAAAAAAAAI/AAAAAAAAAAA/DzcBiIg4bys/photo.jpg?sz=50', '1', 'Landscape photographer, author, workshop leader', '', NULL),
-(237, '2012-04-22 03:00:40', 'Кана Рейка', 'https://lh3.googleusercontent.com/-nrlF8zYfPvY/AAAAAAAAAAI/AAAAAAAAAAA/c7y6PGlQTbI/photo.jpg?sz=50', '2', '', '', NULL),
-(238, '2011-11-14 22:12:25', 'Spartak Kagramanyan', 'https://lh6.googleusercontent.com/-mH7Xvb2EZrI/AAAAAAAAAAI/AAAAAAAAAAA/npKMWB6HlTo/photo.jpg?sz=50', '1', 'Philosophy. Photography. Web Development.', '2', NULL),
-(239, '2012-04-22 01:55:09', 'Николай Шерхан', 'https://lh4.googleusercontent.com/-Zo7aFjySvV0/AAAAAAAAAAI/AAAAAAAAAAA/hnLS6_TpIzg/photo.jpg?sz=50', '1', 'Администратор сайта MPTron.com', '', NULL),
-(240, '2012-04-22 02:18:25', 'Илья Гусев', 'https://lh6.googleusercontent.com/-_bMTv_9IM4A/AAAAAAAAAAI/AAAAAAAAAAA/TViF6KSXg-w/photo.jpg?sz=50', '1', 'Няша', '', NULL),
-(241, '2012-04-22 03:01:05', 'Вашингтон ИрвиНг', 'https://lh3.googleusercontent.com/-lhlqprHVC1E/AAAAAAAAAAI/AAAAAAAAAAA/AQsTnzwBskU/photo.jpg?sz=50', '1', 'ლ(ಠ益ಠლ)', '1', NULL),
-(242, '2012-04-22 03:01:44', 'Artem Rudenko', 'https://lh5.googleusercontent.com/-qwB0qycpRFk/AAAAAAAAAAI/AAAAAAAAAAA/-x2JTvBblq4/photo.jpg?sz=50', '', 'http://twitter.com/artrudenko', '', NULL),
-(243, '2011-11-14 22:14:36', 'Cezmi Kalorifer', 'https://lh6.googleusercontent.com/-yxpLn2x326o/AAAAAAAAAAI/AAAAAAAAAAA/8MdWZrLS5wg/photo.jpg?sz=50', '1', 'Sevgi Dolu ve HÃ¼manist Ä°nsan - www.cezmikalorifer.com', '9', NULL),
-(244, '2011-11-14 22:16:45', 'Moritz Tolxdorff', 'https://lh4.googleusercontent.com/-XCsFuO4FPLE/AAAAAAAAAAI/AAAAAAAAAAA/bbOTAAmE6Fg/photo.jpg?sz=50', '1', 'IT Engineer, Crazy Geek, Code Digger, Top Contributor', '1', NULL),
-(245, '2011-11-14 22:16:49', 'Richard Bennett', 'https://lh3.googleusercontent.com/-NO__cVVPDtI/AAAAAAAAAAI/AAAAAAAAAAA/a-cLtYDIYOQ/photo.jpg?sz=50', '1', 'Belly dancer. 1 stripper. Narcissist. "Generally pleasant."', '1', NULL),
-(246, '2011-11-14 22:16:55', 'Steve Lawrey', 'https://lh6.googleusercontent.com/-ZPmClhlhGzU/AAAAAAAAAAI/AAAAAAAAAAA/p9MmK9ofZOo/photo.jpg?sz=50', '1', 'Losing Followers one post @ a time!', '', NULL),
-(247, '2011-11-14 22:17:06', 'Misha M.-Kupriyanov', 'https://lh5.googleusercontent.com/-Il1zzdGiHJE/AAAAAAAAAAI/AAAAAAAAAAA/N9QGQDtV5N0/photo.jpg?sz=50', '1', '', '4', NULL),
-(248, '2011-11-14 22:17:22', 'Steven G', 'https://lh4.googleusercontent.com/-tBjhEvg3imQ/AAAAAAAAAAI/AAAAAAAAAAA/rAsGCPVsR_4/photo.jpg?sz=50', '', 'Peoples ChampionÂ®', '', NULL),
-(249, '2011-11-14 22:17:29', 'Florian Rohrweck', 'https://lh4.googleusercontent.com/-sD5Xjs6A9is/AAAAAAAAAAI/AAAAAAAAAAA/88yBo_wBxOs/photo.jpg?sz=50', '1', 'Gifted, weird, enthusiastic, awesome, busy, overworked, tired, crazy (a little)', '4', NULL),
-(250, '2011-11-14 22:17:51', 'Ngo Duy Khanh', 'https://lh3.googleusercontent.com/-lS4QxIVoUdc/AAAAAAAAAAI/AAAAAAAAAAA/wNq2j22e1iM/photo.jpg?sz=50', '1', 'Keep a smile on your face', '1', NULL),
-(251, '2012-02-09 08:56:38', 'Justin Ormont', 'https://lh3.googleusercontent.com/-OvtpBB9mjAI/AAAAAAAAAAI/AAAAAAAAAAA/DhzzvL6QZiE/photo.jpg?sz=50', '3', 'Maker of Cool Things', '', NULL),
-(252, '2012-04-22 03:02:29', 'Викентий Черторыльский', 'https://lh6.googleusercontent.com/-RdyEMs51CYo/AAAAAAAAAAI/AAAAAAAAAAA/fMk3oBT8_hY/photo.jpg?sz=50', '3', '', '', NULL),
-(253, '2012-02-01 07:52:02', 'Andrea Kuszewski', 'https://lh6.googleusercontent.com/-XB4CyueN4Ss/AAAAAAAAAAI/AAAAAAAAAAA/nEapPcQfV3Y/photo.jpg?sz=50', '2', 'Sometimes I believe in as many as six impossible things before breakfast.', '', NULL),
-(254, '2012-04-22 03:03:34', 'Konata Izumi', 'https://lh5.googleusercontent.com/-TLj4a6gVsiw/AAAAAAAAAAI/AAAAAAAAAAA/9eyF95AZRDQ/photo.jpg?sz=50', '3', 'Болтающая анимешка.', '', NULL),
-(255, '2012-04-22 02:27:22', 'Сергей Шпикин', 'https://lh4.googleusercontent.com/-HMjUMAx5JMw/AAAAAAAAAAI/AAAAAAAAAAA/DE_Y1OdfVnc/photo.jpg?sz=50', '1', 'Болтающая анимешка', '', NULL),
-(256, '2012-04-22 01:52:14', 'Rei Ayanami', 'https://lh4.googleusercontent.com/-bfi3qmEPAyw/AAAAAAAAAAI/AAAAAAAAAAA/YM0Nxxbj2Ms/photo.jpg?sz=50', '2', 'I think… I am the third.', '', NULL),
-(257, '2012-04-22 01:59:23', 'Николай Статичный', 'https://lh6.googleusercontent.com/-WGWBh5ZiYWk/AAAAAAAAAAI/AAAAAAAAAAA/upL69mZb1KU/photo.jpg?sz=50', '1', '', '', NULL),
-(258, '2012-01-31 03:14:34', 'Pete Cashmore', 'https://lh5.googleusercontent.com/-IPfmtq_gzvo/AAAAAAAAAAI/AAAAAAAAAAA/0z-DejZlFUs/photo.jpg?sz=50', '3', 'CEO & Founder of Mashable', '', NULL),
-(259, '2012-04-22 03:02:59', 'Дмитрий Артюшенко', 'https://lh4.googleusercontent.com/-o0oIpyZxlgA/AAAAAAAAAAI/AAAAAAAAAAA/Dx4SoeHSLNU/photo.jpg?sz=50', '', '', '', NULL),
-(260, '2012-01-31 03:01:37', 'Kevin Rose', 'https://lh4.googleusercontent.com/-YryY58seG10/AAAAAAAAAAI/AAAAAAAAAAA/Bg-dbB-ogOU/photo.jpg?sz=50', '1', 'Tech angel investor and entrepreneur. Drinker of tea.', '2', NULL),
-(261, '2012-01-31 06:29:02', 'Paul Irish', 'https://lh3.googleusercontent.com/-7jdZCLeEaho/AAAAAAAAAAI/AAAAAAAAAAA/mffqze3bF64/photo.jpg?sz=50', '1', 'i like to make the www fun.', '', NULL),
-(262, '2012-01-31 03:14:54', 'Leo Laporte', 'https://lh5.googleusercontent.com/-cC4QSPX0oHY/AAAAAAAAAAI/AAAAAAAAAAA/CPmhpQO-5c8/photo.jpg?sz=50', '1', 'Podcaster, broadcaster, Chief TWiT and The Tech Guy', '2', NULL),
-(263, '2012-04-22 01:47:01', 'Сергей Чиграй', 'https://lh4.googleusercontent.com/--NlJQk2dWIQ/AAAAAAAAAAI/AAAAAAAAAAA/5DB97GQPRqc/photo.jpg?sz=50', '1', 'Artslab.info | web-design, blogging, web-dev', '2', NULL),
-(264, '2012-01-31 03:46:23', 'Bradley Horowitz', 'https://lh3.googleusercontent.com/-iyQOUVWQFto/AAAAAAAAAAI/AAAAAAAAAAA/2bh77qPXuFk/photo.jpg?sz=50', '1', 'VP Product, Google+', '4', NULL),
-(265, '2011-11-14 22:20:57', 'Thomas Morffew', 'https://lh4.googleusercontent.com/-Ms6ZvTGw4ig/AAAAAAAAAAI/AAAAAAAAAAA/6IIHr00RWXY/photo.jpg?sz=50', '1', 'Android, China, Google+', '4', NULL),
-(266, '2012-02-03 06:29:53', 'Jomon Anto', 'https://lh4.googleusercontent.com/-3QuZvZ7Lq7I/AAAAAAAAAAI/AAAAAAAAAAA/u41oyAhyphc/photo.jpg?sz=50', '1', '', '', NULL),
-(267, '2012-02-03 05:56:55', 'Michael Fomenko', 'https://lh6.googleusercontent.com/-T0fVUCVpNac/AAAAAAAAAAI/AAAAAAAAAAA/0yR5WEXc5ek/photo.jpg?sz=50', '1', 'Upcoming Artist', '1', NULL),
-(268, '2011-11-14 22:25:05', 'Eric Bidelman', 'https://lh5.googleusercontent.com/-kgFnix5akCc/AAAAAAAAAAI/AAAAAAAAAAA/VExR-A6RA4s/photo.jpg?sz=50', '1', 'Digital Jedi @ Google', '', NULL),
-(269, '2012-02-01 04:44:42', 'Johnathan Chung', 'https://lh6.googleusercontent.com/-7IFL6RmOl-U/AAAAAAAAAAI/AAAAAAAAAAA/kshFfNnwRcg/photo.jpg?sz=50', '1', 'Create. Discover. Inspire.', '', NULL),
-(270, '2012-02-03 06:29:57', 'Suriel Omar C.H.', 'https://lh6.googleusercontent.com/-1fP9IXzsaxg/AAAAAAAAAAI/AAAAAAAAAAA/JmzImycg98Q/photo.jpg?sz=50', '1', 'Periodista. Dios no me quiere y el diablo me tiene miedo... AMEN', '', NULL),
-(271, '2012-01-31 03:33:22', 'Bilal Akbar', 'https://lh5.googleusercontent.com/-gb3jvyCqU2g/AAAAAAAAAAI/AAAAAAAAAAA/E8o64Yaq0zM/photo.jpg?sz=50', '1', 'Life is good!', '1', NULL),
-(272, '2012-02-01 08:38:23', 'Ben Eidelson', 'https://lh4.googleusercontent.com/-z8IfK3wb9QA/AAAAAAAAAAI/AAAAAAAAAAA/_lZUBh2mSq8/photo.jpg?sz=50', '1', 'everything is the best', '', NULL),
-(273, '2012-02-01 04:46:08', 'Jenson Taylor', 'https://lh3.googleusercontent.com/-3zxvGOpf0ps/AAAAAAAAAAI/AAAAAAAAAAA/Iux0NNW80Og/photo.jpg?sz=50', '1', 'Circle me for jokes, entertainment, photography, quotes and proverbs. Comedian+', '1', NULL),
-(274, '2012-04-22 02:04:18', 'Fedor Petrov', 'https://lh3.googleusercontent.com/-TVLSTh1sJJc/AAAAAAAAAAI/AAAAAAAAAAA/I7U8EAxR0AA/photo.jpg?sz=50', '1', '', '', NULL),
-(275, '2011-11-14 22:30:56', 'Ty Moss', 'https://lh4.googleusercontent.com/-Uu2df8LGO4w/AAAAAAAAAAI/AAAAAAAAAAA/XGmhu-l-rfI/photo.jpg?sz=50', '1', '', '', NULL),
-(276, '2012-02-01 08:39:21', 'MILES HOLDEN', 'https://lh4.googleusercontent.com/-FJ0pzyTuK8k/AAAAAAAAAAI/AAAAAAAAAAA/e-kafZGJEWc/photo.jpg?sz=50', '1', 'A Kiwi photographer from Queenstown, New Zealand', '', NULL),
-(277, '2012-04-22 03:05:38', 'Slava Prishepa', 'https://lh5.googleusercontent.com/-FFt-7aWjOuA/AAAAAAAAAAI/AAAAAAAAAAA/hRQBG8KNDNc/photo.jpg?sz=50', '1', 'Социофоб, нёрд, приношу несчастье :)', '1', NULL),
-(278, '2012-04-22 01:49:44', 'Irina Kosheleva', 'https://lh4.googleusercontent.com/-rMcMYP9DDSk/AAAAAAAAAAI/AAAAAAAAAAA/ZQj6eZMsV2Y/photo.jpg?sz=50', '2', 'Мучаю людей - учу их английскому)', '3', NULL),
-(279, '2012-02-03 05:57:41', 'Oliver Seidel', 'https://lh5.googleusercontent.com/-aOierqr1hvg/AAAAAAAAAAI/AAAAAAAAAAA/K3MX9UkCu2U/photo.jpg?sz=50', '1', 'UX designer & photographer, love to travel.', '', NULL),
-(280, '2012-02-03 06:30:02', 'Giuseppe Basile', 'https://lh4.googleusercontent.com/-RurtGFI3vN0/AAAAAAAAAAI/AAAAAAAAAAA/H1Xh5IY1TKs/photo.jpg?sz=50', '1', 'GLOW photography :: Sydney Australia', '', NULL),
-(281, '2011-11-14 22:32:23', 'Ð¢Ð¸Ð½Ð° ÐšÐ°Ð½Ð´ÐµÐ»Ð°ÐºÐ¸', 'https://lh5.googleusercontent.com/-ZPkZimd339Q/AAAAAAAAAAI/AAAAAAAAAAA/E0Cj9rM-KaU/photo.jpg?sz=50', '2', '', '', NULL),
-(282, '2012-04-22 03:07:25', 'Егор Лимурин', 'https://lh3.googleusercontent.com/-F50zIZd3czc/AAAAAAAAAAI/AAAAAAAAAAA/LKaIvs5yRbg/photo.jpg?sz=50', '1', '', '', NULL),
-(283, '2012-04-22 02:25:04', 'Наталья Гончалова', 'https://lh6.googleusercontent.com/-rEa0i-sr5PM/AAAAAAAAAAI/AAAAAAAAAAA/IUy1ThA2628/photo.jpg?sz=50', '2', '', '', NULL),
-(284, '2012-02-01 04:47:00', 'Michael Lee Johnson', 'https://lh6.googleusercontent.com/-FJ3zt3O7HPc/AAAAAAAAAAI/AAAAAAAAAAA/D6SWGFrBqNU/photo.jpg?sz=50', '1', 'âœ” Internet Geek. - Web Virtuoso / Google+ Evangelist / Marketing Aficionado', '1', NULL),
-(285, '2011-11-14 22:33:08', 'Ð’Ð¸ÐºÑ‚Ð¾Ñ€ ÐžÐ±ÐµÑ€Ð½Ð¸Ñ…Ð¸Ð½', 'https://lh3.googleusercontent.com/-80DJMoumgeA/AAAAAAAAAAI/AAAAAAAAAAA/buSLxjB-dag/photo.jpg?sz=50', '1', 'Ð§ÐµÑ€ÐµÐ· Ñ‚ÐµÑ€Ð½Ð¸Ð¸ Ð² Ð´ÐµÐ±Ñ€Ð¸!', '', NULL),
-(286, '2012-04-22 02:58:27', 'Шестаков Евгений', 'https://lh3.googleusercontent.com/-k0K-TK5EJIg/AAAAAAAAAAI/AAAAAAAAAAA/XVhWmv5sHGQ/photo.jpg?sz=50', '1', '', '', NULL),
-(287, '2012-04-22 02:08:50', 'edvvvard edvvvard', 'https://lh4.googleusercontent.com/-SI8A33Z7LLQ/AAAAAAAAAAI/AAAAAAAAAAA/f-TD6OgF6TA/photo.jpg?sz=50', '1', '', '', NULL),
-(288, '2012-04-22 01:52:09', 'Valentina Sleptsova', 'https://lh6.googleusercontent.com/-AO5dAQo-0vs/AAAAAAAAAAI/AAAAAAAAAAA/oXjFwqFEHL8/photo.jpg?sz=50', '2', '', '', NULL),
-(289, '2011-11-14 22:34:02', 'Chung Huynh', 'https://lh4.googleusercontent.com/-PggQ40bwgsY/AAAAAAAAAAI/AAAAAAAAAAA/F7jEzCk4QPs/photo.jpg?sz=50', '1', 'The photography gallery on stream everyday | Gplus.to/BestImages | Cong1.com', '', NULL),
-(290, '2011-11-14 22:34:26', 'Russ Jam', 'https://lh4.googleusercontent.com/-OKmwzgGFMIM/AAAAAAAAAAI/AAAAAAAAAAA/JqrZxVOIpCg/photo.jpg?sz=50', '1', 'Ramblings of a Yorkshire Man', '', NULL),
-(291, '2011-11-14 22:34:33', 'ÐžÐ»ÐµÐºÑÐµÐ¹ ÐžÑÑ‚Ñ€ÐµÑ‡ÑŠ', 'https://lh4.googleusercontent.com/-4pJt_-D744o/AAAAAAAAAAI/AAAAAAAAAAA/SDHKpC7Kw_o/photo.jpg?sz=50', '1', '', '', NULL),
-(292, '2012-02-01 05:30:36', 'Janet HAL', 'https://lh6.googleusercontent.com/-JnvU_q_MTM0/AAAAAAAAAAI/AAAAAAAAAAA/_qEaj0jmUzY/photo.jpg?sz=50', '', '', '', NULL),
-(293, '2012-01-31 03:36:55', 'Salah Seddik M', 'https://lh6.googleusercontent.com/-SO_HE1EdCis/AAAAAAAAAAI/AAAAAAAAAAA/MmdZporWaFQ/photo.jpg?sz=50', '1', 'Pharmacist', '', NULL),
-(294, '2012-02-01 08:39:36', 'Alina Abbey', 'https://lh4.googleusercontent.com/-5vq5-69VXzs/AAAAAAAAAAI/AAAAAAAAAAA/3_Oaoo2aWto/photo.jpg?sz=50', '2', '', '', NULL),
-(295, '2011-11-15 02:14:47', 'Marcio Martins', 'https://lh6.googleusercontent.com/-GMP8iy7dfeA/AAAAAAAAAAI/AAAAAAAAAAA/2oOmOXP5IMA/photo.jpg?sz=50', '1', '', '', NULL),
-(296, '2011-11-15 02:14:53', 'angel perez conde', 'https://lh5.googleusercontent.com/-T_oHYjJE2tU/AAAAAAAAAAI/AAAAAAAAAAA/bQCC_UIk8es/photo.jpg?sz=50', '1', '', '2', NULL),
-(297, '2011-11-15 02:15:15', 'Jaz Emminger', 'https://lh5.googleusercontent.com/-hovG43TEDPw/AAAAAAAAAAI/AAAAAAAAAAA/Rct9WNbIess/photo.jpg?sz=50', '1', '', '', NULL),
-(298, '2011-11-15 02:15:20', 'Mehdi Rekik', 'https://lh3.googleusercontent.com/-B4wI8jUwiUE/AAAAAAAAAAI/AAAAAAAAAAA/xwDqwpzZkgg/photo.jpg?sz=50', '1', 'Feel free to add me , i add back ;)', '1', NULL),
-(299, '2011-11-15 02:16:02', 'Florian Felix Weyh', 'https://lh3.googleusercontent.com/-r-O4NIC2tNw/AAAAAAAAAAI/AAAAAAAAAAA/ggybrKYSaRE/photo.jpg?sz=50', '1', 'Nulla dies sine linea.', '', NULL),
-(300, '2011-11-15 02:16:08', 'Olaf KolbrÃ¼ck', 'https://lh5.googleusercontent.com/-ldCn5WDimyA/AAAAAAAAAAI/AAAAAAAAAAA/gq_6QJ4_TIc/photo.jpg?sz=50', '1', 'Reporter Internet & E-Business, Horizont, Off-the-Record.de, Etailment.de, Krimi-Autor', '', NULL);
+LOCK TABLES `profile` WRITE;
+/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (9,112,'2012-05-27 17:04:18','Alan Shapiro','https://lh5.googleusercontent.com/-L4dAo8ap9vg/AAAAAAAAAAI/AAAAAAAAAAA/WTxfIRcQ7MY/photo.jpg?sz=50',1,'Passionate, award-winning photographer. Advertising Chief Creative Officer, too.',NULL,100);
+/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Дамп данных таблицы `Word`
+-- Table structure for table `grouplink`
 --
 
-INSERT INTO `Word` (`id`, `Word`) VALUES
-(31, 'abstract'),
-(24, 'acrylic'),
-(73, 'activities'),
-(294, 'admin'),
-(266, 'administrator'),
-(265, 'ajax'),
-(180, 'amateur'),
-(210, 'android'),
-(299, 'apache'),
-(280, 'api'),
-(234, 'app'),
-(236, 'application'),
-(233, 'applications'),
-(229, 'apps'),
-(25, 'architect'),
-(197, 'architecture'),
-(187, 'area'),
-(2, 'art'),
-(134, 'articles'),
-(1, 'artist'),
-(26, 'artistic'),
-(8, 'artwork'),
-(124, 'author'),
-(63, 'baseball'),
-(270, 'basic'),
-(40, 'basketball'),
-(175, 'beautiful'),
-(171, 'beauty'),
-(60, 'bike'),
-(102, 'bikes'),
-(254, 'bit'),
-(307, 'bits'),
-(116, 'blog'),
-(117, 'blogger'),
-(132, 'bloggers'),
-(120, 'blogging'),
-(123, 'blogs'),
-(129, 'blogspot'),
-(75, 'boxing'),
-(297, 'browser'),
-(231, 'c++'),
-(157, 'camera'),
-(190, 'canon'),
-(184, 'capture'),
-(93, 'challenge'),
-(141, 'channel'),
-(115, 'chempionships'),
-(99, 'chess'),
-(42, 'circle'),
-(43, 'circles'),
-(193, 'clients'),
-(113, 'climber'),
-(87, 'climbing'),
-(85, 'coach'),
-(90, 'coaching'),
-(230, 'code'),
-(278, 'coder'),
-(277, 'coding'),
-(32, 'color'),
-(14, 'comics'),
-(221, 'computer'),
-(257, 'computers'),
-(275, 'computing'),
-(22, 'concept'),
-(125, 'content'),
-(272, 'core'),
-(189, 'create'),
-(169, 'creative'),
-(96, 'cricket'),
-(178, 'critique'),
-(245, 'css'),
-(288, 'css3'),
-(51, 'cycling'),
-(98, 'cyclist'),
-(301, 'databases'),
-(269, 'debian'),
-(296, 'delphi'),
-(7, 'design'),
-(6, 'designer'),
-(264, 'develop'),
-(276, 'developed'),
-(208, 'developer'),
-(246, 'developers'),
-(243, 'developing'),
-(215, 'development'),
-(10, 'digital'),
-(267, 'django'),
-(11, 'drawing'),
-(263, 'drupal'),
-(291, 'eclipse'),
-(162, 'enjoy'),
-(27, 'exhibition'),
-(172, 'fashion'),
-(114, 'fighter'),
-(83, 'figure'),
-(61, 'fitness'),
-(35, 'football'),
-(262, 'framework'),
-(305, 'frameworks'),
-(248, 'freelance'),
-(12, 'gallery'),
-(53, 'game'),
-(80, 'gamer'),
-(46, 'games'),
-(68, 'gaming'),
-(203, 'geek'),
-(304, 'gentoo'),
-(298, 'github'),
-(206, 'glamour'),
-(106, 'goal'),
-(79, 'golf'),
-(214, 'google'),
-(9, 'graphic'),
-(160, 'great'),
-(103, 'gym'),
-(283, 'hacker'),
-(289, 'hacking'),
-(282, 'hardware'),
-(205, 'hobby'),
-(54, 'hockey'),
-(199, 'home'),
-(242, 'html'),
-(238, 'html5'),
-(5, 'illustration'),
-(3, 'illustrator'),
-(154, 'images'),
-(112, 'instructor'),
-(232, 'internet'),
-(235, 'ios'),
-(213, 'java'),
-(226, 'javascript'),
-(241, 'jquery'),
-(107, 'kayaking'),
-(151, 'landscape'),
-(170, 'landscapes'),
-(69, 'league'),
-(204, 'lightroom'),
-(217, 'linux'),
-(295, 'lisp'),
-(165, 'live'),
-(176, 'look'),
-(258, 'mac'),
-(192, 'macro'),
-(17, 'magazine'),
-(95, 'marathon'),
-(18, 'media'),
-(251, 'microsoft'),
-(91, 'mma'),
-(33, 'modern'),
-(200, 'moment'),
-(313, 'mssql'),
-(309, 'mvc'),
-(239, 'mysql'),
-(314, 'mysql5'),
-(183, 'national'),
-(148, 'nature'),
-(88, 'nba'),
-(224, 'net'),
-(273, 'network'),
-(287, 'networking'),
-(292, 'networks'),
-(77, 'nfl'),
-(185, 'nikon'),
-(290, 'objective-c'),
-(101, 'olympic'),
-(293, 'open-source'),
-(312, 'opensource'),
-(286, 'oracle'),
-(268, 'page'),
-(4, 'paint'),
-(13, 'painter'),
-(19, 'painting'),
-(159, 'passion'),
-(196, 'passionate'),
-(153, 'people'),
-(149, 'photo'),
-(145, 'photographer'),
-(28, 'photography'),
-(191, 'photoshop'),
-(219, 'php'),
-(168, 'picture'),
-(59, 'place'),
-(255, 'platform'),
-(279, 'platforms'),
-(41, 'play'),
-(64, 'played'),
-(56, 'player'),
-(109, 'players'),
-(48, 'playing'),
-(136, 'podcaster'),
-(62, 'pool'),
-(201, 'portfolio'),
-(29, 'portrait'),
-(127, 'post'),
-(300, 'postgresql'),
-(126, 'posts'),
-(207, 'product'),
-(161, 'professional'),
-(128, 'profile'),
-(260, 'program'),
-(216, 'programmer'),
-(302, 'programmers'),
-(220, 'programming'),
-(274, 'programs'),
-(164, 'project'),
-(138, 'published'),
-(142, 'publisher'),
-(133, 'publishing'),
-(218, 'python'),
-(45, 'race'),
-(92, 'racer'),
-(86, 'races'),
-(58, 'racing'),
-(105, 'rafting'),
-(237, 'rails'),
-(140, 'reviews'),
-(227, 'ruby'),
-(70, 'rugby'),
-(100, 'runner'),
-(50, 'running'),
-(308, 'scripting'),
-(23, 'sculptor'),
-(30, 'sculpture'),
-(256, 'server'),
-(130, 'share'),
-(139, 'sharing'),
-(78, 'shoot'),
-(84, 'shooting'),
-(97, 'shot'),
-(195, 'show'),
-(253, 'site'),
-(261, 'sites'),
-(108, 'skater'),
-(111, 'skates'),
-(76, 'ski'),
-(71, 'skier'),
-(44, 'skiing'),
-(74, 'snowboarding'),
-(38, 'soccer'),
-(211, 'software'),
-(223, 'source'),
-(20, 'speedpaint'),
-(39, 'sport'),
-(37, 'sports'),
-(259, 'sql'),
-(306, 'stack'),
-(65, 'start'),
-(82, 'strategy'),
-(163, 'street'),
-(194, 'studio'),
-(198, 'style'),
-(271, 'support'),
-(72, 'swimmer'),
-(47, 'swimming'),
-(49, 'team'),
-(67, 'teams'),
-(66, 'tennis'),
-(310, 'test'),
-(303, 'tester'),
-(36, 'time'),
-(135, 'topics'),
-(110, 'tour'),
-(94, 'trainer'),
-(55, 'training'),
-(155, 'travel'),
-(52, 'try'),
-(250, 'ubuntu'),
-(285, 'unix'),
-(228, 'user'),
-(202, 'various'),
-(143, 'videoblog'),
-(284, 'virtual'),
-(34, 'visionary'),
-(21, 'visual'),
-(57, 'volleyball'),
-(209, 'web'),
-(311, 'webmaster'),
-(244, 'website'),
-(247, 'websites'),
-(166, 'wildlife'),
-(81, 'win'),
-(131, 'wordpress'),
-(146, 'work'),
-(177, 'workshop'),
-(150, 'world'),
-(104, 'wrestling'),
-(119, 'write'),
-(118, 'writer'),
-(137, 'writes'),
-(122, 'writing'),
-(281, 'xml'),
-(152, 'years'),
-(89, 'yoga'),
-(121, 'youtube');
+DROP TABLE IF EXISTS `grouplink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `grouplink` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `groupDescr` bigint(20) DEFAULT NULL,
+  `link` bigint(20) DEFAULT NULL,
+  `postWeight` float NOT NULL,
+  `profileWeight` float NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_GroupLink_1` (`groupDescr`,`link`),
+  KEY `ix_GroupLink_group_4` (`groupDescr`),
+  KEY `ix_GroupLink_link_5` (`link`),
+  CONSTRAINT `fk_GroupLink_group_4` FOREIGN KEY (`groupDescr`) REFERENCES `groupdescr` (`id`),
+  CONSTRAINT `fk_GroupLink_link_5` FOREIGN KEY (`link`) REFERENCES `link` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп данных таблицы `Synonym`
+-- Dumping data for table `grouplink`
 --
 
-INSERT INTO `Synonym` (`id`, `synonym`, `word`) VALUES
-(1, 'абстрактный', 31),
-(2, 'акриловый', 24),
-(3, 'архитектор', 25),
-(4, 'искусство', 2),
-(5, 'художник', 1),
-(6, 'художественный', 26),
-(7, 'футбол', 35),
-(8, 'тайм', 36),
-(9, 'спортивный', 37),
-(11, 'спорт', 39),
-(12, 'баскетбол', 40),
-(13, 'игра', 41),
-(14, 'круг', 42),
-(15, 'круги', 43),
-(16, 'лыжи', 44),
-(17, 'гонка', 45),
-(18, 'соревнования', 46),
-(19, 'плавание', 47),
-(20, 'игральный', 48),
-(21, 'команда', 49),
-(22, 'бег', 50),
-(23, 'велогонка', 51),
-(24, 'попытка', 52),
-(25, 'партия', 53),
-(26, 'хоккей', 54),
-(27, 'тренировка', 55),
-(28, 'спортсмен', 56),
-(29, 'волейбол', 57),
-(30, 'гоночный', 58),
-(31, 'место', 59),
-(32, 'велосипед', 60),
-(33, 'фитнес', 61),
-(34, 'бассейн', 62),
-(35, 'бейсбол', 63),
-(36, 'играл', 64),
-(37, 'старт', 65),
-(38, 'теннис', 66),
-(39, 'команды', 67),
-(40, 'игровой', 68),
-(41, 'лига', 69),
-(42, 'регби', 70),
-(43, 'лыжник', 71),
-(44, 'пловец', 72),
-(45, 'активность', 73),
-(46, 'сноуборд', 74),
-(47, 'бокс', 75),
-(48, 'лыжа', 76),
-(49, 'нфл', 77),
-(50, 'стрельба', 78),
-(51, 'гольф', 79),
-(52, 'игрок', 80),
-(53, 'победа', 81),
-(54, 'стратегия', 82),
-(55, 'фигура', 83),
-(57, 'тренер', 85),
-(58, 'скачки', 86),
-(59, 'восхождение', 87),
-(60, 'нба', 88),
-(61, 'йога', 89),
-(63, 'гонщик', 92),
-(64, 'вызов', 93),
-(66, 'марафон', 95),
-(67, 'крикет', 96),
-(68, 'выстрел', 97),
-(69, 'велосипедист', 98),
-(70, 'шахматы', 99),
-(71, 'бегун', 100),
-(72, 'олимпийский', 101),
-(73, 'велосипеды', 102),
-(74, 'гимнастика', 103),
-(75, 'борьба', 104),
-(76, 'спуск', 105),
-(77, 'гол', 106),
-(78, 'конькобежец', 108),
-(79, 'игроки', 109),
-(80, 'тур', 110),
-(81, 'коньки', 111),
-(82, 'инструктор', 112),
-(83, 'альпинист', 113),
-(84, 'боец', 114),
-(85, 'чемпионат', 115),
-(86, 'блог', 116),
-(87, 'блоггер', 117),
-(88, 'писатель', 118),
-(89, 'писать', 119),
-(90, 'блоггерство', 120),
-(91, 'youtube', 121),
-(92, 'пишу', 122),
-(93, 'блоги', 123),
-(94, 'автор', 124),
-(95, 'контент', 125),
-(96, 'посты', 126),
-(97, 'пост', 127),
-(98, 'профиль', 128),
-(99, 'blogspot', 129),
-(100, 'поделиться', 130),
-(101, 'wordpress', 131),
-(102, 'блоггеры', 132),
-(103, 'публикую', 133),
-(104, 'статья', 134),
-(106, 'подкастер', 136),
-(108, 'опубликованный', 138),
-(109, 'ревью', 140),
-(110, 'канал', 141),
-(111, 'видеоблог', 143);
-
+LOCK TABLES `grouplink` WRITE;
+/*!40000 ALTER TABLE `grouplink` DISABLE KEYS */;
+INSERT INTO `grouplink` VALUES (1,3,3,0,0),(2,3,4,0,0),(3,3,5,0,0),(4,3,7,0,0),(5,3,8,0,0),(6,4,1,0,0),(7,4,2,0,0),(8,4,10,0,0),(9,5,6,0,0),(10,5,9,0,0);
+/*!40000 ALTER TABLE `grouplink` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Дамп данных таблицы `GroupDescr`
+-- Table structure for table `relationship`
 --
 
-INSERT INTO `GroupDescr` (`id`, `Description`, `name`, `activeImage`, `passiveImage`) VALUES
-(1, '', 'Художники', '', ''),
-(2, NULL, 'Спортсмены', '', ''),
-(3, NULL, 'Блоггеры', '', ''),
-(4, '', 'Фотографы', '', ''),
-(5, NULL, 'Разработчики', '', '');
-
-
---
--- Дамп данных таблицы `Link`
---
-
-INSERT INTO `Link` (`id`, `link`) VALUES
-(1, '500px.com'),
-(7, 'blogger.com'),
-(3, 'blogspot.com'),
-(2, 'flickr.com'),
-(6, 'github.com'),
-(8, 'livejournal.com'),
-(10, 'panoramio.com'),
-(9, 'stackoverflow.com'),
-(4, 'wordpress.com'),
-(5, 'youtube.com');
+DROP TABLE IF EXISTS `relationship`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `relationship` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `status` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Relationship_status` (`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Дамп данных таблицы `GroupLink`
+-- Dumping data for table `relationship`
 --
 
-INSERT INTO `GroupLink` (`postWeight`, `profileWeight`, `link`, `groupDescr`) VALUES
-(0, 0, 3, 3),
-(0, 0, 4, 3),
-(0, 0, 5, 3),
-(0, 0, 7, 3),
-(0, 0, 8, 3),
-(0, 0, 1, 4),
-(0, 0, 2, 4),
-(0, 0, 10, 4),
-(0, 0, 6, 5),
-(0, 0, 9, 5);
+LOCK TABLES `relationship` WRITE;
+/*!40000 ALTER TABLE `relationship` DISABLE KEYS */;
+INSERT INTO `relationship` VALUES (3,'engaged'),(2,'in_a_relationship'),(9,'in_civil_union'),(8,'in_domestic_partnership'),(5,'its_complicated'),(4,'married'),(6,'open_relationship'),(1,'single'),(7,'widowed');
+/*!40000 ALTER TABLE `relationship` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Дамп данных таблицы `GroupWord`
+-- Table structure for table `groupword`
 --
 
-INSERT INTO `GroupWord` (`postWeight`, `profileWeight`, `word`, `groupDescr`) VALUES
-(0, 0, 1, 1),
-(0, 0, 2, 1),
-(0, 0, 3, 1),
-(0, 0, 4, 1),
-(0, 0, 5, 1),
-(0, 0, 6, 1),
-(0, 0, 7, 1),
-(0, 0, 8, 1),
-(0, 0, 9, 1),
-(0, 0, 10, 1),
-(0, 0, 11, 1),
-(0, 0, 12, 1),
-(0, 0, 13, 1),
-(0, 0, 14, 1),
-(0, 0, 17, 1),
-(0, 0, 18, 1),
-(0, 0, 19, 1),
-(0, 0, 20, 1),
-(0, 0, 21, 1),
-(0, 0, 22, 1),
-(0, 0, 23, 1),
-(0, 0, 24, 1),
-(0, 0, 25, 1),
-(0, 0, 26, 1),
-(0, 0, 27, 1),
-(0, 0, 28, 1),
-(0, 0, 29, 1),
-(0, 0, 30, 1),
-(0, 0, 31, 1),
-(0, 0, 32, 1),
-(0, 0, 33, 1),
-(0, 0, 34, 1),
-(0, 0, 35, 2),
-(0, 0, 36, 2),
-(0, 0, 37, 2),
-(0, 0, 38, 2),
-(0, 0, 39, 2),
-(0, 0, 40, 2),
-(0, 0, 41, 2),
-(0, 0, 42, 2),
-(0, 0, 43, 2),
-(0, 0, 44, 2),
-(0, 0, 45, 2),
-(0, 0, 46, 2),
-(0, 0, 47, 2),
-(0, 0, 48, 2),
-(0, 0, 49, 2),
-(0, 0, 50, 2),
-(0, 0, 51, 2),
-(0, 0, 52, 2),
-(0, 0, 53, 2),
-(0, 0, 54, 2),
-(0, 0, 55, 2),
-(0, 0, 56, 2),
-(0, 0, 57, 2),
-(0, 0, 58, 2),
-(0, 0, 59, 2),
-(0, 0, 60, 2),
-(0, 0, 61, 2),
-(0, 0, 62, 2),
-(0, 0, 63, 2),
-(0, 0, 64, 2),
-(0, 0, 65, 2),
-(0, 0, 66, 2),
-(0, 0, 67, 2),
-(0, 0, 68, 2),
-(0, 0, 69, 2),
-(0, 0, 70, 2),
-(0, 0, 71, 2),
-(0, 0, 72, 2),
-(0, 0, 73, 2),
-(0, 0, 74, 2),
-(0, 0, 75, 2),
-(0, 0, 76, 2),
-(0, 0, 77, 2),
-(0, 0, 78, 2),
-(0, 0, 79, 2),
-(0, 0, 80, 2),
-(0, 0, 81, 2),
-(0, 0, 82, 2),
-(0, 0, 83, 2),
-(0, 0, 84, 2),
-(0, 0, 85, 2),
-(0, 0, 86, 2),
-(0, 0, 87, 2),
-(0, 0, 88, 2),
-(0, 0, 89, 2),
-(0, 0, 90, 2),
-(0, 0, 92, 2),
-(0, 0, 93, 2),
-(0, 0, 94, 2),
-(0, 0, 95, 2),
-(0, 0, 96, 2),
-(0, 0, 97, 2),
-(0, 0, 98, 2),
-(0, 0, 99, 2),
-(0, 0, 100, 2),
-(0, 0, 101, 2),
-(0, 0, 102, 2),
-(0, 0, 103, 2),
-(0, 0, 104, 2),
-(0, 0, 105, 2),
-(0, 0, 106, 2),
-(0, 0, 108, 2),
-(0, 0, 109, 2),
-(0, 0, 110, 2),
-(0, 0, 111, 2),
-(0, 0, 112, 2),
-(0, 0, 113, 2),
-(0, 0, 114, 2),
-(0, 0, 115, 2),
-(0, 0, 116, 3),
-(0, 0, 117, 3),
-(0, 0, 118, 3),
-(0, 0, 119, 3),
-(0, 0, 120, 3),
-(0, 0, 121, 3),
-(0, 0, 122, 3),
-(0, 0, 123, 3),
-(0, 0, 124, 3),
-(0, 0, 125, 3),
-(0, 0, 126, 3),
-(0, 0, 127, 3),
-(0, 0, 128, 3),
-(0, 0, 129, 3),
-(0, 0, 130, 3),
-(0, 0, 131, 3),
-(0, 0, 132, 3),
-(0, 0, 133, 3),
-(0, 0, 134, 3),
-(0, 0, 135, 3),
-(0, 0, 136, 3),
-(0, 0, 137, 3),
-(0, 0, 138, 3),
-(0, 0, 139, 3),
-(0, 0, 140, 3),
-(0, 0, 141, 3),
-(0, 0, 142, 3),
-(0, 0, 143, 3),
-(0, 0, 1, 4),
-(0, 0, 6, 4),
-(0, 0, 7, 4),
-(0, 0, 10, 4),
-(0, 0, 17, 4),
-(0, 0, 18, 4),
-(0, 0, 28, 4),
-(0, 0, 29, 4),
-(0, 0, 36, 4),
-(0, 0, 43, 4),
-(0, 0, 59, 4),
-(0, 0, 78, 4),
-(0, 0, 145, 4),
-(0, 0, 146, 4),
-(0, 0, 148, 4),
-(0, 0, 149, 4),
-(0, 0, 150, 4),
-(0, 0, 151, 4),
-(0, 0, 152, 4),
-(0, 0, 153, 4),
-(0, 0, 154, 4),
-(0, 0, 155, 4),
-(0, 0, 157, 4),
-(0, 0, 159, 4),
-(0, 0, 160, 4),
-(0, 0, 161, 4),
-(0, 0, 162, 4),
-(0, 0, 163, 4),
-(0, 0, 164, 4),
-(0, 0, 165, 4),
-(0, 0, 166, 4),
-(0, 0, 168, 4),
-(0, 0, 169, 4),
-(0, 0, 170, 4),
-(0, 0, 171, 4),
-(0, 0, 172, 4),
-(0, 0, 175, 4),
-(0, 0, 176, 4),
-(0, 0, 177, 4),
-(0, 0, 178, 4),
-(0, 0, 180, 4),
-(0, 0, 183, 4),
-(0, 0, 184, 4),
-(0, 0, 185, 4),
-(0, 0, 187, 4),
-(0, 0, 189, 4),
-(0, 0, 190, 4),
-(0, 0, 191, 4),
-(0, 0, 192, 4),
-(0, 0, 193, 4),
-(0, 0, 194, 4),
-(0, 0, 195, 4),
-(0, 0, 196, 4),
-(0, 0, 197, 4),
-(0, 0, 198, 4),
-(0, 0, 199, 4),
-(0, 0, 200, 4),
-(0, 0, 201, 4),
-(0, 0, 202, 4),
-(0, 0, 203, 4),
-(0, 0, 204, 4),
-(0, 0, 205, 4),
-(0, 0, 206, 4),
-(0, 0, 207, 4),
-(0, 0, 6, 5),
-(0, 0, 7, 5),
-(0, 0, 128, 5),
-(0, 0, 131, 5),
-(0, 0, 203, 5),
-(0, 0, 208, 5),
-(0, 0, 209, 5),
-(0, 0, 210, 5),
-(0, 0, 211, 5),
-(0, 0, 213, 5),
-(0, 0, 214, 5),
-(0, 0, 215, 5),
-(0, 0, 216, 5),
-(0, 0, 217, 5),
-(0, 0, 218, 5),
-(0, 0, 219, 5),
-(0, 0, 220, 5),
-(0, 0, 221, 5),
-(0, 0, 223, 5),
-(0, 0, 224, 5),
-(0, 0, 226, 5),
-(0, 0, 227, 5),
-(0, 0, 228, 5),
-(0, 0, 229, 5),
-(0, 0, 230, 5),
-(0, 0, 231, 5),
-(0, 0, 232, 5),
-(0, 0, 233, 5),
-(0, 0, 234, 5),
-(0, 0, 235, 5),
-(0, 0, 236, 5),
-(0, 0, 237, 5),
-(0, 0, 238, 5),
-(0, 0, 239, 5),
-(0, 0, 241, 5),
-(0, 0, 242, 5),
-(0, 0, 243, 5),
-(0, 0, 244, 5),
-(0, 0, 245, 5),
-(0, 0, 246, 5),
-(0, 0, 247, 5),
-(0, 0, 248, 5),
-(0, 0, 250, 5),
-(0, 0, 251, 5),
-(0, 0, 253, 5),
-(0, 0, 254, 5),
-(0, 0, 255, 5),
-(0, 0, 256, 5),
-(0, 0, 257, 5),
-(0, 0, 258, 5),
-(0, 0, 259, 5),
-(0, 0, 260, 5),
-(0, 0, 261, 5),
-(0, 0, 262, 5),
-(0, 0, 263, 5),
-(0, 0, 264, 5),
-(0, 0, 265, 5),
-(0, 0, 266, 5),
-(0, 0, 267, 5),
-(0, 0, 268, 5),
-(0, 0, 269, 5),
-(0, 0, 270, 5),
-(0, 0, 271, 5),
-(0, 0, 272, 5),
-(0, 0, 273, 5),
-(0, 0, 274, 5),
-(0, 0, 275, 5),
-(0, 0, 276, 5),
-(0, 0, 277, 5),
-(0, 0, 278, 5),
-(0, 0, 279, 5),
-(0, 0, 280, 5),
-(0, 0, 281, 5),
-(0, 0, 282, 5),
-(0, 0, 283, 5),
-(0, 0, 284, 5),
-(0, 0, 285, 5),
-(0, 0, 286, 5),
-(0, 0, 287, 5),
-(0, 0, 288, 5),
-(0, 0, 289, 5),
-(0, 0, 290, 5),
-(0, 0, 291, 5),
-(0, 0, 292, 5),
-(0, 0, 293, 5),
-(0, 0, 294, 5),
-(0, 0, 295, 5),
-(0, 0, 296, 5),
-(0, 0, 297, 5),
-(0, 0, 298, 5),
-(0, 0, 299, 5),
-(0, 0, 300, 5),
-(0, 0, 301, 5),
-(0, 0, 302, 5),
-(0, 0, 303, 5),
-(0, 0, 304, 5),
-(0, 0, 305, 5),
-(0, 0, 306, 5),
-(0, 0, 307, 5),
-(0, 0, 308, 5),
-(0, 0, 309, 5),
-(0, 0, 310, 5),
-(0, 0, 311, 5),
-(0, 0, 312, 5),
-(0, 0, 313, 5),
-(0, 0, 314, 5);
+DROP TABLE IF EXISTS `groupword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groupword` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `groupDescr` bigint(20) DEFAULT NULL,
+  `word` bigint(20) DEFAULT NULL,
+  `postWeight` float NOT NULL,
+  `profileWeight` float NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_GroupWord_1` (`groupDescr`,`word`),
+  KEY `ix_GroupWord_group_6` (`groupDescr`),
+  KEY `ix_GroupWord_word_7` (`word`),
+  CONSTRAINT `fk_GroupWord_group_6` FOREIGN KEY (`groupDescr`) REFERENCES `groupdescr` (`id`),
+  CONSTRAINT `fk_GroupWord_word_7` FOREIGN KEY (`word`) REFERENCES `word` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `groupword`
+--
 
+LOCK TABLES `groupword` WRITE;
+/*!40000 ALTER TABLE `groupword` DISABLE KEYS */;
+INSERT INTO `groupword` VALUES (1,1,1,0,0),(2,1,2,0,0),(3,1,3,0,0),(4,1,4,0,0),(5,1,5,0,0),(6,1,6,0,0),(7,1,7,0,0),(8,1,8,0,0),(9,1,9,0,0),(10,1,10,0,0),(11,1,11,0,0),(12,1,12,0,0),(13,1,13,0,0),(14,1,14,0,0),(15,1,17,0,0),(16,1,18,0,0),(17,1,19,0,0),(18,1,20,0,0),(19,1,21,0,0),(20,1,22,0,0),(21,1,23,0,0),(22,1,24,0,0),(23,1,25,0,0),(24,1,26,0,0),(25,1,27,0,0),(26,1,28,0,0),(27,1,29,0,0),(28,1,30,0,0),(29,1,31,0,0),(30,1,32,0,0),(31,1,33,0,0),(32,1,34,0,0),(33,2,35,0,0),(34,2,36,0,0),(35,2,37,0,0),(36,2,38,0,0),(37,2,39,0,0),(38,2,40,0,0),(39,2,41,0,0),(40,2,42,0,0),(41,2,43,0,0),(42,2,44,0,0),(43,2,45,0,0),(44,2,46,0,0),(45,2,47,0,0),(46,2,48,0,0),(47,2,49,0,0),(48,2,50,0,0),(49,2,51,0,0),(50,2,52,0,0),(51,2,53,0,0),(52,2,54,0,0),(53,2,55,0,0),(54,2,56,0,0),(55,2,57,0,0),(56,2,58,0,0),(57,2,59,0,0),(58,2,60,0,0),(59,2,61,0,0),(60,2,62,0,0),(61,2,63,0,0),(62,2,64,0,0),(63,2,65,0,0),(64,2,66,0,0),(65,2,67,0,0),(66,2,68,0,0),(67,2,69,0,0),(68,2,70,0,0),(69,2,71,0,0),(70,2,72,0,0),(71,2,73,0,0),(72,2,74,0,0),(73,2,75,0,0),(74,2,76,0,0),(75,2,77,0,0),(76,2,78,0,0),(77,2,79,0,0),(78,2,80,0,0),(79,2,81,0,0),(80,2,82,0,0),(81,2,83,0,0),(82,2,84,0,0),(83,2,85,0,0),(84,2,86,0,0),(85,2,87,0,0),(86,2,88,0,0),(87,2,89,0,0),(88,2,90,0,0),(89,2,92,0,0),(90,2,93,0,0),(91,2,94,0,0),(92,2,95,0,0),(93,2,96,0,0),(94,2,97,0,0),(95,2,98,0,0),(96,2,99,0,0),(97,2,100,0,0),(98,2,101,0,0),(99,2,102,0,0),(100,2,103,0,0),(101,2,104,0,0),(102,2,105,0,0),(103,2,106,0,0),(104,2,108,0,0),(105,2,109,0,0),(106,2,110,0,0),(107,2,111,0,0),(108,2,112,0,0),(109,2,113,0,0),(110,2,114,0,0),(111,2,115,0,0),(112,3,116,0,0),(113,3,117,0,0),(114,3,118,0,0),(115,3,119,0,0),(116,3,120,0,0),(117,3,121,0,0),(118,3,122,0,0),(119,3,123,0,0),(120,3,124,0,0),(121,3,125,0,0),(122,3,126,0,0),(123,3,127,0,0),(124,3,128,0,0),(125,3,129,0,0),(126,3,130,0,0),(127,3,131,0,0),(128,3,132,0,0),(129,3,133,0,0),(130,3,134,0,0),(131,3,135,0,0),(132,3,136,0,0),(133,3,137,0,0),(134,3,138,0,0),(135,3,139,0,0),(136,3,140,0,0),(137,3,141,0,0),(138,3,142,0,0),(139,3,143,0,0),(140,4,1,0,0),(141,4,6,0,0),(142,4,7,0,0),(143,4,10,0,0),(144,4,17,0,0),(145,4,18,0,0),(146,4,28,0,0),(147,4,29,0,0),(148,4,36,0,0),(149,4,43,0,0),(150,4,59,0,0),(151,4,78,0,0),(152,4,145,0,0),(153,4,146,0,0),(154,4,148,0,0),(155,4,149,0,0),(156,4,150,0,0),(157,4,151,0,0),(158,4,152,0,0),(159,4,153,0,0),(160,4,154,0,0),(161,4,155,0,0),(162,4,157,0,0),(163,4,159,0,0),(164,4,160,0,0),(165,4,161,0,0),(166,4,162,0,0),(167,4,163,0,0),(168,4,164,0,0),(169,4,165,0,0),(170,4,166,0,0),(171,4,168,0,0),(172,4,169,0,0),(173,4,170,0,0),(174,4,171,0,0),(175,4,172,0,0),(176,4,175,0,0),(177,4,176,0,0),(178,4,177,0,0),(179,4,178,0,0),(180,4,180,0,0),(181,4,183,0,0),(182,4,184,0,0),(183,4,185,0,0),(184,4,187,0,0),(185,4,189,0,0),(186,4,190,0,0),(187,4,191,0,0),(188,4,192,0,0),(189,4,193,0,0),(190,4,194,0,0),(191,4,195,0,0),(192,4,196,0,0),(193,4,197,0,0),(194,4,198,0,0),(195,4,199,0,0),(196,4,200,0,0),(197,4,201,0,0),(198,4,202,0,0),(199,4,203,0,0),(200,4,204,0,0),(201,4,205,0,0),(202,4,206,0,0),(203,4,207,0,0),(204,5,6,0,0),(205,5,7,0,0),(206,5,128,0,0),(207,5,131,0,0),(208,5,203,0,0),(209,5,208,0,0),(210,5,209,0,0),(211,5,210,0,0),(212,5,211,0,0),(213,5,213,0,0),(214,5,214,0,0),(215,5,215,0,0),(216,5,216,0,0),(217,5,217,0,0),(218,5,218,0,0),(219,5,219,0,0),(220,5,220,0,0),(221,5,221,0,0),(222,5,223,0,0),(223,5,224,0,0),(224,5,226,0,0),(225,5,227,0,0),(226,5,228,0,0),(227,5,229,0,0),(228,5,230,0,0),(229,5,231,0,0),(230,5,232,0,0),(231,5,233,0,0),(232,5,234,0,0),(233,5,235,0,0),(234,5,236,0,0),(235,5,237,0,0),(236,5,238,0,0),(237,5,239,0,0),(238,5,241,0,0),(239,5,242,0,0),(240,5,243,0,0),(241,5,244,0,0),(242,5,245,0,0),(243,5,246,0,0),(244,5,247,0,0),(245,5,248,0,0),(246,5,250,0,0),(247,5,251,0,0),(248,5,253,0,0),(249,5,254,0,0),(250,5,255,0,0),(251,5,256,0,0),(252,5,257,0,0),(253,5,258,0,0),(254,5,259,0,0),(255,5,260,0,0),(256,5,261,0,0),(257,5,262,0,0),(258,5,263,0,0),(259,5,264,0,0),(260,5,265,0,0),(261,5,266,0,0),(262,5,267,0,0),(263,5,268,0,0),(264,5,269,0,0),(265,5,270,0,0),(266,5,271,0,0),(267,5,272,0,0),(268,5,273,0,0),(269,5,274,0,0),(270,5,275,0,0),(271,5,276,0,0),(272,5,277,0,0),(273,5,278,0,0),(274,5,279,0,0),(275,5,280,0,0),(276,5,281,0,0),(277,5,282,0,0),(278,5,283,0,0),(279,5,284,0,0),(280,5,285,0,0),(281,5,286,0,0),(282,5,287,0,0),(283,5,288,0,0),(284,5,289,0,0),(285,5,290,0,0),(286,5,291,0,0),(287,5,292,0,0),(288,5,293,0,0),(289,5,294,0,0),(290,5,295,0,0),(291,5,296,0,0),(292,5,297,0,0),(293,5,298,0,0),(294,5,299,0,0),(295,5,300,0,0),(296,5,301,0,0),(297,5,302,0,0),(298,5,303,0,0),(299,5,304,0,0),(300,5,305,0,0),(301,5,306,0,0),(302,5,307,0,0),(303,5,308,0,0),(304,5,309,0,0),(305,5,310,0,0),(306,5,311,0,0),(307,5,312,0,0),(308,5,313,0,0),(309,5,314,0,0);
+/*!40000 ALTER TABLE `groupword` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `postlink`
+--
+
+DROP TABLE IF EXISTS `postlink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `postlink` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `post` bigint(20) DEFAULT NULL,
+  `link` bigint(20) DEFAULT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_PostLink_1` (`post`,`link`),
+  KEY `ix_PostLink_post_10` (`post`),
+  KEY `ix_PostLink_link_11` (`link`),
+  CONSTRAINT `fk_PostLink_link_11` FOREIGN KEY (`link`) REFERENCES `link` (`id`),
+  CONSTRAINT `fk_PostLink_post_10` FOREIGN KEY (`post`) REFERENCES `post` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postlink`
+--
+
+LOCK TABLES `postlink` WRITE;
+/*!40000 ALTER TABLE `postlink` DISABLE KEYS */;
+/*!40000 ALTER TABLE `postlink` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `blacklist`
+--
+
+DROP TABLE IF EXISTS `blacklist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blacklist` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dateOfAddition` datetime NOT NULL,
+  `reasonOfAddition` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_BlackList_gpm_3` (`id`),
+  CONSTRAINT `fk_BlackList_gpm_3` FOREIGN KEY (`id`) REFERENCES `gpm` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blacklist`
+--
+
+LOCK TABLES `blacklist` WRITE;
+/*!40000 ALTER TABLE `blacklist` DISABLE KEYS */;
+/*!40000 ALTER TABLE `blacklist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `addedbyadmin`
+--
+
+DROP TABLE IF EXISTS `addedbyadmin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `addedbyadmin` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `gpm` bigint(20) DEFAULT NULL,
+  `groupDescr` bigint(20) DEFAULT NULL,
+  `position` int(11) NOT NULL,
+  `dateOfAddition` datetime NOT NULL,
+  `dateOfRemoval` datetime DEFAULT NULL,
+  `commentField` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_AddedByAdmin_1` (`gpm`,`groupDescr`),
+  KEY `ix_AddedByAdmin_gpm_1` (`gpm`),
+  KEY `ix_AddedByAdmin_group_2` (`groupDescr`),
+  CONSTRAINT `fk_AddedByAdmin_gpm_1` FOREIGN KEY (`gpm`) REFERENCES `gpm` (`id`),
+  CONSTRAINT `fk_AddedByAdmin_group_2` FOREIGN KEY (`groupDescr`) REFERENCES `groupdescr` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `addedbyadmin`
+--
+
+LOCK TABLES `addedbyadmin` WRITE;
+/*!40000 ALTER TABLE `addedbyadmin` DISABLE KEYS */;
+/*!40000 ALTER TABLE `addedbyadmin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `link`
+--
+
+DROP TABLE IF EXISTS `link`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `link` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `link` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Link_link` (`link`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `link`
+--
+
+LOCK TABLES `link` WRITE;
+/*!40000 ALTER TABLE `link` DISABLE KEYS */;
+INSERT INTO `link` VALUES (1,'http://www.500px.com'),(7,'http://www.blogger.com'),(3,'http://www.blogspot.com'),(2,'http://www.flickr.com'),(6,'http://www.github.com'),(8,'http://www.livejournal.com'),(10,'http://www.panoramio.com'),(9,'http://www.stackoverflow.com'),(4,'http://www.wordpress.com'),(5,'http://www.youtube.com');
+/*!40000 ALTER TABLE `link` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profilelink`
+--
+
+DROP TABLE IF EXISTS `profilelink`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profilelink` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `profile` bigint(20) DEFAULT NULL,
+  `link` bigint(20) DEFAULT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_ProfileLink_1` (`profile`,`link`),
+  KEY `ix_ProfileLink_profile_17` (`profile`),
+  KEY `ix_ProfileLink_link_18` (`link`),
+  CONSTRAINT `fk_ProfileLink_link_18` FOREIGN KEY (`link`) REFERENCES `link` (`id`),
+  CONSTRAINT `fk_ProfileLink_profile_17` FOREIGN KEY (`profile`) REFERENCES `profile` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profilelink`
+--
+
+LOCK TABLES `profilelink` WRITE;
+/*!40000 ALTER TABLE `profilelink` DISABLE KEYS */;
+/*!40000 ALTER TABLE `profilelink` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `synonym`
+--
+
+DROP TABLE IF EXISTS `synonym`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `synonym` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `word` bigint(20) DEFAULT NULL,
+  `synonym` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Synonym_1` (`word`,`synonym`),
+  KEY `ix_Synonym_word_21` (`word`),
+  CONSTRAINT `fk_Synonym_word_21` FOREIGN KEY (`word`) REFERENCES `word` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `synonym`
+--
+
+LOCK TABLES `synonym` WRITE;
+/*!40000 ALTER TABLE `synonym` DISABLE KEYS */;
+INSERT INTO `synonym` VALUES (5,1,'художник'),(4,2,'искусство'),(2,24,'акриловый'),(3,25,'архитектор'),(6,26,'художественный'),(1,31,'абстрактный'),(7,35,'футбол'),(8,36,'тайм'),(9,37,'спортивный'),(11,39,'спорт'),(12,40,'баскетбол'),(13,41,'игра'),(14,42,'круг'),(15,43,'круги'),(16,44,'лыжи'),(17,45,'гонка'),(18,46,'соревнования'),(19,47,'плавание'),(20,48,'игральный'),(21,49,'команда'),(22,50,'бег'),(23,51,'велогонка'),(24,52,'попытка'),(25,53,'партия'),(26,54,'хоккей'),(27,55,'тренировка'),(28,56,'спортсмен'),(29,57,'волейбол'),(30,58,'гоночный'),(31,59,'место'),(32,60,'велосипед'),(33,61,'фитнес'),(34,62,'бассейн'),(35,63,'бейсбол'),(36,64,'играл'),(37,65,'старт'),(38,66,'теннис'),(39,67,'команды'),(40,68,'игровой'),(41,69,'лига'),(42,70,'регби'),(43,71,'лыжник'),(44,72,'пловец'),(45,73,'активность'),(46,74,'сноуборд'),(47,75,'бокс'),(48,76,'лыжа'),(49,77,'нфл'),(50,78,'стрельба'),(51,79,'гольф'),(52,80,'игрок'),(53,81,'победа'),(54,82,'стратегия'),(55,83,'фигура'),(57,85,'тренер'),(58,86,'скачки'),(59,87,'восхождение'),(60,88,'нба'),(61,89,'йога'),(63,92,'гонщик'),(64,93,'вызов'),(66,95,'марафон'),(67,96,'крикет'),(68,97,'выстрел'),(69,98,'велосипедист'),(70,99,'шахматы'),(71,100,'бегун'),(72,101,'олимпийский'),(73,102,'велосипеды'),(74,103,'гимнастика'),(75,104,'борьба'),(76,105,'спуск'),(77,106,'гол'),(78,108,'конькобежец'),(79,109,'игроки'),(80,110,'тур'),(81,111,'коньки'),(82,112,'инструктор'),(83,113,'альпинист'),(84,114,'боец'),(85,115,'чемпионат'),(86,116,'блог'),(87,117,'блоггер'),(88,118,'писатель'),(89,119,'писать'),(90,120,'блоггерство'),(91,121,'youtube'),(92,122,'пишу'),(93,123,'блоги'),(94,124,'автор'),(95,125,'контент'),(96,126,'посты'),(97,127,'пост'),(98,128,'профиль'),(99,129,'blogspot'),(100,130,'поделиться'),(101,131,'wordpress'),(102,132,'блоггеры'),(103,133,'публикую'),(104,134,'статья'),(106,136,'подкастер'),(108,138,'опубликованный'),(109,140,'ревью'),(110,141,'канал'),(111,143,'видеоблог');
+/*!40000 ALTER TABLE `synonym` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `postId` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `gpm` bigint(20) DEFAULT NULL,
+  `dateCreate` datetime NOT NULL,
+  `kindContent` bigint(20) DEFAULT NULL,
+  `nComment` int(11) DEFAULT NULL,
+  `nPlusOne` int(11) DEFAULT NULL,
+  `nResharers` int(11) DEFAULT NULL,
+  `isRepost` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Post_postId` (`postId`),
+  KEY `ix_Post_gpm_8` (`gpm`),
+  KEY `ix_Post_kindContent_9` (`kindContent`),
+  CONSTRAINT `fk_Post_gpm_8` FOREIGN KEY (`gpm`) REFERENCES `gpm` (`id`),
+  CONSTRAINT `fk_Post_kindContent_9` FOREIGN KEY (`kindContent`) REFERENCES `content` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (101,'z13scrbowxybibnn1231jrlwdkqjct0es',112,'2012-05-27 06:19:06',2,175,695,61,0),(102,'z12tx5orjwufctsbn04cg5yybla2tx341f0',112,'2012-05-26 09:24:54',2,261,885,125,0),(103,'z125yh5j0ov1chl2f231jrlwdkqjct0es',112,'2012-05-26 03:26:11',2,50,262,13,0),(104,'z13pxbhqdo3nedlay04cg5yybla2tx341f0',112,'2012-05-25 02:10:27',2,199,624,77,0),(105,'z13hhfdrqt2zirysd231jrlwdkqjct0es',112,'2012-05-24 21:30:23',4,39,114,24,0),(106,'z13bhj0ppxmju1tir04cg5yybla2tx341f0',112,'2012-05-24 11:05:34',2,54,309,15,0),(107,'z13hjnfpwqyazn4k4231jrlwdkqjct0es',112,'2012-05-24 09:16:42',1,58,38,5,0),(108,'z13dexgjrpmiwrzwv04cg5yybla2tx341f0',112,'2012-05-24 07:47:17',4,35,26,3,0),(109,'z12mtntjoviufdfr404cg5yybla2tx341f0',112,'2012-05-24 05:31:42',5,26,71,49,0),(110,'z12bhvsaytiiexv2k231jrlwdkqjct0es',112,'2012-05-23 22:53:05',2,140,785,115,0),(111,'z13wjbohyoz3s50lq231jrlwdkqjct0es',112,'2012-05-23 10:05:06',5,24,109,53,0),(112,'z12tzpopgomhup13u231jrlwdkqjct0es',112,'2012-05-23 06:56:40',2,33,186,13,0),(113,'z12bzvv5np2lyt3po04cg5yybla2tx341f0',112,'2012-05-23 04:34:37',1,29,24,1,0),(114,'z12cebipitqugth2j231jrlwdkqjct0es',112,'2012-05-23 01:45:09',2,30,192,16,0),(115,'z12vgfsybxf5sxy22231jrlwdkqjct0es',112,'2012-05-22 05:36:12',2,216,784,149,0),(116,'z13dx1dzfq21i35ac04cg5yybla2tx341f0',112,'2012-05-22 02:29:24',2,15,124,9,0),(117,'z12nvrawmzexits5j04cg5yybla2tx341f0',112,'2012-05-21 10:52:28',2,177,856,123,0),(118,'z12edbviiqqvd1qqv04cg5yybla2tx341f0',112,'2012-05-21 02:12:07',2,32,228,18,0),(119,'z12wjdjodrqgxvt0j231jrlwdkqjct0es',112,'2012-05-20 03:51:42',2,115,434,37,0),(120,'z13jghmqfx2wfbeou04cg5yybla2tx341f0',112,'2012-05-19 07:37:55',2,81,349,38,0),(121,'z13ig3g5vv3odp1d1231jrlwdkqjct0es',112,'2012-05-19 03:48:13',2,67,366,35,0),(122,'z12udbjxrkbqxrwus231jrlwdkqjct0es',112,'2012-05-19 01:34:47',2,49,133,6,0),(123,'z12zz5rb2rbjhzb2v231jrlwdkqjct0es',112,'2012-05-18 09:11:54',2,56,336,15,0),(124,'z121efriukfdh3pp004cg5yybla2tx341f0',112,'2012-05-17 23:58:22',2,33,248,14,0),(125,'z12xdp4w2nfkf3kak04cg5yybla2tx341f0',112,'2012-05-17 15:35:22',2,169,755,89,0),(126,'z13xur3x5rv3hxxuf231jrlwdkqjct0es',112,'2012-05-17 07:56:25',2,49,278,21,0),(127,'z12fexupglmjuzssp231jrlwdkqjct0es',112,'2012-05-14 23:21:41',2,206,830,140,0),(128,'z13zeroh4nvmenkra04cg5yybla2tx341f0',112,'2012-05-14 04:39:13',2,46,314,25,0),(129,'z13ajjhzdszoihz2o231jrlwdkqjct0es',112,'2012-05-13 09:04:40',2,58,230,23,0),(130,'z13ntb3iktz0y5dir04cg5yybla2tx341f0',112,'2012-05-13 03:13:39',5,4,57,0,0),(131,'z13evn5ykkm0xr03r231jrlwdkqjct0es',112,'2012-05-13 00:37:36',2,149,598,98,0),(132,'z13sjre4on20zlnhh04cg5yybla2tx341f0',112,'2012-05-12 07:49:20',2,50,170,11,0),(133,'z124zdbzqo2afnql4231jrlwdkqjct0es',112,'2012-05-11 09:30:30',2,23,180,10,0),(134,'z13pgfwjayqvultgp04cg5yybla2tx341f0',112,'2012-05-11 02:05:08',1,10,9,0,1),(135,'z131hhayvrn3ut5og04cg5yybla2tx341f0',112,'2012-05-10 12:48:25',2,46,225,16,0),(136,'z12uu3xgskebjxdjq04cg5yybla2tx341f0',112,'2012-05-09 12:16:09',2,91,350,44,0),(137,'z123sneynti5invdm231jrlwdkqjct0es',112,'2012-05-08 13:50:49',2,49,267,28,0),(138,'z12vw3zgwwzpvt34n04cg5yybla2tx341f0',112,'2012-05-06 23:28:46',2,90,476,38,0),(139,'z13psvl5xtifs3s3u231jrlwdkqjct0es',112,'2012-05-06 08:27:43',2,41,224,15,0),(140,'z13itnxzezygsfxik04cg5yybla2tx341f0',112,'2012-05-06 00:37:52',2,267,940,174,0),(141,'z12dez2yfum2jnk01231jrlwdkqjct0es',112,'2012-05-05 04:22:40',2,21,139,9,0),(142,'z12pu1tgpvnktbnji04cg5yybla2tx341f0',112,'2012-05-05 04:07:44',1,7,14,7,0),(143,'z133y1mwdyf3dbdrx04cg5yybla2tx341f0',112,'2012-05-04 22:23:05',2,74,374,34,0),(144,'z13etzn4fwnkyxeud231jrlwdkqjct0es',112,'2012-05-04 11:47:46',2,46,289,26,0),(145,'z12vchoqnkmay3jfe231jrlwdkqjct0es',112,'2012-05-04 01:47:31',5,2,15,0,0),(146,'z13tyv4wpyvewpb0i231jrlwdkqjct0es',112,'2012-05-03 21:44:43',2,177,413,39,0),(147,'z120xjlwdlbru30fg231jrlwdkqjct0es',112,'2012-05-02 22:23:29',2,125,413,51,0),(148,'z12rxpzwfojycbafq231jrlwdkqjct0es',112,'2012-05-02 05:06:55',2,60,143,10,0),(149,'z13oux5orpy5uv3j504cg5yybla2tx341f0',112,'2012-05-01 23:24:33',2,67,222,13,0),(150,'z124y1kh5temyj2my231jrlwdkqjct0es',112,'2012-05-01 08:17:37',2,67,284,33,0),(151,'z12hyfvz0wavfvngc04cg5yybla2tx341f0',112,'2012-04-30 22:18:00',2,61,332,32,0),(152,'z12lh3exjwj4ytpmo231jrlwdkqjct0es',112,'2012-04-30 04:37:19',2,162,358,45,0),(153,'z132uhdy1tqvvvk4j04cg5yybla2tx341f0',112,'2012-04-29 11:46:45',2,124,408,52,0),(154,'z13bervihle5x1o0m231jrlwdkqjct0es',112,'2012-04-29 04:36:25',2,35,253,23,0),(155,'z13dxbljrmbexp5ow04cg5yybla2tx341f0',112,'2012-04-29 04:32:27',5,8,27,4,1),(156,'z13hwjsy3k2wtj4u0231jrlwdkqjct0es',112,'2012-04-29 01:42:16',2,17,174,13,0),(157,'z13nulqijkfjcps3u231jrlwdkqjct0es',112,'2012-04-28 03:52:33',2,67,303,70,0),(158,'z12rjnvbcnvcsrbcr231jrlwdkqjct0es',112,'2012-04-27 23:34:29',2,44,281,24,0),(159,'z13pgrszpoqgfhayr04cg5yybla2tx341f0',112,'2012-04-27 08:42:54',2,24,171,13,0),(160,'z122fzxozrrlilygd04cg5yybla2tx341f0',112,'2012-04-27 08:25:18',2,7,34,5,0),(161,'z12vztnjaynazlnhr04cg5yybla2tx341f0',112,'2012-04-27 08:24:55',2,13,53,4,0),(162,'z13awvbh0u31tbqsd231jrlwdkqjct0es',112,'2012-04-27 04:13:12',2,27,192,13,0),(163,'z12vgvrqfqvyuxsdg231jrlwdkqjct0es',112,'2012-04-26 22:05:15',2,45,184,9,0),(164,'z13fwpczyybxi5s4304cg5yybla2tx341f0',112,'2012-04-26 13:26:38',2,70,278,15,0),(165,'z12xsnqxftuksrs1v231jrlwdkqjct0es',112,'2012-04-26 10:32:33',2,38,234,15,0),(166,'z133ellr5z3yzbep404cg5yybla2tx341f0',112,'2012-04-26 05:30:51',1,39,17,0,1),(167,'z125zz1gxzzivz0gw04cg5yybla2tx341f0',112,'2012-04-25 21:53:14',2,29,160,9,0),(168,'z132vpbrivrpgjtgq04cg5yybla2tx341f0',112,'2012-04-25 02:11:37',2,54,248,17,0),(169,'z12lgpfgywrwelh2f231jrlwdkqjct0es',112,'2012-04-24 21:59:39',2,88,445,75,0),(170,'z12jxbnwntfwx33pd04cg5yybla2tx341f0',112,'2012-04-24 21:47:51',2,29,139,19,0),(171,'z13wtvzrvxrfy5kfm231jrlwdkqjct0es',112,'2012-04-24 21:47:43',2,18,119,6,0),(172,'z131g3ugtmaxdnkbj04cg5yybla2tx341f0',112,'2012-04-24 21:47:36',2,16,102,10,0),(173,'z12hilwb3yfcynpvj231jrlwdkqjct0es',112,'2012-04-24 21:47:27',2,16,89,7,0),(174,'z13ndbcywvbwiheer231jrlwdkqjct0es',112,'2012-04-24 21:47:16',2,10,68,10,0),(175,'z12mz5u45veaupt4504cg5yybla2tx341f0',112,'2012-04-24 09:05:57',2,59,315,43,0),(176,'z135x3vbcqa2gpxcw231jrlwdkqjct0es',112,'2012-04-23 21:44:11',2,151,499,40,0),(177,'z124uh3hbnf0vzaxm04cg5yybla2tx341f0',112,'2012-04-23 13:06:16',1,114,69,3,0),(178,'z13bsdrjpu3oz1bzg04cg5yybla2tx341f0',112,'2012-04-23 12:00:33',1,221,62,8,0),(179,'z13bux5rnzeft34kj231jrlwdkqjct0es',112,'2012-04-23 07:09:34',2,83,525,90,0),(180,'z13ygxp4lxuqchv3c231jrlwdkqjct0es',112,'2012-04-23 05:12:12',2,48,308,22,0),(181,'z12yc1ijxxrqj141v231jrlwdkqjct0es',112,'2012-04-22 23:13:52',2,42,136,21,0),(182,'z13ehru5skimuxc4004cg5yybla2tx341f0',112,'2012-04-22 23:10:54',2,10,68,6,0),(183,'z12eeprpbxa2x4xsksfxwj2g5nuac2q0',112,'2012-04-22 23:10:42',2,15,91,10,0),(184,'z121uvagiobzi3izs04cg5yybla2tx341f0',112,'2012-04-22 07:36:04',2,53,318,47,0),(185,'z12aibqyyoqrfb1kd231jrlwdkqjct0es',112,'2012-04-22 06:26:02',2,50,127,7,0),(186,'z13vgdqyrwj0df0k5231jrlwdkqjct0es',112,'2012-04-22 04:52:20',1,18,9,0,0),(187,'z13ixjlwyry2cxcep231jrlwdkqjct0es',112,'2012-04-21 23:34:34',2,70,328,50,0),(188,'z123flgp5nmoedhrp04cg5yybla2tx341f0',112,'2012-04-21 05:44:51',2,30,220,21,0),(189,'z12hwtujxxieflnq204cg5yybla2tx341f0',112,'2012-04-21 00:45:24',2,58,154,10,0),(190,'z135wlp4mq25x3zi104cg5yybla2tx341f0',112,'2012-04-20 22:40:02',2,86,169,17,0),(191,'z12jzlrgop2oghpyg04cg5yybla2tx341f0',112,'2012-04-20 09:52:37',2,44,148,12,0),(192,'z12kudxiws2li3euv231jrlwdkqjct0es',112,'2012-04-20 04:34:33',2,118,611,103,0),(193,'z12qgpo4wsrhwdbnh231jrlwdkqjct0es',112,'2012-04-19 08:38:00',2,22,171,27,0),(194,'z13dfl2aiq34d52mp231jrlwdkqjct0es',112,'2012-04-19 08:34:19',2,6,66,3,0),(195,'z13ghfqxsouwxnruj231jrlwdkqjct0es',112,'2012-04-19 08:34:13',2,7,56,4,0),(196,'z12wwbtbyrrjfvznp231jrlwdkqjct0es',112,'2012-04-19 08:34:11',2,4,40,1,0),(197,'z13dyjrqpkief3ttx231jrlwdkqjct0es',112,'2012-04-19 08:33:58',2,7,51,1,0),(198,'z13zxp3zptn2zlyj504cg5yybla2tx341f0',112,'2012-04-19 00:48:13',2,52,271,24,0),(199,'z123hnihymudgri3l231jrlwdkqjct0es',112,'2012-04-19 00:26:12',5,19,51,19,0),(200,'z12mvrcgnmmfshieq231jrlwdkqjct0es',112,'2012-04-18 11:25:29',2,35,0,16,0);
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gpm`
+--
+
+DROP TABLE IF EXISTS `gpm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gpm` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `idGpm` varchar(21) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_GPM_idGpm` (`idGpm`)
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gpm`
+--
+
+LOCK TABLES `gpm` WRITE;
+/*!40000 ALTER TABLE `gpm` DISABLE KEYS */;
+INSERT INTO `gpm` VALUES (1,'100000329940413161996'),(2,'100000356136760184279'),(3,'100000772955143706751'),(4,'100001460601553769984'),(5,'100001803773152492451'),(6,'100002037172819753939'),(7,'100002429498291810665'),(8,'100002886266231272351'),(9,'100002947862537076711'),(10,'100003317583351942945'),(11,'100003628603413742554'),(12,'100003850557805960555'),(13,'100004016748161538154'),(14,'100004516056282859774'),(15,'100004583185844922211'),(16,'100005239178056249351'),(17,'100005710824892014286'),(18,'100005711559155088683'),(19,'100005809427652429580'),(20,'100006297432662329995'),(21,'100006477772655287322'),(22,'100021025784352405813'),(23,'100035762233109552669'),(24,'100038567648880602892'),(25,'100059725356222329475'),(26,'100062540864597103249'),(27,'100081010984768669358'),(28,'100084528885853378500'),(29,'100095245926948995335'),(30,'100113758181245830335'),(31,'100121771572038665942'),(32,'100124389520659251191'),(33,'100125012078853567494'),(34,'100129275726588145876'),(35,'100185707560478368490'),(36,'100193529331792590881'),(37,'100200160956657706975'),(38,'100201277843142907471'),(39,'100219691404074384850'),(40,'100233345614313192787'),(41,'100238746026920057941'),(42,'100238778462210489846'),(43,'100238824487132161176'),(44,'100251974409620806821'),(45,'100255479358995396743'),(46,'100262595546646927505'),(47,'100269980559891536109'),(48,'100272572056305744950'),(49,'100275307499530023476'),(50,'100279438294886290330'),(51,'100299055611081620740'),(52,'100300281975626912157'),(53,'100304352681897837766'),(54,'100316447977798313854'),(55,'100324436248497823664'),(56,'100331338428465688037'),(57,'100346965843536809009'),(58,'100349743543849719885'),(59,'100362719753000939534'),(60,'100365530928998392590'),(61,'100366041156340390615'),(62,'100372650346667646089'),(63,'100377493270775536948'),(64,'100382758901355515850'),(65,'100397143564111754723'),(66,'100401683392479420272'),(67,'100412096384209660073'),(68,'100425739170055690781'),(69,'100429564727464307274'),(70,'100502770020470411205'),(71,'100518419853963396365'),(72,'100715328241636136414'),(73,'101269616518480136760'),(74,'101892269165398528426'),(75,'101960720994009339267'),(76,'102150693225130002912'),(77,'102871830398264157687'),(78,'103172158448932010502'),(79,'103533326117556337218'),(80,'106189723444098348646'),(81,'106425036468998163064'),(82,'106472137404451336877'),(83,'107117483540235115863'),(84,'107276867598285658079'),(85,'107284813721446648524'),(86,'107765155354887834405'),(87,'108030124760702808713'),(88,'108176814619778619437'),(89,'108551811075711499995'),(90,'108809238871290369247'),(91,'108998673146368660257'),(92,'109813896768294978296'),(93,'110950950882502330382'),(94,'110981030061712822816'),(95,'111000835266298743697'),(96,'111588569124648292310'),(97,'112063946124358686266'),(98,'113359777710817483258'),(99,'113455290791279442483'),(112,'114056084994793924628'),(108,'114536133164105123829'),(100,'114862790439773763162'),(101,'115360471097759949621'),(102,'115956363612512643809'),(103,'116247667398036716276'),(104,'116872576248355504859'),(105,'117420368760274729369'),(106,'117570997424193022129'),(107,'117673062930419636633');
+/*!40000 ALTER TABLE `gpm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `word`
+--
+
+DROP TABLE IF EXISTS `word`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `word` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `word` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Word_word` (`word`)
+) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `word`
+--
+
+LOCK TABLES `word` WRITE;
+/*!40000 ALTER TABLE `word` DISABLE KEYS */;
+INSERT INTO `word` VALUES (31,'abstract'),(24,'acrylic'),(73,'activities'),(294,'admin'),(266,'administrator'),(265,'ajax'),(180,'amateur'),(210,'android'),(299,'apache'),(280,'api'),(234,'app'),(236,'application'),(233,'applications'),(229,'apps'),(25,'architect'),(197,'architecture'),(187,'area'),(2,'art'),(134,'articles'),(1,'artist'),(26,'artistic'),(8,'artwork'),(124,'author'),(63,'baseball'),(270,'basic'),(40,'basketball'),(175,'beautiful'),(171,'beauty'),(60,'bike'),(102,'bikes'),(254,'bit'),(307,'bits'),(116,'blog'),(117,'blogger'),(132,'bloggers'),(120,'blogging'),(123,'blogs'),(129,'blogspot'),(75,'boxing'),(297,'browser'),(231,'c++'),(157,'camera'),(190,'canon'),(184,'capture'),(93,'challenge'),(141,'channel'),(115,'chempionships'),(99,'chess'),(42,'circle'),(43,'circles'),(193,'clients'),(113,'climber'),(87,'climbing'),(85,'coach'),(90,'coaching'),(230,'code'),(278,'coder'),(277,'coding'),(32,'color'),(14,'comics'),(221,'computer'),(257,'computers'),(275,'computing'),(22,'concept'),(125,'content'),(272,'core'),(189,'create'),(169,'creative'),(96,'cricket'),(178,'critique'),(245,'css'),(288,'css3'),(51,'cycling'),(98,'cyclist'),(301,'databases'),(269,'debian'),(296,'delphi'),(7,'design'),(6,'designer'),(264,'develop'),(276,'developed'),(208,'developer'),(246,'developers'),(243,'developing'),(215,'development'),(10,'digital'),(267,'django'),(11,'drawing'),(263,'drupal'),(291,'eclipse'),(162,'enjoy'),(27,'exhibition'),(172,'fashion'),(114,'fighter'),(83,'figure'),(61,'fitness'),(35,'football'),(262,'framework'),(305,'frameworks'),(248,'freelance'),(12,'gallery'),(53,'game'),(80,'gamer'),(46,'games'),(68,'gaming'),(203,'geek'),(304,'gentoo'),(298,'github'),(206,'glamour'),(106,'goal'),(79,'golf'),(214,'google'),(9,'graphic'),(160,'great'),(103,'gym'),(283,'hacker'),(289,'hacking'),(282,'hardware'),(205,'hobby'),(54,'hockey'),(199,'home'),(242,'html'),(238,'html5'),(5,'illustration'),(3,'illustrator'),(154,'images'),(112,'instructor'),(232,'internet'),(235,'ios'),(213,'java'),(226,'javascript'),(241,'jquery'),(107,'kayaking'),(151,'landscape'),(170,'landscapes'),(69,'league'),(204,'lightroom'),(217,'linux'),(295,'lisp'),(165,'live'),(176,'look'),(258,'mac'),(192,'macro'),(17,'magazine'),(95,'marathon'),(18,'media'),(251,'microsoft'),(91,'mma'),(33,'modern'),(200,'moment'),(313,'mssql'),(309,'mvc'),(239,'mysql'),(314,'mysql5'),(183,'national'),(148,'nature'),(88,'nba'),(224,'net'),(273,'network'),(287,'networking'),(292,'networks'),(77,'nfl'),(185,'nikon'),(290,'objective-c'),(101,'olympic'),(293,'open-source'),(312,'opensource'),(286,'oracle'),(268,'page'),(4,'paint'),(13,'painter'),(19,'painting'),(159,'passion'),(196,'passionate'),(153,'people'),(149,'photo'),(145,'photographer'),(28,'photography'),(191,'photoshop'),(219,'php'),(168,'picture'),(59,'place'),(255,'platform'),(279,'platforms'),(41,'play'),(64,'played'),(56,'player'),(109,'players'),(48,'playing'),(136,'podcaster'),(62,'pool'),(201,'portfolio'),(29,'portrait'),(127,'post'),(300,'postgresql'),(126,'posts'),(207,'product'),(161,'professional'),(128,'profile'),(260,'program'),(216,'programmer'),(302,'programmers'),(220,'programming'),(274,'programs'),(164,'project'),(138,'published'),(142,'publisher'),(133,'publishing'),(218,'python'),(45,'race'),(92,'racer'),(86,'races'),(58,'racing'),(105,'rafting'),(237,'rails'),(140,'reviews'),(227,'ruby'),(70,'rugby'),(100,'runner'),(50,'running'),(308,'scripting'),(23,'sculptor'),(30,'sculpture'),(256,'server'),(130,'share'),(139,'sharing'),(78,'shoot'),(84,'shooting'),(97,'shot'),(195,'show'),(253,'site'),(261,'sites'),(108,'skater'),(111,'skates'),(76,'ski'),(71,'skier'),(44,'skiing'),(74,'snowboarding'),(38,'soccer'),(211,'software'),(223,'source'),(20,'speedpaint'),(39,'sport'),(37,'sports'),(259,'sql'),(306,'stack'),(65,'start'),(82,'strategy'),(163,'street'),(194,'studio'),(198,'style'),(271,'support'),(72,'swimmer'),(47,'swimming'),(49,'team'),(67,'teams'),(66,'tennis'),(310,'test'),(303,'tester'),(36,'time'),(135,'topics'),(110,'tour'),(94,'trainer'),(55,'training'),(155,'travel'),(52,'try'),(250,'ubuntu'),(285,'unix'),(228,'user'),(202,'various'),(143,'videoblog'),(284,'virtual'),(34,'visionary'),(21,'visual'),(57,'volleyball'),(209,'web'),(311,'webmaster'),(244,'website'),(247,'websites'),(166,'wildlife'),(81,'win'),(131,'wordpress'),(146,'work'),(177,'workshop'),(150,'world'),(104,'wrestling'),(119,'write'),(118,'writer'),(137,'writes'),(122,'writing'),(281,'xml'),(152,'years'),(89,'yoga'),(121,'youtube');
+/*!40000 ALTER TABLE `word` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `groupdescr`
+--
+
+DROP TABLE IF EXISTS `groupdescr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `groupdescr` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `activeImage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `passiveImage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `textPercent` int(11) DEFAULT NULL,
+  `imagePercent` int(11) DEFAULT NULL,
+  `linkPercent` int(11) DEFAULT NULL,
+  `videoPercent` int(11) DEFAULT NULL,
+  `audioPercent` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_GroupDescr_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `groupdescr`
+--
+
+LOCK TABLES `groupdescr` WRITE;
+/*!40000 ALTER TABLE `groupdescr` DISABLE KEYS */;
+INSERT INTO `groupdescr` VALUES (1,'Художники','','','',NULL,NULL,NULL,NULL,NULL),(2,'Спортсмены','','',NULL,NULL,NULL,NULL,NULL,NULL),(3,'Блоггеры','','',NULL,NULL,NULL,NULL,NULL,NULL),(4,'Фотографы','','','',NULL,NULL,NULL,NULL,NULL),(5,'Разработчики','','',NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `groupdescr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gender`
+--
+
+DROP TABLE IF EXISTS `gender`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gender` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `value` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Gender_value` (`value`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gender`
+--
+
+LOCK TABLES `gender` WRITE;
+/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` VALUES (2,'female'),(1,'male'),(3,'other');
+/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `newgpm`
+--
+
+DROP TABLE IF EXISTS `newgpm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newgpm` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `idGpm` varchar(21) COLLATE utf8_unicode_ci NOT NULL,
+  `nMentiens` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_NewGPM_idGpm` (`idGpm`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `newgpm`
+--
+
+LOCK TABLES `newgpm` WRITE;
+/*!40000 ALTER TABLE `newgpm` DISABLE KEYS */;
+INSERT INTO `newgpm` VALUES (1,'103274398541354707265',2),(2,'113977984500465768287',2);
+/*!40000 ALTER TABLE `newgpm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `content`
+--
+
+DROP TABLE IF EXISTS `content`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `content` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `kind` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_Content_kind` (`kind`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `content`
+--
+
+LOCK TABLES `content` WRITE;
+/*!40000 ALTER TABLE `content` DISABLE KEYS */;
+INSERT INTO `content` VALUES (3,'audio'),(5,'link'),(2,'photo'),(1,'text'),(4,'video');
+/*!40000 ALTER TABLE `content` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `postword`
+--
+
+DROP TABLE IF EXISTS `postword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `postword` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `post` bigint(20) DEFAULT NULL,
+  `word` bigint(20) DEFAULT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_PostWord_1` (`post`,`word`),
+  KEY `ix_PostWord_post_12` (`post`),
+  KEY `ix_PostWord_word_13` (`word`),
+  CONSTRAINT `fk_PostWord_post_12` FOREIGN KEY (`post`) REFERENCES `post` (`id`),
+  CONSTRAINT `fk_PostWord_word_13` FOREIGN KEY (`word`) REFERENCES `word` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postword`
+--
+
+LOCK TABLES `postword` WRITE;
+/*!40000 ALTER TABLE `postword` DISABLE KEYS */;
+INSERT INTO `postword` VALUES (171,102,175,1),(172,103,1,1),(173,105,36,1),(174,105,160,1),(175,105,28,1),(176,105,146,1),(177,105,2,1),(178,105,83,1),(179,105,254,1),(180,105,153,1),(181,105,162,1),(182,107,165,1),(183,107,254,1),(184,107,29,1),(185,107,154,1),(186,107,195,1),(187,108,165,1),(188,109,175,1),(189,109,28,1),(190,109,253,2),(191,109,254,1),(192,109,139,1),(193,111,162,1),(194,113,153,1),(195,115,176,2),(196,115,65,1),(197,115,175,1),(198,116,96,1),(199,116,130,1),(200,118,150,1),(201,119,271,1),(202,119,65,1),(203,119,175,1),(204,120,49,1),(205,122,48,1),(206,122,234,1),(207,122,150,1),(208,124,169,1),(209,126,284,1),(210,126,176,1),(211,126,65,1),(212,126,50,2),(213,126,139,2),(214,126,130,2),(215,126,169,1),(216,126,67,1),(217,126,193,1),(218,126,150,1),(219,126,83,1),(220,126,153,2),(221,126,171,1),(222,126,271,1),(223,126,160,1),(224,126,43,1),(225,127,41,1),(226,128,146,1),(227,129,29,1),(228,129,159,1),(229,129,271,1),(230,129,153,1),(231,129,36,1),(232,129,214,1),(233,130,146,2),(234,130,139,1),(235,130,176,1),(236,133,264,1),(237,133,168,1),(238,133,176,1),(239,133,84,1),(240,133,93,1),(241,133,104,1),(242,134,180,1),(243,134,32,3),(244,134,28,1),(245,134,207,1),(246,134,130,1),(247,134,187,2),(248,134,36,1),(249,137,139,1),(250,139,139,1),(251,142,180,1),(252,142,32,3),(253,142,28,1),(254,142,207,1),(255,142,130,1),(256,142,187,1),(257,143,152,1),(258,143,65,1),(259,145,130,1),(260,145,28,1),(261,145,177,2),(262,145,146,1),(263,145,198,1),(264,145,191,1),(265,145,53,1),(266,146,254,1),(267,150,84,1),(268,152,175,1),(269,152,146,1),(270,153,200,2),(271,155,150,1),(272,155,214,3),(273,155,138,1),(274,155,154,2),(275,155,160,1),(276,155,164,2),(277,155,28,1),(278,155,271,2),(279,155,176,1),(280,157,154,1),(281,157,28,1),(282,157,48,1),(283,157,191,1),(284,157,149,1),(285,159,154,2),(286,159,176,1),(287,159,84,1),(288,159,146,2),(289,163,59,1),(290,166,28,2),(291,166,127,1),(292,166,153,2),(293,167,39,1),(294,169,254,1),(295,169,65,1),(296,169,176,1),(297,175,150,1),(298,177,153,1),(299,178,153,1),(300,181,110,1),(301,181,204,1),(302,181,191,1),(303,181,270,1),(304,181,165,5),(305,181,194,1),(306,181,195,2),(307,181,121,1),(308,181,150,1),(309,181,130,1),(310,185,52,1),(311,185,160,1),(312,186,273,1),(313,186,165,1),(314,186,272,1),(315,188,32,1),(316,190,32,1),(317,191,29,2),(318,191,84,3),(319,191,78,1),(320,191,150,1),(321,191,153,3),(322,191,148,1),(323,191,159,1),(324,191,145,1),(325,191,65,1),(326,191,157,2),(327,191,168,2),(328,191,130,1),(329,191,139,1),(330,191,271,1),(331,191,52,1),(332,192,36,1),(333,193,149,1),(334,193,178,1),(335,193,195,1),(336,198,254,1),(337,199,29,1),(338,200,191,2),(339,200,195,2),(340,200,36,1);
+/*!40000 ALTER TABLE `postword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profileword`
+--
+
+DROP TABLE IF EXISTS `profileword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profileword` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `profile` bigint(20) DEFAULT NULL,
+  `word` bigint(20) DEFAULT NULL,
+  `amount` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_ProfileWord_1` (`profile`,`word`),
+  KEY `ix_ProfileWord_profile_19` (`profile`),
+  KEY `ix_ProfileWord_word_20` (`word`),
+  CONSTRAINT `fk_ProfileWord_profile_19` FOREIGN KEY (`profile`) REFERENCES `profile` (`id`),
+  CONSTRAINT `fk_ProfileWord_word_20` FOREIGN KEY (`word`) REFERENCES `word` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profileword`
+--
+
+LOCK TABLES `profileword` WRITE;
+/*!40000 ALTER TABLE `profileword` DISABLE KEYS */;
+INSERT INTO `profileword` VALUES (183,9,169,5),(184,9,150,3),(185,9,193,1),(186,9,2,1),(187,9,273,1),(188,9,157,2),(189,9,205,1),(190,9,159,1),(191,9,153,2),(192,9,130,1),(193,9,139,3),(194,9,175,1),(195,9,162,1),(196,9,5,1),(197,9,19,1),(198,9,138,1),(199,9,165,1),(200,9,38,1),(201,9,85,1),(202,9,196,2),(203,9,145,2),(204,9,43,2),(205,9,164,2),(206,9,36,3),(207,9,166,1),(208,9,146,2),(209,9,214,5),(210,9,110,1),(211,9,28,1),(212,9,17,1);
+/*!40000 ALTER TABLE `profileword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'test'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-06-10 20:09:56
