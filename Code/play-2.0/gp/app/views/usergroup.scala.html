@@ -1,39 +1,42 @@
-@(gpms: List[GPM], groups: List[Group])
+@(gpms: List[Profile], groups: List[Group], nameGroup: String)
 
 @import helper._
 
-@main("Groups list") {
+@main(nameGroup) {
     
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml">
-	 	<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-			<title>Главная страница сайта по коллективной разработке</title>
-			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
-		</head>
-	
-		<body>
-			
-			@top()
-			<div class="content">
-				@usergroups(groups)
+	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	@top()
+	<div class="content">
+		@usergroups(groups)
 		    	
-		    	<div class="groups-users">
+		<div class="groups-users">
 					
-					@for(gpm <- gpms) {
-		               	<div class="groups-user-block">
-							<img src="gpm.getImage()">
-							<div class="groups-user-text">
-								<h2>gpm.getName()</h2>
-								<h3>gpm.getSex()</h3>
-								<h3>gpm.getRelationshipStatus()</h3>
-								<h4>В кругах у gpm.getFollowers() человек</h4>
-							</div>
-						</div>
+		@for(gpm <- gpms) {
+			<div class="groups-user-block">
+				
+				@if(gpm == null || gpm.image == null || gpm.image == "") {
+					<img src="@routes.Assets.at("images/foto.png")">
+				} else {
+					<img src="@gpm.image">
+				}
+				
+				<div class="groups-user-text">
+					
+					@if(gpm != null) {
+						<h2>@gpm.name</h2>
+						@if(gpm.gender != null) {
+							<h3>@gpm.gender.value</h3>
+						}
+						@if(gpm.relationshipStatus != null) {
+							<h3>@gpm.relationshipStatus.status</h3>
+						}
+						<h4>В кругах у @gpm.nFollowers человек</h4>
 					}
-					
 				</div>
 			</div>
-		</body>
-	</html>
+		}
+					
+	</div>
 }
