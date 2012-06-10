@@ -19,7 +19,7 @@ import views.html.*;
 
 public class Application extends Controller {
 
-    public static Result ind() throws IOException {
+	public static Result ind() throws IOException {
 	    TempProfile temp = GAPI.getProfile("100915540970866628562");
 	    DataExtraction.newGPM("114536133164105123829");
        	return ok(temp.displayName);
@@ -30,7 +30,10 @@ public class Application extends Controller {
     }
     
     public static Result viewGroup(Long idGroup) {
-    	
-    	return ok(views.html.usergroup.render(GPM.all(), Group.all()));
+    	List <Profile> gpms = new ArrayList<Profile>();
+        for(GPM gpm: GPM.all()) {
+        	gpms.add(Profile.lastProfileByGpmId(gpm.id));
+        }
+    	return ok(views.html.usergroup.render(gpms, Group.all(), Group.findById(idGroup).name));
     }
 }
