@@ -26,6 +26,11 @@ public class Application extends Controller {
 		}
 
     public static Result index() {
-        return redirect(routes.Admin.main());
+    	return ok(views.html.index.render(Group.all()));
+    }
+    
+    public static Result viewGroup(Long idGroup) {
+    	
+    	return ok(views.html.usergroup.render(GPM.all(), Group.all()));
     }
 }

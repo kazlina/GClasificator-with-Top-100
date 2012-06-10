@@ -4,9 +4,6 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlRow;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -50,7 +47,7 @@ public class Profile extends Model {
     public Relationship relationshipStatus;
 
     @Column(name = "nFollowers")
-    public Integer nfollowers;
+    public Integer nFollowers;
 
     @OneToMany(mappedBy = "profile")
     public List<ProfileLink> links;
@@ -66,8 +63,7 @@ public class Profile extends Model {
     	this.gender = gender;
     	this.tagline = tagline;
     	this.relationshipStatus = relationshipStatus;
-    	this.nfollowers = nFollowers;
-		
+    	this.nFollowers = nFollowers;
     }
 
 	private static Model.Finder<Long, Profile> find = new Model.Finder<Long, Profile>(Long.class, Profile.class);

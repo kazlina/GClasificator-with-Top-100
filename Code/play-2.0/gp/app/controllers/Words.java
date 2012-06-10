@@ -27,13 +27,13 @@ public class Words extends Controller {
 
     // WORD
     public static Result words() {
-        return ok(views.html.index.render(Word.all(), wordForm));
+        return ok(views.html.words.render(Word.all(), wordForm));
     }
 
     public static Result newWord() {
         Form<Word> filledForm = wordForm.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.index.render(Word.all(), filledForm));
+            return badRequest(views.html.words.render(Word.all(), filledForm));
         } else {
             Word.add(filledForm.get());
             return redirect(routes.Words.words());

@@ -31,7 +31,8 @@ public class Groups extends Controller {
         if(filledForm.hasErrors()) {
             return badRequest(views.html.groups.render(Group.all(), filledForm));
         } else {
-            Group.add(filledForm.get());
+            Group gr = filledForm.get();
+        	Group.add(gr);
             return redirect(routes.Groups.groups());
         }
     }

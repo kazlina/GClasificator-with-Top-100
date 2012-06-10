@@ -41,7 +41,32 @@ public class GPM extends Model {
 	private GPM(String id) {
 		this.idGpm = id;
 	}
-
+	/*
+	public String getImage() {
+		Profile prof = Profile.lastProfileByGpmId(this.id);
+		return (prof == null || prof.image == null || prof.image == "")? "@routes.Assets.at(\"images/foto.png\")" : prof.image;
+	}
+	
+	public String getName() {
+		Profile prof = Profile.lastProfileByGpmId(this.id);
+		return (prof == null)? "" : prof.name;
+	}
+	
+	public String getSex() {
+		Profile prof = Profile.lastProfileByGpmId(this.id);
+		return (prof == null)? "" : prof.gender.value;
+	}
+	
+	public String getRelationshipStatus() {
+		Profile prof = Profile.lastProfileByGpmId(this.id);
+		return (prof == null)? "" : prof.relationshipStatus.status;
+	}
+	
+	public Integer getFollowers() {
+		Profile prof = Profile.lastProfileByGpmId(this.id);
+		return (prof == null)? 0 : prof.nFollowers;
+	}
+*/
 	private static Model.Finder<Long, GPM> find = new Model.Finder<Long, GPM>(Long.class, GPM.class);
 	
 	public static List<GPM> all() {
