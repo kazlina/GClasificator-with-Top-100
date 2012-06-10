@@ -3,6 +3,7 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.*;
+import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class BlackList extends Model {
     public GPM gpm;
 
 	@Constraints.Required
+	@Formats.DateTime(pattern = "dd.MM.yyyy")
     @Column(name = "dateOfAddition", nullable = false)
     public Date dateOfAddition;
 

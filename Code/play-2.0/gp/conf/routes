@@ -6,6 +6,9 @@
 GET     /                       controllers.Application.index()
 GET     /ind                    controllers.Application.ind()
 
+# ADMIN PAGE
+GET     /admin            		controllers.Admin.main()
+
 # LINKS
 GET     /admin/links            controllers.Links.links()
 POST    /admin/links            controllers.Links.newLink()
@@ -42,6 +45,10 @@ GET     /admin/groupwords/:gid            controllers.Groups.groupWords(gid: Lon
 POST    /admin/groupwords/:gid            controllers.Groups.addGroupWord(gid: Long)
 POST    /admin/groupwords/:gid/:gwid/delete controllers.Groups.deleteGroupWord(gid: Long, gwid: Long)
 
+# GROUP WORDS
+GET     /admin/grouplinks/:gid              controllers.Groups.groupLinks(gid: Long)
+POST    /admin/grouplinks/:gid              controllers.Groups.addGroupLink(gid: Long)
+POST    /admin/grouplinks/:gid/:gwid/delete controllers.Groups.deleteGroupLink(gid: Long, gwid: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

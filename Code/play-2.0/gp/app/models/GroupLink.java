@@ -17,7 +17,6 @@ public class GroupLink extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Constraints.Required
     @JoinColumn(name = "groupDescr", nullable = false)
     @ManyToOne
     public Group group;
@@ -46,10 +45,11 @@ public class GroupLink extends Model {
         this.profileWeight = profileWeight;
     }
 	
-	public GroupLink(Group group, String link, float postWeight, float profileWeight) {
+	public GroupLink(Long groupId, String link, float postWeight, float profileWeight) {
 		Link findLink = Link.findByLink(link);
-		if (findLink != null) {
-			this.group = group;
+		Group findGroup = Group.findById(groupId);
+		if (findLink != null && findGroup != null) {
+			this.group = findGroup;
 			this.link = findLink;
 	        this.postWeight = postWeight;
 	        this.profileWeight = profileWeight;

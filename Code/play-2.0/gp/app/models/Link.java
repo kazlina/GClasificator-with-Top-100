@@ -15,7 +15,7 @@ public class Link extends Model {
     public Long id;
 
 	@Constraints.Required
-	@Constraints.Pattern("(http|https|HTTP|HTTPS)://(((\\?\\.)?[a-z]+(\\.){1}[a-z]{2,3}+)|(([a-z]+\\.)?\\?(\\.){1}[a-z]{2,3}+)|(([a-z]+\\.)?[a-z]+(\\.){1}\\?)|(([a-z]+\\.)?[a-z]+(\\.){1}[a-z]{2,3}+))(:\\d{1,4})?/?[/\\.a-zA-Z\\d\\?%=&_\\-#!;:@]*")
+	@Constraints.Pattern(value = "(http|https|HTTP|HTTPS)://(((\\?\\.)?[a-z]+(\\.){1}[a-z]{2,3}+)|(([a-z]+\\.)?\\?(\\.){1}[a-z]{2,3}+)|(([a-z]+\\.)?[a-z]+(\\.){1}\\?)|(([a-z]+\\.)?[a-z]+(\\.){1}[a-z]{2,3}+))(:\\d{1,4})?/?[/\\.a-zA-Z\\d\\?%=&_\\-#!;:@]*", message = "Incorrect link")
 	@Column(name = "link", nullable = false, unique = true)
 	public String link;
 
@@ -43,13 +43,14 @@ public class Link extends Model {
 	}
 
 	public static List<String> allInString() {
-		List <Link> links = all();
 		List <String> linksInString = new ArrayList<String>();
-		
-		for (Link link: links)
+		for (Link link: all())
 			linksInString.add(link.link);
-		
 		return linksInString;
+	}
+	
+	public static Integer size() {
+		return find.findRowCount();
 	}
 	
 	public static Link findById(Long Id) {

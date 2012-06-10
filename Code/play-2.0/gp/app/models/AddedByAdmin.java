@@ -3,6 +3,7 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.*;
+import play.data.format.Formats;
 import play.data.validation.*;
 
 @Entity
@@ -33,9 +34,11 @@ public class AddedByAdmin extends Model {
 	public Integer position;
 
     @Constraints.Required
+    @Formats.DateTime(pattern = "dd.MM.yyyy")
     @Column(name = "dateOfAddition", nullable = false)
 	public Date dateOfAddition;
 
+	@Formats.DateTime(pattern = "dd.MM.yyyy")
 	@Column(name = "dateOfRemoval")
 	public Date dateOfRemoval;
 

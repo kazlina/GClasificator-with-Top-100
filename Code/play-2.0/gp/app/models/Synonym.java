@@ -18,14 +18,13 @@ public class Synonym extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    //@Constraints.Required
-	@JoinColumn(name = "word", nullable = false)
+    @JoinColumn(name = "word", nullable = false)
 	@ManyToOne
 	public Word word;
 
     @Constraints.MaxLength(30)
 	@Constraints.Required
-	@Constraints.Pattern("[a-zA-Zа-яА-Я]+")
+	@Constraints.Pattern(value = "[a-zA-Zа-яА-Я]+", message = "Incorrect word")
 	@Column(name = "synonym", length = 30, nullable = false)
 	public String synonym;
 

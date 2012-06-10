@@ -8,12 +8,12 @@
         @inputFile(groupForm("activeImage"), 'accept -> "image/jpeg,image/png,image/gif")
         @inputFile(groupForm("passiveImage"), 'accept -> "image/jpeg,image/png,image/gif")
         @textarea(groupForm("description"))
-        @inputText(groupForm("textPersent"))
-        @inputText(groupForm("imagePersent"))
-        @inputText(groupForm("linkPersent"))
-        @inputText(groupForm("videoPersent"))
-        @inputText(groupForm("audioPersent"))
-        <input type="submit" value="Create">
+        @inputText(groupForm("textPercent"))
+        @inputText(groupForm("imagePercent"))
+        @inputText(groupForm("linkPercent"))
+        @inputText(groupForm("videoPercent"))
+        @inputText(groupForm("audioPercent"))
+        <input type="submit" value="Update">
     }
     <a href=@routes.Groups.groups()>Back to groups</a>
 }

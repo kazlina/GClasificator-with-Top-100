@@ -18,7 +18,6 @@ public class GroupWord extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-	@Constraints.Required
 	@JoinColumn(name = "groupDescr", nullable = false)
 	@ManyToOne
 	public Group group;
@@ -47,10 +46,11 @@ public class GroupWord extends Model {
 		this.profileWeight = profileWeight;
 	}
 	
-	public GroupWord(Group group, String word, float postWeight, float profileWeight) {
+	public GroupWord(Long groupId, String word, float postWeight, float profileWeight) {
 		Word findWord = Word.findByWord(word);
-		if (findWord != null) {
-			this.group = group;
+		Group findGroup = Group.findById(groupId);
+		if (findWord != null && findGroup != null) {
+			this.group = findGroup;
 			this.word = findWord;
 			this.postWeight = postWeight;
 			this.profileWeight = profileWeight;

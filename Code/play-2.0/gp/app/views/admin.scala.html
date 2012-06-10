@@ -1,0 +1,9 @@
+@(groupSize: Int, wordSize: Int, linkSize: Int)
+
+@import helper._
+
+@main("Admin's page") {
+	<h2>@groupSize group(s)</h2> <a href=@routes.Groups.groups()>Go to list groups</a>
+	<h2>@wordSize word(s)</h2> <a href=@routes.Words.words()>Go to list words</a>
+	<h2>@linkSize link(s)</h2> <a href=@routes.Links.links()>Go to list links</a>
+}

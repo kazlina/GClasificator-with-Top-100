@@ -26,6 +26,6 @@ public class Application extends Controller {
 		}
 
     public static Result index() {
-        return redirect(routes.Words.words());
+        return redirect(routes.Admin.main());
     }
 }
