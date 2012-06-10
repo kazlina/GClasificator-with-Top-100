@@ -1,5 +1,8 @@
 package models;
 
+import HistogramForLinks;
+import Link;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,7 +194,7 @@ public class DataExtraction {
 		Pattern urlPattern = Pattern.compile(urlRegexp);
 		
 		//adding links into list
-		ArrayList <URL> sourcelinksList = new ArrayList<URL>();
+		List <URL> sourcelinksList = new ArrayList<URL>();
 		//add string from sliced mass into list only if they match html-tamplate
 		
 		if (slicedStringMass != null) {
@@ -213,67 +216,73 @@ public class DataExtraction {
 			return nullValue;
 		}
 
-		LinkComparator comparator = new LinkComparator("");
-		java.util.Collections.sort(sourcelinksList, comparator);
+		//LinkComparator comparator = new LinkComparator("");
+		//java.util.Collections.sort(sourcelinksList, comparator);
 		
 		List <Link> dictionaryLinks = Link.all();
-		
 		//create and initialized first element histogram mass
 		ArrayList <HistogramForLinks> histogramList = new ArrayList<HistogramForLinks>();
-		try {
-			for (URL currentLink: sourcelinksList) {
-			    for (Link linkFromDictionary: dictionaryLinks) {
-
-			    	if (dimainCollation(
-			        		linkFromDictionary.link.substring(
-		        					getSecondSlashPosition(linkFromDictionary.link), getThirdSlashPosition(linkFromDictionary.link)
-		        					)
-		        			,currentLink.getHost())	&& 
-		        			linksDistance(currentLink, new URL (linkFromDictionary.link)) <= maxLength) {
+		//try {
+		for (URL currentLink: sourcelinksList) {
+		    for (Link linkFromDictionary: dictionaryLinks) {
+		    	try {
+		    		if (dimainCollation(
+		    	
+		        		linkFromDictionary.link.substring(
+		        				getSecondSlashPosition(linkFromDictionary.link) + 1, getThirdSlashPosition(linkFromDictionary.link)
+	        					)
+	        			,currentLink.getHost())	&& 
+	        			linksDistance(currentLink, linkFromDictionary.link) <= maxLength) {
 			    		//search in histogram such link
 			    		int indexOfLink;
 			    		boolean linkInHistogram = false;
 			    		for (indexOfLink = 0; 
 			    				indexOfLink < histogramList.size() && !linkInHistogram; 
 			    				indexOfLink++) {
-			    			linkInHistogram = histogramList.get(indexOfLink).link.equals(currentLink.toString());
+			    			linkInHistogram = histogramList.get(indexOfLink).link.toString().equals(linkFromDictionary.link);
 			    		}
 	        			if (linkInHistogram) {
 	        				histogramList.get(indexOfLink - 1).count++;
 	        			}
 		        		else {
 		        			histogramList.add(new HistogramForLinks(linkFromDictionary.link));
+		        			
 		        		}
-			    	}
-			    }
-			}
+	        			break;
+		    		}
+		    	}
+		    	catch (Exception ex) {
+					//there is cannot be exception, because it should be early
+				}
+		    }
 		}
+		/*}
 		catch (Exception ex) {
 			//there is cannot be exception, because it should be early
-		}
+		}*/
 		return histogramList;
 	}
     
 	private static String [] separateTokens (String inputString) {
 		String [] outputString = null;
 		if (inputString != null && !inputString.equals("")){
-			outputString = inputString.split("\\s=\\s|>|=\"|\\s=\"|=\\s\"|\\s=");
+			outputString = inputString.split("\\s|\\s=\\s|>|=\"|\\s=\"|=\\s\"|\\s=");
 		}
 		return outputString;
 	}
 
-	private  static int linksDistance (URL link1, URL link2) {
+	private  static int linksDistance (URL link1, String link2) {
 		String bigLinkPath, smallLinkPath;
-		if (!link1.getHost().toString().equals(link2.getHost().toString())) {
+		/*if (!link1.getHost().toString().equals(link2.getHost().toString())) {
 			return -1;
-		}
+		}*/
 		
-		if (link1.toString().length() >= link2.toString().length()) {
+		if (link1.toString().length() >= link2.length()) {
 			bigLinkPath = link1.getPath();
-			smallLinkPath = link2.getPath();
+			smallLinkPath = link2.substring(getThirdSlashPosition(link2), link2.length());
 		}
 		else {
-			bigLinkPath = link2.getPath();
+			bigLinkPath = link2.substring(getThirdSlashPosition(link2), link2.length());
 			smallLinkPath = link1.getPath();
 		}
 		//search of domain end in first and second link
@@ -290,7 +299,7 @@ public class DataExtraction {
 		for (; bigLinkPath.charAt(linksDifferencesPosition) == smallLinkPath.charAt(linksDifferencesPosition) &&
 				linksDifferencesPosition < (smallLinkPath.length() - 1); linksDifferencesPosition++);
 		
-		//search of destination betwen strings
+		//search of destination between strings
 		for (int curPosition = linksDifferencesPosition; curPosition < bigLinkPath.length(); curPosition++) {
 			if (bigLinkPath.charAt(curPosition) == '/' && ((bigLinkPath.length() - curPosition) != 1)){
 				distance++;
@@ -301,7 +310,13 @@ public class DataExtraction {
 	//collate string and find occurrence "?" only in domain
 	private  static boolean dimainCollation (String dictionaryLinkDomain, String newLinkDomain) {
 		int indexOfQuestionMark = dictionaryLinkDomain.indexOf('?');
+		if (dotsNumber(dictionaryLinkDomain) != dotsNumber(newLinkDomain)) {
+			return false;
+		}
 		//if (dictionaryLinkDomain.charAt(dictionaryLinkDomain.length()) != '?')
+		if (indexOfQuestionMark == -1) {
+			return dictionaryLinkDomain.equals(newLinkDomain);
+		}
 		if (indexOfQuestionMark < newLinkDomain.length()) {
 			String leftPart = null, rightPart = null;
 			if (indexOfQuestionMark != 0 && 
@@ -350,6 +365,15 @@ public class DataExtraction {
 				count++;
 			}
 		}
-		return currentPosition;
+		return currentPosition - 1;
+	}
+	public static int dotsNumber (String link) {
+		int numberOfDots = 0;
+		for (int currentPosition = 0; currentPosition < link.length(); currentPosition++) {
+			if (link.charAt(currentPosition) == '.') {
+				numberOfDots++;
+			}
+		}
+		return numberOfDots;
 	}
 }
