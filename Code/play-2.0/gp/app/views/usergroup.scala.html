@@ -10,32 +10,30 @@
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 			<title>Главная страница сайта по коллективной разработке</title>
 			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
-	</head>
+		</head>
 	
-	<body>
-		
-		@top()
-		<div class="content">
-	    	
-	    	@usergroups(groups)
-	    	
-	    	<div class="groups-users">
-				
-				@for(gpm <- gpms) {
-	               	<div class="groups-user-block">
-						<img src="gpm.getImage()">
-						<div class="groups-user-text">
-							<h2>gpm.getName()</h2>
-							<h3>gpm.getSex()</h3>
-							<h3>gpm.getRelationshipStatus()</h3>
-							<h4>В кругах у gpm.getFollowers() человек</h4>
-						</div>
-					</div>
-				}
-				
-			</div>
+		<body>
 			
-		</div>
-		
-	</body>
+			@top()
+			<div class="content">
+				@usergroups(groups)
+		    	
+		    	<div class="groups-users">
+					
+					@for(gpm <- gpms) {
+		               	<div class="groups-user-block">
+							<img src="gpm.getImage()">
+							<div class="groups-user-text">
+								<h2>gpm.getName()</h2>
+								<h3>gpm.getSex()</h3>
+								<h3>gpm.getRelationshipStatus()</h3>
+								<h4>В кругах у gpm.getFollowers() человек</h4>
+							</div>
+						</div>
+					}
+					
+				</div>
+			</div>
+		</body>
+	</html>
 }

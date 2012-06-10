@@ -19,7 +19,7 @@
 		    @for(group <- groups) {
 		    	<div class="category-block">
 					<img src=@group.activeImage>
-					<center><a href="routes.Application.viewGroup(@group.id)">@group.name</a></center>
+					<center><a href="@routes.Application.viewGroup(group.id)">@group.name</a></center>
 				</div>
 			}
 		</div>
