@@ -1,33 +1,27 @@
-@(words: List[Word], wordForm: Form[Word])
+@(groups: List[Group])
 
 @import helper._
 
-@main("Words list") {
+@main("Main page") {
     
-    <h1>@words.size() word(s)</h1>
-    
-    <ul>
-        @for(word <- words) {
-            <li>
-                @word.word has
-                @word.synonyms.size() synonym(s)
-                <a href=@routes.Words.synonyms(word.id)>View/Edit synonyms</a>
-
-                @form(routes.Words.deleteWord(word.id)) {
-                    <input type="submit" value="Delete">
-                }
-            </li>
-        }
-    </ul>
-    
-    <hr/>
-    <h2>Add a new word</h2>
-    
-    @form(routes.Words.newWord()) {
-        @inputText(wordForm("word")) 
-        <input type="submit" value="Create">
-    }
-    <hr/>
-    
-    <a href=@routes.Admin.main()>Go on main page</a>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	 	<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<title>Главная страница сайта по коллективной разработке</title>
+			<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
+	</head>
+	
+	<body>
+	    @top()
+	    
+	    <div class="content">
+		    @for(group <- groups) {
+		    	<div class="category-block">
+					<img src=@group.activeImage>
+					<center><a href="routes.Application.viewGroup(@group.id)">@group.name</a></center>
+				</div>
+			}
+		</div>
+	</body>
 }

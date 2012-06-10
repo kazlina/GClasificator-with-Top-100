@@ -5,8 +5,8 @@
 @main("Group") {
 @form(routes.Groups.changeGroup(group.id)) {
         @inputText(groupForm("name"), '_label -> "name group") 
-        @inputFile(groupForm("activeImage"), 'accept -> "image/jpeg,image/png,image/gif")
-        @inputFile(groupForm("passiveImage"), 'accept -> "image/jpeg,image/png,image/gif")
+        @inputText(groupForm("activeImage"))
+        @inputText(groupForm("passiveImage"))
         @textarea(groupForm("description"))
         @inputText(groupForm("textPercent"))
         @inputText(groupForm("imagePercent"))
