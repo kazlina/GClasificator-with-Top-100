@@ -46,6 +46,15 @@ public class Gender extends Model {
 		element.save();
 	}
 
+	public static void createList() {
+		for (Gender g: all()) {
+			delete(g.id);
+		}
+		add("Male");
+		add("Female");
+		add("Other");
+	}
+
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }

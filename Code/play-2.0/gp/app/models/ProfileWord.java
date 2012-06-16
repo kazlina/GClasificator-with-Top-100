@@ -40,7 +40,7 @@ public class ProfileWord extends Model {
         this.profile = profile;
         this.word = word;
         this.amount = amount;
-        }
+    }
 
     private static Model.Finder<Long, ProfileWord> find = new Model.Finder<Long, ProfileWord>(Long.class, ProfileWord.class);
 

@@ -49,4 +49,20 @@ public class Relationship extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+
+    public static void createList() {
+		for (Relationship g: all()) {
+			delete(g.id);
+		}
+		add("I don't want to say");
+		add("Single");
+		add("In a relationship");
+		add("Engaged");
+		add("Married");
+		add("It's complicated");
+		add("In an open relationship");
+		add("Widowed");
+		add("In a domestic partnership");
+		add("In a civil union");
+	}
 }

@@ -21,6 +21,6 @@ public class Admin extends Controller {
 
 	//MAIN PAGE
 	public static Result main() {
-        return ok(views.html.admin.render(Group.size(), Word.size(), Link.size()));
+        return ok(views.html.admin.render(Group.size(), Word.size(), Link.size(), GPM.size()));
     }
 }

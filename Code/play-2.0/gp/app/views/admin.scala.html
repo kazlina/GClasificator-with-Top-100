@@ -1,9 +1,11 @@
-@(groupSize: Int, wordSize: Int, linkSize: Int)
+@(groupSize: Int, wordSize: Int, linkSize: Int, gpmSize: Int)
 
 @import helper._
 
 @main("Admin's page") {
-	<h2>@groupSize group(s)</h2> <a href=@routes.Groups.groups()>Go to list groups</a>
-	<h2>@wordSize word(s)</h2> <a href=@routes.Words.words()>Go to list words</a>
-	<h2>@linkSize link(s)</h2> <a href=@routes.Links.links()>Go to list links</a>
+	<h2>@groupSize group(s)</h2> <a href=@routes.Groups.groups()>Go to list of groups</a>
+	<h2>@wordSize word(s)</h2> <a href=@routes.Words.words()>Go to list of words</a>
+	<h2>@linkSize link(s)</h2> <a href=@routes.Links.links()>Go to list of links</a>
+	<h2>@gpmSize GPM(s)</h2> <a href=@routes.GPMs.gpms()>Go to GPMs' list</a>
+	<h2>Catalogs</h2><a href=@routes.Catalogs.main()>Catalogs</a><br>
 }

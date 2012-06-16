@@ -1,0 +1,30 @@
+@(contents: List[models.Content], contentForm: Form[models.Content])
+
+@import helper._
+
+@main("Content list") {
+    <ul>
+        @for(c <- contents) {
+            <li>
+                @c.kind
+                @form(routes.Catalogs.deleteContent(c.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <hr/>
+    <h2>Add a new type of content</h2>
+    
+    @form(routes.Catalogs.addContent()) {
+        @inputText(contentForm("kind")) 
+        <input type="submit" value="Create">
+    }
+    @form(routes.Catalogs.createContentList()) {
+        <input type="submit" value="Reset">
+    }
+    <hr/>
+    
+    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+}

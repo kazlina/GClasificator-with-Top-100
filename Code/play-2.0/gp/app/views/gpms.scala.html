@@ -1,0 +1,30 @@
+@(gpms: List[GPM], gpmForm: Form[GPM])
+
+@import helper._
+
+@main("GPMs list") {
+    <ul>
+        @for(gpm <- gpms) {
+            <li>
+                @gpm.idGpm 
+                @form(routes.GPMs.deleteGPM(gpm.id)) {
+                    <input type="submit" value="Delete">
+                }
+                @form(routes.GPMs.extractData(gpm.idGpm)) {
+                    <input type="submit" value="Extract data">
+                }
+            </li>
+        }
+    </ul>
+    
+    <hr/>
+    <h2>Add a new GPM</h2>
+    
+    @form(routes.GPMs.newGPM()) {
+        @inputText(gpmForm("idGpm")) 
+        <input type="submit" value="Create">
+    }
+    <hr/>
+    
+    <a href=@routes.Admin.main()>Go on main page</a>
+}

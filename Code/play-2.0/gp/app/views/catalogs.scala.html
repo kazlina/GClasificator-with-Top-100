@@ -1,0 +1,11 @@
+@()
+
+@import helper._
+
+@main("Catalogs") {
+	<a href=@routes.Catalogs.genders()>Gender</a><br>
+	<a href=@routes.Catalogs.contents()>Type of content</a><br>
+	<a href=@routes.Catalogs.relationships()>Relationship</a>
+
+	<br><br><a href=@routes.Admin.main()>Go on main page</a>
+}

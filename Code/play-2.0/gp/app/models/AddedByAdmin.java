@@ -45,11 +45,26 @@ public class AddedByAdmin extends Model {
 	@Column(name = "commentField")
 	public String comment;
 
-	public AddedByAdmin(int position, Date dateOfAddition, Date dateOfRemoval, String comment) {
-        this.position = position;
+    public AddedByAdmin(GPM gpm, Group group, Integer position, Date dateOfAddition, Date dateOfRemoval, String comment) {
+    	this.gpm = gpm;
+    	this.group = group;
+    	this.position = position;
         this.dateOfAddition = dateOfAddition;
         this.dateOfRemoval = dateOfRemoval;
         this.comment = comment;
+    }
+	
+	public AddedByAdmin(String gpmName, Long groupId, Integer position, Date dateOfAddition, Date dateOfRemoval, String comment) {
+		GPM findLink = GPM.findByIdGpm(gpmName);
+		Group findGroup = Group.findById(groupId);
+		if (findLink != null && findGroup != null) {
+			this.group = findGroup;
+			this.gpm = findLink;
+	        this.position = position;
+        	this.dateOfAddition = dateOfAddition;
+        	this.dateOfRemoval = dateOfRemoval;
+        	this.comment = comment;
+		}
     }
 
 	public String toString(){
@@ -70,14 +85,14 @@ public class AddedByAdmin extends Model {
 		return GPM.findById(Id).addedByAdmin;
 	}
 	
-	public static List<AddedByAdmin> findByGroup(Long Id) {
+	public static List<AddedByAdmin> findByGroupId(Long Id) {
 		return Group.findById(Id).addedByAdmin;
 	}
 
-	public static void add(GPM gpm, Group group, AddedByAdmin man) {
-		man.gpm = gpm;
-		man.group = group;
-        man.save();
+	public static void add(AddedByAdmin element) {
+		AddedByAdmin findGroupLink = find.where().eq("groupDescr", element.group).eq("gpm", element.gpm).findUnique();
+		if (findGroupLink == null)
+			element.save();
 	}
 
 	public static void delete(Long id) {

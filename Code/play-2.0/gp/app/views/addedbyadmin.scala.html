@@ -1,0 +1,32 @@
+@(groupId: Long, nameGroup: String, gpms: List[AddedByAdmin], gpmForm: Form[AddedByAdmin])
+
+@import helper._
+
+@main("Admin`s GPM list") {
+    <h1>GPMs for group @nameGroup</h1>
+
+    <ul>
+        @for(gpm <- gpms) {
+            <li>
+                @gpm.gpm.idGpm
+                @form(routes.GPMsAddedByAdmin.deleteAddedByAdmin(groupId,gpm.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    <hr/>
+    
+    <h2>Add a new GPM to the list of GPMs of group</h2>
+    
+    @form(routes.GPMsAddedByAdmin.addAddedByAdmin(groupId)) {
+        @select(gpmForm("gpm.idGpm"), options(GPM.allInString), '_label -> "GPMs")
+        @inputText(gpmForm("position"))
+        @inputDate(gpmForm("dateOfAddition"))
+        @inputDate(gpmForm("dateOfRemoval"))
+        @textarea(gpmForm("commentField"))
+        <input type="submit" value="Create">
+    }
+    <hr/>
+    <a href=@routes.Groups.groups()>Back to groups</a>
+}

@@ -1,0 +1,30 @@
+@(relations: List[Relationship], relationForm: Form[Relationship])
+
+@import helper._
+
+@main("Relations") {
+    <ul>
+        @for(r <- relations) {
+            <li>
+                @r.status
+                @form(routes.Catalogs.deleteRelation(r.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <hr/>
+    <h2>Add a new relation</h2>
+    
+    @form(routes.Catalogs.addRelation()) {
+        @inputText(relationForm("status")) 
+        <input type="submit" value="Create">
+    }
+    @form(routes.Catalogs.createRelationList()) {
+        <input type="submit" value="Reset">
+    }
+    <hr/>
+    
+    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+}

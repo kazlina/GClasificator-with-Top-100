@@ -49,4 +49,15 @@ public class Content extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+
+    public static void createList() {
+		for (Content g: all()) {
+			delete(g.id);
+		}
+		add("video");
+		add("photo");
+		add("link");
+		add("audio");
+		add("text");
+	}
 }

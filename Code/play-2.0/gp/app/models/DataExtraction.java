@@ -12,13 +12,17 @@ import java.net.URL;
 public class DataExtraction {
 
     public static int newGPM(String id) {
-	GPM gpm = GPM.add(id);
-	if(gpm != null){
-	//updateActivity(gpm,100);
-        // i should add a validator!
-    updateProfile(gpm);
-    }
-    return 0;
+		GPM gpm = GPM.add(id);
+		if(gpm != null) {
+		//updateActivity(gpm,100);
+	        // i should add a validator!
+	    	updateProfile(gpm);
+	    } else {
+	    	GPM gpm2 = GPM.findByIdGpm(id);
+	    	updateProfile(gpm2);
+	    	updateActivity(gpm2,100);
+	    }
+	    return 0;
     }
 
     public static int updateProfile(GPM gpm){
@@ -90,7 +94,7 @@ public class DataExtraction {
         //for each 'post' from 'activity'
         for (TempPost post: activity) {
             //add posts to DB (class Post)
-        	post.print();
+        	//post.print();
         	Content kindContent =  Content.findByKind(post.kindContent);
             Post postToDB = new Post (gpm, post.postId, post.publishedData, kindContent, post.nComments,
 				post.nPlusOne, post.nResharers,post.isRepost);
@@ -115,7 +119,6 @@ public class DataExtraction {
                     // i should add a validator!
                 }
             }
-
             
             //links extraction
             //combine of all links from post
@@ -137,6 +140,7 @@ public class DataExtraction {
         }
         return 0;
     }
+
     static ArrayList<HistogramForWords> wordPreprocessor(String a) {
         int i = 0, check = 0;
         String [] temp = null;
@@ -186,6 +190,7 @@ public class DataExtraction {
         }
         return temp;
     }
+
     public static ArrayList<HistogramForLinks> linkPreprocessor (String inputString, int maxLength) {
     	String [] slicedStringMass = null;
 		
@@ -309,6 +314,7 @@ public class DataExtraction {
 		}
 		return distance;
 	}
+
 	//collate string and find occurrence "?" only in domain
 	private  static boolean dimainCollation (String dictionaryLinkDomain, String newLinkDomain) {
 		int indexOfQuestionMark = dictionaryLinkDomain.indexOf('?');
@@ -351,6 +357,7 @@ public class DataExtraction {
 		}
 		return false;
 	}
+
 	public static int getSecondSlashPosition (String link) {
 		int currentPosition, count = 0; 
 		for (currentPosition = 0; count != 2; currentPosition++) {
@@ -360,6 +367,7 @@ public class DataExtraction {
 		}
 		return currentPosition - 1;
 	}
+
 	public static int getThirdSlashPosition (String link) {
 		int currentPosition, count = 0; 
 		for (currentPosition = 0; count != 3 && currentPosition != link.length(); currentPosition++) {
@@ -369,6 +377,7 @@ public class DataExtraction {
 		}
 		return currentPosition - 1;
 	}
+
 	public static int dotsNumber (String link) {
 		int numberOfDots = 0;
 		for (int currentPosition = 0; currentPosition < link.length(); currentPosition++) {

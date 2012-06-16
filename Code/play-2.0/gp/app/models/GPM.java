@@ -48,6 +48,14 @@ public class GPM extends Model {
 		return find.all();
 	}
 
+	public static List<String> allInString() {
+		List <String> gpmsInString = new ArrayList<String>();
+		for (GPM gpm: all()) {
+			gpmsInString.add(gpm.idGpm);
+		}
+		return gpmsInString;
+	}
+
 	public static GPM findById(Long Id) {
 		return find.where().eq("id", Id).findUnique();
 	}

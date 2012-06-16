@@ -1,0 +1,30 @@
+@(genders: List[Gender], genderForm: Form[Gender])
+
+@import helper._
+
+@main("Gender list") {
+    <ul>
+        @for(g <- genders) {
+            <li>
+                @g.value 
+                @form(routes.Catalogs.deleteGender(g.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <hr/>
+    <h2>Add a new gender</h2>
+    
+    @form(routes.Catalogs.addGender()) {
+        @inputText(genderForm("value")) 
+        <input type="submit" value="Create">
+    }
+    @form(routes.Catalogs.createGenderList()) {
+        <input type="submit" value="Reset">
+    }
+    <hr/>
+    
+    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+}

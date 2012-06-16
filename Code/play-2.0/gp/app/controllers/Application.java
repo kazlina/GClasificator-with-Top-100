@@ -23,7 +23,7 @@ public class Application extends Controller {
 	    TempProfile temp = GAPI.getProfile("100915540970866628562");
 	    DataExtraction.newGPM("114536133164105123829");
        	return ok(temp.displayName);
-		}
+	}
 
     public static Result index() {
     	return ok(views.html.index.render(Group.all()));
