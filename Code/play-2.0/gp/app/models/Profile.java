@@ -77,7 +77,8 @@ public class Profile extends Model {
 	}
 	
 	public static Profile lastProfileByGpmId(Long Id) {
-		return find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findUnique();
+		List<Profile> profiles =  find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findList();
+		return (profiles.size() == 0)? null : profiles.get(0);
 	}
 	
 	public static void add(Profile element) {

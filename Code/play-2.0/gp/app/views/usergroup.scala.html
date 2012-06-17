@@ -3,40 +3,36 @@
 @import helper._
 
 @main(nameGroup) {
-    
+
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
+
 	@top()
 	<div class="content">
 		@usergroups(groups)
-		    	
+
 		<div class="groups-users">
-					
+
 		@for(gpm <- gpms) {
 			<div class="groups-user-block">
-				
+
 				@if(gpm == null || gpm.image == null || gpm.image == "") {
 					<img src="@routes.Assets.at("images/foto.png")">
 				} else {
 					<img src="@gpm.image">
 				}
-				
+
 				<div class="groups-user-text">
-					
+
 					@if(gpm != null) {
 						<h2>@gpm.name</h2>
-						@if(gpm.gender != null) {
-							<h3>@gpm.gender.value</h3>
-						}
-						@if(gpm.relationshipStatus != null) {
-							<h3>@gpm.relationshipStatus.status</h3>
-						}
-						<h4>В кругах у @gpm.nFollowers человек</h4>
+						<h3>@gpm.gender</h3>
+						<h3>@gpm.relationshipStatus</h3>
+						<h4>Р’ РєСЂСѓРіР°С… Сѓ @gpm.nFollowers С‡РµР»РѕРІРµРє</h4>
 					}
 				</div>
 			</div>
 		}
-					
+
 	</div>
 }

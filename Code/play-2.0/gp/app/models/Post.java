@@ -84,7 +84,8 @@ public class Post extends Model {
 	}
     
     public static Date getDateLastPostForGpm(GPM gpm) {
-    	return find.where().eq("gpm", gpm).orderBy("date desc").findUnique().date;
+    	List<Post> posts =  find.where().eq("gpm", gpm).orderBy("date desc").findList();
+    	return (posts.size() == 0)? null : posts.get(0).date;
 	}
 
 	public static void add(Post element) {

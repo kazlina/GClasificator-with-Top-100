@@ -34,6 +34,7 @@ public class Application extends Controller {
         for(GPM gpm: GPM.all()) {
         	gpms.add(Profile.lastProfileByGpmId(gpm.id));
         }
+        Classifier.getGpmForGroup(idGroup);
     	return ok(views.html.usergroup.render(gpms, Group.all(), Group.findById(idGroup).name));
     }
 }
