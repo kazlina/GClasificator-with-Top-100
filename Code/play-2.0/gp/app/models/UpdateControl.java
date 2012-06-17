@@ -6,7 +6,7 @@ import com.avaje.ebean.SqlRow;
 
 public class UpdateControl {
 
-	public static void Start() throws Exception {
+	public static void Start() throws InterruptedException {
 		float countPostGPM = 30;
 		float countProfileGPM = 30;
 		float countNewGPM = 100 - countPostGPM - countProfileGPM;

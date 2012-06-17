@@ -1,24 +1,28 @@
 package controllers;
 
 import java.util.*;
-
-import play.*;
+import java.util.concurrent.TimeUnit;
+//import java.lang.InterruptedException;
+import java.lang.*;
 import play.mvc.*;
-import play.data.*;
-import play.db.jpa.*;
-
-import views.html.*;
-
 import models.*;
-import play.libs.*;
-
-
 import java.io.IOException;
 
-import views.html.*;
 
 public class Application extends Controller {
 
+	private static class BackgroundProcess implements Runnable {
+		public void run() {
+			try {
+	    		while (true)
+	    			UpdateControl.Start();
+	    	}
+	    	catch (InterruptedException ex) {}
+		}
+	}
+	
+	private static boolean threadRun;
+	
 	public static Result ind() throws IOException {
 	    TempProfile temp = GAPI.getProfile("100915540970866628562");
 	    DataExtraction.newGPM("114536133164105123829");
@@ -26,6 +30,13 @@ public class Application extends Controller {
 	}
 
     public static Result index() {
+    	if (!threadRun) {
+    		Thread worker = new Thread(new BackgroundProcess());
+    		worker.setDaemon(true);
+    		threadRun = true;
+    		worker.start();
+    	}
+    	
     	return ok(views.html.index.render(Group.all()));
     }
     

@@ -101,6 +101,7 @@ public class Group extends Model {
 	}
 
 	public static void updateGroup(Long idGroup, Group group) {
+		System.out.println(group.name);
 		Group findGroup = Group.findById(idGroup);
 		if (findGroup == null)
 			return;

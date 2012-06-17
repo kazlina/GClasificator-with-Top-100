@@ -89,4 +89,8 @@ public class Profile extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+	
+	public static int size() {
+		return find.findRowCount();
+	}
 }

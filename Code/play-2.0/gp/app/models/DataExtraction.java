@@ -14,14 +14,14 @@ public class DataExtraction {
     public static int newGPM(String id) {
 		GPM gpm = GPM.add(id);
 		if(gpm != null) {
-		//updateActivity(gpm,100);
-	        // i should add a validator!
-	    	updateProfile(gpm);
-	    } else {
+			// i should add a validator!
+			updateProfile(gpm);
+			updateActivity(gpm,100);
+	    } /*else {
 	    	GPM gpm2 = GPM.findByIdGpm(id);
 	    	updateProfile(gpm2);
 	    	updateActivity(gpm2,100);
-	    }
+	    }*/
 	    return 0;
     }
 

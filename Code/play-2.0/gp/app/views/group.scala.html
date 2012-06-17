@@ -1,9 +1,9 @@
-@(group: Group, groupForm: Form[Group])
+@(group: Long, groupForm: Form[Group])
 
 @import helper._
 
 @main("Group") {
-@form(routes.Groups.changeGroup(group.id)) {
+@form(routes.Groups.changeGroup(group)) {
         @inputText(groupForm("name"), '_label -> "name group") 
         @inputText(groupForm("activeImage"))
         @inputText(groupForm("passiveImage"))

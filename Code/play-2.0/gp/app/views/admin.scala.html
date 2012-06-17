@@ -1,11 +1,27 @@
-@(groupSize: Int, wordSize: Int, linkSize: Int, gpmSize: Int)
+@(groupSize: Int, wordSize: Int, linkSize: Int, gpmSize: Int, profileSize: Int, postSize: Int)
 
 @import helper._
 
 @main("Admin's page") {
-	<h2>@groupSize group(s)</h2> <a href=@routes.Groups.groups()>Go to list of groups</a>
-	<h2>@wordSize word(s)</h2> <a href=@routes.Words.words()>Go to list of words</a>
-	<h2>@linkSize link(s)</h2> <a href=@routes.Links.links()>Go to list of links</a>
-	<h2>@gpmSize GPM(s)</h2> <a href=@routes.GPMs.gpms()>Go to GPMs' list</a>
-	<h2>Catalogs</h2><a href=@routes.Catalogs.main()>Catalogs</a><br>
+	<h2>@groupSize group(s)</h2> 
+	<a href=@routes.Groups.groups()>Go to list of groups</a>
+	
+	<h2>@wordSize word(s)</h2> 
+	<a href=@routes.Words.words()>Go to list of words</a>
+	
+	<h2>@linkSize link(s)</h2> 
+	<a href=@routes.Links.links()>Go to list of links</a>
+	
+	<br><br>
+	<b> 
+		<font style="font-size: 18pt">
+			@gpmSize GPM(s)
+		</font> 
+		have @profileSize profile(s) and @postSize post(s) 
+	</b> 
+	<br><br> 
+	<a href=@routes.GPMs.gpms()>Go to GPMs' list</a>
+	
+	<h2>Catalogs</h2>
+	<a href=@routes.Catalogs.main()>Catalogs</a><br>
 }

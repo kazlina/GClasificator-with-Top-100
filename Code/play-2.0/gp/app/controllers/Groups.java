@@ -41,7 +41,7 @@ public class Groups extends Controller {
     public static Result changeGroup(Long id) {
         Form<Group> filledForm = form(Group.class).bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.groups.render(Group.all(), filledForm));
+            return badRequest(views.html.group.render(id, filledForm));
         } else {
             Group.updateGroup(id, filledForm.get());
             return redirect(routes.Groups.groups());
@@ -56,8 +56,7 @@ public class Groups extends Controller {
 
     //you can view information about group
     public static Result viewGroup(Long groupId) {
-        Form<Group> filledForm = form(Group.class).fill(Group.findById(groupId));
-        return ok(views.html.group.render(Group.findById(groupId),filledForm));
+        return ok(views.html.group.render(groupId, form(Group.class).fill(Group.findById(groupId))));
     }
 
 
