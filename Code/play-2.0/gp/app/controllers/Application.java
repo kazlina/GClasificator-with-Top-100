@@ -30,11 +30,7 @@ public class Application extends Controller {
     }
     
     public static Result viewGroup(Long idGroup) {
-    	List <Profile> gpms = new ArrayList<Profile>();
-        for(GPM gpm: GPM.all()) {
-        	gpms.add(Profile.lastProfileByGpmId(gpm.id));
-        }
-        Classifier.getGpmForGroup(idGroup);
+    	List <Profile> gpms = Classifier.getGpmForGroup(idGroup);
     	return ok(views.html.usergroup.render(gpms, Group.all(), Group.findById(idGroup).name));
     }
 }

@@ -1,12 +1,14 @@
 package models;
 
 import java.util.*;
+
 import com.avaje.ebean.*;
 
 public class Classifier {
 
-	public static void getGpmForGroup(Long groupId) {
-	    List<SqlRow> res = Ebean.createSqlQuery("select GPM.id, ("
+	public static List <Profile> getGpmForGroup(Long groupId) {
+		List <Profile> gpms = new ArrayList<Profile>();
+		List<SqlRow> res = Ebean.createSqlQuery("select GPM.id, ("
 			+"veroyatnost_na_osnove_klyuchevyh_slov_lenty +" 
 			+"veroyatnost_na_osnove_ssylok_iz_lenty +"
 			+"veroyatnost_na_osnove_klyuchevyh_slov_iz_profilya +"
@@ -280,8 +282,12 @@ public class Classifier {
 			+" where gpm.id = Veroyatnost.gpm_id "
 			+" group by GPM.id desc "
 			+" order by RATING desc;").setParameter("group", groupId).findList();
-        System.out.println("res: " + res);
-		
-
-		}
+        //System.out.println("res: " + res);
+	    for(SqlRow row: res) {
+	    	Profile prof = Profile.lastProfileByGpmId(row.getLong("id"));
+	    	if (prof != null)
+	    		gpms.add(prof);
+	    }
+        return gpms;
+	}
 }
