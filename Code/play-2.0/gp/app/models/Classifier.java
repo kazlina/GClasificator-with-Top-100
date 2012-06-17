@@ -278,14 +278,15 @@ public class Classifier {
 				     + " where gpm.id = Veroyatnost.gpm_id"
 				    + " group by GPM.id desc"
 				    + " order by RATING desc"
-				+ " ) all_rating,"
-				+ " ("
-				    + " select addedbyadmin.gpm as gpm from"
-				        + " addedbyadmin, groupDescr"
-				    + " where addedbyadmin.groupDescr = groupdescr.id and"
-				    + " addedbyadmin.groupDescr = :group"
-				+ " ) notadd"
-				+ " where all_rating.gpm != notadd.gpm;";
+				+ " ) all_rating"
+				+ " left join"
+					+ " ("
+						+ " select addedbyadmin.gpm as gpm from"
+						+ " addedbyadmin, groupDescr"
+						+ "	where addedbyadmin.groupDescr = groupdescr.id and"
+						+ " addedbyadmin.groupDescr = :group"
+					+ " ) notadd"
+					+ " on all_rating.gpm = notadd.gpm;";
 		
 		List <Profile> gpms = new ArrayList<Profile>();
 		List<SqlRow> res = Ebean.createSqlQuery(request).setParameter("group", groupId).findList();
@@ -294,7 +295,7 @@ public class Classifier {
 	    	if (row.getFloat("rating") <= 0)
 	    		break;
 	    	
-	    	Profile prof = Profile.lastProfileByGpmId(row.getLong("id"));
+	    	Profile prof = Profile.lastProfileByGpmId(row.getLong("gpm"));
 	    	if (prof != null)
 	    		gpms.add(prof);
 	    }

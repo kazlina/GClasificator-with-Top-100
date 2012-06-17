@@ -17,11 +17,7 @@ public class DataExtraction {
 			// i should add a validator!
 			updateProfile(gpm);
 			updateActivity(gpm,100);
-	    } /*else {
-	    	GPM gpm2 = GPM.findByIdGpm(id);
-	    	updateProfile(gpm2);
-	    	updateActivity(gpm2,100);
-	    }*/
+	    } 
 	    return 0;
     }
 
@@ -30,7 +26,8 @@ public class DataExtraction {
 
         //get 'profile' from GooglePlus
         try {
-			profile = GAPI.getProfile(gpm.idGpm);
+			//profile = GAPI.getProfile(gpm.idGpm);
+        	profile = Parser.getProfile(gpm.idGpm);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

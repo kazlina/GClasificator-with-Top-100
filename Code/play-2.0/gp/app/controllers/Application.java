@@ -8,6 +8,11 @@ import play.mvc.*;
 import models.*;
 import java.io.IOException;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 
 public class Application extends Controller {
 
@@ -24,9 +29,8 @@ public class Application extends Controller {
 	private static boolean threadRun;
 	
 	public static Result ind() throws IOException {
-	    TempProfile temp = GAPI.getProfile("100915540970866628562");
-	    DataExtraction.newGPM("114536133164105123829");
-       	return ok(temp.displayName);
+		TempProfile temp = GAPI.getProfile("101793532287583914396");
+	    return ok(temp.displayName);
 	}
 
     public static Result index() {

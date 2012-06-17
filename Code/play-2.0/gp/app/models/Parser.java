@@ -54,8 +54,9 @@ public class Parser {
          profile.urls.add(link);
         }
         
-        Elements genders = doc.select("div.l-i9.ne.jc");//gender
-        Elements gender = genders.select("div.Ga.a-f-e");
+        Elements gender = doc.getElementsByClass("J90C7b");//gender
+		gender = gender.select("div.l-i9.ne.jc");
+        gender = gender.select("div.Ga.a-f-e");
         profile.gender = gender.text();    
          
         Elements statuses = doc.select("div.l-Xea.ne.jc");//relationshipStatus
