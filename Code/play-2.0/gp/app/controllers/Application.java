@@ -18,11 +18,12 @@ public class Application extends Controller {
 
 	private static class BackgroundProcess implements Runnable {
 		public void run() {
-			try {
-	    		while (true)
-	    			UpdateControl.Start();
-	    	}
-	    	catch (InterruptedException ex) {}
+			while (true) {
+				try {
+					UpdateControl.Start();
+		    	}
+		    	catch (InterruptedException ex) {}
+			}
 		}
 	}
 	
