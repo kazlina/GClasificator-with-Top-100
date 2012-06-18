@@ -15,7 +15,7 @@ public class Gender extends Model {
 
     @Constraints.MaxLength(10)
     @Constraints.Required
-    @Constraints.Pattern("[a-z]+")
+    @Constraints.Pattern("[A-Za-zА-Яа-я]+")
     @Column(name = "value", length = 10, unique = true, nullable = false)
     public String value;
 
@@ -26,7 +26,7 @@ public class Gender extends Model {
 	private Gender(String value){
 		this.value = value;
 	}
-    
+
     private static Model.Finder<Long, Gender> find = new Model.Finder<Long, Gender>(Long.class, Gender.class);
 
 	public static List<Gender> all() {

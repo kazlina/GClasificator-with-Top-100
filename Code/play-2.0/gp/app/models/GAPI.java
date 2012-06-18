@@ -17,6 +17,7 @@ import com.google.api.services.plus.model.Activity.PlusObject.Attachments;
 import com.google.api.services.plus.model.Person.Urls;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 public class GAPI {
   private static Plus plus;
@@ -151,10 +152,18 @@ private static String getUrl(List<Attachments> list){
           }
        }
   	}
-    catch (HttpResponseException e) {
-    	//System.out.println(e.getResponse().getStatusCode());
-    	return posts;
-    } 
+    catch(HttpResponseException e){
+		e.printStackTrace();
+	}
+	catch (SocketTimeoutException e) {
+		e.printStackTrace();
+	}
+	catch (IOException e) {
+		e.printStackTrace();
+	}
+	catch (NumberFormatException e) {
+		e.printStackTrace();
+	} 
  }
    // int i = 0;
     //for ( TempPost p: posts){

@@ -1,80 +1,94 @@
 package models;
 
 import java.util.*;
-
+import java.lang.NumberFormatException;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
 import com.google.api.client.http.HttpResponseException;
 
-import java.io.*;
  
 public class Parser {
     public static TempProfile getProfile(String id) throws IOException {
      TempProfile profile = new TempProfile();
     	try{
-        Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
-        
-        profile.id = id;
-        
-        //followers
-        Elements links = doc.select("script");
-        String template = ",[0,[]\\n]\\n,[";
-        for ( Element e : links) {         	  
-        	  if (e.toString().indexOf("key: '77'") != -1){
-              String textWithFollowers = e.toString();
-              int start = textWithFollowers.lastIndexOf(template)+template.length();
-              int end = textWithFollowers.indexOf(',', start);
-              profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
-              }  
-        }
-        
-        String type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();
-        if (type == "+Page")
-        	profile.isPerson = false;
-        else
-        	profile.isPerson = true;
-        
-        Elements name = doc.getElementsByClass("fn"); //displayName
-        profile.displayName = name.text();
-        
-        Elements tagline = doc.select("div.l-uq.ne.jc"); //tagline
-        Elements tag = tagline.select("div.Ga.a-f-e"); 
-        profile.tagline = tag.text();
- 
-        Elements about = doc.select("div.l-Jg.Wx.ne.jc");//aboutMe 
-        Elements aboutMe = about.select("div.Ga.a-f-e.note");
-        profile.aboutMe = aboutMe.text();
-        
-        Elements urls = doc.select("a.Qc0zVe.url");//url        
-           
-        for(Element ur : urls) {
-       	 String link = ur.attr("href");
-         profile.urls.add(link);
-        }
-        
-        Elements gender = doc.getElementsByClass("J90C7b");//gender
-		gender = gender.select("div.l-i9.ne.jc");
-        gender = gender.select("div.Ga.a-f-e");
-        profile.gender = gender.text();    
-         
-        Elements statuses = doc.select("div.l-Xea.ne.jc");//relationshipStatus
-        Elements status = statuses.select("div.Ga.a-f-e");
-        profile.relationshipStatus = status.text();
-         
-        Elements im = doc.select("div.h-va-Za-W-P");//image
-        Elements imga = im.select("[src]");
-
-        for (Element src : imga) 
-        if (src.tagName().equals("img")){
-        profile.image = src.attr("abs:src");
-        }       
-    	}
+	        Document doc = Jsoup.connect("https://plus.google.com/u/0/"+id).get();
+	        
+	        profile.id = id;
+	        
+	        //followers
+	        Elements links = doc.select("script");
+	        String template = ",[0,[]\\n]\\n,[";
+	        for ( Element e : links) {         	  
+	        	  if (e.toString().indexOf("key: '77'") != -1){
+	              String textWithFollowers = e.toString();
+	              int start = textWithFollowers.lastIndexOf(template)+template.length();
+	              int end = textWithFollowers.indexOf(',', start);
+	              profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
+	              }  
+	        }
+	        
+	        String type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();
+	        if (type == "+Page")
+	        	profile.isPerson = false;
+	        else
+	        	profile.isPerson = true;
+	        
+	        Elements name = doc.getElementsByClass("fn"); //displayName
+	        profile.displayName = name.text();
+	        
+	        Elements tagline = doc.select("div.l-uq.ne.jc"); //tagline
+	        Elements tag = tagline.select("div.Ga.a-f-e"); 
+	        profile.tagline = tag.text();
+	 
+	        Elements about = doc.select("div.l-Jg.Wx.ne.jc");//aboutMe 
+	        Elements aboutMe = about.select("div.Ga.a-f-e.note");
+	        profile.aboutMe = aboutMe.text();
+	        
+	        Elements urls = doc.select("a.Qc0zVe.url");//url        
+	           
+	        for(Element ur : urls) {
+	       	 String link = ur.attr("href");
+	         profile.urls.add(link);
+	        }
+	        
+	        Elements gender = doc.getElementsByClass("J90C7b");//gender
+			gender = gender.select("div.l-i9.ne.jc");
+	        gender = gender.select("div.Ga.a-f-e");
+	        profile.gender = gender.text();    
+	         
+	        Elements statuses = doc.select("div.l-Xea.ne.jc");//relationshipStatus
+	        Elements status = statuses.select("div.Ga.a-f-e");
+	        profile.relationshipStatus = status.text();
+	         
+	        Elements im = doc.select("div.h-va-Za-W-P");//image
+	        Elements imga = im.select("[src]");
+	
+	        for (Element src : imga) 
+		        if (src.tagName().equals("img")){
+		        	profile.image = src.attr("abs:src");
+		        }       
+	    }
     	catch(HttpResponseException e){
-    		
+    		e.printStackTrace();
+    		return null;
     	}
-        //profile.print();
+    	catch (SocketTimeoutException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    	catch (IOException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    	catch (NumberFormatException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+ 
         return profile;
 }
 

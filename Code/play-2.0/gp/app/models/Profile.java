@@ -61,7 +61,7 @@ public class Profile extends Model {
     	this.name = name;
     	this.image = image;
     	this.gender = gender;
-    	this.tagline = tagline;
+    	this.tagline = (tagline.length() >= 255)? tagline.substring(0, 254): tagline;
     	this.relationshipStatus = relationshipStatus;
     	this.nFollowers = nFollowers;
     }

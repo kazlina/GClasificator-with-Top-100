@@ -11,17 +11,21 @@ import java.net.URL;
 
 public class DataExtraction {
 
-    public static int newGPM(String id) {
+    public static boolean newGPM(String id) {
 		GPM gpm = GPM.add(id);
 		if(gpm != null) {
 			// i should add a validator!
-			updateProfile(gpm);
+			if (!updateProfile(gpm)) {
+				gpm.delete();
+				NewGPM.add(id);
+				return false;
+			}
 			updateActivity(gpm,100);
 	    } 
-	    return 0;
+	    return true;
     }
 
-    public static int updateProfile(GPM gpm){
+    public static boolean updateProfile(GPM gpm){
         TempProfile profile = new TempProfile();
 
         //get 'profile' from GooglePlus
@@ -33,6 +37,9 @@ public class DataExtraction {
 			e.printStackTrace();
 		} // i should add a validator!
 
+        if (profile == null)
+        	return false;
+                
         //add profile to DB
         Gender gender =  Gender.findByValue(profile.gender);
         Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
@@ -72,10 +79,10 @@ public class DataExtraction {
     			ProfileLink.add(man, linksHistogram.link.toString(), linksHistogram.count);
         	}
         }
-        return 0;
+        return true;
     }
 
-    public static int updateActivity(GPM gpm, int countOfPosts) {
+    public static boolean updateActivity(GPM gpm, int countOfPosts) {
 
         List <TempPost> activity = new ArrayList <TempPost>();
         GAPI temp = new GAPI();
@@ -135,7 +142,7 @@ public class DataExtraction {
                 newGPM.add(post.actorId);
             }
         }
-        return 0;
+        return true;
     }
 
     static ArrayList<HistogramForWords> wordPreprocessor(String a) {

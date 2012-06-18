@@ -103,8 +103,15 @@ public class GPM extends Model {
 	}
     
 	public static List<SqlRow> getIdGpmByLastProfile(int count) {
+		Date date = Calendar.getInstance().getTime();
+		String dateToString = date.toString();
+		String year = dateToString.substring(dateToString.length() - 4);
+		int mount = date.getMonth() + 1;
+		String parameter = year + "-" + mount + "-" + date.getDate();
+		
 		return Ebean.createSqlQuery("SELECT gpm"
 				+ " FROM Profile"
+				+ " WHERE dateUpdated < '" + parameter + "'"
 				+ " GROUP BY gpm"
 				+ " ORDER BY max(dateUpdated)"
 				+ " LIMIT :count;").setParameter("count", count).findList();

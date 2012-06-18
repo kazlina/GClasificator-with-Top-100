@@ -291,6 +291,7 @@ public class Classifier {
 		List <Profile> gpms = new ArrayList<Profile>();
 		List<SqlRow> res = Ebean.createSqlQuery(request).setParameter("group", groupId).findList();
         //System.out.println("res: " + res);
+        //System.out.println();
 	    for(SqlRow row: res) {
 	    	if (row.getFloat("rating") <= 0)
 	    		break;

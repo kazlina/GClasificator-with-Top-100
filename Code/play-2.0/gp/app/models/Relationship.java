@@ -15,7 +15,7 @@ public class Relationship extends Model {
 
     @Constraints.MaxLength(30)
     @Constraints.Required
-    @Constraints.Pattern("[a-zA-Z\\s]+")
+    @Constraints.Pattern("[a-zA-Zа-яА-Я\\s/]+")
     @Column(name = "status", length = 30, unique = true, nullable = false)
     public String status;
 
@@ -26,7 +26,7 @@ public class Relationship extends Model {
 	private Relationship(String type){
 		this.status = type;
 	}
-    
+
     private static Model.Finder<Long, Relationship> find = new Model.Finder<Long, Relationship>(Long.class, Relationship.class);
 
 	public static List<Relationship> all() {
@@ -40,7 +40,7 @@ public class Relationship extends Model {
 	public static Relationship findByStatus(String element) {
 		return find.where().eq("status", element).findUnique();
 	}
-	
+
 	public static void add(String type) {
 		Relationship element = new Relationship(type);
 		element.save();

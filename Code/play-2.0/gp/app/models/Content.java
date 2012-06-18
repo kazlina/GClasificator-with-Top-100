@@ -26,7 +26,7 @@ public class Content extends Model {
 	private Content(String type){
 		this.kind = type;
 	}
-    
+
     private static Model.Finder<Long, Content> find = new Model.Finder<Long, Content>(Long.class, Content.class);
 
 	public static List<Content> all() {
@@ -40,7 +40,7 @@ public class Content extends Model {
 	public static Content findByKind(String element) {
 		return find.where().eq("kind", element).findUnique();
 	}
-	
+
 	public static void add(String type) {
 		Content element = new Content(type);
 		element.save();
