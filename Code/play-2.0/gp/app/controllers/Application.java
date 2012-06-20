@@ -34,7 +34,11 @@ public class Application extends Controller {
     }
     
     public static Result viewGroup(Long idGroup) {
-        List <Profile> gpms = Classifier.getGpmForGroup(idGroup);
+        List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
         return ok(views.html.usergroup.render(gpms, Group.all(), Group.findById(idGroup).name));
+    }
+    
+    public static Result ind() {
+        return ok("all good");
     }
 }

@@ -1,4 +1,4 @@
-@(gpms: List[Profile], groups: List[Group], nameGroup: String)
+@(gpms: List[GpmForOutput], groups: List[Group], nameGroup: String)
 
 @import helper._
 
@@ -28,7 +28,7 @@
 					<h3>@gpm.gender</h3>
 					<h3>@gpm.relationshipStatus</h3>
 					<h4>В кругах у @gpm.nFollowers человек</h4>
-					
+					<h4>Позиция: @gpm.position</h4>
 				</div>
 			</div>
 		}
