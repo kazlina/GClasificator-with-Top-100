@@ -2,29 +2,28 @@
 
 @import helper._
 
-@main("Relations") {
+@main("Отношения") {
+    <h1>Отношения</h1>
     <ul>
         @for(r <- relations) {
             <li>
                 @r.status
                 @form(routes.Catalogs.deleteRelation(r.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
             </li>
+            <br>
         }
     </ul>
     
     <hr/>
-    <h2>Add a new relation</h2>
+    <h2>Добавление</h2>
     
     @form(routes.Catalogs.addRelation()) {
-        @inputText(relationForm("status")) 
-        <input type="submit" value="Create">
-    }
-    @form(routes.Catalogs.createRelationList()) {
-        <input type="submit" value="Reset">
+        Статус: <input type="text" name="status" value="">
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+    <a href=@routes.Catalogs.main()>Назад</a>
 }

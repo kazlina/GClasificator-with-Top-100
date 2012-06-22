@@ -2,29 +2,28 @@
 
 @import helper._
 
-@main("Content list") {
+@main("Тип контента") {
+    <h1>Тип контента</h1>
     <ul>
         @for(c <- contents) {
             <li>
                 @c.kind
                 @form(routes.Catalogs.deleteContent(c.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
             </li>
+            <br>
         }
     </ul>
     
     <hr/>
-    <h2>Add a new type of content</h2>
+    <h2>Добавление</h2>
     
     @form(routes.Catalogs.addContent()) {
-        @inputText(contentForm("kind")) 
-        <input type="submit" value="Create">
-    }
-    @form(routes.Catalogs.createContentList()) {
-        <input type="submit" value="Reset">
+        Тип контента: <input type="text" name="kind" value=""> 
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+    <a href=@routes.Catalogs.main()>Назад</a>
 }

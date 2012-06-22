@@ -2,40 +2,42 @@
 
 @import helper._
 
-@main("Groups list") {
-    <h1>@groups.size() group(s)</h1>
+@main("Список групп") {
+    <h1>Список групп, @groups.size()</h1>
     
     <ul>
         @for(group <- groups) {
             <li>
-                @group.name
-                <br><a href=@routes.Groups.groupWords(group.id)>Edit words of group</a>
-                <br><a href=@routes.Groups.groupLinks(group.id)>Edit links of group</a>
-                <br><a href=@routes.GPMsAddedByAdmin.addAddedByAdmin(group.id)>Edit GPMs of group</a>
-                <br><a href=@routes.Groups.viewGroup(group.id)>View</a>
+                <a style="font-size: 22pt" href=@routes.Groups.viewGroup(group.id)>@group.name</a><br>
+                <a href=@routes.Groups.groupWords(group.id)>Слова</a>
+                 <a href=@routes.Groups.groupLinks(group.id)>Ссылки</a>
+                 <a href=@routes.GPMsAddedByAdmin.addAddedByAdmin(group.id)>GPM</a>
                 @form(routes.Groups.deleteGroup(group.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
+                <br>
             </li>
         }
     </ul>
     <hr/>
     
-    <h2>Add a new group to the list of groups</h2>
+    <h2>Добавить новую группу</h2>
     
     @form(routes.Groups.addGroup()) {
-        @inputText(groupForm("name"))
-        @inputFile(groupForm("activeImage"))
-        @inputFile(groupForm("passiveImage"))
-        @textarea(groupForm("description"))
-        @inputText(groupForm("textPercent"))
-        @inputText(groupForm("imagePercent"))
-        @inputText(groupForm("linkPercent"))
-        @inputText(groupForm("videoPercent"))
-        @inputText(groupForm("audioPercent"))
-        <input type="submit" value="Create">
+        Название: <input type="text" name="name" value="">
+        <br><br>Изображения для группы:<br> 
+        <input type="file" name="activeImage" value=""><br>
+        <input type="file" name="passiveImage" value=""><br><br>
+        Описание группы: <br><textarea rows="10" cols="45" name="description"></textarea><br>
+        <p>Соотношение типов контента:</p>
+         Текст: <br><input type="text" name="textPercent" value=""><br>
+         Изображения: <br><input type="text" name="imagePercent" value=""><br>
+         Ссылки: <br><input type="text" name="linkPercent" value=""><br>
+         Видео: <br><input type="text" name="videoPercent" value=""><br>
+         Аудио: <br><input type="text" name="audioPercent" value=""><br>
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Admin.main()>Go on main page</a>
+    <a href=@routes.Admin.main()>Назад</a>
 }

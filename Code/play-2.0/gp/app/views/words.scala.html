@@ -2,32 +2,33 @@
 
 @import helper._
 
-@main("Words list") {
+@main("Список слов") {
     
-    <h1>@words.size() word(s)</h1>
+    <h1>Список слов, @words.size()</h1>
     
     <ul>
         @for(word <- words) {
             <li>
-                @word.word has
-                @word.synonyms.size() synonym(s)
-                <a href=@routes.Words.synonyms(word.id)>View/Edit synonyms</a>
-
+                <font style="font-size: 16pt">
+                    @word.word, 
+                </font>
+                <a href=@routes.Words.synonyms(word.id)>Синонимы, @word.synonyms.size()</a>
                 @form(routes.Words.deleteWord(word.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
+                <br>
             </li>
         }
     </ul>
     
     <hr/>
-    <h2>Add a new word</h2>
+    <h2>Добавление нового слова</h2>
     
     @form(routes.Words.newWord()) {
-        @inputText(wordForm("word")) 
-        <input type="submit" value="Create">
+        Слово: <input type="text" name="word" value="">
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Admin.main()>Go on main page</a>
+    <a href=@routes.Admin.main()>Назад</a>
 }
