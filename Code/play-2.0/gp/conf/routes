@@ -50,12 +50,6 @@ GET     /admin/blacklist        			controllers.BlackListController.blackList()
 POST    /admin/blacklist        			controllers.BlackListController.addBlackList()
 POST    /admin/blacklist/:id/delete			controllers.BlackListController.deleteBlackList(id: Long)
 
-# GPMS
-GET     /admin/gpms            				controllers.GPMs.gpms()
-POST    /admin/gpms            				controllers.GPMs.newGPM()
-POST    /admin/gpms/:id/delete 				controllers.GPMs.deleteGPM(id: Long)
-POST    /admin/gpms/:id/extractdata 		controllers.GPMs.extractData(id: String)
-
 # GROUPS
 GET     /admin/groups            			controllers.Groups.groups()
 POST    /admin/groups            			controllers.Groups.addGroup()

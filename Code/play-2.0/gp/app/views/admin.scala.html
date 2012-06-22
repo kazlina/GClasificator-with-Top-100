@@ -2,26 +2,31 @@
 
 @import helper._
 
-@main("Admin's page") {
-	<h2>@groupSize group(s)</h2> 
-	<a href=@routes.Groups.groups()>Go to list of groups</a>
+@main("Страница администратора") {
+
+	<p>
+		<a style="font-size: 18pt" href=@routes.Groups.groups()>Группы</a>, @groupSize
+	</p>
 	
-	<h2>@wordSize word(s)</h2> 
-	<a href=@routes.Words.words()>Go to list of words</a>
+	<p>
+		<a style="font-size: 18pt" href=@routes.Words.words()>Слова</a>, @wordSize
+	</p>
 	
-	<h2>@linkSize link(s)</h2> 
-	<a href=@routes.Links.links()>Go to list of links</a>
+	<p>
+		<a style="font-size: 18pt" href=@routes.Links.links()>Ссылки</a>, @linkSize 
+	</p>
+
+	<a style="font-size: 18pt" href=@routes.Catalogs.main()>Каталоги</a><br><br><br>
 	
-	<br><br>
 	<b> 
 		<font style="font-size: 18pt">
-			@gpmSize GPM(s)
+			GPM, @gpmSize
 		</font> 
-		have @profileSize profile(s) and @postSize post(s) 
+		<p>
+			Профили, @profileSize
+		</p> 
+		<p>
+			Посты, @postSize
+		</p>
 	</b> 
-	<br><br> 
-	<a href=@routes.GPMs.gpms()>Go to GPMs' list</a>
-	
-	<h2>Catalogs</h2>
-	<a href=@routes.Catalogs.main()>Catalogs</a><br>
 }

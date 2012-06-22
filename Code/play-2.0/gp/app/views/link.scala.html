@@ -2,30 +2,30 @@
 
 @import helper._
 
-@main("Links list") {
+@main("Список ссылок") {
     
-    <h1>@links.size() link(s)</h1>
+    <h1>Список ссылок, @links.size()</h1>
     
     <ul>
         @for(link <- links) {
             <li>
-                @link.link has
+                @link.link
                 
                 @form(routes.Links.deleteLink(link.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
             </li>
         }
     </ul>
     
     <hr/>
-    <h2>Add a new link</h2>
+    <h2>Добавление новой ссылки</h2>
     
     @form(routes.Links.newLink()) {
-        @inputText(linkForm("link")) 
-        <input type="submit" value="Create">
+        Ссылка: <input type="text" name="link" value="">
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Admin.main()>Go on main page</a>
+    <a href=@routes.Admin.main()>Назад</a>
 }

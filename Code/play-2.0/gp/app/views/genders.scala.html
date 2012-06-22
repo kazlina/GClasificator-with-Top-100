@@ -2,29 +2,28 @@
 
 @import helper._
 
-@main("Gender list") {
+@main("Пол") {
+    <h1>Пол пользователей Google+</h1>
     <ul>
         @for(g <- genders) {
             <li>
                 @g.value 
                 @form(routes.Catalogs.deleteGender(g.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
             </li>
+            <br>
         }
     </ul>
     
     <hr/>
-    <h2>Add a new gender</h2>
+    <h2>Добавление</h2>
     
     @form(routes.Catalogs.addGender()) {
-        @inputText(genderForm("value")) 
-        <input type="submit" value="Create">
-    }
-    @form(routes.Catalogs.createGenderList()) {
-        <input type="submit" value="Reset">
+        Пол: <input type="text" name="value" value="">
+        <input type="submit" value="Добавить">
     }
     <hr/>
     
-    <a href=@routes.Catalogs.main()>Go to catalog's page</a>
+    <a href=@routes.Catalogs.main()>Назад</a>
 }
