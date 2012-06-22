@@ -7,6 +7,16 @@ import com.avaje.ebean.*;
 public class Classifier {
 
 	public static List <GpmForOutput> getGpmForGroup(Long groupId) {
+		/*String request = "select gpm.id, ifnull(rrr.gpm_id,0) from gpm left join" +
+				"(select blacklist.id as gpm_id from"
+						+ " blacklist"
+						+ " union"
+						+ " select" 
+						+ " addedbyadmin.gpm as id"
+						+ "	from"
+						+ " addedbyadmin"
+						+ " where groupdescr = :group) rrr" +
+						"on rrr.gpm_id = gpm.id";*/
 		String request = "select all_rating.gpm, all_rating.RATING from" 
 				+ " ("
 				+ " select GPM.id as gpm, ("
@@ -372,13 +382,19 @@ public class Classifier {
 				    + " order by RATING desc"
 				+ " ) all_rating"
 				+ " left join"
-					+ " ("
-						+ " select addedbyadmin.gpm as gpm from"
-						+ " addedbyadmin, groupDescr"
-						+ "	where addedbyadmin.groupDescr = groupdescr.id and"
-						+ " addedbyadmin.groupDescr = :group"
-					+ " ) notadd"
-					+ " on all_rating.gpm = notadd.gpm;";
+				+ " ("
+					+ " select blacklist.id as gpm_id from"
+						+ " blacklist"
+						+ " union"
+						+ " select" 
+						+ " addedbyadmin.gpm as id"
+						+ "	from"
+						+ " addedbyadmin"
+						+ " where groupdescr = :group"
+				+ " ) notadd"
+				+ " on all_rating.gpm = notadd.gpm_id"
+				+ " where notadd.gpm_id is null"
+					+ " limit 0, 250;";
 		
 		List <GpmForOutput> gpms = new ArrayList<GpmForOutput>();
 		List<SqlRow> res = Ebean.createSqlQuery(request).setParameter("group", groupId).findList();
