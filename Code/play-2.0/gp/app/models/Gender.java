@@ -58,4 +58,17 @@ public class Gender extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+	
+	public static void updateGender(Long idGender, Gender gender) {
+	System.out.println(gender.value);
+	Gender findGender = Gender.findById(idGender);
+	if (findGender == null)
+		return;
+
+	findGender.value = gender.value;
+	findGender.update();
+	}
+
+	
+    
 }

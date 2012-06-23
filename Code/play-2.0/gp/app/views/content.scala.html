@@ -1,0 +1,11 @@
+@(content: Long, contentForm: Form[models.Content])
+
+@import helper._
+
+@main("Content") {
+@form(routes.Catalogs.changeContent(content)) {
+        @inputText(contentForm("kind"), '_label -> "kind content") 
+        <input type="submit" value="Update">
+    }
+    <a href=@routes.Catalogs.contents()>Back to contents</a>
+}

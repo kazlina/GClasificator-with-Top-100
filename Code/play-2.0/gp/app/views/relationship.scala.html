@@ -1,0 +1,11 @@
+@(relationship: Long, relationshipForm: Form[Relationship])
+
+@import helper._
+
+@main("Relationship") {
+@form(routes.Catalogs.changeRelationship(relationship)) {
+        @inputText(relationshipForm("status"), '_label -> "status relationship") 
+        <input type="submit" value="Update">
+    }
+    <a href=@routes.Catalogs.relationships()>Back to relationships</a>
+}

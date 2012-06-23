@@ -1,0 +1,11 @@
+@(gender: Long, genderForm: Form[Gender])
+
+@import helper._
+
+@main("Gender") {
+@form(routes.Catalogs.changeGender(gender)) {
+        @inputText(genderForm("value"), '_label -> "value gender") 
+        <input type="submit" value="Update">
+    }
+    <a href=@routes.Catalogs.genders()>Back to genders</a>
+}

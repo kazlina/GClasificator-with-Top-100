@@ -1,31 +1,11 @@
-@(mainWord: Word, word: String, synonyms: List[Synonym], synonymForm: Form[Synonym])
+@(synonym: Long, wordId:Long, synonymForm: Form[Synonym])
 
 @import helper._
 
-@main("Список синонимов") {
-    <h1>Список синонимов слова "@word", @synonyms.size()</h1>
-    
-    <ul>
-        @for(synonym <- synonyms) {
-            <li>
-                <font style="font-size: 16pt">
-                    @synonym.synonym
-                </font>
-                @form(routes.Words.deleteSynonym(mainWord.id, synonym.id)) {
-                    <input type="submit" value="Удалить">
-                }
-                <br>
-            </li>
-        }
-    </ul>
-    <hr/>
-    
-    <h2>Добавление нового синонима к слову "@word"</h2>
-    
-    @form(routes.Words.addSynonym(mainWord.id)) {
-        Синоним: <input type="text" name="synonym" value=""> 
-        <input type="submit" value="Добавить">
+@main("Synonym") {
+@form(routes.Words.changeSynonym(synonym, wordId)) {
+        @inputText(synonymForm("synonym"), '_label -> "synonym") 
+        <input type="submit" value="Update">
     }
-    <hr/>
-    <a href=@routes.Words.words()>Назад</a>
+    <a href=@routes.Words.synonyms(wordId)>Back to synonyms</a>
 }

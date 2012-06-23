@@ -65,4 +65,18 @@ public class Relationship extends Model {
 		add("In a domestic partnership");
 		add("In a civil union");
 	}
+
+
+	public static void updateRelationship(Long idRelationship, Relationship relationship) {
+	System.out.println(relationship.status);
+	Relationship findRelationship = Relationship.findById(idRelationship);
+	if (findRelationship == null)
+		return;
+
+	findRelationship.status = relationship.status;
+	findRelationship.update();
+	}
+	
+	
+	
 }

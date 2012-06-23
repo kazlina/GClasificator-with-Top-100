@@ -9,8 +9,7 @@
     <ul>
         @for(word <- words) {
             <li>
-                <font style="font-size: 16pt">
-                    @word.word, 
+                <a style="font-size: 22pt" href=@routes.Words.viewWord(word.id)>@word.word</a><br>
                 </font>
                 <a href=@routes.Words.synonyms(word.id)>Синонимы, @word.synonyms.size()</a>
                 @form(routes.Words.deleteWord(word.id)) {

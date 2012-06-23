@@ -20,14 +20,14 @@ public class Links extends Controller {
     
     public static Result links() {
     	Form<Link> linkForm = form(Link.class);
-    	return ok(views.html.link.render(Link.all(), linkForm));
+    	return ok(views.html.links.render(Link.all(), linkForm));
     }
 
     public static Result newLink() {
     	Form<Link> linkForm = form(Link.class);
     	Form<Link> filledForm = linkForm.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(views.html.link.render(Link.all(), filledForm));
+            return badRequest(views.html.links.render(Link.all(), filledForm));
         } else {
             Link.add(filledForm.get());
             return redirect(routes.Links.links());
@@ -38,4 +38,21 @@ public class Links extends Controller {
         Link.delete(id);
         return redirect(routes.Links.links());
     }
+
+	//you can change link
+    public static Result changeLink(Long id) {
+        Form<Link> filledForm = form(Link.class).bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.link.render(id, filledForm));
+        } else {
+            Link.updateLink(id, filledForm.get());
+            return redirect(routes.Links.links());
+        }
+    }
+	
+    //you can view information about link
+    public static Result viewLink(Long linkId) {
+        return ok(views.html.link.render(linkId, form(Link.class).fill(Link.findById(linkId))));
+    }
+
 }

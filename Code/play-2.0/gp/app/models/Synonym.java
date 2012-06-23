@@ -72,4 +72,15 @@ public class Synonym extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+
+	public static void updateSynonym(Long idSynonym, Synonym synonym) {
+	System.out.println(synonym.synonym);
+	Synonym findSynonym = Synonym.findById(idSynonym);
+	if (findSynonym == null)
+		return;
+
+	findSynonym.synonym = synonym.synonym;
+	findSynonym.update();
+	}
+
 }

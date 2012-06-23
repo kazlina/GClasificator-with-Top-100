@@ -51,6 +51,23 @@ public class Catalogs extends Controller {
         Gender.createList();
         return redirect(routes.Catalogs.genders());
     }
+	//you can change gender
+    public static Result changeGender(Long id) {
+        Form<Gender> filledForm = form(Gender.class).bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.gender.render(id, filledForm));
+        } else {
+            Gender.updateGender(id, filledForm.get());
+            return redirect(routes.Catalogs.genders());
+        }
+    }
+	
+    //you can view information about gender
+    public static Result viewGender(Long genderId) {
+        return ok(views.html.gender.render(genderId, form(Gender.class).fill(Gender.findById(genderId))));
+    }
+
+	
 
     // CONTENT
     public static Result contents() {
@@ -78,6 +95,21 @@ public class Catalogs extends Controller {
     public static Result createContentList() {
         models.Content.createList();
         return redirect(routes.Catalogs.contents());
+    }
+	//you can change Content
+    public static Result changeContent(Long id) {
+        Form<models.Content> filledForm = form(models.Content.class).bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.content.render(id, filledForm));
+        } else {
+            models.Content.updateContent(id, filledForm.get());
+            return redirect(routes.Catalogs.contents());
+        }
+    }
+	
+    //you can view information about content
+    public static Result viewContent(Long contentId) {
+        return ok(views.html.content.render(contentId, form(models.Content.class).fill(models.Content.findById(contentId))));
     }
 
     // RELATIONSHIP
@@ -107,4 +139,21 @@ public class Catalogs extends Controller {
         Relationship.createList();
         return redirect(routes.Catalogs.relationships());
     }
+
+	//you can change Relationship
+    public static Result changeRelationship(Long id) {
+        Form<Relationship> filledForm = form(Relationship.class).bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(views.html.relationship.render(id, filledForm));
+        } else {
+            Relationship.updateRelationship(id, filledForm.get());
+            return redirect(routes.Catalogs.relationships());
+        }
+    }
+	
+    //you can view information about gender
+    public static Result viewRelationship(Long relationshipId) {
+        return ok(views.html.relationship.render(relationshipId, form(Relationship.class).fill(Relationship.findById(relationshipId))));
+    }
+
 }
