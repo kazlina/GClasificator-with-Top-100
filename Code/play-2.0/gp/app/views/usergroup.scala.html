@@ -1,37 +1,51 @@
-@(gpms: List[GpmForOutput], groups: List[Group], nameGroup: String)
+@(gpms: List[GpmForOutput], groups: List[Group], viewGroup: Group, gpmForm: Form[GPM])
 
 @import helper._
 
-@main(nameGroup) {
+@main(viewGroup.name) {
 
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	@top()
+	
 	<div class="content">
 		@usergroups(groups)
+		
+		<hr/>
+		@form(routes.Application.indexGpm(viewGroup.id)) {
 
+			@inputText(
+				gpmForm("idGpm"),
+				'_label -> "id",
+				'_help -> "")
+	         
+	        <input type="submit" value="index">
+    	}
+	
 		<div class="groups-users">
 
-		@for(gpm <- gpms) {
-			<div class="groups-user-block">
+			@for(gpm <- gpms) {
+				<div class="groups-user-block">
 
-				@if(gpm == null || gpm.image == null || gpm.image == "") {
-					<img src="@routes.Assets.at("images/foto.png")" style="height:80px; width:80px; margin:2px;">
-				} else {
-					<a href="https://plus.google.com/u/0/@gpm.gpm"><img src="@gpm.image" style="height:80px; width:80px; margin:2px;"></a>
-				}
+					@if(gpm == null || gpm.image == null || gpm.image == "") {
+						<img src="@routes.Assets.at("images/foto.png")" style="height:80px; width:80px; margin:2px;">
+					} else {
+						<a href="https://plus.google.com/u/0/@gpm.gpm"><img src="@gpm.image" style="height:80px; width:80px; margin:2px;"></a>
+					}
 
-				<div class="groups-user-text">
+					<div class="groups-user-text">
 
-					<h2><a href="https://plus.google.com/u/0/@gpm.gpm" style="color:#333;">@gpm.name</a></h2>
-					<h3>@gpm.gender</h3>
-					<h3>@gpm.relationshipStatus</h3>
-					<h4>В кругах у @gpm.nFollowers человек</h4>
-					<h4>Позиция: @gpm.position</h4>
+						<h2><a href="https://plus.google.com/u/0/@gpm.gpm" style="color:#333;">@gpm.name</a></h2>
+						<h3>@gpm.gender</h3>
+						<h3>@gpm.relationshipStatus</h3>
+						<h4>В кругах у @gpm.nFollowers человек</h4>
+						<h4>Позиция: @gpm.position</h4>
+					</div>
 				</div>
-			</div>
-		}
+			}
+
+		</div>	
 
 	</div>
 }

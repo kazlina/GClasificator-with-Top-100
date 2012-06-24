@@ -8,6 +8,7 @@ GET     /ind                    			controllers.Application.ind()
 
 #USER PAGE
 GET    /group/:id 							controllers.Application.viewGroup(id: Long)
+POST   /group/:id 							controllers.Application.indexGpm(id: Long)
 
 # ADMIN PAGE
 GET     /admin            					controllers.Admin.main()
