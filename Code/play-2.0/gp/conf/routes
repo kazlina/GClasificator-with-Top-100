@@ -8,42 +8,70 @@ GET     /ind                    			controllers.Application.ind()
 
 #USER PAGE
 GET    /group/:id 							controllers.Application.viewGroup(id: Long)
+POST   /group/:id 							controllers.Application.indexGpm(id: Long)
 
 # ADMIN PAGE
 GET     /admin            					controllers.Admin.main()
 
 # CATALOGS
 GET     /admin/catalogs            			controllers.Catalogs.main()
+
 # GENDER
 GET     /admin/catalogs/genders            	controllers.Catalogs.genders()
 POST    /admin/catalogs/genders            	controllers.Catalogs.addGender()
 POST    /admin/catalogs/genders/:id/delete  controllers.Catalogs.deleteGender(id: Long)
 POST    /admin/catalogs/genders/list        controllers.Catalogs.createGenderList()
+
+# ABOUT GENDER
+GET     /admin/catalogs/genders/:gid       			controllers.Catalogs.viewGender(gid: Long)
+POST    /admin/catalogs/genders/:gid       			controllers.Catalogs.changeGender(gid: Long)
+
 # CONTENT
 GET     /admin/catalogs/contents            controllers.Catalogs.contents()
 POST    /admin/catalogs/contents            controllers.Catalogs.addContent()
 POST    /admin/catalogs/contents/:id/delete controllers.Catalogs.deleteContent(id: Long)
 POST    /admin/catalogs/contents/list       controllers.Catalogs.createContentList()
+
+# ABOUT GENDER
+GET     /admin/catalogs/contents/:gid       			controllers.Catalogs.viewContent(gid: Long)
+POST    /admin/catalogs/contents/:gid       			controllers.Catalogs.changeContent(gid: Long)
+
 # RELATION
 GET     /admin/catalogs/relationships       controllers.Catalogs.relationships()
 POST    /admin/catalogs/relationships       controllers.Catalogs.addRelation()
 POST    /admin/catalogs/relationships/:id/delete	controllers.Catalogs.deleteRelation(id: Long)
 POST    /admin/catalogs/relationships/list  controllers.Catalogs.createRelationList()
 
+# ABOUT RELATION
+GET     /admin/catalogs/relationships/:gid       			controllers.Catalogs.viewRelationship(gid: Long)
+POST    /admin/catalogs/relationships/:gid       			controllers.Catalogs.changeRelationship(gid: Long)
+
 # LINKS
 GET     /admin/links            			controllers.Links.links()
 POST    /admin/links            			controllers.Links.newLink()
 POST    /admin/links/:id/delete 			controllers.Links.deleteLink(id: Long)
+
+# ABOUT LINK
+GET     /admin/links/:gid       			controllers.Links.viewLink(gid: Long)
+POST    /admin/links/:gid       			controllers.Links.changeLink(gid: Long)
+
 
 # WORDS
 GET     /admin/words            			controllers.Words.words()
 POST    /admin/words            			controllers.Words.newWord()
 POST    /admin/words/:id/delete 			controllers.Words.deleteWord(id: Long)
 
+# ABOUT WORD
+GET     /admin/words/:gid       			controllers.Words.viewWord(gid: Long)
+POST    /admin/words/:gid       			controllers.Words.changeWord(gid: Long)
+
 # SYNONYMS
 GET     /admin/synonyms/:wid    			controllers.Words.synonyms(wid: Long)
 POST    /admin/synonyms/:wid    			controllers.Words.addSynonym(wid: Long)
 POST    /admin/synonyms/:wid/:sid/delete	controllers.Words.deleteSynonym(wid: Long, sid: Long)
+# ABOUT SYNONYM
+GET     /admin/synonyms/:wid/:gid       			controllers.Words.viewSynonym(gid: Long, wid:Long)
+POST    /admin/synonyms/:wid/:gid       			controllers.Words.changeSynonym(gid: Long, wid: Long)
 
 # BLACK LIST
 GET     /admin/blacklist        			controllers.BlackListController.blackList()

@@ -60,4 +60,16 @@ public class Content extends Model {
 		add("audio");
 		add("text");
 	}
+	
+	public static void updateContent(Long idContent, Content content) {
+	System.out.println(content.kind);
+	Content findContent = Content.findById(idContent);
+	if (findContent == null)
+		return;
+
+	findContent.kind = content.kind;
+	findContent.update();
+	}
+	
+	
 }

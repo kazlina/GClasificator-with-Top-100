@@ -73,4 +73,15 @@ public class Word extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+
+	public static void updateWord(Long idWord, Word word) {
+	System.out.println(word.word);
+	Word findWord = Word.findById(idWord);
+	if (findWord == null)
+		return;
+
+	findWord.word = word.word;
+	findWord.update();
+	}
+
 }

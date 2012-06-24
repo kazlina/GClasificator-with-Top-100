@@ -2,29 +2,43 @@
 
 @import helper._
 
-@main("Group words list") {
-    <h1>Words for group @nameGroup</h1>
+@main("Список слов группы") {
+    <h1>Слова для группы "@nameGroup"</h1>
     
     <ul>
         @for(groupWord <- groupWords) {
             <li>
-                @groupWord.word
+                <font style="font-size: 18pt">
+                    @groupWord.word
+                </font>
+                <br>вес в посте: <font style="font-style: italic">@groupWord.postWeight</font> 
+                <br>вес в профиле: <font style="font-style: italic">@groupWord.profileWeight</font>
                 @form(routes.Groups.deleteGroupWord(group.id,groupWord.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Удалить">
                 }
             </li>
         }
     </ul>
     <hr/>
     
-    <h2>Add a new word to the list of words of group</h2>
+    <h2>Добавление слова в список слов группы</h2>
     
     @form(routes.Groups.addGroupWord(group.id)) {
-        @select(groupWordForm("word"), options(Word.allInString), '_label -> "words")
-        @inputText(groupWordForm("postWeight"))
-        @inputText(groupWordForm("profileWeight"))
-        <input type="submit" value="Create">
+        <a href=@routes.Words.words()>Все слова</a><br>
+        <p>Слово:<br>
+        <select size="1" name="word">
+            @for(w <- Word.allInString) {
+                <option value="@w">@w</option>
+            }
+        </select></p>
+        <p>Вес слова в посте (число от 0 до 1):<br>
+        <input type="text" name="postWeight" value=""><br>
+        </p>
+        <p>Вес слова в профиле (число от 0 до 1):<br>
+        <input type="text" name="profileWeight" value=""><br>
+        </p>
+        <input type="submit" value="Добавить">
     }
     <hr/>
-    <a href=@routes.Groups.groups()>Back to groups</a>
+    <a href=@routes.Groups.groups()>Назад</a>
 }

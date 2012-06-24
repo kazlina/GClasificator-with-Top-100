@@ -104,7 +104,7 @@ public class Groups extends Controller {
 
     //you can delete group's word
     public static Result deleteGroupLink(Long groupId,Long groupWordId) {
-        GroupWord.delete(groupWordId);
-        return redirect(routes.Groups.groupWords(groupId));
+        GroupLink.delete(groupWordId);
+        return redirect(routes.Groups.groupLinks(groupId));
     }
 }

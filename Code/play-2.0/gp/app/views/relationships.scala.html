@@ -7,7 +7,7 @@
     <ul>
         @for(r <- relations) {
             <li>
-                @r.status
+                 <a style="font-size: 22pt" href=@routes.Catalogs.viewRelationship(r.id)>@r.status</a><br>
                 @form(routes.Catalogs.deleteRelation(r.id)) {
                     <input type="submit" value="Удалить">
                 }

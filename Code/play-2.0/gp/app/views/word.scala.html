@@ -1,0 +1,11 @@
+@(word: Long, wordForm: Form[Word])
+
+@import helper._
+
+@main("Word") {
+@form(routes.Words.changeWord(word)) {
+        @inputText(wordForm("word"), '_label -> "word") 
+        <input type="submit" value="Update">
+    }
+    <a href=@routes.Words.words()>Back to words</a>
+}

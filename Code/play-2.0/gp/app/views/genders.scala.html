@@ -7,7 +7,7 @@
     <ul>
         @for(g <- genders) {
             <li>
-                @g.value 
+				 <a style="font-size: 22pt" href=@routes.Catalogs.viewGender(g.id)>@g.value</a><br>
                 @form(routes.Catalogs.deleteGender(g.id)) {
                     <input type="submit" value="Удалить">
                 }

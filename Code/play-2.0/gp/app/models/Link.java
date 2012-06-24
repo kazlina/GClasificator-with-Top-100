@@ -70,4 +70,15 @@ public class Link extends Model {
 	public static void delete(Long id) {
 		find.ref(id).delete();
     }
+
+	public static void updateLink(Long idLink, Link link) {
+	System.out.println(link.link);
+	Link findLink = Link.findById(idLink);
+	if (findLink == null)
+		return;
+
+	findLink.link = link.link;
+	findLink.update();
+	}
+
 }

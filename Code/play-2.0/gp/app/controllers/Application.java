@@ -2,8 +2,11 @@ package controllers;
 import java.util.*;
 import java.lang.InterruptedException;
 import java.util.concurrent.TimeUnit;
+
+import play.data.Form;
 import play.mvc.*;
 import models.*;
+
 import java.io.IOException;
 
 public class Application extends Controller {
@@ -35,7 +38,27 @@ public class Application extends Controller {
     
     public static Result viewGroup(Long idGroup) {
         List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
-        return ok(views.html.usergroup.render(gpms, Group.all(), Group.findById(idGroup).name));
+        return ok(views.html.usergroup.render(
+        		gpms, 
+        		Group.all(), 
+        		Group.findById(idGroup),
+        		form(GPM.class)));
+    }
+    
+    public static Result indexGpm(Long id) {
+    	Form<GPM> filledForm = form(GPM.class).bindFromRequest();
+        if(filledForm.hasErrors()) {
+        	List <GpmForOutput> gpms = Classifier.getGpmForGroup(id);
+            return badRequest(views.html.usergroup.render(
+            		gpms, 
+            		Group.all(), 
+            		Group.findById(id),
+            		filledForm));
+        } 
+        
+    	NewGPM.add(filledForm.get().idGpm);
+    	
+    	return redirect(routes.Application.viewGroup(id));
     }
     
     public static Result ind() {
