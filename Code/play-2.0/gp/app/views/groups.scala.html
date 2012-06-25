@@ -23,11 +23,13 @@
     
     <h2>Добавить новую группу</h2>
     
-    @form(routes.Groups.addGroup()) {
+    @form(action = routes.Groups.addGroup(), 'enctype -> "multipart/form-data") {
+	<input type="hidden" name="activeImage" value="default.jpg">
+        <input type="hidden" name="passiveImage" value="default.jpg">
         Название: <input type="text" name="name" value="">
         <br><br>Изображения для группы:<br> 
-        <input type="file" name="activeImage" value=""><br>
-        <input type="file" name="passiveImage" value=""><br><br>
+        <input type="file" name="activeImageFile" value=""><br>
+        <input type="file" name="passiveImageFile" value=""><br><br>
         Описание группы: <br><textarea rows="10" cols="45" name="description"></textarea><br>
         <p>Соотношение типов контента:</p>
          Текст: <br><input type="text" name="textPercent" value=""><br>

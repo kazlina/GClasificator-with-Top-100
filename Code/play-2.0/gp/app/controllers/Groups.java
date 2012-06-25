@@ -12,10 +12,14 @@ import views.html.*;
 import models.*;
 import play.libs.*;
 
+import play.mvc.Http.*;
+import play.mvc.Http.MultipartFormData.*;
+
+import java.io.File;
+import java.net.*;
 
 import java.io.IOException;
 
-import views.html.*;
 
 public class Groups extends Controller {
 
@@ -30,12 +34,38 @@ public class Groups extends Controller {
         Form<Group> filledForm = form(Group.class).bindFromRequest();
         if(filledForm.hasErrors()) {
             return badRequest(views.html.groups.render(Group.all(), filledForm));
-        } else {
-            Group gr = filledForm.get();
-        	Group.add(gr);
-            return redirect(routes.Groups.groups());
-        }
-    }
+        } else {		
+		Group gr = filledForm.get();
+	
+		MultipartFormData body = request().body().asMultipartFormData();		
+		if (body != null) {
+	   		FilePart activeImageFile = body.getFile("activeImageFile");
+			gr.activeImage = activeImageFile.getFilename();
+			String FileTitle1 = activeImageFile.getFilename();
+			String contentType1 = activeImageFile.getContentType();
+	      		System.out.println("Name: " + FileTitle1 + ", contentType: " + contentType1);
+	      		File file1 = activeImageFile.getFile();
+	     		file1.renameTo(new File("public/images/" + FileTitle1));     	
+		
+			FilePart passiveImageFile = body.getFile("passiveImageFile");
+			gr.passiveImage = passiveImageFile.getFilename();
+			String FileTitle2 = passiveImageFile.getFilename();
+	      		String contentType2 = passiveImageFile.getContentType();
+	      		System.out.println("Name: " + FileTitle2 + ", contentType: " + contentType2);
+	      		File file2 = passiveImageFile.getFile();
+	     		file2.renameTo(new File("public/images/" + FileTitle2));
+						    
+		    	//return redirect(routes.Groups.groups());
+				}
+		 	else
+			       { 
+				System.out.println("Body is NULL!");
+				}
+		Group.add(gr);
+       		 }
+		return redirect(routes.Groups.groups());
+   	 }
+
 
     //you can change group
     public static Result changeGroup(Long id) {
