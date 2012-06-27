@@ -73,15 +73,69 @@ public class Groups extends Controller {
         if(filledForm.hasErrors()) {
             return badRequest(views.html.group.render(id, filledForm));
         } else {
-            Group.updateGroup(id, filledForm.get());
-            return redirect(routes.Groups.groups());
+		
+	   Group gr = filledForm.get();
+	   String OldActiveImage = gr.activeImage;
+	   String OldPassiveImage = gr.passiveImage;
+	   //Group OldGr = Group.findById(id);
+		           
+		MultipartFormData body = request().body().asMultipartFormData();		
+		if (body != null) {
+
+
+			if (body.getFile("activeImageFile") != null) {
+	   		FilePart activeImageFile = body.getFile("activeImageFile");
+			gr.activeImage = activeImageFile.getFilename();
+			String FileTitle1 = activeImageFile.getFilename();
+			String contentType1 = activeImageFile.getContentType();
+	      		File file1 = activeImageFile.getFile();
+	     		file1.renameTo(new File("public/images/" + FileTitle1));
+
+			File f1=new File("public/images/" + OldActiveImage);
+			if(f1.exists() && f1.isFile()){
+			f1.delete();
+			}
+			}
+		    	
+			if (body.getFile("passiveImageFile") != null) {
+			FilePart passiveImageFile = body.getFile("passiveImageFile");
+			gr.passiveImage = passiveImageFile.getFilename();
+			String FileTitle2 = passiveImageFile.getFilename();
+	      		String contentType2 = passiveImageFile.getContentType();
+	      		File file2 = passiveImageFile.getFile();
+	     		file2.renameTo(new File("public/images/" + FileTitle2));
+					
+			File f2=new File("public/images/" + OldPassiveImage);
+			if(f2.exists() && f2.isFile()){
+			f2.delete();
+			}
+			}
+					    
+		    }
+		 	else
+		 	{
+		 		System.out.println("Body is NULL!");
+		 	}
+		Group.updateGroup(id, gr);         
         }
+		return redirect(routes.Groups.groups());
     }
     
     //you can delete group
     public static Result deleteGroup(Long id) {
-        Group.delete(id);
-        return redirect(routes.Groups.groups());
+    	
+    	//groupId = id;
+    	Group gr = Group.findById(id);	
+    	File f1=new File("public/images/" + gr.activeImage);
+    	if(f1.exists() && f1.isFile()){
+    		f1.delete();
+    	}
+    	File f2=new File("public/images/" + gr.passiveImage);
+    	if(f2.exists() && f2.isFile()){
+    		f2.delete();
+    	}
+    	Group.delete(id);
+    	return redirect(routes.Groups.groups());
     }
 
     //you can view information about group
