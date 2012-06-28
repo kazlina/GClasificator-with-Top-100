@@ -51,9 +51,11 @@ public class Application extends Controller {
                 		
                 		//quick initialization of cache
                 		System.out.println("Quick initialization of cache has started.");
+                		TimeClass.printlnReadyCurrentTime();
+                		
                 		List <Group> allGroups = Group.all();
                     	for (Group currentGroup: allGroups) {
-                    		//getting profile of Yuri Vaschenko
+                    		//getting profile of Yuri Vashchenko
                     		Profile prof = Profile.lastProfileByGpmId((long) 1);
                     		//creating of fake query
                     		List <GpmForOutput> fakeQueryResult = new ArrayList<GpmForOutput>();
@@ -70,23 +72,15 @@ public class Application extends Controller {
                     		groupsForOutput.add(fakeGpms);
                     	}
                     	System.out.println("Quick initialization of cache has finished.");
-                    	
-                		System.out.println("Cache updating: cache initialize has started.");
-                    	//List <Group> allGroups = Group.all();
-                    	for (Group currentGroup: allGroups) {
-                    		System.out.println("Cache updating: start of initialaze group with id: " + currentGroup.id);
-                    		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
-                    		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
-                    		groupsForOutput.add(currentGroupForOutput);
-                    		System.out.println("Was finish of initialize group with id: " + currentGroup.id);
-                    		TimeUnit.SECONDS.sleep(5);
-                    	}
-                    	System.out.println("Cache updating: cache initialize succesfully finish.");
+                		TimeClass.printlnReadyCurrentTime();
                     }
                     else {
                     	List <Group> allGroups = Group.all();
                         for (Group currentGroup: allGroups) {
+                        	
                         	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
+                        	TimeClass.printlnReadyCurrentTime();
+                        	
     	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
     	            		//searching index of element with current group in groupsForOutput array
     	            		int currentGroupId = 0;
@@ -96,7 +90,10 @@ public class Application extends Controller {
     	            		//creating new element, which we must add in general array
     	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
     	            		groupsForOutput.set(currentGroupId, currentGroupForOutput);
-    	            		System.out.println("Was finish of updating group with id: " + currentGroup.id);
+    	            		
+    	            		System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
+    	            		TimeClass.printlnReadyCurrentTime();
+    	            		
     	            		TimeUnit.SECONDS.sleep(5);
                         }
                     }
