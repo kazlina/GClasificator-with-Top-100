@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.net.URL;
+import javax.persistence.PersistenceException;
 
 public class DataExtraction {
 
@@ -15,17 +16,21 @@ public class DataExtraction {
 		GPM gpm = GPM.add(id);
 		if(gpm != null) {
 			// i should add a validator!
-			if (!updateProfile(gpm)) {
+			int result = updateProfile(gpm);
+			if (result == 0) {
 				gpm.delete();
 				NewGPM.add(id);
 				return false;
-			}
+			} 
+			else if (result == -1)
+				return false;
+			
 			updateActivity(gpm,100);
 	    } 
 	    return true;
     }
 
-    public static boolean updateProfile(GPM gpm){
+    public static int updateProfile(GPM gpm){
         TempProfile profile = new TempProfile();
 
         //get 'profile' from GooglePlus
@@ -35,17 +40,34 @@ public class DataExtraction {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+        	
+        	BlackList ban = new BlackList(gpm.id, "IOException");
+        	BlackList.add(ban);
+        	System.out.println("id " + gpm.idGpm + " was add in black list");
+			
+			return -1;
 		} // i should add a validator!
 
         if (profile == null)
-        	return false;
+        	return 0;
                 
         //add profile to DB
         Gender gender =  Gender.findByValue(profile.gender);
         Relationship relationshipStatus = Relationship.findByStatus(profile.relationshipStatus);
         Profile man = new Profile(gpm,profile.displayName,profile.image, gender,
 					profile.tagline, relationshipStatus, profile.nfollowers);
-        Profile.add(man);
+        try {
+        	Profile.add(man);
+        } catch (PersistenceException e) {
+			// TODO Auto-generated catch block
+        	e.printStackTrace();
+        	
+        	BlackList ban = new BlackList(gpm.id, "PersistenceException");
+        	BlackList.add(ban);
+        	System.out.println("id " + gpm.idGpm + " was add in black list");
+			
+			return -1;
+		}
         // i should add a validator!
 
         //words extraction
@@ -79,7 +101,7 @@ public class DataExtraction {
     			ProfileLink.add(man, linksHistogram.link.toString(), linksHistogram.count);
         	}
         }
-        return true;
+        return 1;
     }
 
     public static boolean updateActivity(GPM gpm, int countOfPosts) {

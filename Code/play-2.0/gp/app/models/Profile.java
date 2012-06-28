@@ -81,7 +81,7 @@ public class Profile extends Model {
 		return (profiles.size() == 0)? null : profiles.get(0);
 	}
 	
-	public static void add(Profile element) {
+	public static void add(Profile element) throws PersistenceException {
 		element.date = Calendar.getInstance().getTime();		
 		element.save();
 	}

@@ -1,13 +1,18 @@
 package controllers;
+
+import java.io.*;
 import java.util.*;
 import java.lang.InterruptedException;
 import java.util.concurrent.TimeUnit;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import play.data.Form;
 import play.mvc.*;
 import models.*;
-
-import java.io.IOException;
 
 public class Application extends Controller {
 
@@ -31,6 +36,7 @@ public class Application extends Controller {
             worker.setDaemon(true);
             threadRun = true;
             worker.start();
+            System.out.println(" ---=== UPDATE STARTED ===---");
         }
         
         return ok(views.html.index.render(Group.all()));
@@ -62,6 +68,6 @@ public class Application extends Controller {
     }
     
     public static Result ind() {
-        return ok("all good");
+    	return ok("all good");
     }
 }

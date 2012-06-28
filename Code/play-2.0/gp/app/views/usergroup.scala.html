@@ -4,34 +4,38 @@
 
 @main(viewGroup.name) {
 
-	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/style.css")" type="text/css" media="screen" />
+	<link rel="stylesheet" href=@routes.Assets.at("stylesheets/style.css") type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 	@top()
-	
+
 	<div class="content">
 		@usergroups(groups)
-		
+
 		<hr/>
 		@form(routes.Application.indexGpm(viewGroup.id)) {
 
 			@inputText(
 				gpmForm("idGpm"),
-				'_label -> "id",
+				'_label -> "Введите ваш id",
 				'_help -> "")
-	         
+
 	        <input type="submit" value="index">
     	}
-	
+
 		<div class="groups-users">
 
 			@for(gpm <- gpms) {
 				<div class="groups-user-block">
 
 					@if(gpm == null || gpm.image == null || gpm.image == "") {
-						<img src="@routes.Assets.at("images/foto.png")" style="height:80px; width:80px; margin:2px;">
+						<a href="https://plus.google.com/u/0/@gpm.gpm">
+							<img src="@routes.Assets.at("images/foto.png")" style="height:80px; width:80px; margin:2px;">
+						</a>
 					} else {
-						<a href="https://plus.google.com/u/0/@gpm.gpm"><img src="@gpm.image" style="height:80px; width:80px; margin:2px;"></a>
+						<a href="https://plus.google.com/u/0/@gpm.gpm">
+							<img src="@gpm.image" style="height:80px; width:80px; margin:2px;">
+						</a>
 					}
 
 					<div class="groups-user-text">
@@ -45,7 +49,7 @@
 				</div>
 			}
 
-		</div>	
+		</div>
 
 	</div>
 }

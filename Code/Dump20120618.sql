@@ -77,8 +77,7 @@ DROP TABLE IF EXISTS `groupdescr`;
 CREATE TABLE `groupdescr` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `activeImage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `passiveImage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `textPercent` int(11) DEFAULT NULL,
   `imagePercent` int(11) DEFAULT NULL,
@@ -96,7 +95,7 @@ CREATE TABLE `groupdescr` (
 
 LOCK TABLES `groupdescr` WRITE;
 /*!40000 ALTER TABLE `groupdescr` DISABLE KEYS */;
-INSERT INTO `groupdescr` VALUES (1,'flowers','','','',30,50,12,5,3),(2,'photographers','','','',14,70,10,3,3),(3,'artists','','','',35,30,20,10,5),(4,'googlers','','','',0,0,0,0,0),(5,'Musicians','IMG_0009.JPG','IMG_0002.JPG','',20,20,10,10,40),(6,'science','IMG_0002.JPG','IMG_0002.JPG','',50,16,30,2,2),(7,'Programmers','IMG_0002.JPG','IMG_0002.JPG','',58,15,20,5,2);
+INSERT INTO `groupdescr` VALUES (1,'flowers','','',30,50,12,5,3),(2,'photographers','','',14,70,10,3,3),(3,'artists','','',35,30,20,10,5),(4,'googlers','','',0,0,0,0,0),(5,'Musicians','IMG_0009.JPG','',20,20,10,10,40),(6,'science','IMG_0002.JPG','',50,16,30,2,2),(7,'Programmers','IMG_0002.JPG','',58,15,20,5,2);
 /*!40000 ALTER TABLE `groupdescr` ENABLE KEYS */;
 UNLOCK TABLES;
 

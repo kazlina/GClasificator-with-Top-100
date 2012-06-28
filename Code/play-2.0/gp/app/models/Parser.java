@@ -24,11 +24,17 @@ public class Parser {
 	        String template = ",[0,[]\\n]\\n,[";
 	        for ( Element e : links) {         	  
 	        	  if (e.toString().indexOf("key: '77'") != -1){
-	              String textWithFollowers = e.toString();
-	              int start = textWithFollowers.lastIndexOf(template)+template.length();
-	              int end = textWithFollowers.indexOf(',', start);
-	              profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
-	              }  
+		              String textWithFollowers = e.toString();
+		              
+		              int start = textWithFollowers.lastIndexOf(template);
+		              if (start == -1)
+		            	  profile.nfollowers = 0;
+		              else {
+			              start += template.length();
+			              int end = textWithFollowers.indexOf(',', start);
+			              profile.nfollowers = Integer.parseInt((String) textWithFollowers.subSequence(start, end));
+	                  }
+	        	  }
 	        }
 	        
 	        String type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();
@@ -51,8 +57,8 @@ public class Parser {
 	        Elements urls = doc.select("a.Qc0zVe.url");//url        
 	           
 	        for(Element ur : urls) {
-	       	 String link = ur.attr("href");
-	         profile.urls.add(link);
+		       	String link = ur.attr("href");
+		        profile.urls.add(link);
 	        }
 	        
 	        Elements gender = doc.getElementsByClass("J90C7b");//gender
@@ -72,23 +78,17 @@ public class Parser {
 		        	profile.image = src.attr("abs:src");
 		        }       
 	    }
-    	catch(HttpResponseException e){
+    	catch(HttpResponseException e) {
+    		System.out.println("ERROR in getting profile by id = " + id);
     		e.printStackTrace();
     		return null;
     	}
     	catch (SocketTimeoutException e) {
+    		System.out.println("ERROR in getting profile by id = " + id);
     		e.printStackTrace();
     		return null;
     	}
-    	catch (IOException e) {
-    		e.printStackTrace();
-    		return null;
-    	}
-    	catch (NumberFormatException e) {
-    		e.printStackTrace();
-    		return null;
-    	}
- 
+    	
         return profile;
 }
 

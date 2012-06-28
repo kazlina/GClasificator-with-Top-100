@@ -4,7 +4,7 @@
 
 @main("Список групп") {
     <h1>Список групп, @groups.size()</h1>
-    
+
     <ul>
         @for(group <- groups) {
             <li>
@@ -20,26 +20,32 @@
         }
     </ul>
     <hr/>
-    
+
     <h2>Добавить новую группу</h2>
-    
+
     @form(action = routes.Groups.addGroup(), 'enctype -> "multipart/form-data") {
-	<input type="hidden" name="activeImage" value="default.jpg">
-        <input type="hidden" name="passiveImage" value="default.jpg">
-        Название: <input type="text" name="name" value="">
-        <br><br>Изображения для группы:<br> 
-        <input type="file" name="activeImageFile" value=""><br>
-        <input type="file" name="passiveImageFile" value=""><br><br>
-        Описание группы: <br><textarea rows="10" cols="45" name="description"></textarea><br>
+
+        <input type="hidden" name="image" value="default.jpg">
+        @inputText(groupForm("name"), '_label -> "Название: ")
+
+        <br><br>Изображения для группы:<br>
+        @inputFile(groupForm("imageFile"))
+
+        <br><br>
+
+        Описание группы: <br>
+        @inputText(groupForm("description"), '_label -> "Описание: ", 'style -> "width:400px; heigth:100px")
+
         <p>Соотношение типов контента:</p>
-         Текст: <br><input type="text" name="textPercent" value=""><br>
-         Изображения: <br><input type="text" name="imagePercent" value=""><br>
-         Ссылки: <br><input type="text" name="linkPercent" value=""><br>
-         Видео: <br><input type="text" name="videoPercent" value=""><br>
-         Аудио: <br><input type="text" name="audioPercent" value=""><br>
+        @inputText(groupForm("textPercent"), '_label -> "Текст: ")
+        @inputText(groupForm("imagePercent"), '_label -> "Изображения: ")
+        @inputText(groupForm("linkPercent"), '_label -> "Ссылки: ")
+        @inputText(groupForm("videoPercent"), '_label -> "Видео: ")
+        @inputText(groupForm("audioPercent"), '_label -> "Аудио: ")
+
         <input type="submit" value="Добавить">
     }
     <hr/>
-    
+
     <a href=@routes.Admin.main()>Назад</a>
 }

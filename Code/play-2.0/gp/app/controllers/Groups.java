@@ -1,25 +1,11 @@
 package controllers;
 
-import java.util.*;
-
-import play.*;
 import play.mvc.*;
 import play.data.*;
-import play.db.jpa.*;
-
-import views.html.*;
-
 import models.*;
-import play.libs.*;
-
 import play.mvc.Http.*;
 import play.mvc.Http.MultipartFormData.*;
-
 import java.io.File;
-import java.net.*;
-
-import java.io.IOException;
-
 
 public class Groups extends Controller {
 
@@ -32,37 +18,24 @@ public class Groups extends Controller {
     //you can add new group
     public static Result addGroup() {
         Form<Group> filledForm = form(Group.class).bindFromRequest();
-        if(filledForm.hasErrors()) {
+        if(filledForm.hasErrors())
             return badRequest(views.html.groups.render(Group.all(), filledForm));
-        } else {		
+         
 		Group gr = filledForm.get();
 	
 		MultipartFormData body = request().body().asMultipartFormData();		
-		if (body != null) {
-	   		FilePart activeImageFile = body.getFile("activeImageFile");
-			gr.activeImage = activeImageFile.getFilename();
-			String FileTitle1 = activeImageFile.getFilename();
-			String contentType1 = activeImageFile.getContentType();
-	      		System.out.println("Name: " + FileTitle1 + ", contentType: " + contentType1);
-	      		File file1 = activeImageFile.getFile();
-	     		file1.renameTo(new File("public/images/" + FileTitle1));     	
+		if (body == null)
+			return badRequest(views.html.groups.render(Group.all(), filledForm));
 		
-			FilePart passiveImageFile = body.getFile("passiveImageFile");
-			gr.passiveImage = passiveImageFile.getFilename();
-			String FileTitle2 = passiveImageFile.getFilename();
-	      		String contentType2 = passiveImageFile.getContentType();
-	      		System.out.println("Name: " + FileTitle2 + ", contentType: " + contentType2);
-	      		File file2 = passiveImageFile.getFile();
-	     		file2.renameTo(new File("public/images/" + FileTitle2));
-						    
-		    	//return redirect(routes.Groups.groups());
-				}
-		 	else
-			       { 
-				System.out.println("Body is NULL!");
-				}
-		Group.add(gr);
-       		 }
+	   	FilePart imageFile = body.getFile("imageFile");
+	   	String fileName = imageFile.getFilename();
+		
+	   	File file = imageFile.getFile();
+	    file.renameTo(new File("public/images/" + fileName));     	
+	    
+	    gr.image = fileName;
+	    Group.add(gr);
+       		 
 		return redirect(routes.Groups.groups());
    	 }
 
@@ -70,54 +43,29 @@ public class Groups extends Controller {
     //you can change group
     public static Result changeGroup(Long id) {
         Form<Group> filledForm = form(Group.class).bindFromRequest();
-        if(filledForm.hasErrors()) {
+        if(filledForm.hasErrors()) 
             return badRequest(views.html.group.render(id, filledForm));
-        } else {
+
 		
 	   Group gr = filledForm.get();
-	   String OldActiveImage = gr.activeImage;
-	   String OldPassiveImage = gr.passiveImage;
-	   //Group OldGr = Group.findById(id);
+	   String oldImage = gr.image;
 		           
-		MultipartFormData body = request().body().asMultipartFormData();		
-		if (body != null) {
+	   MultipartFormData body = request().body().asMultipartFormData();		
+	   if (body != null && body.getFile("imageFile") != null) {
+	   		FilePart imageFile = body.getFile("imageFile");
+	   		String fileName = imageFile.getFilename();
+	   		gr.image = fileName;
+			
+			File file = imageFile.getFile();
+	     	file.renameTo(new File("public/images/" + fileName));
+	     	
+			File f = new File("public/images/" + oldImage);
+			if(f.exists() && f.isFile())
+				f.delete();
+		}
 
-
-			if (body.getFile("activeImageFile") != null) {
-	   		FilePart activeImageFile = body.getFile("activeImageFile");
-			gr.activeImage = activeImageFile.getFilename();
-			String FileTitle1 = activeImageFile.getFilename();
-			String contentType1 = activeImageFile.getContentType();
-	      		File file1 = activeImageFile.getFile();
-	     		file1.renameTo(new File("public/images/" + FileTitle1));
-
-			File f1=new File("public/images/" + OldActiveImage);
-			if(f1.exists() && f1.isFile()){
-			f1.delete();
-			}
-			}
-		    	
-			if (body.getFile("passiveImageFile") != null) {
-			FilePart passiveImageFile = body.getFile("passiveImageFile");
-			gr.passiveImage = passiveImageFile.getFilename();
-			String FileTitle2 = passiveImageFile.getFilename();
-	      		String contentType2 = passiveImageFile.getContentType();
-	      		File file2 = passiveImageFile.getFile();
-	     		file2.renameTo(new File("public/images/" + FileTitle2));
-					
-			File f2=new File("public/images/" + OldPassiveImage);
-			if(f2.exists() && f2.isFile()){
-			f2.delete();
-			}
-			}
-					    
-		    }
-		 	else
-		 	{
-		 		System.out.println("Body is NULL!");
-		 	}
-		Group.updateGroup(id, gr);         
-        }
+	   Group.updateGroup(id, gr);         
+        
 		return redirect(routes.Groups.groups());
     }
     
@@ -126,15 +74,13 @@ public class Groups extends Controller {
     	
     	//groupId = id;
     	Group gr = Group.findById(id);	
-    	File f1=new File("public/images/" + gr.activeImage);
-    	if(f1.exists() && f1.isFile()){
+    	
+    	File f1 = new File("public/images/" + gr.image);
+    	if(f1.exists() && f1.isFile())
     		f1.delete();
-    	}
-    	File f2=new File("public/images/" + gr.passiveImage);
-    	if(f2.exists() && f2.isFile()){
-    		f2.delete();
-    	}
+    	
     	Group.delete(id);
+    	
     	return redirect(routes.Groups.groups());
     }
 

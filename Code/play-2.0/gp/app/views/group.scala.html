@@ -5,13 +5,12 @@
 @main("Group") {
 @form(action = routes.Groups.changeGroup(group), 'enctype -> "multipart/form-data") {
 
-	@inputText(groupForm("name"), '_label -> "name group") 
+	@inputText(groupForm("name"), '_label -> "name group")
 
-	@inputText(groupForm("activeImage"), '_label -> "Old Active Picture")
-        @inputText(groupForm("passiveImage"), '_label -> "Old Passive Picture")
-        <br><br>New Images For Group:<br> 
-        <input type="file" name="activeImageFile" value=""><br>
-        <input type="file" name="passiveImageFile" value=""><br><br>
+	@inputText(groupForm("image"), '_label -> "Old Picture")
+
+        <br><br>New Image For Group:<br>
+        <input type="file" name="imageFile" value=""><br><br>
 
         @textarea(groupForm("description"))
         @inputText(groupForm("textPercent"))
@@ -19,7 +18,7 @@
         @inputText(groupForm("linkPercent"))
         @inputText(groupForm("videoPercent"))
         @inputText(groupForm("audioPercent"))
-        
+
         <input type="submit" value="Update">
     }
     <a href=@routes.Groups.groups()>Back to groups</a>

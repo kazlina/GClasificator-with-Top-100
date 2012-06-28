@@ -7,6 +7,18 @@ html, body{
 	height: auto;
 	width: 100%;
 }
+
+.image{
+	width:128px;
+	height:128px;
+	opacity:0.4;
+}
+
+.image:hover{
+	opacity:1;
+	cursor:pointer;
+}
+
 .clear{
 	clear:both;
 }
@@ -158,3 +170,18 @@ html, body{
 	line-height: 16px;
 }
 
+.form-input{
+	border: 1px #999 solid;
+	width: 90px;
+	padding:0px 20px;
+	height:20px;
+	font-style:normal;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#999;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+.form-input:hover{
+	outline: none;
+}

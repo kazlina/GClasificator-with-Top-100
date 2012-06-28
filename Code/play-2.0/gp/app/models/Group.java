@@ -20,12 +20,8 @@ public class Group extends Model {
 	public String name;
 
 	@Constraints.Required
-	@Column(name = "activeImage", nullable = false)
-	public String activeImage;
-
-	@Constraints.Required
-	@Column(name = "passiveImage", nullable = false)
-	public String passiveImage;
+	@Column(name = "image", nullable = false)
+	public String image;
 
 	@Column(name = "description")
 	public String description;
@@ -63,11 +59,10 @@ public class Group extends Model {
 		return this.name;
 	}
 
-	public Group(String name, String activeImage, String passiveImage, String description,
-			int textPercent, int imagePercent, int linkPercent, int videoPercent, int audioPercent) {
+	public Group(String name, String activeImage, String description, int textPercent, 
+			int imagePercent, int linkPercent, int videoPercent, int audioPercent) {
 		this.name = name;
-		this.activeImage = activeImage;
-		this.passiveImage = passiveImage;
+		this.image = activeImage;
 		this.description = description;
 		this.textPercent = textPercent;
 		this.imagePercent = imagePercent;
@@ -107,8 +102,7 @@ public class Group extends Model {
 			return;
 
 		findGroup.name = group.name;
-		findGroup.activeImage = group.activeImage;
-		findGroup.passiveImage = group.passiveImage;
+		findGroup.image = group.image;
 		findGroup.description = group.description;
 		findGroup.textPercent = group.textPercent;
 		findGroup.imagePercent = group.imagePercent;
