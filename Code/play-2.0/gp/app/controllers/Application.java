@@ -36,6 +36,30 @@ public class Application extends Controller {
         return ok(views.html.index.render(Group.all()));
     }
     
+    private static class CacheUpdater implements Runnable {
+        public void run() {
+            while (true) {
+            	//тут классификация в кеш
+            	делаем кучу массивов - по массиву на группу. каждый массив- результат запроса классификации
+                /*try {
+                    
+                    TimeUnit.SECONDS.sleep(5);
+                }
+                catch (InterruptedException ex) {}*/
+            }
+        }
+    }
+    private static boolean isCacheUpdaterThreadRun;
+    public static void cacheUpdate() {
+        if (!isCacheUpdaterThreadRun) {
+			    //running of cache updating
+			    Thread cacheUpdaterThread = new Thread(new CacheUpdater());
+			    cacheUpdaterThread.setDaemon(true);
+			    isCacheUpdaterThreadRun = true;
+			    cacheUpdaterThread.start();
+        }
+    }
+    
     public static Result viewGroup(Long idGroup) {
         List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
         return ok(views.html.usergroup.render(
