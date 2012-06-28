@@ -6,22 +6,32 @@
 
 	<link rel="stylesheet" href=@routes.Assets.at("stylesheets/style.css") type="text/css" media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+			.form-input{
+				border: 1px #999 solid;
+				width: 90px;
+				padding:0px 20px;
+				height:20px;
+				font-style:normal;
+				font-family: Arial, Helvetica, sans-serif;
+				color:#999;
+				border-radius: 10px;
+				-moz-border-radius: 10px;
+				float:left;
+				
+			}
+			.form-input:hover{
+				outline: none;
+			}
+			
+		</style>
 
 	@top()
 
 	<div class="content">
 		@usergroups(groups)
 
-		<hr/>
-		@form(routes.Application.indexGpm(viewGroup.id)) {
-
-			@inputText(
-				gpmForm("idGpm"),
-				'_label -> "Введите ваш id",
-				'_help -> "")
-
-	        <input type="submit" value="index">
-    	}
+		
 
 		<div class="groups-users">
 
@@ -50,6 +60,23 @@
 			}
 
 		</div>
+		
+		<div style="float:left;width:130px;height:300px;">
+			
+			<hr/>
+			
+			@form(routes.Application.indexGpm(viewGroup.id)) {
+	
+				@inputText(
+					gpmForm("idGpm"),
+					'_label -> "Введите ваш id",
+					'_help -> "",
+					'class -> "form-input")
+	
+		        <input type="submit" value="index" class="form-input">
+	    	}
+	    	
+    	</div>
 
 	</div>
 }
