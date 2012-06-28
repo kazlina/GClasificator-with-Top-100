@@ -31,28 +31,58 @@ public class Application extends Controller {
             worker.setDaemon(true);
             threadRun = true;
             worker.start();
+            
+            cacheUpdate();
         }
         
         return ok(views.html.index.render(Group.all()));
     }
     
+    static List <AllGroups> groupsForOutput = new ArrayList <AllGroups> ();
+    
+    private static boolean isCacheUpdaterThreadRun;
+    
     private static class CacheUpdater implements Runnable {
         public void run() {
             while (true) {
-            	//тут классификация в кеш
-            	//делаем кучу массивов - по массиву на группу. каждый массив- результат запроса классификации
-            	//берём айдишки всех групп
-            	List <Group> = 
-            	for ()
-                /*try {
-                    
-                    TimeUnit.SECONDS.sleep(5);
+                try {
+                    //if cache is empty
+                	if (groupsForOutput.size() == 0) {
+                		System.out.println("Cache updating: cache initialize is starting.");
+                    	List <Group> allGroups = Group.all();
+                    	for (Group currentGroup: allGroups) {
+                    		System.out.println("Cache updating: start of initialaze group with id: " + currentGroup.id);
+                    		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
+                    		AllGroups currentGroupForOutput = new AllGroups (currentGroup.id, gpms);
+                    		groupsForOutput.add(currentGroupForOutput);
+                    		System.out.println("Was finish of initialize group with id: " + currentGroup.id);
+                    		TimeUnit.SECONDS.sleep(5);
+                    	}
+                    	System.out.println("Cache updating: cache initialize succesfully finish.");
+                    }
+                    else {
+                    	List <Group> allGroups = Group.all();
+                        for (Group currentGroup: allGroups) {
+                        	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
+    	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
+    	            		//searching index of element with current group in groupsForOutput array
+    	            		int currentGroupId = 0;
+    	            		while (groupsForOutput.get(currentGroupId).groupId != currentGroup.id) {
+    	            			currentGroupId++;
+    	            		}
+    	            		//creating new element, which we must add in general array
+    	            		AllGroups currentGroupForOutput = new AllGroups (currentGroup.id, gpms);
+    	            		groupsForOutput.set(currentGroupId, currentGroupForOutput);
+    	            		System.out.println("Was finish of updating group with id: " + currentGroup.id);
+    	            		TimeUnit.SECONDS.sleep(5);
+                        }
+                    }
                 }
-                catch (InterruptedException ex) {}*/
+                catch (InterruptedException ex) {}
             }
         }
     }
-    private static boolean isCacheUpdaterThreadRun;
+    
     public static void cacheUpdate() {
         if (!isCacheUpdaterThreadRun) {
 			    //running of cache updating
@@ -64,7 +94,12 @@ public class Application extends Controller {
     }
     
     public static Result viewGroup(Long idGroup) {
-        List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
+        //List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
+    	int currentGroupId = 0;
+		while (groupsForOutput.get(currentGroupId).groupId != idGroup) {
+			currentGroupId++;
+		}
+    	List <GpmForOutput> gpms = groupsForOutput.get(currentGroupId).gpms;
         return ok(views.html.usergroup.render(
         		gpms, 
         		Group.all(), 
@@ -75,7 +110,11 @@ public class Application extends Controller {
     public static Result indexGpm(Long id) {
     	Form<GPM> filledForm = form(GPM.class).bindFromRequest();
         if(filledForm.hasErrors()) {
-        	List <GpmForOutput> gpms = Classifier.getGpmForGroup(id);
+        	int currentGroupId = 0;
+    		while (groupsForOutput.get(currentGroupId).groupId != id) {
+    			currentGroupId++;
+    		}
+        	List <GpmForOutput> gpms = groupsForOutput.get(currentGroupId).gpms;
             return badRequest(views.html.usergroup.render(
             		gpms, 
             		Group.all(), 
