@@ -88,18 +88,56 @@ public class Application extends Controller {
                         	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
                         	TimeClass.printlnReadyCurrentTime();
                         	
-    	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
-    	            		//searching index of element with current group in groupsForOutput array
-    	            		int currentGroupId = 0;
-    	            		while (groupsForOutput.get(currentGroupId).groupId != currentGroup.id) {
-    	            			currentGroupId++;
+                        	//check that current group wasn't deleted from data base
+                        	List <Group> lastAllGroupsArray = Group.all();
+                        	boolean isGroupFind = false;
+                        	for (int currentIndex = 0; 
+    	            				currentIndex < lastAllGroupsArray.size() && isGroupFind == false; 
+    	            				currentIndex++) {
+    	            			if (lastAllGroupsArray.get(currentIndex).id == currentGroup.id) {
+    	            				isGroupFind = true;
+    	            				
+    	            				//classification for current group
+    	    	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
+    	    	            		
+    	    	            		//check that current group wasn't deleted from data base
+    	    	            		lastAllGroupsArray = Group.all();
+    	    	            		//searching current group in actually group array
+    	    	            		boolean isGroupFind2 = false;
+    	    	            		for (int currentIndex2 = 0; 
+    	    	            				currentIndex2 < lastAllGroupsArray.size() && isGroupFind2 == false; 
+    	    	            				currentIndex2++) {
+    	    	            			if (lastAllGroupsArray.get(currentIndex2).id == currentGroup.id) {
+    	    	            				isGroupFind2 = true;
+    	    	            				
+    	    	            				//update current group in cache
+    	    	            				//searching index of element with current group in groupsForOutput array
+    	    	    	            		int currentGroupIndex = 0;
+    	    	    	            		while (groupsForOutput.get(currentGroupIndex).groupId != currentGroup.id) {
+    	    	    	            			currentGroupIndex++;
+    	    	    	            		}
+    	    	    	            		//creating new element, which we must add in general array
+    	    	    	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
+    	    	    	            		groupsForOutput.set(currentGroupIndex, currentGroupForOutput);
+    	    	    	            		
+    	    	    	            		System.out.println("Updating group with id: " + currentGroup.id + " was finished.");
+    	    	    	            		TimeClass.printlnReadyCurrentTime();
+    	    	    	            	}
+    	    	            		}
+    	    	            		if (isGroupFind2 == false) {
+    	    	            			//delete current group from cache
+    	    	            			deledeGroupById(currentGroup.id);
+    	    	            			System.out.println("Group with id: " + currentGroup.id + " was deleted.");
+	    	    	            		TimeClass.printlnReadyCurrentTime();
+    	    	            		}
+    	            			}
+                        	}
+    	            		if (isGroupFind == false) {
+    	            			//delete current group from cache
+    	            			deledeGroupById(currentGroup.id);
+    	            			System.out.println("Group with id: " + currentGroup.id + " was deleted.");
+	    	            		TimeClass.printlnReadyCurrentTime();
     	            		}
-    	            		//creating new element, which we must add in general array
-    	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
-    	            		groupsForOutput.set(currentGroupId, currentGroupForOutput);
-    	            		
-    	            		System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
-    	            		TimeClass.printlnReadyCurrentTime();
     	            		
     	            		TimeUnit.SECONDS.sleep(5);
                         }
@@ -107,6 +145,13 @@ public class Application extends Controller {
                 }
                 catch (InterruptedException ex) {}
             }
+        }
+        private static void deledeGroupById (Long currentGroupId) {
+        	int currentGroupIndex = 0;
+    		while (groupsForOutput.get(currentGroupIndex).groupId != currentGroupId) {
+    			currentGroupIndex++;
+    		}
+    		groupsForOutput.remove(currentGroupIndex);
         }
     }
     

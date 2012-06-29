@@ -46,8 +46,7 @@ create table Gender (
 create table GroupDescr (
   id                        bigint auto_increment not null,
   name                      varchar(50) not null,
-  activeImage               varchar(255) not null,
-  passiveImage              varchar(255) not null,
+  image                     varchar(255) not null,
   description               varchar(255),
   textPercent               integer,
   imagePercent              integer,
