@@ -1,0 +1,70 @@
+@(gpmSize: Int, profileSize: Int, postSize: Int, updateRunning: Boolean, parametersForm: Form[Parameters])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Управление обновлением") {
+
+	<h3>В базе данных имеется:</h3>
+	
+	<p style="font-size: 14pt">
+		&nbsp;&nbsp; GPM - <b>@gpmSize</b>
+	</p>
+	<p style="font-size: 12pt">
+		&nbsp;&nbsp; Профили - <b>@profileSize</b>
+	</p> 
+	<p style="font-size: 12pt">
+		&nbsp;&nbsp; Посты - <b>@postSize</b>
+	</p>
+	
+	@if(postSize != 0) {
+		<p style="font-size: 12pt">
+			&nbsp;&nbsp; В среднем, один GPM имеет @(postSize / gpmSize) пост(ов)
+		</p>
+	}
+	
+	<br>
+	<h4>Проценты обновления информации в базе данных:</h4>
+	
+	@form(action = routes.Admin.setParameters()) {
+		<fieldlist>
+			@inputText(
+				parametersForm("percentGetNew"), 
+				'_label -> "Получение новых пользователей:",
+				'style -> "width:20px",
+				'_help -> "обязательный, целое число от 0 до 100")
+			
+			@inputText(
+				parametersForm("percentUpdatePosts"), 
+				'_label -> "Обновление постов:",
+				'style -> "width:20px",
+				'_help -> "обязательный, целое число от 0 до 100")
+			
+			@inputText(
+				parametersForm("percentUpdateProfiles"), 
+				'_label -> "Обновление профилей:",
+				'style -> "width:20px",
+				'_help -> "обязательный, целое число от 0 до 100")
+				
+		</fieldlist>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Обновить" class="btn primary">
+    }
+	
+	<br>	
+	<p style="font-size: 14pt">
+		@if(updateRunning) {
+			Обновление запущено:
+			&nbsp;&nbsp;
+			<a href=@routes.Admin.startUpdate() class="btn danger">Остановить</a>
+		} else {
+			Обновление не запущено:
+			&nbsp;&nbsp;
+			<a href=@routes.Admin.startUpdate() class="btn success">Запустить</a>
+		}
+	</p>
+	
+	<div class="actions">
+		<a href=@routes.Admin.main() class="btn">На главную</a>
+	</div>
+}

@@ -1,11 +1,24 @@
 @(content: Long, contentForm: Form[models.Content])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
-@main("Content") {
-@form(routes.Catalogs.changeContent(content)) {
-        @inputText(contentForm("kind"), '_label -> "kind content") 
-        <input type="submit" value="Update">
+@main("Контент") {
+
+	<h1>Изменение контента:</h1>
+	
+	@form(routes.Catalogs.changeContent(content)) {
+		<fieldlist>
+			@inputText(
+				contentForm("kind"), 
+				'_label -> "Тип контента:",
+				'_help -> "обязательный, максимальная длина 5 символов") 
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.contents() class="btn">Назад</a>
+		</div>
     }
-    <a href=@routes.Catalogs.contents()>Back to contents</a>
 }

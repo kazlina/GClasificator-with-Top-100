@@ -1,50 +1,19 @@
 package controllers;
 
-import java.io.*;
+//import java.io.*;
+//import org.jsoup.Jsoup;
+//import org.jsoup.nodes.Document;
+//import org.jsoup.nodes.Element;
+//import org.jsoup.select.Elements;
 import java.util.*;
 import java.lang.InterruptedException;
 import java.util.concurrent.TimeUnit;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import play.data.Form;
 import play.mvc.*;
 import models.*;
 
 public class Application extends Controller {
 
-    private static class BackgroundProcess implements Runnable {
-        public void run() {
-            while (true) {
-                try {
-                    UpdateControl.Start();
-                    TimeUnit.SECONDS.sleep(10);
-                }
-                catch (InterruptedException ex) {}
-            }
-        }
-    }
-    
-    private static boolean threadRun;
-    
-    public static Result index() {
-        if (!threadRun) {
-            Thread worker = new Thread(new BackgroundProcess());
-            worker.setDaemon(true);
-            threadRun = true;
-            worker.start();
-
-            System.out.println(" ---=== UPDATE STARTED ===---");
-            
-            cacheUpdate();
-        }
-        
-        return ok(views.html.index.render(Group.all()));
-    }
-    
     static List <GroupForOutput> groupsForOutput = new ArrayList <GroupForOutput> ();
     
     private static boolean isCacheUpdaterThreadRun;
@@ -57,8 +26,8 @@ public class Application extends Controller {
                 	if (groupsForOutput.size() == 0) {
                 		
                 		//quick initialization of cache
-                		System.out.println("Quick initialization of cache has started.");
-                		TimeClass.printlnReadyCurrentTime();
+                		//System.out.println("Quick initialization of cache has started.");
+                		//TimeClass.printlnReadyCurrentTime();
                 		
                 		List <Group> allGroups = Group.all();
                     	for (Group currentGroup: allGroups) {
@@ -78,15 +47,15 @@ public class Application extends Controller {
                     		GroupForOutput fakeGpms = new GroupForOutput (currentGroup.id, fakeQueryResult);
                     		groupsForOutput.add(fakeGpms);
                     	}
-                    	System.out.println("Quick initialization of cache has finished.");
-                		TimeClass.printlnReadyCurrentTime();
+                    	//System.out.println("Quick initialization of cache has finished.");
+                		//TimeClass.printlnReadyCurrentTime();
                     }
                     else {
                     	List <Group> allGroups = Group.all();
                         for (Group currentGroup: allGroups) {
                         	
-                        	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
-                        	TimeClass.printlnReadyCurrentTime();
+                        	//System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
+                        	//TimeClass.printlnReadyCurrentTime();
                         	
     	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
     	            		//searching index of element with current group in groupsForOutput array
@@ -98,8 +67,8 @@ public class Application extends Controller {
     	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
     	            		groupsForOutput.set(currentGroupId, currentGroupForOutput);
     	            		
-    	            		System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
-    	            		TimeClass.printlnReadyCurrentTime();
+    	            		//System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
+    	            		//TimeClass.printlnReadyCurrentTime();
     	            		
     	            		TimeUnit.SECONDS.sleep(5);
                         }
@@ -110,7 +79,7 @@ public class Application extends Controller {
         }
     }
     
-    public static void cacheUpdate() {
+    public static Result index() {
         if (!isCacheUpdaterThreadRun) {
 			    //running of cache updating
 			    Thread cacheUpdaterThread = new Thread(new CacheUpdater());
@@ -118,6 +87,8 @@ public class Application extends Controller {
 			    isCacheUpdaterThreadRun = true;
 			    cacheUpdaterThread.start();
         }
+        
+        return ok(views.html.index.render(Group.all()));
     }
     
     public static Result viewGroup(Long idGroup) {

@@ -27,19 +27,25 @@ public class GPMsAddedByAdmin extends Controller {
     }
 
     public static Result addAddedByAdmin(Long groupId) {
-        Group gr = Group.findById(groupId);
         Form<AddedByAdmin> filledForm = gpmForm.bindFromRequest();
         if(filledForm.hasErrors()) {
+        	Group gr = Group.findById(groupId);
+        	System.out.println("error");
+        	System.out.println(filledForm.toString());
             return badRequest(views.html.addedbyadmin.render(gr.id, gr.name, AddedByAdmin.findByGroupId(groupId), filledForm));
-        } else {
-            AddedByAdmin gg = filledForm.get();
-            AddedByAdmin.add(new AddedByAdmin(gg.gpm.idGpm, groupId, gg.position, gg.dateOfAddition, gg.dateOfRemoval, gg.comment));
-            return redirect(routes.GPMsAddedByAdmin.gpmsAddedByAdmin(groupId));
-        }
+        } 
+        
+        System.out.println("ok");
+        AddedByAdmin gg = filledForm.get();
+        //System.out.println(filledForm.get());
+        AddedByAdmin.add(new AddedByAdmin(gg.gpm.idGpm, groupId, gg.position, gg.dateOfAddition, gg.dateOfRemoval, gg.comment));
+        
+        return redirect(routes.GPMsAddedByAdmin.gpmsAddedByAdmin(groupId));
     }
 
     public static Result deleteAddedByAdmin(Long groupId, Long id) {
         AddedByAdmin.delete(id);
+        
         return redirect(routes.GPMsAddedByAdmin.gpmsAddedByAdmin(groupId));
     }
 }

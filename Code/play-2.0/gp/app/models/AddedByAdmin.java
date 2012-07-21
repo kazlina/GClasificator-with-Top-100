@@ -23,7 +23,6 @@ public class AddedByAdmin extends Model {
 	@ManyToOne
     public GPM gpm;
 
-	@Constraints.Required
 	@JoinColumn(name = "groupDescr", nullable = false)
 	@ManyToOne
     public Group group;
@@ -34,14 +33,15 @@ public class AddedByAdmin extends Model {
 	public Integer position;
 
     @Constraints.Required
-    @Formats.DateTime(pattern = "dd.MM.yyyy")
+    @Formats.DateTime(pattern = "yyyy-MM-dd")
     @Column(name = "dateOfAddition", nullable = false)
 	public Date dateOfAddition;
 
-	@Formats.DateTime(pattern = "dd.MM.yyyy")
+	@Formats.DateTime(pattern = "yyyy-MM-dd")
 	@Column(name = "dateOfRemoval")
 	public Date dateOfRemoval;
 
+	@Constraints.MaxLength(value = 255, message = "max length = 255")
 	@Column(name = "commentField")
 	public String comment;
 
@@ -68,7 +68,7 @@ public class AddedByAdmin extends Model {
     }
 
 	public String toString(){
-		return this.gpm.idGpm + " - " + group.name;
+		return this.gpm.toString();
 	}
 
 	private static Model.Finder<Long, AddedByAdmin> find = new Model.Finder<Long, AddedByAdmin>(Long.class, AddedByAdmin.class);
@@ -86,11 +86,11 @@ public class AddedByAdmin extends Model {
 	}
 	
 	public static List<AddedByAdmin> findByGroupId(Long Id) {
-		return Group.findById(Id).addedByAdmin;
+		return find.where().eq("group", Group.findById(Id)).orderBy("position").findList();
 	}
 
 	public static void add(AddedByAdmin element) {
-		AddedByAdmin findGroupLink = find.where().eq("groupDescr", element.group).eq("gpm", element.gpm).findUnique();
+		AddedByAdmin findGroupLink = find.where().eq("group", element.group).eq("gpm", element.gpm).findUnique();
 		if (findGroupLink == null)
 			element.save();
 	}

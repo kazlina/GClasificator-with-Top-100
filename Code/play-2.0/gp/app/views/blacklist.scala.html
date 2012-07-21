@@ -1,6 +1,7 @@
 @(blackList: List[BlackList], blackListForm: Form[BlackList])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Black list") {
     <h1>@blackList.size() people in the black list</h1>

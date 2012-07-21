@@ -12,6 +12,9 @@ POST   /group/:id 							controllers.Application.indexGpm(id: Long)
 
 # ADMIN PAGE
 GET     /admin            					controllers.Admin.main()
+GET     /admin/update_control         		controllers.Admin.updateControl()
+GET		/admin/start_update         		controllers.Admin.startUpdate()
+POST	/admin/update_control         		controllers.Admin.setParameters()
 
 # CATALOGS
 GET     /admin/catalogs            			controllers.Catalogs.main()

@@ -1,25 +1,73 @@
 @(group: Long, groupForm: Form[Group])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
-@main("Group") {
-@form(action = routes.Groups.changeGroup(group), 'enctype -> "multipart/form-data") {
+@main("Редактирование группы") {
+	<br>
+	<br>
+	@form(action = routes.Groups.changeGroup(group), 'enctype -> "multipart/form-data") {
+		<fieldlist>
+			<input type="hidden" name="image" value="default.jpg">
+			@inputText(
+				groupForm("name"), 
+				'_label -> "Название:",
+				'_help -> "обязательный, максимальная длина 50 символов")
 
-	@inputText(groupForm("name"), '_label -> "name group")
+			@inputText(
+				groupForm("description"), 
+				'_label -> "Описание группы:", 
+				'style -> "width:400px; height:30px;",
+				'_help -> "максимальная длина 255 символов")
 
-	@inputText(groupForm("image"), '_label -> "Old Picture")
+			<br>
+			&nbsp;&nbsp;&nbsp;<b>Изображение группы:</b>
+			<br>
+			
+			@inputText(
+				groupForm("image"),
+				'_label -> "Старое изображение:",
+				'_help -> "")
 
-        <br><br>New Image For Group:<br>
-        <input type="file" name="imageFile" value=""><br><br>
-
-        @textarea(groupForm("description"))
-        @inputText(groupForm("textPercent"))
-        @inputText(groupForm("imagePercent"))
-        @inputText(groupForm("linkPercent"))
-        @inputText(groupForm("videoPercent"))
-        @inputText(groupForm("audioPercent"))
-
-        <input type="submit" value="Update">
+			@inputFile(
+				groupForm("imageFile"),
+				'_label -> "Новое изображение:")
+			
+			<br>
+			&nbsp;&nbsp;&nbsp;<b>Соотношение типов контента:</b>
+			<br>
+			
+			@inputText(
+				groupForm("textPercent"), 
+				'_label -> "Текст:",
+				'_help -> "обязательный, положительное число")
+			
+			@inputText(
+				groupForm("imagePercent"), 
+				'_label -> "Изображения:",
+				'_help -> "обязательный, положительное число")
+			
+			@inputText(
+				groupForm("linkPercent"), 
+				'_label -> "Ссылки:",
+				'_help -> "обязательный, положительное число")
+			
+			@inputText(
+				groupForm("videoPercent"), 
+				'_label -> "Видео:",
+				'_help -> "обязательный, положительное число")
+			
+			@inputText(
+				groupForm("audioPercent"), 
+				'_label -> "Аудио:",
+				'_help -> "обязательный, положительное число")
+				
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Обновить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Groups.groups() class="btn">Назад</a>
+		</div>
     }
-    <a href=@routes.Groups.groups()>Back to groups</a>
 }

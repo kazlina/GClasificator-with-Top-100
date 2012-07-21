@@ -45,7 +45,7 @@ public class GPM extends Model {
 	private static Model.Finder<Long, GPM> find = new Model.Finder<Long, GPM>(Long.class, GPM.class);
 	
 	public static List<GPM> all() {
-		return find.all();
+		return find.orderBy("idGpm").findList();
 	}
 
 	public static List<String> allInString() {

@@ -23,6 +23,7 @@ public class Group extends Model {
 	@Column(name = "image", nullable = false)
 	public String image;
 
+	@Constraints.MaxLength(value = 255, message = "max length = 255")
 	@Column(name = "description")
 	public String description;
 
