@@ -26,8 +26,8 @@ public class Application extends Controller {
                 	if (groupsForOutput.size() == 0) {
                 		
                 		//quick initialization of cache
-                		//System.out.println("Quick initialization of cache has started.");
-                		//TimeClass.printlnReadyCurrentTime();
+                		System.out.println("Quick initialization of cache has started.");
+                		TimeClass.printlnReadyCurrentTime();
                 		
                 		List <Group> allGroups = Group.all();
                     	for (Group currentGroup: allGroups) {
@@ -47,15 +47,15 @@ public class Application extends Controller {
                     		GroupForOutput fakeGpms = new GroupForOutput (currentGroup.id, fakeQueryResult);
                     		groupsForOutput.add(fakeGpms);
                     	}
-                    	//System.out.println("Quick initialization of cache has finished.");
-                		//TimeClass.printlnReadyCurrentTime();
+                    	System.out.println("Quick initialization of cache has finished.");
+                		TimeClass.printlnReadyCurrentTime();
                     }
                     else {
                     	List <Group> allGroups = Group.all();
                         for (Group currentGroup: allGroups) {
                         	
-                        	//System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
-                        	//TimeClass.printlnReadyCurrentTime();
+                        	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
+                        	TimeClass.printlnReadyCurrentTime();
                         	
     	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
     	            		//searching index of element with current group in groupsForOutput array
@@ -67,8 +67,8 @@ public class Application extends Controller {
     	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
     	            		groupsForOutput.set(currentGroupId, currentGroupForOutput);
     	            		
-    	            		//System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
-    	            		//TimeClass.printlnReadyCurrentTime();
+    	            		System.out.println("Updating group with id: " + currentGroup.id + "was finished.");
+    	            		TimeClass.printlnReadyCurrentTime();
     	            		
     	            		TimeUnit.SECONDS.sleep(5);
                         }
