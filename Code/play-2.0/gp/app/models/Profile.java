@@ -87,7 +87,19 @@ public class Profile extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Profile prof = findById(id);
+		if (prof == null)
+			return;
+		
+		// delete links for profile
+		for (ProfileLink pl: prof.links)
+			ProfileLink.delete(pl.id);
+		
+		// delete words for profile
+		for (ProfileWord pw: prof.words)
+			ProfileWord.delete(pw.id);
+		
+		prof.delete();
     }
 	
 	public static int size() {

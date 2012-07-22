@@ -48,6 +48,9 @@ public class Group extends Model {
 	public Integer audioPercent;
 
 	@OneToMany(mappedBy = "group")
+	public List<CacheClassifier> gpms;
+	
+	@OneToMany(mappedBy = "group")
 	public List<AddedByAdmin> addedByAdmin;
 
 	@OneToMany(mappedBy = "group")
@@ -115,6 +118,25 @@ public class Group extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Group grp = findById(id);
+		if (grp == null)
+			return;
+		
+		// delete from added by admin
+		for (AddedByAdmin aba: grp.addedByAdmin)
+			AddedByAdmin.delete(aba.id);
+		
+		// delete links for group
+		for (GroupLink gl: grp.links)
+			GroupLink.delete(gl.id);
+		
+		// delete words for group
+		for (GroupWord gw: grp.words)
+			GroupWord.delete(gw.id);
+		
+		// delete from added by admin
+		CacheClassifier.deleteForGroup(grp.id);
+		
+		grp.delete();
     }
 }

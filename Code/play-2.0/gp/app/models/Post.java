@@ -1,12 +1,8 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlRow;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -104,7 +100,19 @@ public class Post extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Post pos = findById(id);
+		if (pos == null)
+			return;
+		
+		// delete links for post
+		for (PostLink pl: pos.links)
+			PostLink.delete(pl.id);
+		
+		// delete words for post
+		for (PostWord pw: pos.words)
+			PostWord.delete(pw.id);
+		
+		pos.delete();
     }
 	
 	public static int size() {

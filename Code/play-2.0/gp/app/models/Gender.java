@@ -2,6 +2,10 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
+
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -46,29 +50,32 @@ public class Gender extends Model {
 		element.save();
 	}
 
-	public static void createList() {
-		for (Gender g: all()) {
-			delete(g.id);
-		}
-		add("Male");
-		add("Female");
-		add("Other");
-	}
-
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Gender gend = findById(id);
+		if (gend == null)
+			return;
+		
+		List<SqlRow> result = Ebean.createSqlQuery("SELECT id"
+										+ " FROM profile"
+										+ " WHERE gender = :idGender;").setParameter("idGender", id).findList();
+		for (SqlRow res: result) {
+			Profile prof = Profile.findById(res.getLong("id"));
+			if (prof != null) {
+				prof.gender = null;
+				prof.update();
+			}
+		}
+		
+		gend.delete();
     }
 	
 	public static void updateGender(Long idGender, Gender gender) {
-	System.out.println(gender.value);
-	Gender findGender = Gender.findById(idGender);
-	if (findGender == null)
-		return;
-
-	findGender.value = gender.value;
-	findGender.update();
-	}
-
+		System.out.println(gender.value);
+		Gender findGender = Gender.findById(idGender);
+		if (findGender == null)
+			return;
 	
-    
+		findGender.value = gender.value;
+		findGender.update();
+	}
 }

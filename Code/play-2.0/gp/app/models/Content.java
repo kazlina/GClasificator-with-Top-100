@@ -2,6 +2,8 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+import com.avaje.ebean.SqlRow;
+import com.avaje.ebean.Ebean;
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -47,21 +49,14 @@ public class Content extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		SqlRow result = Ebean.createSqlQuery("SELECT COUNT(*) as count"
+									+ " FROM post"
+									+ " WHERE kindContent = :id;").setParameter("id", id).findUnique();
+		if (result.getLong("count") == 0)
+			find.ref(id).delete();
     }
 
-    public static void createList() {
-		for (Content g: all()) {
-			delete(g.id);
-		}
-		add("video");
-		add("photo");
-		add("link");
-		add("audio");
-		add("text");
-	}
-	
-	public static void updateContent(Long idContent, Content content) {
+    public static void updateContent(Long idContent, Content content) {
 	System.out.println(content.kind);
 	Content findContent = Content.findById(idContent);
 	if (findContent == null)

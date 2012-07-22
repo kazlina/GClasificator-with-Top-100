@@ -66,11 +66,14 @@ public class NewGPM extends Model {
 				searchNewGpm.save();
 			}
 			else {
-				GPM searchGpm = GPM.findByIdGpm(idGpm);
-				if (searchGpm == null) {
-					NewGPM newGpm = new NewGPM(idGpm);
-					newGpm.nMentiens = 1;
-					newGpm.save();
+				UserError searchUserError = UserError.findByIdGpm(idGpm);
+				if (searchUserError == null) {
+					GPM searchGpm = GPM.findByIdGpm(idGpm);
+					if (searchGpm == null) {
+						NewGPM newGpm = new NewGPM(idGpm);
+						newGpm.nMentiens = 1;
+						newGpm.save();
+					}
 				}
 			}
 			Ebean.commitTransaction();

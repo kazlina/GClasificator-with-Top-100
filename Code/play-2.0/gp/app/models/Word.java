@@ -71,17 +71,37 @@ public class Word extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Word findWord = findById(id);
+		if (findWord == null)
+			return;
+		
+		// delete groups for word
+		for (GroupWord gw: findWord.groupWords)
+			GroupWord.delete(gw.id);
+		
+		// delete posts for word
+		for (PostWord pw: findWord.postWords)
+			PostWord.delete(pw.id);
+				
+		// delete profiles for word
+		for (ProfileWord pw: findWord.profileWords)
+			ProfileWord.delete(pw.id);
+		
+		// delete synonyms for word
+		for (Synonym syn: findWord.synonyms)
+			Synonym.delete(syn.id);
+		
+		findWord.delete();
     }
 
 	public static void updateWord(Long idWord, Word word) {
-	System.out.println(word.word);
-	Word findWord = Word.findById(idWord);
-	if (findWord == null)
-		return;
-
-	findWord.word = word.word;
-	findWord.update();
+		System.out.println(word.word);
+		Word findWord = Word.findById(idWord);
+		if (findWord == null)
+			return;
+	
+		findWord.word = word.word;
+		findWord.update();
 	}
 
 }

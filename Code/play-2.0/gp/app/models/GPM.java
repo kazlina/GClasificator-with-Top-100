@@ -75,12 +75,15 @@ public class GPM extends Model {
 		try {
 			GPM searchGpm = findByIdGpm(idGpm);
 			if (searchGpm == null) {
-				NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
-				if (searchNewGpm != null)
-					NewGPM.delete(searchNewGpm.id);
-				
-				newGpm = new GPM(idGpm);
-				newGpm.save();
+				UserError searchUserError = UserError.findByIdGpm(idGpm);
+				if (searchUserError == null) {
+					NewGPM searchNewGpm = NewGPM.findByIdGpm(idGpm);
+					if (searchNewGpm != null)
+						NewGPM.delete(searchNewGpm.id);
+					
+					newGpm = new GPM(idGpm);
+					newGpm.save();
+				}
 			}
 			Ebean.commitTransaction();	
 		} 
@@ -91,7 +94,28 @@ public class GPM extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		GPM findGpm = findById(id);
+		if (findGpm == null)
+			return;
+		
+		// delete from black list
+		BlackList bl = BlackList.findByGpmId(findGpm.id);
+		if (bl != null)
+			bl.delete();
+		
+		// delete from added by admin
+		for (AddedByAdmin aba: findGpm.addedByAdmin)
+			AddedByAdmin.delete(aba.id);
+		
+		// delete profiles
+		for (Profile prof: findGpm.profile)
+			Profile.delete(prof.id);
+				
+		// delete posts
+		for (Post pos: findGpm.post)
+			Post.delete(pos.id);	
+		
+		findGpm.delete();
     }
 	
 	public static List<SqlRow> getIdGpmByLastPosts(int count) {

@@ -69,7 +69,23 @@ public class Link extends Model {
 	}
 
 	public static void delete(Long id) {
-		find.ref(id).delete();
+		Link lnk = findById(id);
+		if (lnk == null)
+			return;
+		
+		// delete groups for link
+		for (GroupLink gl: lnk.groupLink)
+			GroupLink.delete(gl.id);
+		
+		// delete posts for link
+		for (PostLink pl: lnk.postLinks)
+			PostLink.delete(pl.id);
+				
+		// delete profiles for link
+		for (ProfileLink pl: lnk.profileLinks)
+			ProfileLink.delete(pl.id);
+		
+		lnk.delete();
     }
 
 	public static void updateLink(Long idLink, Link link) {

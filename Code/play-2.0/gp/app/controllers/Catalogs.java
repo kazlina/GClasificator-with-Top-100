@@ -47,10 +47,6 @@ public class Catalogs extends Controller {
         return redirect(routes.Catalogs.genders());
     }
 
-    public static Result createGenderList() {
-        Gender.createList();
-        return redirect(routes.Catalogs.genders());
-    }
 	//you can change gender
     public static Result changeGender(Long id) {
         Form<Gender> filledForm = form(Gender.class).bindFromRequest();
@@ -92,10 +88,6 @@ public class Catalogs extends Controller {
         return redirect(routes.Catalogs.contents());
     }
 
-    public static Result createContentList() {
-        models.Content.createList();
-        return redirect(routes.Catalogs.contents());
-    }
 	//you can change Content
     public static Result changeContent(Long id) {
         Form<models.Content> filledForm = form(models.Content.class).bindFromRequest();
@@ -132,11 +124,6 @@ public class Catalogs extends Controller {
 
     public static Result deleteRelation(Long id) {
         Relationship.delete(id);
-        return redirect(routes.Catalogs.relationships());
-    }
-
-    public static Result createRelationList() {
-        Relationship.createList();
         return redirect(routes.Catalogs.relationships());
     }
 

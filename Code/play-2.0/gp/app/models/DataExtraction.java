@@ -41,9 +41,9 @@ public class DataExtraction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
         	
-        	BlackList ban = new BlackList(gpm.id, "IOException");
-        	BlackList.add(ban);
-        	System.out.println("id " + gpm.idGpm + " was add in black list");
+			UserError ban = new UserError(gpm.idGpm, "IOException");
+			UserError.add(ban);
+        	System.out.println("id " + ban.idGpm + " was add in black list");
 			
 			return -1;
 		} // i should add a validator!
@@ -62,9 +62,9 @@ public class DataExtraction {
 			// TODO Auto-generated catch block
         	e.printStackTrace();
         	
-        	BlackList ban = new BlackList(gpm.id, "PersistenceException");
-        	BlackList.add(ban);
-        	System.out.println("id " + gpm.idGpm + " was add in black list");
+        	UserError ban = new UserError(gpm.idGpm, "PersistenceException");
+        	UserError.add(ban);
+        	System.out.println("id " + ban.idGpm + " was add in black list");
 			
 			return -1;
 		}
