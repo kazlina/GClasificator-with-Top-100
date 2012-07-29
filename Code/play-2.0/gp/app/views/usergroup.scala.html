@@ -1,4 +1,4 @@
-@(gpms: List[GpmForOutput], groups: List[Group], viewGroup: Group, gpmForm: Form[GPM])
+@(gpms: List[CacheClassifier], groups: List[Group], viewGroup: Group, gpmForm: Form[GPM])
 
 @import helper._
 
@@ -38,13 +38,13 @@
 			@for(gpm <- gpms) {
 				<div class="groups-user-block">
 
-					@if(gpm == null || gpm.image == null || gpm.image == "") {
+					@if(gpm.image == null || gpm.image == "") {
 						<a href="https://plus.google.com/u/0/@gpm.gpm">
-							<img src="@routes.Assets.at("images/foto.png")" style="height:80px; width:80px; margin:2px;">
+							<img src=@routes.Assets.at("images/foto.png") style="height:80px; width:80px; margin:2px;">
 						</a>
 					} else {
 						<a href="https://plus.google.com/u/0/@gpm.gpm">
-							<img src="@gpm.image" style="height:80px; width:80px; margin:2px;">
+							<img src=@gpm.image style="height:80px; width:80px; margin:2px;">
 						</a>
 					}
 

@@ -6,7 +6,7 @@ import com.avaje.ebean.*;
 
 public class Classifier {
 
-	public static List <GpmForOutput> getGpmForGroup(Long groupId) {
+	public static void getGpmForGroup(Long groupId) {
 		String request = "select all_rating.gpm, all_rating.RATING from" 
 				+ " ("
 				+ " select GPM.id as gpm, ("
@@ -386,24 +386,7 @@ public class Classifier {
 				+ " where notadd.gpm_id is null"
 					+ " limit 0, 250;";
 		
-		List <GpmForOutput> gpms = new ArrayList<GpmForOutput>();
 		List<SqlRow> res = Ebean.createSqlQuery(request).setParameter("group", groupId).findList();
-        int i = 1;
-	    for(SqlRow row: res) {
-	    	if (row.getFloat("rating") <= 0)
-	    		break;
-	    	
-	    	Profile prof = Profile.lastProfileByGpmId(row.getLong("gpm"));
-	    	if (prof != null)
-	    		gpms.add(new GpmForOutput(
-	    				i++, 
-	    				prof.gpm.idGpm, 
-	    				prof.name, 
-	    				prof.image, 
-	    				(prof.gender == null)? null : prof.gender.value,
-	    				(prof.relationshipStatus == null)? null : prof.relationshipStatus.status,
-	    				prof.nFollowers));
-	    }
-        return gpms;
+		CacheClassifier.update(groupId, res);
 	}
 }
