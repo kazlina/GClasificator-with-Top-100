@@ -123,19 +123,19 @@ public class Group extends Model {
 			return;
 		
 		// delete from added by admin
-		for (AddedByAdmin aba: grp.addedByAdmin)
+		for (AddedByAdmin aba: AddedByAdmin.findByGroupId(id))
 			AddedByAdmin.delete(aba.id);
 		
 		// delete links for group
-		for (GroupLink gl: grp.links)
+		for (GroupLink gl: GroupLink.findByGroup(id))
 			GroupLink.delete(gl.id);
 		
 		// delete words for group
-		for (GroupWord gw: grp.words)
+		for (GroupWord gw: GroupWord.findByGroup(id))
 			GroupWord.delete(gw.id);
 		
 		// delete from added by admin
-		CacheClassifier.deleteForGroup(grp.id);
+		CacheClassifier.deleteForGroup(id);
 		
 		grp.delete();
     }

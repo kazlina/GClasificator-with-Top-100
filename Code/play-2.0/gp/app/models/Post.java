@@ -105,11 +105,11 @@ public class Post extends Model {
 			return;
 		
 		// delete links for post
-		for (PostLink pl: pos.links)
+		for (PostLink pl: PostLink.findByPost(id))
 			PostLink.delete(pl.id);
 		
 		// delete words for post
-		for (PostWord pw: pos.words)
+		for (PostWord pw: PostWord.findByPost(id))
 			PostWord.delete(pw.id);
 		
 		pos.delete();

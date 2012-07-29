@@ -74,17 +74,17 @@ public class Link extends Model {
 			return;
 		
 		// delete groups for link
-		for (GroupLink gl: lnk.groupLink)
+		for (GroupLink gl: GroupLink.findByLink(id))
 			GroupLink.delete(gl.id);
 		
 		// delete posts for link
-		for (PostLink pl: lnk.postLinks)
+		for (PostLink pl: PostLink.findByLink(id))
 			PostLink.delete(pl.id);
 				
 		// delete profiles for link
-		for (ProfileLink pl: lnk.profileLinks)
-			ProfileLink.delete(pl.id);
-		
+		for (ProfileLink prl: ProfileLink.findByLink(id))
+			ProfileLink.delete(prl.id);
+			
 		lnk.delete();
     }
 

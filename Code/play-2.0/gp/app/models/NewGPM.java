@@ -2,11 +2,7 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-
-import org.jsoup.select.Elements;
-
 import com.avaje.ebean.*;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 

@@ -1,9 +1,7 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -92,12 +90,14 @@ public class Profile extends Model {
 			return;
 		
 		// delete links for profile
-		for (ProfileLink pl: prof.links)
-			ProfileLink.delete(pl.id);
+		if (prof.links != null)
+			for (ProfileLink pl: prof.links)
+				ProfileLink.delete(pl.id);
 		
 		// delete words for profile
-		for (ProfileWord pw: prof.words)
-			ProfileWord.delete(pw.id);
+		if (prof.words != null)
+			for (ProfileWord pw: prof.words)
+				ProfileWord.delete(pw.id);
 		
 		prof.delete();
     }

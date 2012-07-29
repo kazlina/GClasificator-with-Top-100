@@ -104,15 +104,15 @@ public class GPM extends Model {
 			bl.delete();
 		
 		// delete from added by admin
-		for (AddedByAdmin aba: findGpm.addedByAdmin)
+		for (AddedByAdmin aba: AddedByAdmin.findByGpm(id))
 			AddedByAdmin.delete(aba.id);
 		
 		// delete profiles
-		for (Profile prof: findGpm.profile)
+		for (Profile prof: Profile.findByGpmId(id))
 			Profile.delete(prof.id);
 				
 		// delete posts
-		for (Post pos: findGpm.post)
+		for (Post pos: Post.findByGpmId(id))
 			Post.delete(pos.id);	
 		
 		findGpm.delete();

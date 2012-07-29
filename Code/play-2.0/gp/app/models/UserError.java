@@ -22,11 +22,11 @@ public class UserError extends Model {
     @Column(name = "reasonOfAddition")
     public String reasonOfAddition;
 
-	public String toString(){
+	public String toString() {
 		return this.idGpm;
 	}
 
-	public UserError(String gpmId, String reasonOfAddition) {
+	private UserError(String gpmId, String reasonOfAddition) {
 		this.idGpm = gpmId;
 		this.reasonOfAddition = reasonOfAddition;
     }
@@ -45,18 +45,19 @@ public class UserError extends Model {
 		return find.where().eq("idGpm", Id).findUnique();
 	}
 
-	public static void add(UserError element) {
+	public static void add(String idGpm, String reasonOfAddition) {
 		Ebean.beginTransaction();
 		try {
-			GPM gpm = GPM.findByIdGpm(element.idGpm);
-			if (gpm != null)
-				GPM.delete(gpm.id);
+			GPM findGpm = GPM.findByIdGpm(idGpm);
+			if (findGpm != null)
+				GPM.delete(findGpm.id);
 			else {
-				NewGPM newGpm = NewGPM.findByIdGpm(element.idGpm);
-				if (newGpm != null)
-					NewGPM.delete(newGpm.id);
+				NewGPM findNewGpm = NewGPM.findByIdGpm(idGpm);
+				if (findNewGpm != null)
+					NewGPM.delete(findNewGpm.id);
 			}
 		
+			UserError element = new UserError(idGpm, reasonOfAddition);
 			element.dateOfAddition = Calendar.getInstance().getTime();
 			element.save();
 			

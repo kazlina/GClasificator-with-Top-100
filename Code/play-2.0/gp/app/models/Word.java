@@ -76,19 +76,19 @@ public class Word extends Model {
 			return;
 		
 		// delete groups for word
-		for (GroupWord gw: findWord.groupWords)
+		for (GroupWord gw: GroupWord.findByWord(id))
 			GroupWord.delete(gw.id);
 		
 		// delete posts for word
-		for (PostWord pw: findWord.postWords)
+		for (PostWord pw: PostWord.findByWord(id))
 			PostWord.delete(pw.id);
 				
 		// delete profiles for word
-		for (ProfileWord pw: findWord.profileWords)
+		for (ProfileWord pw: ProfileWord.findByWord(id))
 			ProfileWord.delete(pw.id);
 		
 		// delete synonyms for word
-		for (Synonym syn: findWord.synonyms)
+		for (Synonym syn: Synonym.findByWordId(id))
 			Synonym.delete(syn.id);
 		
 		findWord.delete();

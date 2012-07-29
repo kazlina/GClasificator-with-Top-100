@@ -70,6 +70,11 @@ public class Groups extends Controller {
     }
     
     //you can delete group
+    public static Result askDeleteGroup(Long id) {
+    	
+    	return ok(views.html.confirmDeletion.render(id, Group.findById(id).name));
+    }
+    
     public static Result deleteGroup(Long id) {
     	
     	//groupId = id;

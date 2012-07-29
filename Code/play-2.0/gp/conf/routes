@@ -81,7 +81,8 @@ POST    /admin/blacklist/:id/delete			controllers.BlackListController.deleteBlac
 # GROUPS
 GET     /admin/groups            			controllers.Groups.groups()
 POST    /admin/groups            			controllers.Groups.addGroup()
-POST    /admin/groups/:id/delete 			controllers.Groups.deleteGroup(id: Long)
+POST    /admin/groups/:id/delete 			controllers.Groups.askDeleteGroup(id: Long)
+POST    /admin/groups/:id/deleteGroup     	controllers.Groups.deleteGroup(id: Long)
 
 # ABOUT GROUP
 GET     /admin/groups/:gid       			controllers.Groups.viewGroup(gid: Long)
