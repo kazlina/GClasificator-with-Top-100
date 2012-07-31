@@ -1,12 +1,9 @@
 package models;
 
 import java.util.*;
-
 import javax.persistence.*;
-
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlRow;
-
 import play.db.ebean.*;
 import play.data.validation.*;
 
@@ -119,14 +116,43 @@ public class GPM extends Model {
     }
 	
 	public static List<SqlRow> getIdGpmByLastPosts(int count) {
-    	return Ebean.createSqlQuery("SELECT gpm"
+		List<SqlRow> res = Ebean.createSqlQuery("SELECT id AS gpm"
+				+ " FROM gpm"
+				+ " WHERE id NOT IN ("
+					+ " SELECT id" 
+					+ " FROM blacklist"
+					+ " UNION"
+						+ " SELECT gpm AS id"
+						+ " FROM post)"
+				+ " LIMIT :count;").setParameter("count", count).findList();
+		
+		if (res.size() > 0)
+			return res;
+		
+		return Ebean.createSqlQuery("SELECT gpm"
 				+ " FROM Post"
+    			+ " WHERE gpm NOT IN ("
+    				+ " SELECT id"
+    				+ " FROM blacklist)"
 				+ " GROUP BY gpm"
 				+ " ORDER BY max(dateCreate)"
 				+ " LIMIT :count;").setParameter("count", count).findList();
 	}
     
 	public static List<SqlRow> getIdGpmByLastProfile(int count) {
+		List<SqlRow> res = Ebean.createSqlQuery("SELECT id AS gpm"
+				+ " FROM gpm"
+				+ " WHERE id NOT IN ("
+					+ " SELECT id" 
+					+ " FROM blacklist"
+					+ " UNION"
+						+ " SELECT gpm AS id"
+						+ " FROM profile)"
+				+ " LIMIT :count;").setParameter("count", count).findList();
+		
+		if (res.size() > 0)
+			return res;
+		
 		Date date = Calendar.getInstance().getTime();
 		String dateToString = date.toString();
 		String year = dateToString.substring(dateToString.length() - 4);
@@ -135,7 +161,10 @@ public class GPM extends Model {
 		
 		return Ebean.createSqlQuery("SELECT gpm"
 				+ " FROM Profile"
-				+ " WHERE dateUpdated < '" + parameter + "'"
+				+ " WHERE gpm NOT IN ("
+					+ " SELECT id"
+					+ " FROM blacklist)"
+					+ " AND dateUpdated < '" + parameter + "'"
 				+ " GROUP BY gpm"
 				+ " ORDER BY max(dateUpdated)"
 				+ " LIMIT :count;").setParameter("count", count).findList();

@@ -157,10 +157,8 @@ public class DataExtraction {
             }
 
             //ids extraction
-            if ((post.isRepost)) {
-                NewGPM newGPM = null;
-                newGPM.add(post.actorId);
-            }
+            if ((post.isRepost))
+                NewGPM.add(post.actorId);
         }
         return true;
     }

@@ -37,46 +37,77 @@ public class Parser {
 	        	  }
 	        }
 	        
-	        String type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();
-	        if (type == "+Page")
-	        	profile.isPerson = false;
-	        else
-	        	profile.isPerson = true;
-	        
-	        Elements name = doc.getElementsByClass("fn"); //displayName
+	        // get displayName
+	        Elements name = doc.getElementsByClass("fn"); 
 	        profile.displayName = name.text();
+	        
+	        // get image
+	        Elements image = doc.select("div.g-oa-Sa-R-N");	// first try
+	        if (image.isEmpty())
+	        	image = doc.select("div.h-va-Za-W-P");	// second try
+	        image = image.select("[src]");
+	        for (Element src : image) 
+		        if (src.tagName().equals("img")){
+		        	profile.image = src.attr("abs:src");
+		        }
+	        
+	        // get type page
+	        String type = doc.select("div.Rr.sU.rAa.a-f-e.qU").text();	// first try
+	        if (type.contentEquals("+Страница"))
+	        	profile.isPerson = false;
+	        else {
+	        	type = doc.select("div.GDsXwf.Qm.lwy5pf.c-wa-Da.Om").text();	// second try
+		        if (type.contentEquals("+Page"))
+		        	profile.isPerson = false;
+		        else
+		        	profile.isPerson = true;
+	        }
+	        
+	        // get aboutMe 
+	        Elements about = doc.select("div.l-Rg.IC.me.lc");	// first try
+	        about = about.select("div.Ca.a-f-e.note");
+	        if (about.isEmpty()) {
+		        about = doc.select("div.l-Jg.Wx.ne.jc");	// second try
+		        about = about.select("div.Ga.a-f-e.note");
+	        }
+	        profile.aboutMe = about.text();
 	        
 	        Elements tagline = doc.select("div.l-uq.ne.jc"); //tagline
 	        Elements tag = tagline.select("div.Ga.a-f-e"); 
 	        profile.tagline = tag.text();
 	 
-	        Elements about = doc.select("div.l-Jg.Wx.ne.jc");//aboutMe 
-	        Elements aboutMe = about.select("div.Ga.a-f-e.note");
-	        profile.aboutMe = aboutMe.text();
-	        
-	        Elements urls = doc.select("a.Qc0zVe.url");//url        
-	           
+	        // get urls
+	        Elements urls = doc.select("a.nX.url");	// first try
+	        if (urls.isEmpty())
+	        	urls = doc.select("a.Qc0zVe.url");	// second try   
 	        for(Element ur : urls) {
 		       	String link = ur.attr("href");
 		        profile.urls.add(link);
-	        }
+	        }   
 	        
-	        Elements gender = doc.getElementsByClass("J90C7b");//gender
-			gender = gender.select("div.l-i9.ne.jc");
-	        gender = gender.select("div.Ga.a-f-e");
-	        profile.gender = gender.text();    
-	         
-	        Elements statuses = doc.select("div.l-Xea.ne.jc");//relationshipStatus
-	        Elements status = statuses.select("div.Ga.a-f-e");
-	        profile.relationshipStatus = status.text();
-	         
-	        Elements im = doc.select("div.h-va-Za-W-P");//image
-	        Elements imga = im.select("[src]");
-	
-	        for (Element src : imga) 
-		        if (src.tagName().equals("img")){
-		        	profile.image = src.attr("abs:src");
-		        }       
+	        if (!profile.isPerson) {
+	        	profile.gender = profile.relationshipStatus = "";
+	        }
+	        else {
+	        	// get gender
+		        Elements gender = doc.select("div.l-Cha.me.lc");	// first try
+		        gender = gender.select("div.Ca.a-f-e");
+				if (gender.isEmpty()) {
+					gender = doc.getElementsByClass("J90C7b");	// second try
+					gender = gender.select("div.l-i9.ne.jc");
+			        gender = gender.select("div.Ga.a-f-e");
+				}
+		        profile.gender = gender.text(); 
+		        
+		        // get relationshipStatus
+		        Elements status = doc.select("div.l-Fla.me.lc");	// first try
+		        status = status.select("div.Ca.a-f-e");
+		        if (status.isEmpty()) {
+			        Elements statuses = doc.select("div.l-Xea.ne.jc");	// second try
+			        status = statuses.select("div.Ga.a-f-e");
+		        }
+		        profile.relationshipStatus = status.text();
+	        }
 	    }
     	catch(HttpResponseException e) {
     		System.out.println("ERROR in getting profile by id = " + id);

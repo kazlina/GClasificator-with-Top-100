@@ -82,7 +82,7 @@ public class AddedByAdmin extends Model {
 	}
 	
 	public static List<AddedByAdmin> findByGpm(Long Id) {
-		return GPM.findById(Id).addedByAdmin;
+		return find.where().eq("gpm", GPM.findById(Id)).findList();
 	}
 	
 	public static List<AddedByAdmin> findByGroupId(Long Id) {

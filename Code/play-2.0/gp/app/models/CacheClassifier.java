@@ -91,6 +91,7 @@ public class CacheClassifier extends Model {
 	
 	public static void deleteForGroup(Long id) {
 		for (CacheClassifier gpm: findByGroup(id))
-			gpm.delete();
+			//gpm.delete();
+			find.ref(gpm.id).delete();
     }
 }
