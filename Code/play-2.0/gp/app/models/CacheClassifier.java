@@ -26,7 +26,7 @@ public class CacheClassifier extends Model {
 	@Column(name = "name", length = 100, nullable = false)
 	public String name;
 
-	@Column(name = "image", nullable = false)
+	@Column(name = "image")
 	public String image;
 
 	@Column(name = "gender", length = 10)
@@ -79,6 +79,8 @@ public class CacheClassifier extends Model {
 	    				(prof.gender == null)? null : prof.gender.value,
 	    				(prof.relationshipStatus == null)? null : prof.relationshipStatus.status,
 	    				prof.nFollowers);
+				if (cc.name == null || cc.name.isEmpty())
+					cc.name = Profile.getLastNotEmptyField(prof.gpm.id, "name");
 				cc.save();
 			}
 			

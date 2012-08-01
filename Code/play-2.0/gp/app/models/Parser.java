@@ -72,9 +72,14 @@ public class Parser {
 	        }
 	        profile.aboutMe = about.text();
 	        
-	        Elements tagline = doc.select("div.l-uq.ne.jc"); //tagline
-	        Elements tag = tagline.select("div.Ga.a-f-e"); 
-	        profile.tagline = tag.text();
+	        //tagline
+	        Elements tagline = doc.select("div.l-xr.me.lc");	// first try
+	        tagline = tagline.select("div.Ca.a-f-e");
+	        if (tagline.isEmpty()) {
+		        tagline = doc.select("div.l-uq.ne.jc");		// second try
+		        tagline = tagline.select("div.Ga.a-f-e");
+	        }
+	        profile.tagline = tagline.text();
 	 
 	        // get urls
 	        Elements urls = doc.select("a.nX.url");	// first try

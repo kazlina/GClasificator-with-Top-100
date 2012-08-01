@@ -1,4 +1,4 @@
-@(gpmSize: Int, profileSize: Int, postSize: Int, updateRunning: Boolean, parametersForm: Form[Parameters])
+@(gpmSize: Int, profileSize: Int, postSize: Int, updateRunning: Boolean, parametersForm: Form[Parameters], cacheUpdateRunning: Boolean)
 
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
@@ -54,13 +54,26 @@
 	<br>	
 	<p style="font-size: 14pt">
 		@if(updateRunning) {
-			Обновление запущено:
+			Обновление базы данных запущено:
 			&nbsp;&nbsp;
 			<a href=@routes.Admin.startUpdate() class="btn danger">Остановить</a>
 		} else {
-			Обновление не запущено:
+			Обновление базы данных не запущено:
 			&nbsp;&nbsp;
 			<a href=@routes.Admin.startUpdate() class="btn success">Запустить</a>
+		}
+	</p>
+	
+	<br>	
+	<p style="font-size: 14pt">
+		@if(cacheUpdateRunning) {
+			Обновление кеша запущено:
+			&nbsp;&nbsp;
+			<a href=@routes.Admin.startCacheUpdate() class="btn danger">Остановить</a>
+		} else {
+			Обновление кеша не запущено:
+			&nbsp;&nbsp;
+			<a href=@routes.Admin.startCacheUpdate() class="btn success">Запустить</a>
 		}
 	</p>
 	

@@ -4,6 +4,8 @@ import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.*;
 import play.data.validation.*;
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 
 @Entity
 @Table(name = "Profile", uniqueConstraints = {
@@ -77,6 +79,16 @@ public class Profile extends Model {
 	public static Profile lastProfileByGpmId(Long Id) {
 		List<Profile> profiles =  find.where().eq("gpm", GPM.findById(Id)).orderBy("date desc").findList();
 		return (profiles.size() == 0)? null : profiles.get(0);
+	}
+	
+	public static String getLastNotEmptyField(Long gpmId, String field) {
+		SqlRow res = Ebean.createSqlQuery("SELECT " + field
+				+ " FROM profile"
+				+ " WHERE gpm = :gpmId"
+					+ " AND NOT " + field + " = ''"
+				+ " ORDER BY dateUpdated DESC"
+				+ " LIMIT 1;").setParameter("gpmId", gpmId).findUnique();
+    	return (res == null)? "" : res.getString("name");
 	}
 	
 	public static void add(Profile element) throws PersistenceException {
