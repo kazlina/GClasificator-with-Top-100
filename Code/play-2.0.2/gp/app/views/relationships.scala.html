@@ -1,0 +1,52 @@
+@(relations: List[Relationship], relationForm: Form[Relationship])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Отношения") {
+
+    <h1>Отношения</h1>
+	
+	<table>
+		<thead>
+			<tr>
+				<td width="35%">Тип отношений</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(r <- relations) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Catalogs.viewRelationship(r.id)>@r.status</a>
+					</td>
+					
+					<td>
+						@form(routes.Catalogs.deleteRelation(r.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+	<h2>Добавление</h2>
+    <br>
+    
+    @form(routes.Catalogs.addRelation()) {
+		<fieldlist>
+			@inputText(
+				relationForm("status"),
+				'_label -> "Статус: ",
+				'_help -> "обязательный, максимальная длина 30 символов")
+		<fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.main() class="btn">Назад</a>
+		</div>
+    }
+}

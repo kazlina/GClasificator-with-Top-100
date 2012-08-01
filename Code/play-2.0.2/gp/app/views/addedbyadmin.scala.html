@@ -1,0 +1,93 @@
+@(groupId: Long, nameGroup: String, gpms: List[AddedByAdmin], gpmForm: Form[AddedByAdmin])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(nameGroup) {
+    <h1>Пользователи для группы @nameGroup</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<td width="4%">Позиция</td>
+				<td width="10%">Id пользователя</td>
+				<td width="17%">Дата добавления</td>
+				<td width="17%">Дата удаления</td>
+				<td>Комментарий</td>
+				<td width="5%">Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(gpm <- gpms) {
+				<tr>
+					<td style="font-size: 12pt">
+						@gpm.position
+					</td>
+					
+					<td style="font-size: 12pt; color: blue">
+						@gpm
+					</td>
+					
+					<td>
+						@gpm.dateOfAddition
+					</td>
+					
+					<td>
+						@gpm.dateOfRemoval
+					</td>
+					
+					<td>
+						@gpm.comment
+					</td>
+					
+					<td>
+						@form(routes.GPMsAddedByAdmin.deleteAddedByAdmin(groupId,gpm.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <h2>Добавление нового пользователя в список пользователей для группы @nameGroup</h2>
+    <br>
+	
+    @form(routes.GPMsAddedByAdmin.addAddedByAdmin(groupId)) {
+		<fieldlist>
+			@select(
+				gpmForm("gpm.idGpm"), 
+				options(GPM.allInString()), 
+				'_label -> "Id пользователя: ",
+				'_help -> "обязательный")
+			
+			@inputText(
+				gpmForm("position"),
+				'_label -> "Позиция в группе: ",
+				'style -> "width:50px;",
+				'_help -> "обязательный, положительное число")
+			
+			@inputDate(
+				gpmForm("dateOfAddition"),
+				'_label -> "Дата добавления: ",
+				'_help -> "обязательный")
+			
+			@inputDate(
+				gpmForm("dateOfRemoval"),
+				'_label -> "Дата удаления: ",
+				'_help -> "")
+				
+			@textarea(
+				gpmForm("commentField"),
+				'_label -> "Комментарий: ",
+				'_help -> "максимальная длина 255 символов")
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Groups.groups() class="btn">Назад</a>
+		</div>
+    }
+}

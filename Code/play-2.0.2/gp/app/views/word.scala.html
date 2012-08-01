@@ -1,0 +1,24 @@
+@(wordId: Long, wordForm: Form[Word])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Слово") {
+	
+	<h1>Изменение слова:</h1>
+	
+	@form(routes.Words.changeWord(wordId)) {
+		<fieldlist>
+			@inputText(
+				wordForm("word"), 
+				'_label -> "Слово: ",
+				'_help -> "обязательный, максимальная длина 30 символов") 
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Обновить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Words.words() class="btn">Назад к списку слов</a>
+		</div>
+    }
+}

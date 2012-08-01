@@ -1,0 +1,15 @@
+@(groups: List[Group])
+
+@import helper._
+
+<div class="groups-top100">
+					
+	<h1>TOP 100</h1>
+	<div id="spisok">
+		@for(group <- groups) {
+			<h2><a href="@routes.Application.viewGroup(group.id)">@group.name</a></h2>
+		}
+	</div>
+			        
+</div>
+
