@@ -1,0 +1,108 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                       			controllers.Application.index()
+GET     /ind                    			controllers.Application.ind()
+
+#USER PAGE
+GET    /group/:id 							controllers.Application.viewGroup(id: Long)
+POST   /group/:id 							controllers.Application.indexGpm(id: Long)
+
+# ADMIN PAGE
+GET     /admin            					controllers.Admin.main()
+GET     /admin/update_control         		controllers.Admin.updateControl()
+GET		/admin/start_update         		controllers.Admin.startUpdate()
+GET		/admin/start_cache_update         	controllers.Admin.startCacheUpdate()
+POST	/admin/update_control         		controllers.Admin.setParameters()
+
+# CATALOGS
+GET     /admin/catalogs            			controllers.Catalogs.main()
+
+# GENDER
+GET     /admin/catalogs/genders            	controllers.Catalogs.genders()
+POST    /admin/catalogs/genders            	controllers.Catalogs.addGender()
+POST    /admin/catalogs/genders/:id/delete  controllers.Catalogs.deleteGender(id: Long)
+
+# ABOUT GENDER
+GET     /admin/catalogs/genders/:gid       			controllers.Catalogs.viewGender(gid: Long)
+POST    /admin/catalogs/genders/:gid       			controllers.Catalogs.changeGender(gid: Long)
+
+# CONTENT
+GET     /admin/catalogs/contents            controllers.Catalogs.contents()
+POST    /admin/catalogs/contents            controllers.Catalogs.addContent()
+POST    /admin/catalogs/contents/:id/delete controllers.Catalogs.deleteContent(id: Long)
+
+# ABOUT GENDER
+GET     /admin/catalogs/contents/:gid       			controllers.Catalogs.viewContent(gid: Long)
+POST    /admin/catalogs/contents/:gid       			controllers.Catalogs.changeContent(gid: Long)
+
+# RELATION
+GET     /admin/catalogs/relationships       controllers.Catalogs.relationships()
+POST    /admin/catalogs/relationships       controllers.Catalogs.addRelation()
+POST    /admin/catalogs/relationships/:id/delete	controllers.Catalogs.deleteRelation(id: Long)
+
+# ABOUT RELATION
+GET     /admin/catalogs/relationships/:gid       			controllers.Catalogs.viewRelationship(gid: Long)
+POST    /admin/catalogs/relationships/:gid       			controllers.Catalogs.changeRelationship(gid: Long)
+
+# LINKS
+GET     /admin/links            			controllers.Links.links()
+POST    /admin/links            			controllers.Links.newLink()
+POST    /admin/links/:id/delete 			controllers.Links.deleteLink(id: Long)
+
+# ABOUT LINK
+GET     /admin/links/:gid       			controllers.Links.viewLink(gid: Long)
+POST    /admin/links/:gid       			controllers.Links.changeLink(gid: Long)
+
+
+# WORDS
+GET     /admin/words            			controllers.Words.words()
+POST    /admin/words            			controllers.Words.newWord()
+POST    /admin/words/:id/delete 			controllers.Words.deleteWord(id: Long)
+
+# ABOUT WORD
+GET     /admin/words/:gid       			controllers.Words.viewWord(gid: Long)
+POST    /admin/words/:gid       			controllers.Words.changeWord(gid: Long)
+
+# SYNONYMS
+GET     /admin/synonyms/:wid    			controllers.Words.synonyms(wid: Long)
+POST    /admin/synonyms/:wid    			controllers.Words.addSynonym(wid: Long)
+POST    /admin/synonyms/:wid/:sid/delete	controllers.Words.deleteSynonym(wid: Long, sid: Long)
+# ABOUT SYNONYM
+GET     /admin/synonyms/:wid/:gid       			controllers.Words.viewSynonym(gid: Long, wid:Long)
+POST    /admin/synonyms/:wid/:gid       			controllers.Words.changeSynonym(gid: Long, wid: Long)
+
+# BLACK LIST
+GET     /admin/blacklist        			controllers.BlackListController.blackList()
+POST    /admin/blacklist        			controllers.BlackListController.addBlackList()
+POST    /admin/blacklist/:id/delete			controllers.BlackListController.deleteBlackList(id: Long)
+
+# GROUPS
+GET     /admin/groups            			controllers.Groups.groups()
+POST    /admin/groups            			controllers.Groups.addGroup()
+POST    /admin/groups/:id/delete 			controllers.Groups.askDeleteGroup(id: Long)
+POST    /admin/groups/:id/deleteGroup     	controllers.Groups.deleteGroup(id: Long)
+
+# ABOUT GROUP
+GET     /admin/groups/:gid       			controllers.Groups.viewGroup(gid: Long)
+POST    /admin/groups/:gid       			controllers.Groups.changeGroup(gid: Long)
+
+# GROUP WORDS
+GET     /admin/groupwords/:gid            	controllers.Groups.groupWords(gid: Long)
+POST    /admin/groupwords/:gid            	controllers.Groups.addGroupWord(gid: Long)
+POST    /admin/groupwords/:gid/:gwid/delete controllers.Groups.deleteGroupWord(gid: Long, gwid: Long)
+
+# GROUP LINKS
+GET     /admin/grouplinks/:gid              controllers.Groups.groupLinks(gid: Long)
+POST    /admin/grouplinks/:gid              controllers.Groups.addGroupLink(gid: Long)
+POST    /admin/grouplinks/:gid/:gwid/delete controllers.Groups.deleteGroupLink(gid: Long, gwid: Long)
+
+# ADDED BY ADMIN
+GET		/admin/groupgpms/:gid				controllers.GPMsAddedByAdmin.gpmsAddedByAdmin(gid: Long)
+POST	/admin/groupgpms/:gid				controllers.GPMsAddedByAdmin.addAddedByAdmin(gid: Long)
+POST	/admin/groupgpms/:gid/:ggid/delete	controllers.GPMsAddedByAdmin.deleteAddedByAdmin(gid: Long, ggid: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               		controllers.Assets.at(path="/public", file)

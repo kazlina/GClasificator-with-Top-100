@@ -1,44 +1,77 @@
 @(group: Group, nameGroup: String, groupLinks: List[GroupLink], groupLinkForm: Form[GroupLink])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Список ссылок группы") {
     <h1>Ссылки для группы "@nameGroup"</h1>
     
-    <ul>
-        @for(groupLink <- groupLinks) {
-            <li>
-                <font style="font-size: 18pt">
-                    @groupLink.link
-                </font>
-                <br>вес в посте: <font style="font-style: italic">@groupLink.postWeight</font> 
-                <br>вес в профиле: <font style="font-style: italic">@groupLink.profileWeight</font>
-                @form(routes.Groups.deleteGroupLink(group.id,groupLink.id)) {
-                    <input type="submit" value="Удалить">
-                }
-            </li>
-        }
-    </ul>
-    <hr/>
-    
-    <h2>Добавление ссылки в список ссылок группы</h2>
-    
+	<table>
+		<thead>
+			<tr>
+				<td width="50%">Ссылка</td>
+				<td width="10%">Вес в посте</td>
+				<td width="10%">Вес в профиле</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(groupLink <- groupLinks) {
+				<tr>
+					<td style="font-size: 18pt">
+						 @groupLink.link
+					</td>
+					
+					<td style="font-style: italic">
+						@groupLink.postWeight
+					</td>
+					
+					<td style="font-style: italic">
+						@groupLink.profileWeight
+					</td>
+					
+					<td>
+						@form(routes.Groups.deleteGroupLink(group.id,groupLink.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <h2>Добавление новой ссылки для группы</h2>
+    <br>
+	
     @form(routes.Groups.addGroupLink(group.id)) {
-        <a href=@routes.Links.links()>Все ссылки</a><br>
-        <p>Ссылка:<br>
-        <select size="1" name="link">
-            @for(w <- Link.allInString) {
-                <option value="@w">@w</option>
-            }
-        </select></p>
-        <p>Вес ссылки в посте (число от 0 до 1):<br>
-        <input type="text" name="postWeight" value=""><br>
-        </p>
-        <p>Вес ссылки в профиле (число от 0 до 1):<br>
-        <input type="text" name="profileWeight" value=""><br>
-        </p>
-        <input type="submit" value="Добавить">
+	
+		<fieldlist>
+			
+			@select(
+				groupLinkForm("link"),
+				options(Link.allInString()),
+				'_label -> "Ссылка",
+				'_help -> "обязательный")
+
+			@inputText(
+				groupLinkForm("postWeight"), 
+				'_label -> "Вес ссылки в посте:",
+				'_help -> "обязательный, число от 0 до 1")
+				
+			@inputText(
+				groupLinkForm("profileWeight"), 
+				'_label -> "Вес ссылки в профиле:",
+				'_help -> "обязательный, число от 0 до 1")
+				
+		<fieldlist>
+			
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Groups.groups() class="btn">Назад</a>
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Links.links() class="btn success">Все слова</a>
+		</div>
     }
-    <hr/>
-    <a href=@routes.Groups.groups()>Назад</a>
 }

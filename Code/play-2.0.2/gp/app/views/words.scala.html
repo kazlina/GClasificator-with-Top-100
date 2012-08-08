@@ -1,0 +1,62 @@
+@(words: List[Word], wordForm: Form[Word])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Список слов") {
+    
+	<h3>Добавление нового слова</h3>
+	
+    @form(routes.Words.newWord()) {
+		<fieldlist>
+			@inputText(
+				wordForm("word"),
+				'_label -> "Слово: ",
+				'_help -> "обязательный, максимальная длина 30 символов")
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Admin.main() class="btn">Назад</a>
+		</div>
+    }
+	<br>
+	<br>
+	
+    <h1>Всего в базе @words.size() слов(а)</h1>
+    
+	<table>
+		<thead>
+			<tr>
+				<td width="25%">Слово</td>
+				<td width="10%">Синонимы</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(word <- words) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Words.viewWord(word.id)>@word.word</a>
+					</td>
+					
+					<td>
+						<a href=@routes.Words.synonyms(word.id)>@word.synonyms.size() синоним(а)</a>
+					</td>
+					
+					<td>
+						@form(routes.Words.deleteWord(word.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <div class="actions">
+		<a href=@routes.Admin.main() class="btn">Назад</a>
+	</div>
+}

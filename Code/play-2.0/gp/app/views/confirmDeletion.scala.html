@@ -1,0 +1,17 @@
+@(id: Long, name: String)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Подтверждение удаления") {
+
+	<h2>Вы действительно хотите удалить группу @name?</h2>
+	
+	@form(routes.Groups.deleteGroup(id)) {
+		<div class="actions">
+			<input type="submit" value="Да" class="btn danger">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Groups.groups() class="btn primary">Нет</a>
+		</div>
+	}
+}

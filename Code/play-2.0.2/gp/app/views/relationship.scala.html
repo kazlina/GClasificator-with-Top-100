@@ -1,0 +1,24 @@
+@(relationship: Long, relationshipForm: Form[Relationship])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Статус отношений") {
+
+	<h1>Изменение  статус отношений:</h1>
+	
+	@form(routes.Catalogs.changeRelationship(relationship)) {
+		<fieldlist>
+			@inputText(
+				relationshipForm("status"),
+				'_label -> "Статус: ",
+				'_help -> "обязательный, максимальная длина 30 символов")
+		<fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.relationships() class="btn">Назад</a>
+		</div>
+    }
+}

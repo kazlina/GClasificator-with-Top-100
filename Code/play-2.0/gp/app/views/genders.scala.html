@@ -1,29 +1,51 @@
 @(genders: List[Gender], genderForm: Form[Gender])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Пол") {
     <h1>Пол пользователей Google+</h1>
-    <ul>
-        @for(g <- genders) {
-            <li>
-				 <a style="font-size: 22pt" href=@routes.Catalogs.viewGender(g.id)>@g.value</a><br>
-                @form(routes.Catalogs.deleteGender(g.id)) {
-                    <input type="submit" value="Удалить">
-                }
-            </li>
-            <br>
-        }
-    </ul>
-    
-    <hr/>
-    <h2>Добавление</h2>
+	
+	<table>
+		<thead>
+			<tr>
+				<td width="15%">Пол</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(g <- genders) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Catalogs.viewGender(g.id)>@g.value</a>
+					</td>
+					
+					<td>
+						@form(routes.Catalogs.deleteGender(g.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <h2>Добавление:</h2>
+	<br>
     
     @form(routes.Catalogs.addGender()) {
-        Пол: <input type="text" name="value" value="">
-        <input type="submit" value="Добавить">
+		<fieldlist>
+			@inputText(
+				genderForm("value"),
+				'_label -> "Пол: ",
+				'_help -> "обязательный, максимальная длина 10 символов")
+		<fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.main() class="btn">Назад</a>
+		</div>
     }
-    <hr/>
-    
-    <a href=@routes.Catalogs.main()>Назад</a>
 }

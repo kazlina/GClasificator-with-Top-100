@@ -1,0 +1,24 @@
+@(link: Long, linkForm: Form[Link])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Ссылка") {
+
+	<h1>Изменение ссылки:</h1>
+	
+	@form(routes.Links.changeLink(link)) {
+		<fieldlist>
+			@inputText(
+				linkForm("link"), 
+				'_label -> "ссылка",
+				'_help -> "обязательный, максимальная длина 255 символов")
+		</fieldlist>	
+		
+		<div class="actions">
+			<input type="submit" value="Обновить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Links.links() class="btn">Назад к списку ссылок</a>
+		</div>
+    }
+}

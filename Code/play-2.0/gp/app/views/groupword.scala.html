@@ -1,44 +1,77 @@
 @(group: Group, nameGroup: String, groupWords: List[GroupWord], groupWordForm: Form[GroupWord])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Список слов группы") {
-    <h1>Слова для группы "@nameGroup"</h1>
     
-    <ul>
-        @for(groupWord <- groupWords) {
-            <li>
-                <font style="font-size: 18pt">
-                    @groupWord.word
-                </font>
-                <br>вес в посте: <font style="font-style: italic">@groupWord.postWeight</font> 
-                <br>вес в профиле: <font style="font-style: italic">@groupWord.profileWeight</font>
-                @form(routes.Groups.deleteGroupWord(group.id,groupWord.id)) {
-                    <input type="submit" value="Удалить">
-                }
-            </li>
-        }
-    </ul>
-    <hr/>
+	<h1>Слова для группы "@nameGroup"</h1>
     
-    <h2>Добавление слова в список слов группы</h2>
-    
+	<table>
+		<thead>
+			<tr>
+				<td width="30%">Слово</td>
+				<td width="10%">Вес в посте</td>
+				<td width="10%">Вес в профиле</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(groupWord <- groupWords) {
+				<tr>
+					<td style="font-size: 18pt">
+						@groupWord.word
+					</td>
+					
+					<td style="font-style: italic">
+						@groupWord.postWeight
+					</td>
+					
+					<td style="font-style: italic">
+						@groupWord.profileWeight
+					</td>
+					
+					<td>
+						@form(routes.Groups.deleteGroupWord(group.id,groupWord.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <h2>Добавление нового слова для группы</h2>
+    <br>
+	
     @form(routes.Groups.addGroupWord(group.id)) {
-        <a href=@routes.Words.words()>Все слова</a><br>
-        <p>Слово:<br>
-        <select size="1" name="word">
-            @for(w <- Word.allInString) {
-                <option value="@w">@w</option>
-            }
-        </select></p>
-        <p>Вес слова в посте (число от 0 до 1):<br>
-        <input type="text" name="postWeight" value=""><br>
-        </p>
-        <p>Вес слова в профиле (число от 0 до 1):<br>
-        <input type="text" name="profileWeight" value=""><br>
-        </p>
-        <input type="submit" value="Добавить">
+		<fieldlist>
+			
+			@select(
+				groupWordForm("word"),
+				options(Word.allInString()),
+				'_label -> "Слово",
+				'_help -> "обязательный")
+
+			@inputText(
+				groupWordForm("postWeight"), 
+				'_label -> "Вес слова в посте:",
+				'_help -> "обязательный, число от 0 до 1")
+				
+			@inputText(
+				groupWordForm("profileWeight"), 
+				'_label -> "Вес слова в профиле:",
+				'_help -> "обязательный, число от 0 до 1")
+				
+		<fieldlist>
+			
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Groups.groups() class="btn">Назад</a>
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Words.words() class="btn success">Все слова</a>
+		</div>
     }
-    <hr/>
-    <a href=@routes.Groups.groups()>Назад</a>
 }

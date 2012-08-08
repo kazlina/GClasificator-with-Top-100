@@ -1,0 +1,46 @@
+@(groupSize: Int, wordSize: Int, linkSize: Int, gpmSize: Int, profileSize: Int, postSize: Int)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Страница администратора") {
+
+	<h1>В базе данных имеется:</h1>
+	
+	<table>
+		<thead>
+			<tr>
+				<td width="7%"></td>
+				<td width="13%"></td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			
+			<tr>
+				<td style="font-size: 18pt">@groupSize</td>
+				<td style="font-size: 18pt">Групп(ы)</td>
+				<td> <a  href=@routes.Groups.groups() class="btn primary">Посмотреть</a> </td>
+			</tr>
+			
+			<tr>
+				<td style="font-size: 18pt">@wordSize</td>
+				<td style="font-size: 18pt">Слов(а)</td>
+				<td> <a  href=@routes.Words.words() class="btn primary">Посмотреть</a> </td>
+			</tr>
+			
+			<tr>
+				<td style="font-size: 18pt">@linkSize</td>
+				<td style="font-size: 18pt">Ссылок(а)</td>
+				<td> <a  href=@routes.Links.links() class="btn primary">Посмотреть</a> </td>
+			</tr>
+	
+		</tbody>
+	</table>
+	
+	<div class="actions">
+		<a href=@routes.Catalogs.main() class="btn">Каталоги</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href=@routes.Admin.updateControl() class="btn success">Управление обновлением</a>
+	</div>
+}

@@ -1,32 +1,46 @@
 @(groupSize: Int, wordSize: Int, linkSize: Int, gpmSize: Int, profileSize: Int, postSize: Int)
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Страница администратора") {
 
-	<p>
-		<a style="font-size: 18pt" href=@routes.Groups.groups()>Группы</a>, @groupSize
-	</p>
+	<h1>В базе данных имеется:</h1>
 	
-	<p>
-		<a style="font-size: 18pt" href=@routes.Words.words()>Слова</a>, @wordSize
-	</p>
+	<table>
+		<thead>
+			<tr>
+				<td width="7%"></td>
+				<td width="13%"></td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			
+			<tr>
+				<td style="font-size: 18pt">@groupSize</td>
+				<td style="font-size: 18pt">Групп(ы)</td>
+				<td> <a  href=@routes.Groups.groups() class="btn primary">Посмотреть</a> </td>
+			</tr>
+			
+			<tr>
+				<td style="font-size: 18pt">@wordSize</td>
+				<td style="font-size: 18pt">Слов(а)</td>
+				<td> <a  href=@routes.Words.words() class="btn primary">Посмотреть</a> </td>
+			</tr>
+			
+			<tr>
+				<td style="font-size: 18pt">@linkSize</td>
+				<td style="font-size: 18pt">Ссылок(а)</td>
+				<td> <a  href=@routes.Links.links() class="btn primary">Посмотреть</a> </td>
+			</tr>
 	
-	<p>
-		<a style="font-size: 18pt" href=@routes.Links.links()>Ссылки</a>, @linkSize 
-	</p>
-
-	<a style="font-size: 18pt" href=@routes.Catalogs.main()>Каталоги</a><br><br><br>
+		</tbody>
+	</table>
 	
-	<b> 
-		<font style="font-size: 18pt">
-			GPM, @gpmSize
-		</font> 
-		<p>
-			Профили, @profileSize
-		</p> 
-		<p>
-			Посты, @postSize
-		</p>
-	</b> 
+	<div class="actions">
+		<a href=@routes.Catalogs.main() class="btn">Каталоги</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href=@routes.Admin.updateControl() class="btn success">Управление обновлением</a>
+	</div>
 }

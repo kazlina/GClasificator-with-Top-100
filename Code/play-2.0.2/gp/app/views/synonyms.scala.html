@@ -1,0 +1,57 @@
+@(mainWord: Word, word: String, synonyms: List[Synonym], synonymForm: Form[Synonym])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Список синонимов " + word) {
+    
+	 <h2>Добавление нового синонима к слову "@word"</h2>
+	 
+	@form(routes.Words.addSynonym(mainWord.id)) {
+		<fieldlist>
+			@inputText(
+				synonymForm("synonym"),
+				'_label -> "Синоним: ",
+				'_help -> "обязательный, максимальная длина 30 символов")
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Words.words() class="btn">Назад</a>
+		</div>
+    }
+	<br>
+	<br>
+	
+	<h1>Слово "@word" имеет @synonyms.size() синоним(а, ов)</h1>
+    
+	<table>
+		<thead>
+			<tr>
+				<td width="25%">Синоним</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(synonym <- synonyms) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Words.viewSynonym(synonym.id, mainWord.id)>@synonym.synonym</a>
+					</td>
+					
+					<td>
+						@form(routes.Words.deleteSynonym(mainWord.id, synonym.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+  	<div class="actions">
+		<a href=@routes.Words.words() class="btn">Назад</a>
+	</div>
+}

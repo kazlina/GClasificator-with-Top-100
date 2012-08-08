@@ -1,29 +1,52 @@
 @(contents: List[models.Content], contentForm: Form[models.Content])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Тип контента") {
+
     <h1>Тип контента</h1>
-    <ul>
-        @for(c <- contents) {
-            <li>
-                <a style="font-size: 22pt" href=@routes.Catalogs.viewContent(c.id)>@c.kind</a><br>
-                @form(routes.Catalogs.deleteContent(c.id)) {
-                    <input type="submit" value="Удалить">
-                }
-            </li>
-            <br>
-        }
-    </ul>
-    
-    <hr/>
-    <h2>Добавление</h2>
+	
+	<table>
+		<thead>
+			<tr>
+				<td width="15%">Контент</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(c <- contents) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Catalogs.viewContent(c.id)>@c.kind</a>
+					</td>
+					
+					<td>
+						@form(routes.Catalogs.deleteContent(c.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <h2>Добавление:</h2>
+	<br>
     
     @form(routes.Catalogs.addContent()) {
-        Тип контента: <input type="text" name="kind" value=""> 
-        <input type="submit" value="Добавить">
+		<fieldlist>
+			@inputText(
+				contentForm("kind"),
+				'_label -> "Тип контента: ",
+				'_help -> "обязательный, максимальная длина 5 символов")
+		<fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.main() class="btn">Назад</a>
+		</div>
     }
-    <hr/>
-    
-    <a href=@routes.Catalogs.main()>Назад</a>
 }

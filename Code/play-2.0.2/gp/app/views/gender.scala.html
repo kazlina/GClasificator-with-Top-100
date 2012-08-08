@@ -1,0 +1,24 @@
+@(gender: Long, genderForm: Form[Gender])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Пол") {
+
+	<h1>Смена пола:</h1>
+	
+	@form(routes.Catalogs.changeGender(gender)) {
+		<fieldlist>
+			@inputText(
+				genderForm("value"), 
+				'_label -> "Пол:",
+				'_help -> "обязательный, максимальная длина 10 символов") 
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Catalogs.genders() class="btn">Назад</a>
+		</div>
+    }
+}

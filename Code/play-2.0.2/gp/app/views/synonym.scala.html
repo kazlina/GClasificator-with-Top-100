@@ -1,0 +1,24 @@
+@(synonym: Long, wordId: Long, synonymForm: Form[Synonym])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Синоним") {
+
+	<h1>Изменение синонима:</h1>
+	
+	@form(routes.Words.changeSynonym(synonym, wordId)) {
+		<fieldlist>
+			@inputText(
+				synonymForm("synonym"), 
+				'_label -> "synonym",
+				'_help -> "обязательный, максимальная длина 30 символов") 
+		</fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Обновить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Words.synonyms(wordId) class="btn">Назад к списку синонимов</a>
+		</div>
+    }
+}

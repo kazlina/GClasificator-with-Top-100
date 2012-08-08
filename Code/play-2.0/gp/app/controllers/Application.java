@@ -1,177 +1,24 @@
 package controllers;
 
+/*import com.avaje.ebean.SqlRow;
 import java.io.*;
-import java.util.*;
-import java.lang.InterruptedException;
-import java.util.concurrent.TimeUnit;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
+import java.io.IOException;*/
+import java.util.*;
 import play.data.Form;
 import play.mvc.*;
 import models.*;
 
 public class Application extends Controller {
 
-    private static class BackgroundProcess implements Runnable {
-        public void run() {
-            while (true) {
-                try {
-                    UpdateControl.Start();
-                    TimeUnit.SECONDS.sleep(10);
-                }
-                catch (InterruptedException ex) {}
-            }
-        }
-    }
-    
-    private static boolean threadRun;
-    
     public static Result index() {
-        if (!threadRun) {
-            Thread worker = new Thread(new BackgroundProcess());
-            worker.setDaemon(true);
-            threadRun = true;
-            worker.start();
-
-            System.out.println(" ---=== UPDATE STARTED ===---");
-            
-            cacheUpdate();
-        }
-        
         return ok(views.html.index.render(Group.all()));
     }
-    
-    static List <GroupForOutput> groupsForOutput = new ArrayList <GroupForOutput> ();
-    
-    private static boolean isCacheUpdaterThreadRun;
-    
-    private static class CacheUpdater implements Runnable {
-        public void run() {
-            while (true) {
-                try {
-                    //if cache is empty
-                	if (groupsForOutput.size() == 0) {
-                		
-                		//quick initialization of cache
-                		System.out.println("Quick initialization of cache has started.");
-                		TimeClass.printlnReadyCurrentTime();
-                		
-                		List <Group> allGroups = Group.all();
-                    	for (Group currentGroup: allGroups) {
-                    		//getting profile of Yuri Vashchenko
-                    		Profile prof = Profile.lastProfileByGpmId((long) 1);
-                    		//creating of fake query
-                    		List <GpmForOutput> fakeQueryResult = new ArrayList<GpmForOutput>();
-                    		fakeQueryResult.add(new GpmForOutput(
-            	    				1, 
-            	    				prof.gpm.idGpm, 
-            	    				prof.name, 
-            	    				prof.image, 
-            	    				(prof.gender == null)? null : prof.gender.value,
-            	    				(prof.relationshipStatus == null)? null : prof.relationshipStatus.status,
-            	    				prof.nFollowers));
-                    		//creating element for cache array: groupsForOutput 
-                    		GroupForOutput fakeGpms = new GroupForOutput (currentGroup.id, fakeQueryResult);
-                    		groupsForOutput.add(fakeGpms);
-                    	}
-                    	System.out.println("Quick initialization of cache has finished.");
-                		TimeClass.printlnReadyCurrentTime();
-                    }
-                    else {
-                    	List <Group> allGroups = Group.all();
-                        for (Group currentGroup: allGroups) {
-                        	
-                        	System.out.println("Cache updating: start of updating group with id: " + currentGroup.id);
-                        	TimeClass.printlnReadyCurrentTime();
-                        	
-                        	//check that current group wasn't deleted from data base
-                        	List <Group> lastAllGroupsArray = Group.all();
-                        	boolean isGroupFind = false;
-                        	for (int currentIndex = 0; 
-    	            				currentIndex < lastAllGroupsArray.size() && isGroupFind == false; 
-    	            				currentIndex++) {
-    	            			if (lastAllGroupsArray.get(currentIndex).id == currentGroup.id) {
-    	            				isGroupFind = true;
-    	            				
-    	            				//classification for current group
-    	    	            		List <GpmForOutput> gpms = Classifier.getGpmForGroup(currentGroup.id);
-    	    	            		
-    	    	            		//check that current group wasn't deleted from data base
-    	    	            		lastAllGroupsArray = Group.all();
-    	    	            		//searching current group in actually group array
-    	    	            		boolean isGroupFind2 = false;
-    	    	            		for (int currentIndex2 = 0; 
-    	    	            				currentIndex2 < lastAllGroupsArray.size() && isGroupFind2 == false; 
-    	    	            				currentIndex2++) {
-    	    	            			if (lastAllGroupsArray.get(currentIndex2).id == currentGroup.id) {
-    	    	            				isGroupFind2 = true;
-    	    	            				
-    	    	            				//update current group in cache
-    	    	            				//searching index of element with current group in groupsForOutput array
-    	    	    	            		int currentGroupIndex = 0;
-    	    	    	            		while (groupsForOutput.get(currentGroupIndex).groupId != currentGroup.id) {
-    	    	    	            			currentGroupIndex++;
-    	    	    	            		}
-    	    	    	            		//creating new element, which we must add in general array
-    	    	    	            		GroupForOutput currentGroupForOutput = new GroupForOutput (currentGroup.id, gpms);
-    	    	    	            		groupsForOutput.set(currentGroupIndex, currentGroupForOutput);
-    	    	    	            		
-    	    	    	            		System.out.println("Updating group with id: " + currentGroup.id + " was finished.");
-    	    	    	            		TimeClass.printlnReadyCurrentTime();
-    	    	    	            	}
-    	    	            		}
-    	    	            		if (isGroupFind2 == false) {
-    	    	            			//delete current group from cache
-    	    	            			deledeGroupById(currentGroup.id);
-    	    	            			System.out.println("Group with id: " + currentGroup.id + " was deleted.");
-	    	    	            		TimeClass.printlnReadyCurrentTime();
-    	    	            		}
-    	            			}
-                        	}
-    	            		if (isGroupFind == false) {
-    	            			//delete current group from cache
-    	            			deledeGroupById(currentGroup.id);
-    	            			System.out.println("Group with id: " + currentGroup.id + " was deleted.");
-	    	            		TimeClass.printlnReadyCurrentTime();
-    	            		}
-    	            		
-    	            		TimeUnit.SECONDS.sleep(5);
-                        }
-                    }
-                }
-                catch (InterruptedException ex) {}
-            }
-        }
-        private static void deledeGroupById (Long currentGroupId) {
-        	int currentGroupIndex = 0;
-    		while (groupsForOutput.get(currentGroupIndex).groupId != currentGroupId) {
-    			currentGroupIndex++;
-    		}
-    		groupsForOutput.remove(currentGroupIndex);
-        }
-    }
-    
-    public static void cacheUpdate() {
-        if (!isCacheUpdaterThreadRun) {
-			    //running of cache updating
-			    Thread cacheUpdaterThread = new Thread(new CacheUpdater());
-			    cacheUpdaterThread.setDaemon(true);
-			    isCacheUpdaterThreadRun = true;
-			    cacheUpdaterThread.start();
-        }
-    }
-    
     public static Result viewGroup(Long idGroup) {
-        //List <GpmForOutput> gpms = Classifier.getGpmForGroup(idGroup);
-    	int currentGroupId = 0;
-		while (groupsForOutput.get(currentGroupId).groupId != idGroup) {
-			currentGroupId++;
-		}
-    	List <GpmForOutput> gpms = groupsForOutput.get(currentGroupId).gpms;
+        List <CacheClassifier> gpms = CacheClassifier.findByGroup(idGroup);
         return ok(views.html.usergroup.render(
         		gpms, 
         		Group.all(), 
@@ -182,11 +29,7 @@ public class Application extends Controller {
     public static Result indexGpm(Long id) {
     	Form<GPM> filledForm = form(GPM.class).bindFromRequest();
         if(filledForm.hasErrors()) {
-        	int currentGroupId = 0;
-    		while (groupsForOutput.get(currentGroupId).groupId != id) {
-    			currentGroupId++;
-    		}
-        	List <GpmForOutput> gpms = groupsForOutput.get(currentGroupId).gpms;
+        	List <CacheClassifier> gpms = CacheClassifier.findByGroup(id);
             return badRequest(views.html.usergroup.render(
             		gpms, 
             		Group.all(), 
@@ -200,6 +43,6 @@ public class Application extends Controller {
     }
     
     public static Result ind() {
-    	return ok("all good");
+    	return ok("It's work!");
     }
 }

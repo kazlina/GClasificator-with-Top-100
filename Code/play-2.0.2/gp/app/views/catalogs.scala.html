@@ -1,0 +1,36 @@
+@()
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main("Каталоги") {
+
+	<table>
+		<thead>
+			<tr>
+				<td width="20%"></td>
+				<td width="20%"></td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			
+			<tr style="font-size: 18pt">
+				<td>
+					<a href=@routes.Catalogs.genders()>Пол</a>
+				</td>
+				<td>
+					<a href=@routes.Catalogs.contents()>Тип контента</a>
+				</td>
+				<td> 
+					<a href=@routes.Catalogs.relationships()>Отношения</a>
+				</td>
+			</tr>
+	
+		</tbody>
+	</table>
+	
+	<div class="actions">
+		<a href=@routes.Admin.main() class="btn">Назад</a>
+	</div>
+}

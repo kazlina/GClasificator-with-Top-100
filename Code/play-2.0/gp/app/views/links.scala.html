@@ -1,31 +1,57 @@
 @(links: List[Link], linkForm: Form[Link])
 
 @import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @main("Список ссылок") {
     
-    <h1>Список ссылок, @links.size()</h1>
-    
-    <ul>
-        @for(link <- links) {
-            <li>
-                <a style="font-size: 22pt" href=@routes.Links.viewLink(link.id)>@link.link</a><br>
-                
-                @form(routes.Links.deleteLink(link.id)) {
-                    <input type="submit" value="Удалить">
-                }
-            </li>
-        }
-    </ul>
-    
-    <hr/>
-    <h2>Добавление новой ссылки</h2>
+	<h3>Добавление новой ссылки</h3>
     
     @form(routes.Links.newLink()) {
-        Ссылка: <input type="text" name="link" value="">
-        <input type="submit" value="Добавить">
+		<fieldlist>
+			@inputText(
+				linkForm("link"),
+				'_label -> "Ссылка: ",
+				'_help -> "обязательный, максимальная длина 255 символов")
+		<fieldlist>
+		
+		<div class="actions">
+			<input type="submit" value="Добавить" class="btn primary">
+			&nbsp;&nbsp;&nbsp;
+			<a href=@routes.Admin.main() class="btn">Назад</a>
+		</div>
     }
-    <hr/>
+	<br>
+	<br>
+	
+    <h1>Всего в базе @links.size() ссылок(ки, ка)</h1>
     
-    <a href=@routes.Admin.main()>Назад</a>
+	<table>
+		<thead>
+			<tr>
+				<td width="40%">Ссылка</td>
+				<td>Действие</td>
+			</tr>
+		</thead>
+		
+		<tbody>
+			@for(link <- links) {
+				<tr>
+					<td style="font-size: 20pt">
+						<a href=@routes.Links.viewLink(link.id)>@link.link</a>
+					</td>
+					
+					<td>
+						@form(routes.Links.deleteLink(link.id)) {
+							<input type="submit" value="Удалить" class="btn danger">
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	
+    <div class="actions">
+		<a href=@routes.Admin.main() class="btn">Назад</a>
+	</div>
 }
