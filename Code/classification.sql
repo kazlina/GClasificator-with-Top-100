@@ -286,8 +286,7 @@ from
                         from Post, Content
                         where
                             Post.kindContent = Content.id and
-                            -- Content.kind = 'text'
-                            Content.id = '1'
+                            Content.kind = 'text'
                     ) PostTextTable
                     on GPM.id = PostTextTable.gpm_id
                 group by GPM.id
@@ -301,8 +300,7 @@ from
                         from Post, Content
                         where 
                             Post.kindContent = Content.id and
-                            -- Content.kind = 'video'
-                            Content.id = '4'
+                            Content.kind = 'video'
                     ) PostVideoTable
                     on GPM.id = PostVideoTable.gpm_id
                                 group by GPM.id
@@ -316,8 +314,7 @@ from
                         from Post, Content
                         where
                             Post.kindContent = Content.id and
-                            -- Content.kind = 'photo'
-                            Content.id = '2'
+                            Content.kind = 'photo'
                     ) PostImageTable
                     on GPM.id = PostImageTable.gpm_id
                                 group by GPM.id
@@ -331,8 +328,7 @@ from
                         from Post, Content
                         where
                             Post.kindContent = Content.id and
-                            -- Content.kind = 'link'
-                            Content.id = '5'
+                            Content.kind = 'link'
                     ) PostLinkTable
                     on GPM.id = PostLinkTable.gpm_id
                                 group by GPM.id
@@ -346,8 +342,7 @@ from
                         from Post, Content
                         where
                             Post.kindContent = Content.id and
-                            -- Content.kind = 'audio'
-                            Content.id = '3'
+                            Content.kind = 'audio'
                     ) PostAudioTable
                     on GPM.id = PostAudioTable.gpm_id
                                 group by GPM.id
