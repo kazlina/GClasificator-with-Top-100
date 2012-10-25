@@ -156,8 +156,8 @@ BEGIN
     ORDER BY possibility DESC
     LIMIT 0, 250;
 
-    SELECT gpm.idGpm, rate_gpms.rate
-    FROM rate_gpms LEFT JOIN gpm ON rate_gpms.gpm_id = gpm.id;
+    SELECT *
+    FROM rate_gpms;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
