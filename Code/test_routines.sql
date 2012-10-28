@@ -156,7 +156,7 @@ BEGIN
     ORDER BY possibility DESC
     LIMIT 0, 250;
 
-    SELECT *
+    SELECT gpm_id AS gpm, rate
     FROM rate_gpms;
 END */;;
 DELIMITER ;
