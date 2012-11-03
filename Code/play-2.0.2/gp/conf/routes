@@ -106,3 +106,6 @@ POST	/admin/groupgpms/:gid/:ggid/delete	controllers.GPMsAddedByAdmin.deleteAdded
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               		controllers.Assets.at(path="/public", file)
+
+# Top 100
+GET /top									controllers.Application.showTop()

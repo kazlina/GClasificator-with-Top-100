@@ -46,4 +46,11 @@ public class Application extends Controller {
     public static Result ind() {
     	return ok("It's work!");
     }
+    
+    public static Result showTop() {
+    	List <GpmForOutput> gpms = Top100.getTopGpms();
+    	return ok(views.html.topGpms.render(
+        		gpms, 
+        		Group.all()));
+    }
 }
